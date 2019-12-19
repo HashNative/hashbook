@@ -10,7 +10,7 @@ return [
 
     'minor'     =>  '0',
 
-    'patch'     =>  '',
+    'patch'     =>  '0',
 
     'build'     =>  '',
 
