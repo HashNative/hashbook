@@ -83,7 +83,7 @@
 #profit {
     width: 15px;
     height: 15px;
-    background: #2FB628;
+    background: #ff3401;
     -moz-border-radius: 15px;
     -webkit-border-radius: 15px;
     border-radius: 15px;
@@ -129,7 +129,7 @@ div.required .control-label:not(span):after, td.required:after {
 }
 
 .info-box .progress .progress-bar.progress-bar-green, .progress-bar-success {
-    background-color: #00a65a;
+    background-color: #ff3401;
 }
 
 .info-box .progress .progress-bar.progress-bar-red, .progress-bar-danger {
@@ -161,7 +161,7 @@ div.required .control-label:not(span):after, td.required:after {
 }
 
 .nav-tabs-custom>.nav-tabs>li.active {
-    border-top-color: #00a65a;
+    border-top-color: #ff3401;
 }
 
 .input-group .btn-group.radio-inline {
@@ -213,7 +213,7 @@ div.required .control-label:not(span):after, td.required:after {
 }
 
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
-    background-color: #00a65a !important;
+    background-color: #ff3401 !important;
     color : #FFFFFF;
 }
 
@@ -367,7 +367,7 @@ div.required .control-label:not(span):after, td.required:after {
 
 #result-search li a:hover {
     color: #FFFFFF;
-    background-color : #00A65A !important;
+    background-color : #ff3401 !important;
 }
 
 #result-search li a:hover .live-search .name {

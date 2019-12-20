@@ -44,7 +44,7 @@
         <!-- /.col -->
 
         <div class="col-sm-4">
-            <button type="submit" class="btn btn-success btn-block btn-flat button-submit" data-loading-text="{{ trans('general.loading') }}">{{ trans('auth.login') }}</button>
+            <button type="submit" class="btn btn-danger btn-block btn-flat button-submit" data-loading-text="{{ trans('general.loading') }}">{{ trans('auth.login') }}</button>
         </div>
         <!-- /.col -->
     </div>

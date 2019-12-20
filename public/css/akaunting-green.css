@@ -4,48 +4,48 @@
 
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
     background-color: #6e7094 !important;
-    
+
 }
 
 .form-control:focus {
-    border-color: #6e7094 !important;
+    border-color: #24292e !important;
 }
 
 #result-search {
-    border-color: #6e7094;
+    border-color: #24292e;
 }
 
 #profit {
-    background: #6e7094;
+    background: #24292e;
 }
 
 .info-box .progress .progress-bar.progress-bar-green, .progress-bar-success {
-    background-color: #6e7094;
+    background-color: #24292e;
 }
 
 /* Bootstrap */
 .btn-success {
-    background-color: #6e7094;
-    border-color: #4c8885;
+    background-color: #24292e;
+    border-color: #24292e;
 }
 
 .btn-success.hover, .btn-success:hover {
-    background-color: #4c8885;
+    background-color: #ff712c;
 }
 
 .btn-success.focus, .btn-success:focus {
-    background-color: #4c8885;
+    background-color: #ff712c;
     border-color: #142961;
 }
 
 .btn-success.active, .btn-success:active {
     background-color: #6e7094;
-    border-color: #a6d18e;
+    border-color: #ff3401;
 }
 
 .btn-success.active.focus, .btn-success.active:focus {
     background-color: #24292e;
-    border-color: #ff712c;
+    border-color: #242923;
 }
 
 .bg-green {
@@ -54,7 +54,7 @@
 
 .alert-success {
     background-color: #bd4913 !important;
-    border-color: #629149;
+    border-color: #ff3401;
 }
 
 .label-success {
@@ -70,7 +70,7 @@
 }
 
 .box.box-solid.box-success {
-    border-color: #629149;
+    border-color: #ff3401;
 }
 
 .text-green {
@@ -79,21 +79,21 @@
 
 /* AdminLTE green skin */
 .skin-green-light .main-header .navbar {
-    background-color: #bd4913;
+    background-color: #221f1e;
 }
 
 .skin-green-light .main-header .navbar .sidebar-toggle:hover {
-    background-color: #bd4913;
+    background-color: #221f1e;
 }
 
 .skin-green-light .main-header .logo {
-    background-color: #bd4913;
+    background-color: #221f1e;
 }
 
 .skin-green-light .main-header li.user-header {
-    background-color: #bd4913;
+    background-color: #221f1e;
 }
 
 .skin-green-light .main-header .logo:hover {
-    background-color: #bd4913;
+    background-color: #221f1e;
 }
