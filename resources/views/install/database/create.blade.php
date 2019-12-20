@@ -3,7 +3,7 @@
 @section('header', trans('install.steps.database'))
 
 @section('content')
-    {{ Form::textGroup('hostname', trans('install.database.hostname'), 'server', ['required' => 'required'], old('hostname', 'localhost'), 'col-md-12') }}
+    {{ Form::textGroup('hostname', trans('install.database.hostname'), 'server', ['required' => 'required'], old('hostname', 'namslk.ipagemysql.com'), 'col-md-12') }}
 
     {{ Form::textGroup('username', trans('install.database.username'), 'user', ['required' => 'required'], old('username'), 'col-md-12') }}
 

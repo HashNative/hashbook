@@ -551,7 +551,7 @@ ul.add-new.nav.navbar-nav.pull-left {
 */
 
 .progress-bar-green, .progress-bar-success {
-    background-color: #6da252;
+    background-color: #3aa3b6;
 }
 
 #chart .row {
@@ -766,7 +766,7 @@ input[type="number"] {
 }
 
 #items .select2-container--default.select2-container--focus .select2-selection--multiple {
-    border-color: #6da252;
+    border-color: #50ee01;
     border-radius: 0;
 }
 
