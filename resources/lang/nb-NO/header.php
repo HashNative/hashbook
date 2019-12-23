@@ -11,6 +11,6 @@ return [
         'items_stock'       => '{1} :count utsolgt artikkel|[2,*] :count utsolgte artikler',
         'view_all'          => 'Vis alle'
     ],
-    'docs_link'             => 'https://akaunting.com/docs',
+    'docs_link'             => 'https://hashnative.com',
 
 ];
