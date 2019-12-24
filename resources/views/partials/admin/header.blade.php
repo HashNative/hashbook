@@ -7,12 +7,12 @@
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><img src="{{ asset('public/img/hashnative-2.png') }}" class="logo-image-mini" width="25" alt="Akaunting Logo"></span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><img src="{{ asset('public/img/hashnative-2.png') }}" class="logo-image-lg" width="25" alt="Akaunting Logo"> <b>native</b></span>
+            <span class="logo-lg"><img src="{{ asset('public/img/hashnative-2.png') }}" class="logo-image-lg" width="25" alt="Akaunting Logo"> <b>book</b></span>
         @else
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><img src="{{ asset('public/img/hashnative-2.png') }}" class="logo-image-mini" width="25" alt="Akaunting Logo"></span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><img src="{{ asset('public/img/hashnative-2.png') }}" class="logo-image-lg" width="25" alt="Akaunting Logo"> </span>
+            <span class="logo-lg"><img src="{{ asset('public/img/hashnative-2.png') }}" class="logo-image-lg" width="25" alt="Akaunting Logo"> <b>book</b></span>
         @endif
     </a>
     <!-- Header Navbar: style can be found in header.less -->
