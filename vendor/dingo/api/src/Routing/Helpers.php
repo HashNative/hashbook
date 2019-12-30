@@ -2,16 +2,20 @@
 
 namespace Dingo\Api\Routing;
 
+use Dingo\Api\Contract\Http\RateLimit\Throttle;
+use Dingo\Api\Http\Response;
 use ErrorException;
 use Dingo\Api\Auth\Auth;
 use Dingo\Api\Dispatcher;
 use Dingo\Api\Http\Response\Factory;
+use Illuminate\Auth\GenericUser;
+use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property \Dingo\Api\Dispatcher                                            $api
- * @property \Illuminate\Auth\GenericUser|\Illuminate\Database\Eloquent\Model $user
- * @property \Dingo\Api\Auth\Auth                                             $auth
- * @property \Dingo\Api\Http\Response\Factory                                 $response
+ * @property Dispatcher $api
+ * @property GenericUser|Model $user
+ * @property Auth $auth
+ * @property Factory $response
  */
 trait Helpers
 {
@@ -46,7 +50,7 @@ trait Helpers
     /**
      * Throttles for controller methods.
      *
-     * @param string|\Dingo\Api\Contract\Http\RateLimit\Throttle $class
+     * @param string|Throttle $class
      * @param array                                              $options
      *
      * @return void
@@ -155,7 +159,7 @@ trait Helpers
     /**
      * Get the internal dispatcher instance.
      *
-     * @return \Dingo\Api\Dispatcher
+     * @return Dispatcher
      */
     public function api()
     {
@@ -175,7 +179,7 @@ trait Helpers
     /**
      * Get the auth instance.
      *
-     * @return \Dingo\Api\Auth\Auth
+     * @return Auth
      */
     protected function auth()
     {
@@ -185,7 +189,7 @@ trait Helpers
     /**
      * Get the response factory instance.
      *
-     * @return \Dingo\Api\Http\Response\Factory
+     * @return Factory
      */
     protected function response()
     {
@@ -197,9 +201,9 @@ trait Helpers
      *
      * @param string $key
      *
-     * @throws \ErrorException
-     *
      * @return mixed
+     * @throws ErrorException
+     *
      */
     public function __get($key)
     {
@@ -220,9 +224,9 @@ trait Helpers
      * @param string $method
      * @param array  $parameters
      *
-     * @throws \ErrorException
+     * @return Response
+     *@throws ErrorException
      *
-     * @return \Dingo\Api\Http\Response
      */
     public function __call($method, $parameters)
     {

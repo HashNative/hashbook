@@ -41,7 +41,7 @@ class ClassCreator
      *
      * @return mixed
      *
-     * @throws \Prophecy\Exception\Doubler\ClassCreatorException
+     * @throws ClassCreatorException
      */
     public function create($classname, Node\ClassNode $class)
     {

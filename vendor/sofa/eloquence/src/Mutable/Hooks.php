@@ -2,6 +2,8 @@
 
 namespace Sofa\Eloquence\Mutable;
 
+use Closure;
+
 /**
  * This class provides instance scope for the closures
  * so they can be rebound later onto the acutal model.
@@ -11,7 +13,7 @@ class Hooks
     /**
      * Register hook on getAttribute method.
      *
-     * @return \Closure
+     * @return Closure
      */
     public function getAttribute()
     {
@@ -29,7 +31,7 @@ class Hooks
     /**
      * Register hook on setAttribute method.
      *
-     * @return \Closure
+     * @return Closure
      */
     public function setAttribute()
     {
@@ -47,7 +49,7 @@ class Hooks
     /**
      * Register hook on toArray method.
      *
-     * @return \Closure
+     * @return Closure
      */
     public function toArray()
     {

@@ -11,14 +11,17 @@
 
 namespace Psy\Test\TabCompletion;
 
+use DOMDocument;
+use PHPUnit\Framework\TestCase;
 use Psy\Command\ListCommand;
 use Psy\Command\ShowCommand;
 use Psy\Configuration;
 use Psy\Context;
 use Psy\ContextAware;
 use Psy\TabCompletion\Matcher;
+use function strlen;
 
-class AutoCompleterTest extends \PHPUnit\Framework\TestCase
+class AutoCompleterTest extends TestCase
 {
     /**
      * @param string $line
@@ -57,12 +60,12 @@ class AutoCompleterTest extends \PHPUnit\Framework\TestCase
             $tabCompletion->addMatcher($matcher);
         }
 
-        $context->setAll(['foo' => 12, 'bar' => new \DOMDocument()]);
+        $context->setAll(['foo' => 12, 'bar' => new DOMDocument()]);
 
         $code = $tabCompletion->processCallback('', 0, [
            'line_buffer' => $line,
            'point'       => 0,
-           'end'         => \strlen($line),
+           'end'         => strlen($line),
         ]);
 
         foreach ($mustContain as $mc) {

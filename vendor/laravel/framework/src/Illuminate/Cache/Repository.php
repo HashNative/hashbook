@@ -17,7 +17,7 @@ use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Contracts\Cache\Repository as CacheContract;
 
 /**
- * @mixin \Illuminate\Contracts\Cache\Store
+ * @mixin Store
  */
 class Repository implements CacheContract, ArrayAccess
 {
@@ -28,14 +28,14 @@ class Repository implements CacheContract, ArrayAccess
     /**
      * The cache store implementation.
      *
-     * @var \Illuminate\Contracts\Cache\Store
+     * @var Store
      */
     protected $store;
 
     /**
      * The event dispatcher implementation.
      *
-     * @var \Illuminate\Contracts\Events\Dispatcher
+     * @var Dispatcher
      */
     protected $events;
 
@@ -49,7 +49,7 @@ class Repository implements CacheContract, ArrayAccess
     /**
      * Create a new cache repository instance.
      *
-     * @param  \Illuminate\Contracts\Cache\Store  $store
+     * @param Store $store
      * @return void
      */
     public function __construct(Store $store)
@@ -162,7 +162,7 @@ class Repository implements CacheContract, ArrayAccess
      *
      * @param  string  $key
      * @param  mixed   $value
-     * @param  \DateTime|float|int  $minutes
+     * @param DateTime|float|int  $minutes
      * @return void
      */
     public function put($key, $value, $minutes = null)
@@ -201,7 +201,7 @@ class Repository implements CacheContract, ArrayAccess
      *
      * @param  string  $key
      * @param  mixed   $value
-     * @param  \DateTime|float|int  $minutes
+     * @param DateTime|float|int  $minutes
      * @return bool
      */
     public function add($key, $value, $minutes)
@@ -273,8 +273,8 @@ class Repository implements CacheContract, ArrayAccess
      * Get an item from the cache, or store the default value.
      *
      * @param  string  $key
-     * @param  \DateTime|float|int  $minutes
-     * @param  \Closure  $callback
+     * @param DateTime|float|int  $minutes
+     * @param Closure $callback
      * @return mixed
      */
     public function remember($key, $minutes, Closure $callback)
@@ -297,7 +297,7 @@ class Repository implements CacheContract, ArrayAccess
      * Get an item from the cache, or store the default value forever.
      *
      * @param  string   $key
-     * @param  \Closure  $callback
+     * @param Closure $callback
      * @return mixed
      */
     public function sear($key, Closure $callback)
@@ -309,7 +309,7 @@ class Repository implements CacheContract, ArrayAccess
      * Get an item from the cache, or store the default value forever.
      *
      * @param  string   $key
-     * @param  \Closure  $callback
+     * @param Closure $callback
      * @return mixed
      */
     public function rememberForever($key, Closure $callback)
@@ -345,9 +345,9 @@ class Repository implements CacheContract, ArrayAccess
      * Begin executing a new tags operation if the store supports it.
      *
      * @param  array|mixed  $names
-     * @return \Illuminate\Cache\TaggedCache
+     * @return TaggedCache
      *
-     * @throws \BadMethodCallException
+     * @throws BadMethodCallException
      */
     public function tags($names)
     {
@@ -401,7 +401,7 @@ class Repository implements CacheContract, ArrayAccess
     /**
      * Get the cache store implementation.
      *
-     * @return \Illuminate\Contracts\Cache\Store
+     * @return Store
      */
     public function getStore()
     {
@@ -424,7 +424,7 @@ class Repository implements CacheContract, ArrayAccess
     /**
      * Set the event dispatcher instance.
      *
-     * @param  \Illuminate\Contracts\Events\Dispatcher  $events
+     * @param Dispatcher $events
      * @return void
      */
     public function setEventDispatcher(Dispatcher $events)
@@ -480,7 +480,7 @@ class Repository implements CacheContract, ArrayAccess
     /**
      * Calculate the number of minutes with the given duration.
      *
-     * @param  \DateTime|float|int  $duration
+     * @param DateTime|float|int  $duration
      * @return float|int|null
      */
     protected function getMinutes($duration)

@@ -12,6 +12,7 @@ namespace SebastianBergmann\CodeCoverage\Report\Html;
 
 use SebastianBergmann\CodeCoverage\Node\AbstractNode as Node;
 use SebastianBergmann\CodeCoverage\Node\Directory as DirectoryNode;
+use Text_Template;
 
 /**
  * Renders a directory node.
@@ -24,7 +25,7 @@ class Directory extends Renderer
      */
     public function render(DirectoryNode $node, $file)
     {
-        $template = new \Text_Template($this->templatePath . 'directory.html', '{{', '}}');
+        $template = new Text_Template($this->templatePath . 'directory.html', '{{', '}}');
 
         $this->setCommonTemplateVariables($template, $node);
 
@@ -94,7 +95,7 @@ class Directory extends Renderer
         }
 
         return $this->renderItemTemplate(
-            new \Text_Template($this->templatePath . 'directory_item.html', '{{', '}}'),
+            new Text_Template($this->templatePath . 'directory_item.html', '{{', '}}'),
             $data
         );
     }

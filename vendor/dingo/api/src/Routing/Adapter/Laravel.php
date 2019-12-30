@@ -2,6 +2,7 @@
 
 namespace Dingo\Api\Routing\Adapter;
 
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Routing\Router;
@@ -14,14 +15,14 @@ class Laravel implements Adapter
     /**
      * Application container instance.
      *
-     * @var \Illuminate\Contracts\Container\Container
+     * @var Container
      */
     protected $container;
 
     /**
      * Laravel router instance.
      *
-     * @var \Illuminate\Routing\Router
+     * @var Router
      */
     protected $router;
 
@@ -42,14 +43,14 @@ class Laravel implements Adapter
     /**
      * Routes already defined on the router.
      *
-     * @var \Illuminate\Routing\RouteCollection
+     * @var RouteCollection
      */
     protected $oldRoutes;
 
     /**
      * Create a new laravel routing adapter instance.
      *
-     * @param \Illuminate\Routing\Router $router
+     * @param Router $router
      *
      * @return void
      */
@@ -61,7 +62,7 @@ class Laravel implements Adapter
     /**
      * Dispatch a request.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param string                   $version
      *
      * @return mixed
@@ -113,7 +114,7 @@ class Laravel implements Adapter
      * Get the URI, methods, and action from the route.
      *
      * @param mixed                    $route
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
      * @return array
      */
@@ -134,7 +135,7 @@ class Laravel implements Adapter
      * @param string $uri
      * @param mixed  $action
      *
-     * @return \Illuminate\Routing\Route
+     * @return Route
      */
     public function addRoute(array $methods, array $versions, $uri, $action)
     {
@@ -223,7 +224,7 @@ class Laravel implements Adapter
     /**
      * Gather the route middlewares.
      *
-     * @param \Illuminate\Routing\Route $route
+     * @param Route $route
      *
      * @return array
      */
@@ -239,7 +240,7 @@ class Laravel implements Adapter
     /**
      * Get the Laravel router instance.
      *
-     * @return \Illuminate\Routing\Router
+     * @return Router
      */
     public function getRouter()
     {

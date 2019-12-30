@@ -107,7 +107,7 @@ class ObjectProphecy implements ProphecyInterface
      *
      * @return object
      *
-     * @throws \Prophecy\Exception\Prophecy\ObjectProphecyException If double doesn't implement needed interface
+     * @throws ObjectProphecyException If double doesn't implement needed interface
      */
     public function reveal()
     {
@@ -131,7 +131,7 @@ class ObjectProphecy implements ProphecyInterface
      *
      * @param MethodProphecy $methodProphecy
      *
-     * @throws \Prophecy\Exception\Prophecy\MethodProphecyException If method prophecy doesn't
+     * @throws MethodProphecyException If method prophecy doesn't
      *                                                              have arguments wildcard
      */
     public function addMethodProphecy(MethodProphecy $methodProphecy)
@@ -207,7 +207,7 @@ class ObjectProphecy implements ProphecyInterface
     /**
      * Checks that registered method predictions do not fail.
      *
-     * @throws \Prophecy\Exception\Prediction\AggregateException If any of registered predictions fail
+     * @throws AggregateException If any of registered predictions fail
      */
     public function checkProphecyMethodsPredictions()
     {

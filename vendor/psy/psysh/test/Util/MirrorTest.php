@@ -11,9 +11,13 @@
 
 namespace Psy\Test\Util;
 
+use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 use Psy\Util\Mirror;
+use RuntimeException;
+use function version_compare;
 
-class MirrorTest extends \PHPUnit\Framework\TestCase
+class MirrorTest extends TestCase
 {
     const FOO           = 1;
     private $bar        = 2;
@@ -36,7 +40,7 @@ class MirrorTest extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf('ReflectionObject', $refl);
 
         $refl = Mirror::get($this, 'FOO');
-        if (\version_compare(PHP_VERSION, '7.1.0', '>=')) {
+        if (version_compare(PHP_VERSION, '7.1.0', '>=')) {
             $this->assertInstanceOf('ReflectionClassConstant', $refl);
         } else {
             $this->assertInstanceOf('Psy\Reflection\ReflectionClassConstant', $refl);
@@ -59,7 +63,7 @@ class MirrorTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @expectedException \RuntimeException
+     * @expectedException RuntimeException
      */
     public function testMirrorThrowsExceptions()
     {
@@ -67,7 +71,7 @@ class MirrorTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException InvalidArgumentException
      * @dataProvider invalidArguments
      */
     public function testMirrorThrowsInvalidArgumentExceptions($value)

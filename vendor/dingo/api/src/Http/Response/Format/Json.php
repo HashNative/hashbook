@@ -2,6 +2,8 @@
 
 namespace Dingo\Api\Http\Response\Format;
 
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Illuminate\Contracts\Support\Arrayable;
 
@@ -10,7 +12,7 @@ class Json extends Format
     /**
      * Format an Eloquent model.
      *
-     * @param \Illuminate\Database\Eloquent\Model $model
+     * @param Model $model
      *
      * @return string
      */
@@ -28,7 +30,7 @@ class Json extends Format
     /**
      * Format an Eloquent collection.
      *
-     * @param \Illuminate\Database\Eloquent\Collection $collection
+     * @param Collection $collection
      *
      * @return string
      */
@@ -51,7 +53,7 @@ class Json extends Format
     /**
      * Format an array or instance implementing Arrayable.
      *
-     * @param array|\Illuminate\Contracts\Support\Arrayable $content
+     * @param array|Arrayable $content
      *
      * @return string
      */
@@ -79,7 +81,7 @@ class Json extends Format
     /**
      * Morph a value to an array.
      *
-     * @param array|\Illuminate\Contracts\Support\Arrayable $value
+     * @param array|Arrayable $value
      *
      * @return array
      */

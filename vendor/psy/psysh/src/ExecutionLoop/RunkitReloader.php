@@ -11,9 +11,16 @@
 
 namespace Psy\ExecutionLoop;
 
+use Exception;
 use Psy\Exception\ParseErrorException;
 use Psy\ParserFactory;
 use Psy\Shell;
+use function clearstatcache;
+use function extension_loaded;
+use function file_get_contents;
+use function filemtime;
+use function get_included_files;
+use function sprintf;
 
 /**
  * A runkit-based code reloader, which is pretty much magic.
@@ -30,7 +37,7 @@ class RunkitReloader extends AbstractListener
      */
     public static function isSupported()
     {
-        return \extension_loaded('runkit');
+        return extension_loaded('runkit');
     }
 
     /**
@@ -62,11 +69,11 @@ class RunkitReloader extends AbstractListener
      */
     private function reload(Shell $shell)
     {
-        \clearstatcache();
+        clearstatcache();
         $modified = [];
 
-        foreach (\get_included_files() as $file) {
-            $timestamp = \filemtime($file);
+        foreach (get_included_files() as $file) {
+            $timestamp = filemtime($file);
 
             if (!isset($this->timestamps[$file])) {
                 $this->timestamps[$file] = $timestamp;
@@ -78,7 +85,7 @@ class RunkitReloader extends AbstractListener
             }
 
             if (!$this->lintFile($file)) {
-                $msg = \sprintf('Modified file "%s" could not be reloaded', $file);
+                $msg = sprintf('Modified file "%s" could not be reloaded', $file);
                 $shell->writeException(new ParseErrorException($msg));
                 continue;
             }
@@ -125,8 +132,8 @@ class RunkitReloader extends AbstractListener
     {
         // first try to parse it
         try {
-            $this->parser->parse(\file_get_contents($file));
-        } catch (\Exception $e) {
+            $this->parser->parse(file_get_contents($file));
+        } catch (Exception $e) {
             return false;
         }
 

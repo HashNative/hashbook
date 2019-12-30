@@ -8,6 +8,7 @@ use App\Models\Banking\Transfer;
 use App\Models\Expense\Payment;
 use App\Models\Income\Revenue;
 use App\Transformers\Banking\Transfer as Transformer;
+use Dingo\Api\Http\Response;
 use Dingo\Api\Routing\Helpers;
 
 class Transfers extends ApiController
@@ -17,7 +18,7 @@ class Transfers extends ApiController
     /**
      * Display a listing of the resource.
      *
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -30,7 +31,7 @@ class Transfers extends ApiController
      * Display the specified resource.
      *
      * @param  Transfer  $transfer
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function show(Transfer $transfer)
     {
@@ -41,7 +42,7 @@ class Transfers extends ApiController
      * Store a newly created resource in storage.
      *
      * @param  $request
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -55,7 +56,7 @@ class Transfers extends ApiController
      *
      * @param  $transfer
      * @param  $request
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function update(Transfer $transfer, Request $request)
     {
@@ -68,7 +69,7 @@ class Transfers extends ApiController
      * Remove the specified resource from storage.
      *
      * @param  Transfer  $transfer
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function destroy(Transfer $transfer)
     {

@@ -11,6 +11,7 @@
 
 namespace Psy\Command;
 
+use PhpParser\Error;
 use PhpParser\Node;
 use PhpParser\Parser;
 use Psy\Context;
@@ -23,6 +24,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\VarDumper\Caster\Caster;
+use function array_key_exists;
+use function implode;
+use function strpos;
 
 /**
  * Parse PHP code and show the abstract syntax tree.
@@ -97,7 +101,7 @@ class ParseCommand extends Command implements ContextAware, PresenterAware
 
         if ($this->parserFactory->hasKindsSupport()) {
             $msg = 'One of PhpParser\\ParserFactory constants: '
-                . \implode(', ', ParserFactory::getPossibleKinds())
+                . implode(', ', ParserFactory::getPossibleKinds())
                 . " (default is based on current interpreter's version).";
             $defaultKind = $this->parserFactory->getDefaultKind();
 
@@ -128,7 +132,7 @@ HELP
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $code = $input->getArgument('code');
-        if (\strpos('<?', $code) === false) {
+        if (strpos('<?', $code) === false) {
             $code = '<?php ' . $code;
         }
 
@@ -152,8 +156,8 @@ HELP
     {
         try {
             return $parser->parse($code);
-        } catch (\PhpParser\Error $e) {
-            if (\strpos($e->getMessage(), 'unexpected EOF') === false) {
+        } catch (Error $e) {
+            if (strpos($e->getMessage(), 'unexpected EOF') === false) {
                 throw $e;
             }
 
@@ -171,7 +175,7 @@ HELP
      */
     private function getParser($kind = null)
     {
-        if (!\array_key_exists($kind, $this->parsers)) {
+        if (!array_key_exists($kind, $this->parsers)) {
             $this->parsers[$kind] = $this->parserFactory->createParser($kind);
         }
 

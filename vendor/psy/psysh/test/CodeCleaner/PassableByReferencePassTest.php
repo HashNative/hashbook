@@ -12,6 +12,7 @@
 namespace Psy\Test\CodeCleaner;
 
 use Psy\CodeCleaner\PassableByReferencePass;
+use Psy\Exception\FatalErrorException;
 
 class PassableByReferencePassTest extends CodeCleanerTestCase
 {
@@ -22,7 +23,7 @@ class PassableByReferencePassTest extends CodeCleanerTestCase
 
     /**
      * @dataProvider invalidStatements
-     * @expectedException \Psy\Exception\FatalErrorException
+     * @expectedException FatalErrorException
      */
     public function testProcessStatementFails($code)
     {
@@ -86,7 +87,7 @@ class PassableByReferencePassTest extends CodeCleanerTestCase
 
     /**
      * @dataProvider invalidArrayMultisort
-     * @expectedException \Psy\Exception\FatalErrorException
+     * @expectedException FatalErrorException
      */
     public function testInvalidArrayMultisort($code)
     {

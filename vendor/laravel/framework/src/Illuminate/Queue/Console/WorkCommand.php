@@ -40,14 +40,14 @@ class WorkCommand extends Command
     /**
      * The queue worker instance.
      *
-     * @var \Illuminate\Queue\Worker
+     * @var Worker
      */
     protected $worker;
 
     /**
      * Create a new queue work command.
      *
-     * @param  \Illuminate\Queue\Worker  $worker
+     * @param Worker $worker
      * @return void
      */
     public function __construct(Worker $worker)
@@ -105,7 +105,7 @@ class WorkCommand extends Command
     /**
      * Gather all of the queue worker options as a single object.
      *
-     * @return \Illuminate\Queue\WorkerOptions
+     * @return WorkerOptions
      */
     protected function gatherWorkerOptions()
     {
@@ -141,7 +141,7 @@ class WorkCommand extends Command
     /**
      * Write the status output for the queue worker.
      *
-     * @param  \Illuminate\Contracts\Queue\Job  $job
+     * @param Job $job
      * @param  string $status
      * @return void
      */
@@ -160,7 +160,7 @@ class WorkCommand extends Command
     /**
      * Format the status output for the queue worker.
      *
-     * @param  \Illuminate\Contracts\Queue\Job  $job
+     * @param Job $job
      * @param  string  $status
      * @param  string  $type
      * @return void

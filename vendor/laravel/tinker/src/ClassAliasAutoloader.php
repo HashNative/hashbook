@@ -10,7 +10,7 @@ class ClassAliasAutoloader
     /**
      * The shell instance.
      *
-     * @var \Psy\Shell
+     * @var Shell
      */
     protected $shell;
 
@@ -24,7 +24,7 @@ class ClassAliasAutoloader
     /**
      * Register a new alias loader instance.
      *
-     * @param  \Psy\Shell  $shell
+     * @param Shell $shell
      * @param  string  $classMapPath
      * @return static
      */
@@ -38,7 +38,7 @@ class ClassAliasAutoloader
     /**
      * Create a new alias loader instance.
      *
-     * @param  \Psy\Shell  $shell
+     * @param Shell $shell
      * @param  string  $classMapPath
      * @return void
      */

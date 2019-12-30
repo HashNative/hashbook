@@ -5,6 +5,7 @@ namespace App\Transformers\Banking;
 use App\Transformers\Expense\Payment;
 use App\Transformers\Income\Revenue;
 use App\Models\Banking\Transfer as Model;
+use League\Fractal\Resource\Item;
 use League\Fractal\TransformerAbstract;
 
 class Transfer extends TransformerAbstract
@@ -32,7 +33,7 @@ class Transfer extends TransformerAbstract
 
     /**
      * @param Model $model
-     * @return \League\Fractal\Resource\Item
+     * @return Item
      */
     public function includePayment(Model $model)
     {
@@ -41,7 +42,7 @@ class Transfer extends TransformerAbstract
 
     /**
      * @param Model $model
-     * @return \League\Fractal\Resource\Item
+     * @return Item
      */
     public function includeRevenue(Model $model)
     {

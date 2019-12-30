@@ -13,6 +13,7 @@ namespace Monolog\Handler;
 
 use Monolog\Logger;
 use Monolog\TestCase;
+use RuntimeException;
 
 class FilterHandlerTest extends TestCase
 {
@@ -156,7 +157,7 @@ class FilterHandlerTest extends TestCase
 
     /**
      * @covers Monolog\Handler\FilterHandler::handle
-     * @expectedException \RuntimeException
+     * @expectedException RuntimeException
      */
     public function testHandleWithBadCallbackThrowsException()
     {

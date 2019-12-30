@@ -2,12 +2,14 @@
 
 namespace FontLib\Tests;
 
+use Fontlib\Exception\FontNotFoundException;
 use FontLib\Font;
+use PHPUnit_Framework_TestCase;
 
-class FontTest extends \PHPUnit_Framework_TestCase
+class FontTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @expectedException \Fontlib\Exception\FontNotFoundException
+     * @expectedException FontNotFoundException
      */
     public function testLoadFileNotFound()
     {

@@ -11,6 +11,8 @@
 
 namespace League\Fractal\Resource;
 
+use League\Fractal\TransformerAbstract;
+
 interface ResourceInterface
 {
     /**
@@ -30,7 +32,7 @@ interface ResourceInterface
     /**
      * Get the transformer.
      *
-     * @return callable|\League\Fractal\TransformerAbstract
+     * @return callable|TransformerAbstract
      */
     public function getTransformer();
 
@@ -46,7 +48,7 @@ interface ResourceInterface
     /**
      * Set the transformer.
      *
-     * @param callable|\League\Fractal\TransformerAbstract $transformer
+     * @param callable|TransformerAbstract $transformer
      *
      * @return $this
      */

@@ -15,6 +15,8 @@ use Psy\Output\ShellOutput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use function array_map;
+use function sprintf;
 
 /**
  * Interact with the current code buffer.
@@ -68,10 +70,10 @@ HELP
      */
     protected function formatLines(array $lines, $type = 'return')
     {
-        $template = \sprintf('<%s>%%s</%s>', $type, $type);
+        $template = sprintf('<%s>%%s</%s>', $type, $type);
 
-        return \array_map(function ($line) use ($template) {
-            return \sprintf($template, $line);
+        return array_map(function ($line) use ($template) {
+            return sprintf($template, $line);
         }, $lines);
     }
 }

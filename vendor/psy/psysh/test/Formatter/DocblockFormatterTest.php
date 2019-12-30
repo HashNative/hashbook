@@ -11,9 +11,12 @@
 
 namespace Psy\Test\Formatter;
 
+use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 use Psy\Formatter\DocblockFormatter;
+use ReflectionMethod;
 
-class DocblockFormatterTest extends \PHPUnit\Framework\TestCase
+class DocblockFormatterTest extends TestCase
 {
     /**
      * This is a docblock!
@@ -30,7 +33,7 @@ class DocblockFormatterTest extends \PHPUnit\Framework\TestCase
     private function methodWithDocblock($foo, $bar = 1)
     {
         if (empty($foo)) {
-            throw new \InvalidArgumentException();
+            throw new InvalidArgumentException();
         }
 
         return 'method called';
@@ -57,7 +60,7 @@ EOS;
 
         $this->assertSame(
             $expected,
-            DocblockFormatter::format(new \ReflectionMethod($this, 'methodWithDocblock'))
+            DocblockFormatter::format(new ReflectionMethod($this, 'methodWithDocblock'))
         );
     }
 }

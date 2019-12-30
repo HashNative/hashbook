@@ -2,6 +2,7 @@
 
 namespace Akaunting\SignedUrl;
 
+use DateTime;
 use Spatie\UrlSigner\MD5UrlSigner;
 
 class SignedUrl extends MD5UrlSigner
@@ -39,7 +40,7 @@ class SignedUrl extends MD5UrlSigner
      * Get a secure URL to a controller action.
      *
      * @param string             $url
-     * @param \DateTime|int|null $expiration Defaults to the config value
+     * @param DateTime|int|null $expiration Defaults to the config value
      *
      * @return string
      */

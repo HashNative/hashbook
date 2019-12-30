@@ -11,6 +11,7 @@
 
 namespace Monolog\Handler;
 
+use DateTime;
 use Monolog\Logger;
 
 /**
@@ -47,7 +48,7 @@ class RotatingFileHandler extends StreamHandler
     {
         $this->filename = $filename;
         $this->maxFiles = (int) $maxFiles;
-        $this->nextRotation = new \DateTime('tomorrow');
+        $this->nextRotation = new DateTime('tomorrow');
         $this->filenameFormat = '{filename}-{date}';
         $this->dateFormat = 'Y-m-d';
 
@@ -126,7 +127,7 @@ class RotatingFileHandler extends StreamHandler
     {
         // update filename
         $this->url = $this->getTimedFilename();
-        $this->nextRotation = new \DateTime('tomorrow');
+        $this->nextRotation = new DateTime('tomorrow');
 
         // skip GC of old logs if files are unlimited
         if (0 === $this->maxFiles) {

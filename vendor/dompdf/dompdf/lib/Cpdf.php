@@ -17,6 +17,8 @@
  */
 use FontLib\Font;
 use FontLib\BinaryStream;
+use Svg\Document;
+use Svg\Surface\SurfaceCpdf;
 
 class Cpdf
 {
@@ -1003,7 +1005,7 @@ EOT;
 
                 $res = "\n$id 0 obj\n";
                 $res .= "<</Length " . mb_strlen($stream, '8bit') . " >>\n";
-                $res .= "stream\n" . $stream . "\nendstream" . "\nendobj";;
+                $res .= "stream\n" . $stream . "\nendstream" . "\nendobj";
 
                 return $res;
         }
@@ -1255,7 +1257,7 @@ EOT;
                 $res .= "/Supplement 0\n"; // The supplement number of the character collection.
                 $res .= ">>";
 
-                $res .= "\nendobj";;
+                $res .= "\nendobj";
 
                 return $res;
         }
@@ -4723,7 +4725,7 @@ EOT;
     function addImagePng($file, $x, $y, $w = 0.0, $h = 0.0, &$img, $is_mask = false, $mask = null)
     {
         if (!function_exists("imagepng")) {
-            throw new \Exception("The PHP GD extension is required, but is not installed.");
+            throw new Exception("The PHP GD extension is required, but is not installed.");
         }
 
         //if already cached, need not to read again
@@ -4820,18 +4822,18 @@ EOT;
 
         // Use PECL gmagick + Graphics Magic to process transparent PNG images
         if (extension_loaded("gmagick")) {
-            $gmagick = new \Gmagick($file);
+            $gmagick = new Gmagick($file);
             $gmagick->setimageformat('png');
 
             // Get opacity channel (negative of alpha channel)
             $alpha_channel_neg = clone $gmagick;
-            $alpha_channel_neg->separateimagechannel(\Gmagick::CHANNEL_OPACITY);
+            $alpha_channel_neg->separateimagechannel(Gmagick::CHANNEL_OPACITY);
 
             // Negate opacity channel
-            $alpha_channel = new \Gmagick();
+            $alpha_channel = new Gmagick();
             $alpha_channel->newimage($wpx, $hpx, "#FFFFFF", "png");
-            $alpha_channel->compositeimage($alpha_channel_neg, \Gmagick::COMPOSITE_DIFFERENCE, 0, 0);
-            $alpha_channel->separateimagechannel(\Gmagick::CHANNEL_RED);
+            $alpha_channel->compositeimage($alpha_channel_neg, Gmagick::COMPOSITE_DIFFERENCE, 0, 0);
+            $alpha_channel->separateimagechannel(Gmagick::CHANNEL_RED);
             $alpha_channel->writeimage($tempfile_alpha);
 
             // Cast to 8bit+palette
@@ -4841,11 +4843,11 @@ EOT;
             imagepng($imgalpha, $tempfile_alpha);
 
             // Make opaque image
-            $color_channels = new \Gmagick();
+            $color_channels = new Gmagick();
             $color_channels->newimage($wpx, $hpx, "#FFFFFF", "png");
-            $color_channels->compositeimage($gmagick, \Gmagick::COMPOSITE_COPYRED, 0, 0);
-            $color_channels->compositeimage($gmagick, \Gmagick::COMPOSITE_COPYGREEN, 0, 0);
-            $color_channels->compositeimage($gmagick, \Gmagick::COMPOSITE_COPYBLUE, 0, 0);
+            $color_channels->compositeimage($gmagick, Gmagick::COMPOSITE_COPYRED, 0, 0);
+            $color_channels->compositeimage($gmagick, Gmagick::COMPOSITE_COPYGREEN, 0, 0);
+            $color_channels->compositeimage($gmagick, Gmagick::COMPOSITE_COPYBLUE, 0, 0);
             $color_channels->writeimage($tempfile_plain);
 
             $imgplain = imagecreatefrompng($tempfile_plain);
@@ -4859,13 +4861,13 @@ EOT;
                 $imagickClonable = version_compare(Imagick::IMAGICK_EXTVER, '3.0.1rc1') > 0;
             }
 
-            $imagick = new \Imagick($file);
+            $imagick = new Imagick($file);
             $imagick->setFormat('png');
 
             // Get opacity channel (negative of alpha channel)
             if ($imagick->getImageAlphaChannel() !== 0) {
                 $alpha_channel = $imagickClonable ? clone $imagick : $imagick->clone();
-                $alpha_channel->separateImageChannel(\Imagick::CHANNEL_ALPHA);
+                $alpha_channel->separateImageChannel(Imagick::CHANNEL_ALPHA);
                 $alpha_channel->negateImage(true);
                 $alpha_channel->writeImage($tempfile_alpha);
 
@@ -4879,11 +4881,11 @@ EOT;
             }
 
             // Make opaque image
-            $color_channels = new \Imagick();
+            $color_channels = new Imagick();
             $color_channels->newImage($wpx, $hpx, "#FFFFFF", "png");
-            $color_channels->compositeImage($imagick, \Imagick::COMPOSITE_COPYRED, 0, 0);
-            $color_channels->compositeImage($imagick, \Imagick::COMPOSITE_COPYGREEN, 0, 0);
-            $color_channels->compositeImage($imagick, \Imagick::COMPOSITE_COPYBLUE, 0, 0);
+            $color_channels->compositeImage($imagick, Imagick::COMPOSITE_COPYRED, 0, 0);
+            $color_channels->compositeImage($imagick, Imagick::COMPOSITE_COPYGREEN, 0, 0);
+            $color_channels->compositeImage($imagick, Imagick::COMPOSITE_COPYBLUE, 0, 0);
             $color_channels->writeImage($tempfile_plain);
 
             $imgplain = imagecreatefrompng($tempfile_plain);
@@ -4962,7 +4964,7 @@ EOT;
     function addPngFromFile($file, $x, $y, $w = 0, $h = 0)
     {
         if (!function_exists("imagecreatefrompng")) {
-            throw new \Exception("The PHP GD extension is required, but is not installed.");
+            throw new Exception("The PHP GD extension is required, but is not installed.");
         }
 
         //if already cached, need not to read again
@@ -5037,7 +5039,7 @@ EOT;
      */
     function addSvgFromFile($file, $x, $y, $w = 0, $h = 0)
     {
-        $doc = new \Svg\Document();
+        $doc = new Document();
         $doc->loadFile($file);
         $dimensions = $doc->getDimensions();
 
@@ -5045,7 +5047,7 @@ EOT;
 
         $this->transform(array($w / $dimensions["width"], 0, 0, $h / $dimensions["height"], $x, $y));
 
-        $surface = new \Svg\Surface\SurfaceCpdf($doc, $this);
+        $surface = new SurfaceCpdf($doc, $this);
         $doc->render($surface);
 
         $this->restore();

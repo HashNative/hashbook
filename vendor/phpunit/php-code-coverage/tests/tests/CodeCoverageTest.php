@@ -10,6 +10,8 @@
 
 namespace SebastianBergmann\CodeCoverage;
 
+use PHPUnit_Runner_Version;
+use ReflectionMethod;
 use SebastianBergmann\CodeCoverage\Driver\PHPDBG;
 use SebastianBergmann\CodeCoverage\Driver\Xdebug;
 
@@ -292,7 +294,7 @@ class CodeCoverageTest extends TestCase
             $coverage->getData()
         );
 
-        if (version_compare(\PHPUnit_Runner_Version::id(), '4.7', '>=')) {
+        if (version_compare(PHPUnit_Runner_Version::id(), '4.7', '>=')) {
             $size = 'unknown';
         } else {
             $size = 'small';
@@ -459,11 +461,11 @@ class CodeCoverageTest extends TestCase
     }
 
     /**
-     * @return \ReflectionMethod
+     * @return ReflectionMethod
      */
     private function getLinesToBeIgnored()
     {
-        $getLinesToBeIgnored = new \ReflectionMethod(
+        $getLinesToBeIgnored = new ReflectionMethod(
             'SebastianBergmann\CodeCoverage\CodeCoverage',
             'getLinesToBeIgnored'
         );

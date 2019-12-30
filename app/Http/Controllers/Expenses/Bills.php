@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Expenses;
 
+use App;
 use App\Events\BillCreated;
 //use App\Events\BillPrinting;
 use App\Events\BillUpdated;
@@ -33,6 +34,7 @@ use App\Utilities\Import;
 use App\Utilities\ImportFile;
 use App\Utilities\Modules;
 use Date;
+use Excel;
 use File;
 use Image;
 use Storage;
@@ -277,7 +279,7 @@ class Bills extends Controller
      */
     public function export()
     {
-        \Excel::create('bills', function ($excel) {
+        Excel::create('bills', function ($excel) {
             $bills = Bill::with(['items', 'item_taxes', 'histories', 'payments', 'totals'])->filter(request()->input())->get();
 
             $excel->sheet('bills', function ($sheet) use ($bills) {
@@ -366,7 +368,7 @@ class Bills extends Controller
         $view = view($bill->template_path, compact('bill', 'currency_style'))->render();
         $html = mb_convert_encoding($view, 'HTML-ENTITIES');
 
-        $pdf = \App::make('dompdf.wrapper');
+        $pdf = App::make('dompdf.wrapper');
         $pdf->loadHTML($html);
 
         $file_name = 'bill_' . time() . '.pdf';

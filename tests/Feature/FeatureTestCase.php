@@ -5,12 +5,13 @@ namespace Tests\Feature;
 use App\Models\Auth\User;
 use App\Models\Common\Company;
 use Faker\Factory;
+use Faker\Generator;
 use Tests\TestCase;
 
 abstract class FeatureTestCase extends TestCase
 {
 	/**
-	 * @var \Faker\Generator
+	 * @var Generator
 	 */
 	protected $faker;
 

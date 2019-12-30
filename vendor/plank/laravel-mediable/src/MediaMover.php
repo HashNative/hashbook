@@ -19,7 +19,7 @@ class MediaMover
 
     /**
      * Constructor.
-     * @param \Illuminate\Filesystem\FilesystemManager $filesystem
+     * @param FilesystemManager $filesystem
      */
     public function __construct(FilesystemManager $filesystem)
     {
@@ -30,11 +30,11 @@ class MediaMover
      * Move the file to a new location on disk.
      *
      * Will invoke the `save()` method on the model after the associated file has been moved to prevent synchronization errors
-     * @param  \Plank\Mediable\Media $media
+     * @param Media $media
      * @param  string                $directory directory relative to disk root
      * @param  string                $name      filename. Do not include extension
      * @return void
-     * @throws \Plank\Mediable\Exceptions\MediaMoveException If attempting to change the file extension or a file with the same name already exists at the destination
+     * @throws MediaMoveException If attempting to change the file extension or a file with the same name already exists at the destination
      */
     public function move(Media $media, $directory, $filename = null)
     {

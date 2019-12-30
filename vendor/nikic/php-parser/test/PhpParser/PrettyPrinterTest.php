@@ -2,6 +2,7 @@
 
 namespace PhpParser;
 
+use LogicException;
 use PhpParser\Comment;
 use PhpParser\Node\Expr;
 use PhpParser\Node\Name;
@@ -12,6 +13,8 @@ use PhpParser\Node\Scalar\LNumber;
 use PhpParser\Node\Scalar\String_;
 use PhpParser\Node\Stmt;
 use PhpParser\PrettyPrinter\Standard;
+use const INF;
+use const NAN;
 
 require_once __DIR__ . '/CodeTestAbstract.php';
 
@@ -179,14 +182,14 @@ class PrettyPrinterTest extends CodeTestAbstract
             [new LNumber(-1, ['kind' => LNumber::KIND_BIN]), '-0b1'],
             [new LNumber(-1, ['kind' => LNumber::KIND_OCT]), '-01'],
             [new LNumber(-1, ['kind' => LNumber::KIND_HEX]), '-0x1'],
-            [new DNumber(\INF), '\INF'],
-            [new DNumber(-\INF), '-\INF'],
-            [new DNumber(-\NAN), '\NAN'],
+            [new DNumber(INF), '\INF'],
+            [new DNumber(-INF), '-\INF'],
+            [new DNumber(-NAN), '\NAN'],
         ];
     }
 
     /**
-     * @expectedException \LogicException
+     * @expectedException LogicException
      * @expectedExceptionMessage Cannot pretty-print AST with Error nodes
      */
     public function testPrettyPrintWithError() {
@@ -196,7 +199,7 @@ class PrettyPrinterTest extends CodeTestAbstract
     }
 
     /**
-     * @expectedException \LogicException
+     * @expectedException LogicException
      * @expectedExceptionMessage Cannot pretty-print AST with Error nodes
      */
     public function testPrettyPrintWithErrorInClassConstFetch() {

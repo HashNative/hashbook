@@ -8,6 +8,7 @@
 
 namespace FontLib;
 
+use Exception;
 use FontLib\Table\Type\name;
 use FontLib\TrueType\File;
 
@@ -35,7 +36,7 @@ class AdobeFontMetrics {
       $encoding = preg_replace("/[^a-z0-9-_]/", "", $encoding);
       $map_file = dirname(__FILE__) . "/../maps/$encoding.map";
       if (!file_exists($map_file)) {
-        throw new \Exception("Unkown encoding ($encoding)");
+        throw new Exception("Unkown encoding ($encoding)");
       }
 
       $map      = new EncodingMap($map_file);

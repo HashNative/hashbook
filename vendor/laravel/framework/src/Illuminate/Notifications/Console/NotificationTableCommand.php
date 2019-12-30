@@ -25,20 +25,20 @@ class NotificationTableCommand extends Command
     /**
      * The filesystem instance.
      *
-     * @var \Illuminate\Filesystem\Filesystem
+     * @var Filesystem
      */
     protected $files;
 
     /**
-     * @var \Illuminate\Support\Composer
+     * @var Composer
      */
     protected $composer;
 
     /**
      * Create a new notifications table command instance.
      *
-     * @param  \Illuminate\Filesystem\Filesystem  $files
-     * @param  \Illuminate\Support\Composer    $composer
+     * @param Filesystem $files
+     * @param Composer $composer
      * @return void
      */
     public function __construct(Filesystem $files, Composer $composer)

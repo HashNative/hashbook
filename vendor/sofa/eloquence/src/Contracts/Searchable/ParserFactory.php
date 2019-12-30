@@ -11,7 +11,7 @@ interface ParserFactory
      *
      * @param  integer $weight
      * @param  string  $wildcard
-     * @return \Sofa\Eloquence\Contracts\Searchable\Parser
+     * @return Parser
      */
     public static function make($weight = 1, $wildcard = '*');
 }

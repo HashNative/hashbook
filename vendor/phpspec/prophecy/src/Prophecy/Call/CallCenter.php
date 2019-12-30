@@ -11,6 +11,7 @@
 
 namespace Prophecy\Call;
 
+use Exception;
 use Prophecy\Exception\Prophecy\MethodProphecyException;
 use Prophecy\Prophecy\MethodProphecy;
 use Prophecy\Prophecy\ObjectProphecy;
@@ -51,7 +52,7 @@ class CallCenter
      *
      * @return mixed Returns null if no promise for prophecy found or promise return value.
      *
-     * @throws \Prophecy\Exception\Call\UnexpectedCallException If no appropriate method prophecy found
+     * @throws UnexpectedCallException If no appropriate method prophecy found
      */
     public function makeCall(ObjectProphecy $prophecy, $methodName, array $arguments)
     {
@@ -104,7 +105,7 @@ class CallCenter
         if ($promise = $methodProphecy->getPromise()) {
             try {
                 $returnValue = $promise->execute($arguments, $prophecy, $methodProphecy);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $exception = $e;
             }
         }

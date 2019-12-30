@@ -11,7 +11,7 @@ class RouteRegistrar
     /**
      * The router instance.
      *
-     * @var \Illuminate\Routing\Router
+     * @var Router
      */
     protected $router;
 
@@ -52,7 +52,7 @@ class RouteRegistrar
     /**
      * Create a new route registrar instance.
      *
-     * @param  \Illuminate\Routing\Router  $router
+     * @param Router $router
      * @return void
      */
     public function __construct(Router $router)
@@ -67,7 +67,7 @@ class RouteRegistrar
      * @param  mixed  $value
      * @return $this
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function attribute($key, $value)
     {
@@ -96,7 +96,7 @@ class RouteRegistrar
     /**
      * Create a route group with shared attributes.
      *
-     * @param  \Closure|string  $callback
+     * @param Closure|string  $callback
      * @return void
      */
     public function group($callback)
@@ -109,8 +109,8 @@ class RouteRegistrar
      *
      * @param  array|string  $methods
      * @param  string  $uri
-     * @param  \Closure|array|string|null  $action
-     * @return \Illuminate\Routing\Route
+     * @param Closure|array|string|null  $action
+     * @return Route
      */
     public function match($methods, $uri, $action = null)
     {
@@ -122,8 +122,8 @@ class RouteRegistrar
      *
      * @param  string  $method
      * @param  string  $uri
-     * @param  \Closure|array|string|null  $action
-     * @return \Illuminate\Routing\Route
+     * @param Closure|array|string|null  $action
+     * @return Route
      */
     protected function registerRoute($method, $uri, $action = null)
     {
@@ -137,7 +137,7 @@ class RouteRegistrar
     /**
      * Compile the action into an array including the attributes.
      *
-     * @param  \Closure|array|string|null  $action
+     * @param Closure|array|string|null  $action
      * @return array
      */
     protected function compileAction($action)
@@ -158,7 +158,7 @@ class RouteRegistrar
      *
      * @param  string  $method
      * @param  array  $parameters
-     * @return \Illuminate\Routing\Route|$this
+     * @return Route|$this
      */
     public function __call($method, $parameters)
     {

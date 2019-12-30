@@ -12,6 +12,7 @@
 namespace Psy\Test\CodeCleaner;
 
 use Psy\CodeCleaner\FunctionContextPass;
+use Psy\Exception\FatalErrorException;
 
 class FunctionContextPassTest extends CodeCleanerTestCase
 {
@@ -39,7 +40,7 @@ class FunctionContextPassTest extends CodeCleanerTestCase
 
     /**
      * @dataProvider invalidYieldStatements
-     * @expectedException \Psy\Exception\FatalErrorException
+     * @expectedException FatalErrorException
      */
     public function testInvalidYield($code)
     {

@@ -6,6 +6,7 @@ use App\Http\Controllers\ApiController;
 use App\Http\Requests\Auth\Permission as Request;
 use App\Models\Auth\Permission;
 use App\Transformers\Auth\Permission as Transformer;
+use Dingo\Api\Http\Response;
 use Dingo\Api\Routing\Helpers;
 
 class Permissions extends ApiController
@@ -15,7 +16,7 @@ class Permissions extends ApiController
     /**
      * Display a listing of the resource.
      *
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -28,7 +29,7 @@ class Permissions extends ApiController
      * Display the specified resource.
      *
      * @param  Permission  $permission
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function show(Permission $permission)
     {
@@ -39,7 +40,7 @@ class Permissions extends ApiController
      * Store a newly created resource in storage.
      *
      * @param  $request
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -53,7 +54,7 @@ class Permissions extends ApiController
      *
      * @param  $permission
      * @param  $request
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function update(Permission $permission, Request $request)
     {
@@ -66,7 +67,7 @@ class Permissions extends ApiController
      * Remove the specified resource from storage.
      *
      * @param  Permission  $permission
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function destroy(Permission $permission)
     {

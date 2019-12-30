@@ -12,6 +12,8 @@
 namespace Psy\Test\CodeCleaner;
 
 use Psy\CodeCleaner\FinalClassPass;
+use Psy\Exception\FatalErrorException;
+use function defined;
 
 class FinalClassPassTest extends CodeCleanerTestCase
 {
@@ -22,7 +24,7 @@ class FinalClassPassTest extends CodeCleanerTestCase
 
     /**
      * @dataProvider invalidStatements
-     * @expectedException \Psy\Exception\FatalErrorException
+     * @expectedException FatalErrorException
      */
     public function testProcessStatementFails($code)
     {
@@ -37,7 +39,7 @@ class FinalClassPassTest extends CodeCleanerTestCase
             // array('namespace A { final class B {} } namespace C { class D extends \\A\\B {} }'),
         ];
 
-        if (!\defined('HHVM_VERSION')) {
+        if (!defined('HHVM_VERSION')) {
             // For some reason Closure isn't final in HHVM?
             $data[] = ['class A extends \\Closure {}'];
         }

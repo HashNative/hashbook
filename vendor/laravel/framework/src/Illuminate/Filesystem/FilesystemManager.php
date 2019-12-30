@@ -4,6 +4,10 @@ namespace Illuminate\Filesystem;
 
 use Closure;
 use Aws\S3\S3Client;
+use Illuminate\Contracts\Filesystem\Cloud;
+use Illuminate\Contracts\Foundation\Application;
+use League\Flysystem\FlysystemInterface;
+use OpenCloud\ObjectStore\Resource\Container;
 use OpenCloud\Rackspace;
 use Illuminate\Support\Arr;
 use InvalidArgumentException;
@@ -24,7 +28,7 @@ class FilesystemManager implements FactoryContract
     /**
      * The application instance.
      *
-     * @var \Illuminate\Contracts\Foundation\Application
+     * @var Application
      */
     protected $app;
 
@@ -45,7 +49,7 @@ class FilesystemManager implements FactoryContract
     /**
      * Create a new filesystem manager instance.
      *
-     * @param  \Illuminate\Contracts\Foundation\Application  $app
+     * @param  Application  $app
      * @return void
      */
     public function __construct($app)
@@ -106,7 +110,7 @@ class FilesystemManager implements FactoryContract
      * @param  string  $name
      * @return \Illuminate\Contracts\Filesystem\Filesystem
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     protected function resolve($name)
     {
@@ -182,7 +186,7 @@ class FilesystemManager implements FactoryContract
      * Create an instance of the Amazon S3 driver.
      *
      * @param  array  $config
-     * @return \Illuminate\Contracts\Filesystem\Cloud
+     * @return Cloud
      */
     public function createS3Driver(array $config)
     {
@@ -218,7 +222,7 @@ class FilesystemManager implements FactoryContract
      * Create an instance of the Rackspace driver.
      *
      * @param  array  $config
-     * @return \Illuminate\Contracts\Filesystem\Cloud
+     * @return Cloud
      */
     public function createRackspaceDriver(array $config)
     {
@@ -236,9 +240,9 @@ class FilesystemManager implements FactoryContract
     /**
      * Get the Rackspace Cloud Files container.
      *
-     * @param  \OpenCloud\Rackspace  $client
+     * @param Rackspace $client
      * @param  array  $config
-     * @return \OpenCloud\ObjectStore\Resource\Container
+     * @return Container
      */
     protected function getRackspaceContainer(Rackspace $client, array $config)
     {
@@ -252,9 +256,9 @@ class FilesystemManager implements FactoryContract
     /**
      * Create a Flysystem instance with the given adapter.
      *
-     * @param  \League\Flysystem\AdapterInterface  $adapter
+     * @param AdapterInterface $adapter
      * @param  array  $config
-     * @return \League\Flysystem\FlysystemInterface
+     * @return FlysystemInterface
      */
     protected function createFlysystem(AdapterInterface $adapter, array $config)
     {
@@ -266,7 +270,7 @@ class FilesystemManager implements FactoryContract
     /**
      * Adapt the filesystem implementation.
      *
-     * @param  \League\Flysystem\FilesystemInterface  $filesystem
+     * @param FilesystemInterface $filesystem
      * @return \Illuminate\Contracts\Filesystem\Filesystem
      */
     protected function adapt(FilesystemInterface $filesystem)
@@ -321,7 +325,7 @@ class FilesystemManager implements FactoryContract
      * Register a custom driver creator Closure.
      *
      * @param  string    $driver
-     * @param  \Closure  $callback
+     * @param Closure $callback
      * @return $this
      */
     public function extend($driver, Closure $callback)

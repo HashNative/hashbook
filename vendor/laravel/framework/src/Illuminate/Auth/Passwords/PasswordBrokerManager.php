@@ -2,6 +2,7 @@
 
 namespace Illuminate\Auth\Passwords;
 
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
 use Illuminate\Contracts\Auth\PasswordBrokerFactory as FactoryContract;
@@ -14,7 +15,7 @@ class PasswordBrokerManager implements FactoryContract
     /**
      * The application instance.
      *
-     * @var \Illuminate\Foundation\Application
+     * @var Application
      */
     protected $app;
 
@@ -28,7 +29,7 @@ class PasswordBrokerManager implements FactoryContract
     /**
      * Create a new PasswordBroker manager instance.
      *
-     * @param  \Illuminate\Foundation\Application  $app
+     * @param  Application  $app
      * @return void
      */
     public function __construct($app)
@@ -57,7 +58,7 @@ class PasswordBrokerManager implements FactoryContract
      * @param  string  $name
      * @return \Illuminate\Contracts\Auth\PasswordBroker
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     protected function resolve($name)
     {
@@ -80,7 +81,7 @@ class PasswordBrokerManager implements FactoryContract
      * Create a token repository instance based on the given configuration.
      *
      * @param  array  $config
-     * @return \Illuminate\Auth\Passwords\TokenRepositoryInterface
+     * @return TokenRepositoryInterface
      */
     protected function createTokenRepository(array $config)
     {

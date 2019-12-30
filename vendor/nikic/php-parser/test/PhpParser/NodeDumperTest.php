@@ -2,7 +2,11 @@
 
 namespace PhpParser;
 
-class NodeDumperTest extends \PHPUnit_Framework_TestCase
+use InvalidArgumentException;
+use PHPUnit_Framework_TestCase;
+use stdClass;
+
+class NodeDumperTest extends PHPUnit_Framework_TestCase
 {
     private function canonicalize($string) {
         return str_replace("\r\n", "\n", $string);
@@ -95,11 +99,11 @@ OUT;
     }
 
     /**
-     * @expectedException        \InvalidArgumentException
+     * @expectedException        InvalidArgumentException
      * @expectedExceptionMessage Can only dump nodes and arrays.
      */
     public function testError() {
         $dumper = new NodeDumper;
-        $dumper->dump(new \stdClass);
+        $dumper->dump(new stdClass);
     }
 }

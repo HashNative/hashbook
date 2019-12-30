@@ -4,19 +4,20 @@ namespace Illuminate\Pagination;
 
 use Closure;
 use ArrayIterator;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
 use Illuminate\Contracts\Support\Htmlable;
 
 /**
- * @mixin \Illuminate\Support\Collection
+ * @mixin Collection
  */
 abstract class AbstractPaginator implements Htmlable
 {
     /**
      * All of the items being paginated.
      *
-     * @var \Illuminate\Support\Collection
+     * @var Collection
      */
     protected $items;
 
@@ -65,21 +66,21 @@ abstract class AbstractPaginator implements Htmlable
     /**
      * The current path resolver callback.
      *
-     * @var \Closure
+     * @var Closure
      */
     protected static $currentPathResolver;
 
     /**
      * The current page resolver callback.
      *
-     * @var \Closure
+     * @var Closure
      */
     protected static $currentPageResolver;
 
     /**
      * The view factory resolver callback.
      *
-     * @var \Closure
+     * @var Closure
      */
     protected static $viewFactoryResolver;
 
@@ -370,7 +371,7 @@ abstract class AbstractPaginator implements Htmlable
     /**
      * Set the current request path resolver callback.
      *
-     * @param  \Closure  $resolver
+     * @param Closure $resolver
      * @return void
      */
     public static function currentPathResolver(Closure $resolver)
@@ -397,7 +398,7 @@ abstract class AbstractPaginator implements Htmlable
     /**
      * Set the current page resolver callback.
      *
-     * @param  \Closure  $resolver
+     * @param Closure $resolver
      * @return void
      */
     public static function currentPageResolver(Closure $resolver)
@@ -408,7 +409,7 @@ abstract class AbstractPaginator implements Htmlable
     /**
      * Get an instance of the view factory from the resolver.
      *
-     * @return \Illuminate\Contracts\View\Factory
+     * @return Factory
      */
     public static function viewFactory()
     {
@@ -418,7 +419,7 @@ abstract class AbstractPaginator implements Htmlable
     /**
      * Set the view factory resolver callback.
      *
-     * @param  \Closure  $resolver
+     * @param Closure $resolver
      * @return void
      */
     public static function viewFactoryResolver(Closure $resolver)
@@ -451,7 +452,7 @@ abstract class AbstractPaginator implements Htmlable
     /**
      * Get an iterator for the items.
      *
-     * @return \ArrayIterator
+     * @return ArrayIterator
      */
     public function getIterator()
     {
@@ -481,7 +482,7 @@ abstract class AbstractPaginator implements Htmlable
     /**
      * Get the paginator's underlying collection.
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function getCollection()
     {
@@ -491,7 +492,7 @@ abstract class AbstractPaginator implements Htmlable
     /**
      * Set the paginator's underlying collection.
      *
-     * @param  \Illuminate\Support\Collection  $collection
+     * @param Collection $collection
      * @return $this
      */
     public function setCollection(Collection $collection)

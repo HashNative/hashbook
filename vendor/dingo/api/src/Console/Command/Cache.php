@@ -3,6 +3,7 @@
 namespace Dingo\Api\Console\Command;
 
 use Illuminate\Console\Command;
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Contracts\Console\Kernel;
 
@@ -25,14 +26,14 @@ class Cache extends Command
     /**
      * Filesystem instance.
      *
-     * @var \Illuminate\Filesystem\Filesystem
+     * @var Filesystem
      */
     protected $files;
 
     /**
      * Create a new cache command instance.
      *
-     * @param \Illuminate\Filesystem\Filesystem $files
+     * @param Filesystem $files
      *
      * @return void
      */
@@ -80,7 +81,7 @@ class Cache extends Command
     /**
      * Get a fresh application instance.
      *
-     * @return \Illuminate\Contracts\Container\Container
+     * @return Container
      */
     protected function getFreshApplication()
     {

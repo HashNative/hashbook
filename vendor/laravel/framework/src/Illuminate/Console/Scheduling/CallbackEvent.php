@@ -2,6 +2,7 @@
 
 namespace Illuminate\Console\Scheduling;
 
+use Exception;
 use LogicException;
 use InvalidArgumentException;
 use Illuminate\Contracts\Container\Container;
@@ -25,12 +26,12 @@ class CallbackEvent extends Event
     /**
      * Create a new event instance.
      *
-     * @param  \Illuminate\Console\Scheduling\Mutex  $mutex
+     * @param Mutex $mutex
      * @param  string  $callback
      * @param  array  $parameters
      * @return void
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function __construct(Mutex $mutex, $callback, array $parameters = [])
     {
@@ -48,10 +49,10 @@ class CallbackEvent extends Event
     /**
      * Run the given event.
      *
-     * @param  \Illuminate\Contracts\Container\Container  $container
+     * @param Container $container
      * @return mixed
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function run(Container $container)
     {

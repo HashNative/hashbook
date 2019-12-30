@@ -22,7 +22,7 @@ class PostgresConnector extends Connector implements ConnectorInterface
      * Establish a database connection.
      *
      * @param  array  $config
-     * @return \PDO
+     * @return PDO
      */
     public function connect(array $config)
     {
@@ -53,7 +53,7 @@ class PostgresConnector extends Connector implements ConnectorInterface
     /**
      * Set the connection character set and collation.
      *
-     * @param  \PDO  $connection
+     * @param PDO $connection
      * @param  array  $config
      * @return void
      */
@@ -67,7 +67,7 @@ class PostgresConnector extends Connector implements ConnectorInterface
     /**
      * Set the timezone on the connection.
      *
-     * @param  \PDO  $connection
+     * @param PDO $connection
      * @param  array  $config
      * @return void
      */
@@ -83,7 +83,7 @@ class PostgresConnector extends Connector implements ConnectorInterface
     /**
      * Set the schema on the connection.
      *
-     * @param  \PDO  $connection
+     * @param PDO $connection
      * @param  array  $config
      * @return void
      */
@@ -114,7 +114,7 @@ class PostgresConnector extends Connector implements ConnectorInterface
     /**
      * Set the schema on the connection.
      *
-     * @param  \PDO  $connection
+     * @param PDO $connection
      * @param  array  $config
      * @return void
      */

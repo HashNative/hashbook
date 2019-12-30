@@ -2,6 +2,7 @@
 
 namespace Nwidart\Modules;
 
+use Exception;
 use Illuminate\Filesystem\Filesystem;
 use Nwidart\Modules\Exceptions\InvalidJsonException;
 
@@ -17,7 +18,7 @@ class Json
     /**
      * The laravel filesystem instance.
      *
-     * @var \Illuminate\Filesystem\Filesystem
+     * @var Filesystem
      */
     protected $filesystem;
 
@@ -32,7 +33,7 @@ class Json
      * The constructor.
      *
      * @param mixed                             $path
-     * @param \Illuminate\Filesystem\Filesystem $filesystem
+     * @param Filesystem $filesystem
      */
     public function __construct($path, Filesystem $filesystem = null)
     {
@@ -93,7 +94,7 @@ class Json
      * Make new instance.
      *
      * @param string                            $path
-     * @param \Illuminate\Filesystem\Filesystem $filesystem
+     * @param Filesystem $filesystem
      *
      * @return static
      */
@@ -115,7 +116,7 @@ class Json
     /**
      * Get file contents as array.
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     public function getAttributes()
     {

@@ -49,8 +49,8 @@ trait HandlesMediaUploadExceptions
     /**
      * Transform a MediaUploadException into an HttpException.
      *
-     * @param  \Exception  $e
-     * @return \Symfony\Component\HttpKernel\Exception\HttpException
+     * @param Exception $e
+     * @return HttpException
      */
     protected function transformMediaUploadException(Exception $e)
     {
@@ -65,7 +65,7 @@ trait HandlesMediaUploadExceptions
     /**
      * Get the appropriate HTTP status code for the exception.
      *
-     * @param  \Plank\Mediable\Exceptions\MediaUploadException $e
+     * @param MediaUploadException $e
      * @return integer
      */
     private function getStatusCodeForMediaUploadException(MediaUploadException $e)

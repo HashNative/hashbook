@@ -11,12 +11,22 @@
 
 namespace Psy\Reflection;
 
+use InvalidArgumentException;
+use ReflectionClass;
+use ReflectionMethod;
+use Reflector;
+use RuntimeException;
+use function array_key_exists;
+use function class_exists;
+use function gettype;
+use function sprintf;
+
 /**
  * Somehow the standard reflection library didn't include class constants until 7.1.
  *
  * ReflectionClassConstant corrects that omission.
  */
-class ReflectionClassConstant implements \Reflector
+class ReflectionClassConstant implements Reflector
 {
     public $class;
     public $name;
@@ -30,16 +40,16 @@ class ReflectionClassConstant implements \Reflector
      */
     public function __construct($class, $name)
     {
-        if (!$class instanceof \ReflectionClass) {
-            $class = new \ReflectionClass($class);
+        if (!$class instanceof ReflectionClass) {
+            $class = new ReflectionClass($class);
         }
 
         $this->class = $class;
         $this->name  = $name;
 
         $constants = $class->getConstants();
-        if (!\array_key_exists($name, $constants)) {
-            throw new \InvalidArgumentException('Unknown constant: ' . $name);
+        if (!array_key_exists($name, $constants)) {
+            throw new InvalidArgumentException('Unknown constant: ' . $name);
         }
 
         $this->value = $constants[$name];
@@ -59,7 +69,7 @@ class ReflectionClassConstant implements \Reflector
         $refl = new self($class, $name);
         $value = $refl->getValue();
 
-        $str = \sprintf('Constant [ public %s %s ] { %s }', \gettype($value), $refl->getName(), $value);
+        $str = sprintf('Constant [ public %s %s ] { %s }', gettype($value), $refl->getName(), $value);
 
         if ($return) {
             return $str;
@@ -71,7 +81,7 @@ class ReflectionClassConstant implements \Reflector
     /**
      * Gets the declaring class.
      *
-     * @return \ReflectionClass
+     * @return ReflectionClass
      */
     public function getDeclaringClass()
     {
@@ -111,7 +121,7 @@ class ReflectionClassConstant implements \Reflector
      */
     public function getModifiers()
     {
-        return \ReflectionMethod::IS_PUBLIC;
+        return ReflectionMethod::IS_PUBLIC;
     }
 
     /**
@@ -189,17 +199,17 @@ class ReflectionClassConstant implements \Reflector
     /**
      * Get the code start line.
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     public function getStartLine()
     {
-        throw new \RuntimeException('Not yet implemented because it\'s unclear what I should do here :)');
+        throw new RuntimeException('Not yet implemented because it\'s unclear what I should do here :)');
     }
 
     /**
      * Get the code end line.
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     public function getEndLine()
     {
@@ -219,7 +229,7 @@ class ReflectionClassConstant implements \Reflector
      */
     public static function create($class, $name)
     {
-        if (\class_exists('\\ReflectionClassConstant')) {
+        if (class_exists('\\ReflectionClassConstant')) {
             return new \ReflectionClassConstant($class, $name);
         }
 

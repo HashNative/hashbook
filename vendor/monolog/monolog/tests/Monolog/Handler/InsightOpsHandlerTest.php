@@ -13,8 +13,9 @@
  
  use Monolog\TestCase;
  use Monolog\Logger;
+ use ReflectionProperty;
 
-/**
+ /**
  * @author Robert Kaufmann III <rok3@rok3.me>
  * @author Gabriel Machado <gabriel.ms1@hotmail.com>
  */
@@ -63,7 +64,7 @@ class InsightOpsHandlerTest extends TestCase
             $args
         );
 
-        $reflectionProperty = new \ReflectionProperty('\Monolog\Handler\SocketHandler', 'connectionString');
+        $reflectionProperty = new ReflectionProperty('\Monolog\Handler\SocketHandler', 'connectionString');
         $reflectionProperty->setAccessible(true);
         $reflectionProperty->setValue($this->handler, 'localhost:1234');
 

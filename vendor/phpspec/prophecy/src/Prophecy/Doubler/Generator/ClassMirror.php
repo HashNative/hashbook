@@ -14,6 +14,7 @@ namespace Prophecy\Doubler\Generator;
 use Prophecy\Exception\InvalidArgumentException;
 use Prophecy\Exception\Doubler\ClassMirrorException;
 use ReflectionClass;
+use ReflectionException;
 use ReflectionMethod;
 use ReflectionParameter;
 
@@ -43,7 +44,7 @@ class ClassMirror
      *
      * @return Node\ClassNode
      *
-     * @throws \Prophecy\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function reflect(ReflectionClass $class = null, array $interfaces)
     {
@@ -251,7 +252,7 @@ class ClassMirror
     {
         try {
             return $parameter->getClass() ? $parameter->getClass()->getName() : null;
-        } catch (\ReflectionException $e) {
+        } catch (ReflectionException $e) {
             preg_match('/\[\s\<\w+?>\s([\w,\\\]+)/s', $parameter, $matches);
 
             return isset($matches[1]) ? $matches[1] : null;

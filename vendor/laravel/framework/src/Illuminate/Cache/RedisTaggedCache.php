@@ -2,6 +2,8 @@
 
 namespace Illuminate\Cache;
 
+use DateTime;
+
 class RedisTaggedCache extends TaggedCache
 {
     /**
@@ -22,7 +24,7 @@ class RedisTaggedCache extends TaggedCache
      *
      * @param  string  $key
      * @param  mixed   $value
-     * @param  \DateTime|float|int  $minutes
+     * @param  DateTime|float|int  $minutes
      * @return void
      */
     public function put($key, $value, $minutes = null)

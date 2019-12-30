@@ -2,11 +2,12 @@
 
 namespace Sofa\Eloquence\Tests;
 
+use PHPUnit_Framework_TestCase;
 use Sofa\Eloquence\Subquery;
 
 use Mockery as m;
 
-class SubqueryTest extends \PHPUnit_Framework_TestCase {
+class SubqueryTest extends PHPUnit_Framework_TestCase {
 
     public function tearDown()
     {

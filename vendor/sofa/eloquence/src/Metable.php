@@ -2,9 +2,12 @@
 
 namespace Sofa\Eloquence;
 
+use Closure;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Sofa\Eloquence\Metable\Hooks;
 use Sofa\Eloquence\Metable\Attribute;
 use Sofa\Eloquence\Metable\AttributeBag;
+use Sofa\EloquenceArgumentBag;
 use Sofa\Hookable\Contracts\ArgumentBag;
 
 /**
@@ -62,9 +65,9 @@ trait Metable
     /**
      * Custom query handler for querying meta attributes.
      *
-     * @param  \Sofa\Eloquence\Builder $query
+     * @param Builder $query
      * @param  string $method
-     * @param  \Sofa\Hookable\Contracts\ArgumentBag $args
+     * @param ArgumentBag $args
      * @return mixed
      */
     protected function metaQuery(Builder $query, $method, ArgumentBag $args)
@@ -79,8 +82,8 @@ trait Metable
     /**
      * Adjust meta columns for select statement.
      *
-     * @param  \Sofa\Eloquence\Builder $query
-     * @param  \Sofa\Hookable\Contracts\ArgumentBag $args
+     * @param Builder $query
+     * @param ArgumentBag $args
      * @return void
      */
     protected function metaSelect(Builder $query, ArgumentBag $args)
@@ -111,9 +114,9 @@ trait Metable
     /**
      * Join meta attributes table in order to call provided method.
      *
-     * @param  \Sofa\Eloquence\Builder $query
+     * @param Builder $query
      * @param  string $method
-     * @param  \Sofa\Hookable\Contracts\ArgumentBag $args
+     * @param ArgumentBag $args
      * @return mixed
      */
     protected function metaJoinQuery(Builder $query, $method, ArgumentBag $args)
@@ -132,10 +135,10 @@ trait Metable
     /**
      * Order query by meta attribute.
      *
-     * @param  \Sofa\Eloquence\Builder $query
-     * @param  \Sofa\Hookable\Contracts\ArgumentBag $args
+     * @param Builder $query
+     * @param ArgumentBag $args
      * @param  string $alias
-     * @return \Sofa\Eloquence\Builder
+     * @return Builder
      */
     protected function orderByMeta(Builder $query, $args, $alias)
     {
@@ -147,8 +150,8 @@ trait Metable
     /**
      * Get an array with the values of given meta attribute.
      *
-     * @param  \Sofa\Eloquence\Builder $query
-     * @param  \Sofa\Hookable\Contracts\ArgumentBag $args
+     * @param Builder $query
+     * @param ArgumentBag $args
      * @param  string $alias
      * @return array
      */
@@ -168,9 +171,9 @@ trait Metable
     /**
      * Add select clause for key of the list array.
      *
-     * @param  \Sofa\Eloquence\Builder $query
+     * @param Builder $query
      * @param  string $key
-     * @return \Sofa\Eloquence\Builder
+     * @return Builder
      */
     protected function metaSelectListsKey(Builder $query, $key)
     {
@@ -188,7 +191,7 @@ trait Metable
     /**
      * Get single value result from the meta attribute.
      *
-     * @param  \Sofa\Eloquence\Builder $query
+     * @param Builder $query
      * @param  string $method
      * @param  string $alias
      * @return mixed
@@ -202,7 +205,7 @@ trait Metable
     /**
      * Join meta attributes table.
      *
-     * @param  \Sofa\Eloquence\Builder $query
+     * @param Builder $query
      * @param  string $column
      * @return string
      */
@@ -236,10 +239,10 @@ trait Metable
     /**
      * Add whereHas subquery on the meta attributes relation.
      *
-     * @param  \Sofa\Eloquence\Builder $query
+     * @param Builder $query
      * @param  string $method
-     * @param  \Sofa\Hookable\Contracts\ArgumentBag $args
-     * @return \Sofa\Eloquence\Builder
+     * @param ArgumentBag $args
+     * @return Builder
      */
     protected function metaHasQuery(Builder $query, $method, ArgumentBag $args)
     {
@@ -259,7 +262,7 @@ trait Metable
     /**
      * Get boolean called on the original method and set it to default.
      *
-     * @param  \Sofa\EloquenceArgumentBag $args
+     * @param  EloquenceArgumentBag $args
      * @return string
      */
     protected function getMetaBoolean(ArgumentBag $args)
@@ -275,7 +278,7 @@ trait Metable
      * Determine the operator for count relation query.
      *
      * @param  string $method
-     * @param  \Sofa\Hookable\Contracts\ArgumentBag $args
+     * @param ArgumentBag $args
      * @return string
      */
     protected function getMetaOperator($method, ArgumentBag $args)
@@ -291,7 +294,7 @@ trait Metable
      * Integers and floats must be passed in raw form in order to avoid string
      * comparison, due to the fact that all meta values are stored as strings.
      *
-     * @param  \Sofa\Hookable\Contracts\ArgumentBag $args
+     * @param ArgumentBag $args
      * @return void
      */
     protected function unbindNumerics(ArgumentBag $args)
@@ -313,8 +316,8 @@ trait Metable
      * Get the relation constraint closure.
      *
      * @param  string $method
-     * @param  \Sofa\Hookable\Contracts\ArgumentBag $args
-     * @return \Closure
+     * @param ArgumentBag $args
+     * @return Closure
      */
     protected function getMetaWhereConstraint($method, ArgumentBag $args)
     {
@@ -340,7 +343,7 @@ trait Metable
      *
      * @param  string $column
      * @param  array  $values
-     * @return \Closure
+     * @return Closure
      */
     protected function getMetaBetweenConstraint($column, array $values)
     {
@@ -422,7 +425,7 @@ trait Metable
      *
      * @codeCoverageIgnore
      *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     * @return MorphMany
      */
     public function metaAttributes()
     {
@@ -432,7 +435,7 @@ trait Metable
     /**
      * Get meta attributes as collection.
      *
-     * @return \Sofa\Eloquence\Metable\AttributeBag
+     * @return AttributeBag
      */
     public function getMetaAttributes()
     {
@@ -444,7 +447,7 @@ trait Metable
     /**
      * Accessor for metaAttributes property
      *
-     * @return \Sofa\Eloquence\Metable\AttributeBag
+     * @return AttributeBag
      */
     public function getMetaAttributesAttribute()
     {

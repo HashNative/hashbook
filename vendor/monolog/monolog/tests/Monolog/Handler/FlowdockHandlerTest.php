@@ -14,6 +14,7 @@ namespace Monolog\Handler;
 use Monolog\Formatter\FlowdockFormatter;
 use Monolog\TestCase;
 use Monolog\Logger;
+use ReflectionProperty;
 
 /**
  * @author Dominik Liebler <liebler.dominik@gmail.com>
@@ -69,7 +70,7 @@ class FlowdockHandlerTest extends TestCase
             $constructorArgs
         );
 
-        $reflectionProperty = new \ReflectionProperty('\Monolog\Handler\SocketHandler', 'connectionString');
+        $reflectionProperty = new ReflectionProperty('\Monolog\Handler\SocketHandler', 'connectionString');
         $reflectionProperty->setAccessible(true);
         $reflectionProperty->setValue($this->handler, 'localhost:1234');
 

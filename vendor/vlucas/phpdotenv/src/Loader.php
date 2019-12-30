@@ -2,6 +2,7 @@
 
 namespace Dotenv;
 
+use Dotenv\Exception\InvalidFileException;
 use Dotenv\Exception\InvalidPathException;
 
 /**
@@ -74,9 +75,9 @@ class Loader
     /**
      * Load `.env` file in given directory.
      *
-     * @throws \Dotenv\Exception\InvalidPathException|\Dotenv\Exception\InvalidFileException
-     *
      * @return array
+     *@throws InvalidPathException|InvalidFileException
+     *
      */
     public function load()
     {
@@ -96,9 +97,9 @@ class Loader
     /**
      * Ensures the given filePath is readable.
      *
-     * @throws \Dotenv\Exception\InvalidPathException
-     *
      * @return void
+     * @throws InvalidPathException
+     *
      */
     protected function ensureFileIsReadable()
     {
@@ -119,7 +120,7 @@ class Loader
      * @param string $name
      * @param string $value
      *
-     * @throws \Dotenv\Exception\InvalidFileException
+     * @throws InvalidFileException
      *
      * @return array
      */
@@ -140,7 +141,7 @@ class Loader
      * @param string $name
      * @param string $value
      *
-     * @throws \Dotenv\Exception\InvalidFileException
+     * @throws InvalidFileException
      *
      * @return array
      */
@@ -223,7 +224,7 @@ class Loader
      * @param string $name
      * @param string $value
      *
-     * @throws \Dotenv\Exception\InvalidFileException
+     * @throws InvalidFileException
      *
      * @return array
      */
@@ -314,7 +315,7 @@ class Loader
      * @param string      $name
      * @param string|null $value
      *
-     * @throws \Dotenv\Exception\InvalidFileException
+     * @throws InvalidFileException
      *
      * @return void
      */

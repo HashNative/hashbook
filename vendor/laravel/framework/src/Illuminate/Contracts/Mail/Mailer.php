@@ -2,13 +2,15 @@
 
 namespace Illuminate\Contracts\Mail;
 
+use Closure;
+
 interface Mailer
 {
     /**
      * Send a new message when only a raw text part.
      *
      * @param  string  $text
-     * @param  \Closure|string  $callback
+     * @param  Closure|string  $callback
      * @return int
      */
     public function raw($text, $callback);
@@ -18,7 +20,7 @@ interface Mailer
      *
      * @param  string|array  $view
      * @param  array  $data
-     * @param  \Closure|string  $callback
+     * @param  Closure|string  $callback
      * @return void
      */
     public function send($view, array $data = [], $callback = null);

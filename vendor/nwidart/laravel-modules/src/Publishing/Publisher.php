@@ -3,9 +3,11 @@
 namespace Nwidart\Modules\Publishing;
 
 use Illuminate\Console\Command;
+use Illuminate\Filesystem\Filesystem;
 use Nwidart\Modules\Contracts\PublisherInterface;
 use Nwidart\Modules\Module;
 use Nwidart\Modules\Repository;
+use RuntimeException;
 
 abstract class Publisher implements PublisherInterface
 {
@@ -19,14 +21,14 @@ abstract class Publisher implements PublisherInterface
     /**
      * The modules repository instance.
      *
-     * @var \Nwidart\Modules\Repository
+     * @var Repository
      */
     protected $repository;
 
     /**
      * The laravel console instance.
      *
-     * @var \Illuminate\Console\Command
+     * @var Command
      */
     protected $console;
 
@@ -88,7 +90,7 @@ abstract class Publisher implements PublisherInterface
     /**
      * Get module instance.
      *
-     * @return \Nwidart\Modules\Module
+     * @return Module
      */
     public function getModule()
     {
@@ -98,7 +100,7 @@ abstract class Publisher implements PublisherInterface
     /**
      * Set modules repository instance.
      *
-     * @param \Nwidart\Modules\Repository $repository
+     * @param Repository $repository
      *
      * @return $this
      */
@@ -112,7 +114,7 @@ abstract class Publisher implements PublisherInterface
     /**
      * Get modules repository instance.
      *
-     * @return \Nwidart\Modules\Repository
+     * @return Repository
      */
     public function getRepository()
     {
@@ -122,7 +124,7 @@ abstract class Publisher implements PublisherInterface
     /**
      * Set console instance.
      *
-     * @param \Illuminate\Console\Command $console
+     * @param Command $console
      *
      * @return $this
      */
@@ -136,7 +138,7 @@ abstract class Publisher implements PublisherInterface
     /**
      * Get console instance.
      *
-     * @return \Illuminate\Console\Command
+     * @return Command
      */
     public function getConsole()
     {
@@ -146,7 +148,7 @@ abstract class Publisher implements PublisherInterface
     /**
      * Get laravel filesystem instance.
      *
-     * @return \Illuminate\Filesystem\Filesystem
+     * @return Filesystem
      */
     public function getFilesystem()
     {
@@ -175,7 +177,7 @@ abstract class Publisher implements PublisherInterface
         if (!$this->console instanceof Command) {
             $message = "The 'console' property must instance of \\Illuminate\\Console\\Command.";
 
-            throw new \RuntimeException($message);
+            throw new RuntimeException($message);
         }
 
         if (!$this->getFilesystem()->isDirectory($sourcePath = $this->getSourcePath())) {

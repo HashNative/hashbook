@@ -2,6 +2,7 @@
 
 namespace Illuminate\Auth;
 
+use Illuminate\Contracts\Auth\UserProvider;
 use InvalidArgumentException;
 
 trait CreatesUserProviders
@@ -17,9 +18,9 @@ trait CreatesUserProviders
      * Create the user provider implementation for the driver.
      *
      * @param  string  $provider
-     * @return \Illuminate\Contracts\Auth\UserProvider
+     * @return UserProvider
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function createUserProvider($provider)
     {
@@ -45,7 +46,7 @@ trait CreatesUserProviders
      * Create an instance of the database user provider.
      *
      * @param  array  $config
-     * @return \Illuminate\Auth\DatabaseUserProvider
+     * @return DatabaseUserProvider
      */
     protected function createDatabaseProvider($config)
     {
@@ -58,7 +59,7 @@ trait CreatesUserProviders
      * Create an instance of the Eloquent user provider.
      *
      * @param  array  $config
-     * @return \Illuminate\Auth\EloquentUserProvider
+     * @return EloquentUserProvider
      */
     protected function createEloquentProvider($config)
     {

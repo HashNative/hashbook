@@ -2,6 +2,8 @@
 
 namespace Nwidart\Modules\Contracts;
 
+use Nwidart\Modules\Collection;
+
 interface RepositoryInterface
 {
     /**
@@ -28,7 +30,7 @@ interface RepositoryInterface
     /**
      * Get modules as modules collection instance.
      *
-     * @return \Nwidart\Modules\Collection
+     * @return Collection
      */
     public function toCollection();
 

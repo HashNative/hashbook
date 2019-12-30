@@ -2,6 +2,7 @@
 
 namespace Illuminate\Queue;
 
+use Exception;
 use Illuminate\Contracts\Queue\Job;
 use Illuminate\Contracts\Bus\Dispatcher;
 
@@ -10,14 +11,14 @@ class CallQueuedHandler
     /**
      * The bus dispatcher implementation.
      *
-     * @var \Illuminate\Contracts\Bus\Dispatcher
+     * @var Dispatcher
      */
     protected $dispatcher;
 
     /**
      * Create a new handler instance.
      *
-     * @param  \Illuminate\Contracts\Bus\Dispatcher  $dispatcher
+     * @param Dispatcher $dispatcher
      * @return void
      */
     public function __construct(Dispatcher $dispatcher)
@@ -28,7 +29,7 @@ class CallQueuedHandler
     /**
      * Handle the queued job.
      *
-     * @param  \Illuminate\Contracts\Queue\Job  $job
+     * @param Job $job
      * @param  array  $data
      * @return void
      */
@@ -50,7 +51,7 @@ class CallQueuedHandler
     /**
      * Resolve the handler for the given command.
      *
-     * @param  \Illuminate\Contracts\Queue\Job  $job
+     * @param Job $job
      * @param  mixed  $command
      * @return mixed
      */
@@ -68,7 +69,7 @@ class CallQueuedHandler
     /**
      * Set the job instance of the given class if necessary.
      *
-     * @param  \Illuminate\Contracts\Queue\Job  $job
+     * @param Job $job
      * @param  mixed  $instance
      * @return mixed
      */
@@ -87,7 +88,7 @@ class CallQueuedHandler
      * The exception that caused the failure will be passed.
      *
      * @param  array  $data
-     * @param  \Exception  $e
+     * @param  Exception  $e
      * @return void
      */
     public function failed(array $data, $e)

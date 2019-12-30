@@ -9,7 +9,9 @@
  * file that was distributed with this source code.
  */
 
-\Symfony\Component\Translation\PluralizationRules::set(function ($number) {
+use Symfony\Component\Translation\PluralizationRules;
+
+PluralizationRules::set(function ($number) {
     return $number == 1 ? 0 : 1;
 }, 'oc');
 

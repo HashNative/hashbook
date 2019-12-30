@@ -3,6 +3,8 @@
 namespace Illuminate\Foundation\Testing;
 
 use Closure;
+use Illuminate\Http\Response;
+use Illuminate\Session\Store;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Contracts\View\View;
@@ -11,7 +13,7 @@ use PHPUnit\Framework\Assert as PHPUnit;
 use Symfony\Component\HttpFoundation\Cookie;
 
 /**
- * @mixin \Illuminate\Http\Response
+ * @mixin Response
  */
 class TestResponse
 {
@@ -22,14 +24,14 @@ class TestResponse
     /**
      * The response to delegate to.
      *
-     * @var \Illuminate\Http\Response
+     * @var Response
      */
     public $baseResponse;
 
     /**
      * Create a new test response instance.
      *
-     * @param  \Illuminate\Http\Response  $response
+     * @param  Response  $response
      * @return void
      */
     public function __construct($response)
@@ -40,7 +42,7 @@ class TestResponse
     /**
      * Create a new TestResponse from another response.
      *
-     * @param  \Illuminate\Http\Response  $response
+     * @param  Response  $response
      * @return static
      */
     public static function fromBaseResponse($response)
@@ -175,7 +177,7 @@ class TestResponse
      * Get the given cookie from the response.
      *
      * @param  string  $cookieName
-     * @return \Symfony\Component\HttpFoundation\Cookie|null
+     * @return Cookie|null
      */
     protected function getCookie($cookieName)
     {
@@ -592,7 +594,7 @@ class TestResponse
     /**
      * Get the current session store.
      *
-     * @return \Illuminate\Session\Store
+     * @return Store
      */
     protected function session()
     {

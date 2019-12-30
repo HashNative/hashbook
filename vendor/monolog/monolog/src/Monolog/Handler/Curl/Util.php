@@ -11,6 +11,8 @@
 
 namespace Monolog\Handler\Curl;
 
+use RuntimeException;
+
 class Util
 {
     private static $retriableErrorCodes = array(
@@ -27,7 +29,7 @@ class Util
      * Executes a CURL request with optional retries and exception on failure
      *
      * @param  resource          $ch curl handler
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     public static function execute($ch, $retries = 5, $closeAfterDone = true)
     {
@@ -42,7 +44,7 @@ class Util
                         curl_close($ch);
                     }
 
-                    throw new \RuntimeException(sprintf('Curl error (code %s): %s', $curlErrno, $curlError));
+                    throw new RuntimeException(sprintf('Curl error (code %s): %s', $curlErrno, $curlError));
                 }
 
                 continue;

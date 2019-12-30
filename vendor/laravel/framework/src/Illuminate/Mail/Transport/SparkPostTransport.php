@@ -2,6 +2,7 @@
 
 namespace Illuminate\Mail\Transport;
 
+use GuzzleHttp\Psr7\Response;
 use Swift_Mime_Message;
 use GuzzleHttp\ClientInterface;
 
@@ -10,7 +11,7 @@ class SparkPostTransport extends Transport
     /**
      * Guzzle client instance.
      *
-     * @var \GuzzleHttp\ClientInterface
+     * @var ClientInterface
      */
     protected $client;
 
@@ -31,7 +32,7 @@ class SparkPostTransport extends Transport
     /**
      * Create a new SparkPost transport instance.
      *
-     * @param  \GuzzleHttp\ClientInterface  $client
+     * @param ClientInterface $client
      * @param  string  $key
      * @param  array  $options
      * @return void
@@ -80,7 +81,7 @@ class SparkPostTransport extends Transport
      *
      * Note that SparkPost still respects CC, BCC headers in raw message itself.
      *
-     * @param  \Swift_Mime_Message $message
+     * @param Swift_Mime_Message $message
      * @return array
      */
     protected function getRecipients(Swift_Mime_Message $message)
@@ -105,7 +106,7 @@ class SparkPostTransport extends Transport
     /**
      * Get the transmission ID from the response.
      *
-     * @param \GuzzleHttp\Psr7\Response $response
+     * @param Response $response
      * @return string
      */
     protected function getTransmissionId($response)

@@ -3,6 +3,7 @@
 namespace Dingo\Api\Routing;
 
 use Closure;
+use Dingo\Api\Http\Parser\Accept;
 use Exception;
 use RuntimeException;
 use Illuminate\Support\Arr;
@@ -22,28 +23,28 @@ class Router
     /**
      * Routing adapter instance.
      *
-     * @var \Dingo\Api\Contract\Routing\Adapter
+     * @var Adapter
      */
     protected $adapter;
 
     /**
      * Accept parser instance.
      *
-     * @var \Dingo\Api\Http\Parser\Accept
+     * @var Accept
      */
     protected $accept;
 
     /**
      * Exception handler instance.
      *
-     * @var \Dingo\Api\Contract\Debug\ExceptionHandler
+     * @var ExceptionHandler
      */
     protected $exception;
 
     /**
      * Application container instance.
      *
-     * @var \Illuminate\Container\Container
+     * @var Container
      */
     protected $container;
 
@@ -64,7 +65,7 @@ class Router
     /**
      * The current route being dispatched.
      *
-     * @var \Dingo\Api\Routing\Route
+     * @var Route
      */
     protected $currentRoute;
 
@@ -92,10 +93,10 @@ class Router
     /**
      * Create a new router instance.
      *
-     * @param \Dingo\Api\Contract\Routing\Adapter        $adapter
-     * @param \Dingo\Api\Http\Parser\Accept              $accept
-     * @param \Dingo\Api\Contract\Debug\ExceptionHandler $exception
-     * @param \Illuminate\Container\Container            $container
+     * @param Adapter $adapter
+     * @param Accept              $accept
+     * @param ExceptionHandler $exception
+     * @param Container $container
      * @param string                                     $domain
      * @param string                                     $prefix
      *
@@ -495,11 +496,11 @@ class Router
     /**
      * Dispatch a request via the adapter.
      *
-     * @param \Dingo\Api\Http\Request $request
+     * @param Request $request
      *
-     * @throws \Exception
+     * @return Response
+     *@throws Exception
      *
-     * @return \Dingo\Api\Http\Response
      */
     public function dispatch(Request $request)
     {
@@ -532,10 +533,10 @@ class Router
      * Prepare a response by transforming and formatting it correctly.
      *
      * @param mixed                   $response
-     * @param \Dingo\Api\Http\Request $request
+     * @param Request $request
      * @param string                  $format
      *
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     protected function prepareResponse($response, Request $request, $format)
     {
@@ -607,7 +608,7 @@ class Router
     /**
      * Get the current request instance.
      *
-     * @return \Dingo\Api\Http\Request
+     * @return Request
      */
     public function getCurrentRequest()
     {
@@ -617,7 +618,7 @@ class Router
     /**
      * Get the current route instance.
      *
-     * @return \Dingo\Api\Routing\Route
+     * @return Route
      */
     public function getCurrentRoute()
     {
@@ -645,7 +646,7 @@ class Router
      *
      * @param array|\Illuminate\Routing\Route $route
      *
-     * @return \Dingo\Api\Routing\Route
+     * @return Route
      */
     public function createRoute($route)
     {
@@ -655,7 +656,7 @@ class Router
     /**
      * Set the current route instance.
      *
-     * @param \Dingo\Api\Routing\Route $route
+     * @param Route $route
      *
      * @return void
      */

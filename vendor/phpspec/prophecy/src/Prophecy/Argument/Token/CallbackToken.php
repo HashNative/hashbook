@@ -27,7 +27,7 @@ class CallbackToken implements TokenInterface
      *
      * @param callable $callback
      *
-     * @throws \Prophecy\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function __construct($callback)
     {

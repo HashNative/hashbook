@@ -2,11 +2,14 @@
 
 namespace Illuminate\Support\Facades;
 
+use Closure;
+use Illuminate\Database\Schema\Builder;
+
 /**
- * @method static \Illuminate\Database\Schema\Builder create(string $table, \Closure $callback)
- * @method static \Illuminate\Database\Schema\Builder drop(string $table)
- * @method static \Illuminate\Database\Schema\Builder dropIfExists(string $table)
- * @method static \Illuminate\Database\Schema\Builder table(string $table, \Closure $callback)
+ * @method static Builder create(string $table, Closure $callback)
+ * @method static Builder drop(string $table)
+ * @method static Builder dropIfExists(string $table)
+ * @method static Builder table(string $table, Closure $callback)
  *
  * @see \Illuminate\Database\Schema\Builder
  */
@@ -16,7 +19,7 @@ class Schema extends Facade
      * Get a schema builder instance for a connection.
      *
      * @param  string  $name
-     * @return \Illuminate\Database\Schema\Builder
+     * @return Builder
      */
     public static function connection($name)
     {
@@ -26,7 +29,7 @@ class Schema extends Facade
     /**
      * Get a schema builder instance for the default connection.
      *
-     * @return \Illuminate\Database\Schema\Builder
+     * @return Builder
      */
     protected static function getFacadeAccessor()
     {

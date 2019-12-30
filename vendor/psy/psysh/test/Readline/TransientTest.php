@@ -11,9 +11,10 @@
 
 namespace Psy\Test\Readline;
 
+use PHPUnit\Framework\TestCase;
 use Psy\Readline\Transient;
 
-class TransientTest extends \PHPUnit\Framework\TestCase
+class TransientTest extends TestCase
 {
     public function testHistory()
     {

@@ -36,7 +36,7 @@ class Doubler
     private $patches = array();
 
     /**
-     * @var \Doctrine\Instantiator\Instantiator
+     * @var Instantiator
      */
     private $instantiator;
 
@@ -88,7 +88,7 @@ class Doubler
      *
      * @return DoubleInterface
      *
-     * @throws \Prophecy\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function double(ReflectionClass $class = null, array $interfaces, array $args = null)
     {

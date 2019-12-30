@@ -2,6 +2,9 @@
 
 namespace PhpParser;
 
+use Exception;
+use PHPUnit_Framework_TestCase;
+
 class DummyNode extends NodeAbstract {
     public $subNode1;
     public $subNode2;
@@ -22,7 +25,7 @@ class DummyNode extends NodeAbstract {
     }
 }
 
-class NodeAbstractTest extends \PHPUnit_Framework_TestCase
+class NodeAbstractTest extends PHPUnit_Framework_TestCase
 {
     public function provideNodes() {
         $attributes = array(
@@ -132,7 +135,7 @@ class NodeAbstractTest extends \PHPUnit_Framework_TestCase
                 $this->assertSame('notSubNode', $key);
                 $this->assertSame('value3', $value);
             } else {
-                throw new \Exception;
+                throw new Exception;
             }
             $i++;
         }

@@ -11,9 +11,10 @@
 
 namespace Psy\Test\Reflection;
 
+use PHPUnit\Framework\TestCase;
 use Psy\Reflection\ReflectionConstant;
 
-class ReflectionConstantBCTest extends \PHPUnit\Framework\TestCase
+class ReflectionConstantBCTest extends TestCase
 {
     const CONSTANT_ONE = 'one';
 

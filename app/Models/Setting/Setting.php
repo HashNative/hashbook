@@ -3,7 +3,9 @@
 namespace App\Models\Setting;
 
 use App\Scopes\Company;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Setting extends Model
 {
@@ -39,7 +41,7 @@ class Setting extends Model
     /**
      * Global company relation.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function company()
     {
@@ -49,10 +51,10 @@ class Setting extends Model
     /**
      * Scope to only include company data.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param Builder $query
      * @param $company_id
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public function scopeCompanyId($query, $company_id)
     {

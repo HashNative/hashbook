@@ -12,6 +12,7 @@
 namespace Psy\Test\CodeCleaner;
 
 use Psy\CodeCleaner\ValidConstantPass;
+use Psy\Exception\FatalErrorException;
 
 class ValidConstantPassTest extends CodeCleanerTestCase
 {
@@ -22,7 +23,7 @@ class ValidConstantPassTest extends CodeCleanerTestCase
 
     /**
      * @dataProvider getInvalidReferences
-     * @expectedException \Psy\Exception\FatalErrorException
+     * @expectedException FatalErrorException
      */
     public function testProcessInvalidConstantReferences($code)
     {

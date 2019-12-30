@@ -2,7 +2,9 @@
 
 namespace PhpParser;
 
-class Comment implements \JsonSerializable
+use JsonSerializable;
+
+class Comment implements JsonSerializable
 {
     protected $text;
     protected $line;

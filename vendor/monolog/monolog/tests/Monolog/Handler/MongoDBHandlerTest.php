@@ -13,6 +13,7 @@ namespace Monolog\Handler;
 
 use Monolog\TestCase;
 use Monolog\Logger;
+use stdClass;
 
 class MongoDBHandlerTest extends TestCase
 {
@@ -21,7 +22,7 @@ class MongoDBHandlerTest extends TestCase
      */
     public function testConstructorShouldThrowExceptionForInvalidMongo()
     {
-        new MongoDBHandler(new \stdClass(), 'DB', 'Collection');
+        new MongoDBHandler(new stdClass(), 'DB', 'Collection');
     }
 
     public function testHandle()
@@ -34,7 +35,7 @@ class MongoDBHandlerTest extends TestCase
             ->with('DB', 'Collection')
             ->will($this->returnValue($collection));
 
-        $record = $this->getRecord(Logger::WARNING, 'test', array('data' => new \stdClass, 'foo' => 34));
+        $record = $this->getRecord(Logger::WARNING, 'test', array('data' => new stdClass, 'foo' => 34));
 
         $expected = array(
             'message' => 'test',

@@ -30,7 +30,7 @@ class UserTest extends PHPUnit_Framework_TestCase
 
     protected function setup()
     {
-        $this->prophet = new \Prophecy\Prophet;
+        $this->prophet = new Prophet;
     }
 
     protected function tearDown()

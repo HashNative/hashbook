@@ -11,13 +11,19 @@
 
 namespace Psy\Test\Exception;
 
+use Error;
+use Exception;
+use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 use Psy\Exception\ThrowUpException;
+use StdClass;
+use function version_compare;
 
-class ThrowUpExceptionTest extends \PHPUnit\Framework\TestCase
+class ThrowUpExceptionTest extends TestCase
 {
     public function testException()
     {
-        $previous = new \Exception('{{message}}', 123);
+        $previous = new Exception('{{message}}', 123);
         $e = new ThrowUpException($previous);
 
         $this->assertInstanceOf('Psy\Exception\Exception', $e);
@@ -31,7 +37,7 @@ class ThrowUpExceptionTest extends \PHPUnit\Framework\TestCase
 
     public function testFromThrowable()
     {
-        $previous = new \Exception('{{message}}');
+        $previous = new Exception('{{message}}');
         $e = ThrowUpException::fromThrowable($previous);
 
         $this->assertInstanceOf('Psy\Exception\ThrowUpException', $e);
@@ -40,11 +46,11 @@ class ThrowUpExceptionTest extends \PHPUnit\Framework\TestCase
 
     public function testFromThrowableWithError()
     {
-        if (\version_compare(PHP_VERSION, '7.0.0', '<')) {
+        if (version_compare(PHP_VERSION, '7.0.0', '<')) {
             $this->markTestSkipped();
         }
 
-        $previous = new \Error('{{message}}');
+        $previous = new Error('{{message}}');
         $e = ThrowUpException::fromThrowable($previous);
 
         $this->assertInstanceOf('Psy\Exception\ThrowUpException', $e);
@@ -55,12 +61,12 @@ class ThrowUpExceptionTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException InvalidArgumentException
      * @expectedExceptionMessage throw-up can only throw Exceptions and Errors
      */
     public function testFromThrowableThrowsError()
     {
-        $notThrowable = new \StdClass();
+        $notThrowable = new StdClass();
         ThrowUpException::fromThrowable($notThrowable);
     }
 }

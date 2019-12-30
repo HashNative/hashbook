@@ -11,6 +11,8 @@
 
 namespace Psy\Command;
 
+use InvalidArgumentException;
+use PhpParser\Error;
 use PhpParser\NodeTraverser;
 use PhpParser\PrettyPrinter\Standard as Printer;
 use Psy\Input\CodeArgument;
@@ -19,6 +21,8 @@ use Psy\Readline\Readline;
 use Psy\Sudo\SudoVisitor;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use function count;
+use function strpos;
 
 /**
  * Evaluate PHP code, bypassing visibility restrictions.
@@ -103,13 +107,13 @@ HELP
         // special case for !!
         if ($code === '!!') {
             $history = $this->readline->listHistory();
-            if (\count($history) < 2) {
-                throw new \InvalidArgumentException('No previous command to replay');
+            if (count($history) < 2) {
+                throw new InvalidArgumentException('No previous command to replay');
             }
-            $code = $history[\count($history) - 2];
+            $code = $history[count($history) - 2];
         }
 
-        if (\strpos('<?', $code) === false) {
+        if (strpos('<?', $code) === false) {
             $code = '<?php ' . $code;
         }
 
@@ -131,8 +135,8 @@ HELP
     {
         try {
             return $this->parser->parse($code);
-        } catch (\PhpParser\Error $e) {
-            if (\strpos($e->getMessage(), 'unexpected EOF') === false) {
+        } catch (Error $e) {
+            if (strpos($e->getMessage(), 'unexpected EOF') === false) {
                 throw $e;
             }
 

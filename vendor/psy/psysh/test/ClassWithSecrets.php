@@ -11,6 +11,8 @@
 
 namespace Psy\Test;
 
+use function json_encode;
+
 class ClassWithSecrets
 {
     private const PRIVATE_CONST = 'private and const';
@@ -20,7 +22,7 @@ class ClassWithSecrets
     private static function privateStaticMethod($extra = null)
     {
         if ($extra !== null) {
-            return 'private and static and method with ' . \json_encode($extra);
+            return 'private and static and method with ' . json_encode($extra);
         }
 
         return 'private and static and method';
@@ -29,7 +31,7 @@ class ClassWithSecrets
     private function privateMethod($extra = null)
     {
         if ($extra !== null) {
-            return 'private and method with ' . \json_encode($extra);
+            return 'private and method with ' . json_encode($extra);
         }
 
         return 'private and method';

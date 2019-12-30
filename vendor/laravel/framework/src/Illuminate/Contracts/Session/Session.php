@@ -2,6 +2,9 @@
 
 namespace Illuminate\Contracts\Session;
 
+use Illuminate\Http\Request;
+use SessionHandlerInterface;
+
 interface Session
 {
     /**
@@ -144,7 +147,7 @@ interface Session
     /**
      * Get the session handler instance.
      *
-     * @return \SessionHandlerInterface
+     * @return SessionHandlerInterface
      */
     public function getHandler();
 
@@ -158,7 +161,7 @@ interface Session
     /**
      * Set the request on the handler instance.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @return void
      */
     public function setRequestOnHandler($request);

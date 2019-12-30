@@ -10,11 +10,13 @@
 
 namespace SebastianBergmann\CodeCoverage\Report\Xml;
 
+use DOMDocument;
+
 class Report extends File
 {
     public function __construct($name)
     {
-        $this->dom = new \DOMDocument;
+        $this->dom = new DOMDocument;
         $this->dom->loadXML('<?xml version="1.0" ?><phpunit xmlns="http://schema.phpunit.de/coverage/1.0"><file /></phpunit>');
 
         $this->contextNode = $this->dom->getElementsByTagNameNS(

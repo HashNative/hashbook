@@ -4,16 +4,21 @@ namespace PhpParser;
 
 use PhpParser\Comment;
 use PhpParser\Node\Expr;
+use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Scalar;
 use PhpParser\Node\Scalar\String_;
+use PhpParser\Node\Stmt\Echo_;
+use PhpParser\Node\Stmt\Function_;
+use PHPUnit_Framework_TestCase;
+use RangeException;
 
-abstract class ParserTest extends \PHPUnit_Framework_TestCase
+abstract class ParserTest extends PHPUnit_Framework_TestCase
 {
     /** @returns Parser */
     abstract protected function getParser(Lexer $lexer);
 
     /**
-     * @expectedException \PhpParser\Error
+     * @expectedException Error
      * @expectedExceptionMessage Syntax error, unexpected EOF on line 1
      */
     public function testParserThrowsSyntaxError() {
@@ -22,7 +27,7 @@ abstract class ParserTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \PhpParser\Error
+     * @expectedException Error
      * @expectedExceptionMessage Cannot use foo as self because 'self' is a special class name on line 1
      */
     public function testParserThrowsSpecialError() {
@@ -31,7 +36,7 @@ abstract class ParserTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \PhpParser\Error
+     * @expectedException Error
      * @expectedExceptionMessage Unterminated comment on line 1
      */
     public function testParserThrowsLexerError() {
@@ -61,7 +66,7 @@ EOC;
         $parser = $this->getParser($lexer);
         $stmts = $parser->parse($code);
 
-        /** @var \PhpParser\Node\Stmt\Function_ $fn */
+        /** @var Function_ $fn */
         $fn = $stmts[0];
         $this->assertInstanceOf('PhpParser\Node\Stmt\Function_', $fn);
         $this->assertEquals(array(
@@ -83,7 +88,7 @@ EOC;
             'endTokenPos' => 7,
         ), $param->getAttributes());
 
-        /** @var \PhpParser\Node\Stmt\Echo_ $echo */
+        /** @var Echo_ $echo */
         $echo = $fn->stmts[0];
         $this->assertInstanceOf('PhpParser\Node\Stmt\Echo_', $echo);
         $this->assertEquals(array(
@@ -97,7 +102,7 @@ EOC;
             'endTokenPos' => 19,
         ), $echo->getAttributes());
 
-        /** @var \PhpParser\Node\Expr\Variable $var */
+        /** @var Variable $var */
         $var = $echo->exprs[0];
         $this->assertInstanceOf('PhpParser\Node\Expr\Variable', $var);
         $this->assertEquals(array(
@@ -109,7 +114,7 @@ EOC;
     }
 
     /**
-     * @expectedException \RangeException
+     * @expectedException RangeException
      * @expectedExceptionMessage The lexer returned an invalid token (id=999, value=foobar)
      */
     public function testInvalidToken() {

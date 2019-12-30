@@ -14,6 +14,7 @@ namespace Psy\CodeCleaner;
 use PhpParser\Node\Name;
 use PhpParser\Node\Stmt\Namespace_;
 use Psy\CodeCleaner;
+use function end;
 
 /**
  * Provide implicit namespaces for subsequent execution.
@@ -53,7 +54,7 @@ class NamespacePass extends CodeCleanerPass
             return $nodes;
         }
 
-        $last = \end($nodes);
+        $last = end($nodes);
 
         if ($last instanceof Namespace_) {
             $kind = $last->getAttribute('kind');

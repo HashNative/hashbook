@@ -11,6 +11,7 @@
 
 namespace League\Fractal;
 
+use InvalidArgumentException;
 use League\Fractal\Resource\ResourceInterface;
 use League\Fractal\Serializer\DataArraySerializer;
 use League\Fractal\Serializer\SerializerAbstract;
@@ -110,7 +111,7 @@ class Manager
      *
      * @param string $include
      *
-     * @return \League\Fractal\ParamBag
+     * @return ParamBag
      */
     public function getIncludeParams($include)
     {
@@ -170,7 +171,7 @@ class Manager
         }
 
         if (! is_array($includes)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 'The parseIncludes() method expects a string or an array. '.gettype($includes).' given'
             );
         }
@@ -254,7 +255,7 @@ class Manager
      *
      * @param string $type
      *
-     * @return \League\Fractal\ParamBag|null
+     * @return ParamBag|null
      */
     public function getFieldset($type)
     {
@@ -279,7 +280,7 @@ class Manager
         }
 
         if (! is_array($excludes)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 'The parseExcludes() method expects a string or an array. '.gettype($excludes).' given'
             );
         }

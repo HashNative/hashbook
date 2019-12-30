@@ -2,6 +2,8 @@
 
 namespace Illuminate\Database\Migrations;
 
+use Illuminate\Database\Connection;
+use Illuminate\Database\Schema\Grammars\Grammar;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
@@ -13,21 +15,21 @@ class Migrator
     /**
      * The migration repository implementation.
      *
-     * @var \Illuminate\Database\Migrations\MigrationRepositoryInterface
+     * @var MigrationRepositoryInterface
      */
     protected $repository;
 
     /**
      * The filesystem instance.
      *
-     * @var \Illuminate\Filesystem\Filesystem
+     * @var Filesystem
      */
     protected $files;
 
     /**
      * The connection resolver instance.
      *
-     * @var \Illuminate\Database\ConnectionResolverInterface
+     * @var Resolver
      */
     protected $resolver;
 
@@ -55,9 +57,9 @@ class Migrator
     /**
      * Create a new migrator instance.
      *
-     * @param  \Illuminate\Database\Migrations\MigrationRepositoryInterface  $repository
-     * @param  \Illuminate\Database\ConnectionResolverInterface  $resolver
-     * @param  \Illuminate\Filesystem\Filesystem  $files
+     * @param MigrationRepositoryInterface $repository
+     * @param Resolver $resolver
+     * @param Filesystem $files
      * @return void
      */
     public function __construct(MigrationRepositoryInterface $repository,
@@ -500,7 +502,7 @@ class Migrator
      * Resolve the database connection instance.
      *
      * @param  string  $connection
-     * @return \Illuminate\Database\Connection
+     * @return Connection
      */
     public function resolveConnection($connection)
     {
@@ -510,8 +512,8 @@ class Migrator
     /**
      * Get the schema grammar out of a migration connection.
      *
-     * @param  \Illuminate\Database\Connection  $connection
-     * @return \Illuminate\Database\Schema\Grammars\Grammar
+     * @param  Connection  $connection
+     * @return Grammar
      */
     protected function getSchemaGrammar($connection)
     {
@@ -527,7 +529,7 @@ class Migrator
     /**
      * Get the migration repository instance.
      *
-     * @return \Illuminate\Database\Migrations\MigrationRepositoryInterface
+     * @return MigrationRepositoryInterface
      */
     public function getRepository()
     {
@@ -547,7 +549,7 @@ class Migrator
     /**
      * Get the file system instance.
      *
-     * @return \Illuminate\Filesystem\Filesystem
+     * @return Filesystem
      */
     public function getFilesystem()
     {

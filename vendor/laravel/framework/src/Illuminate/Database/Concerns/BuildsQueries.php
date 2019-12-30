@@ -2,9 +2,13 @@
 
 namespace Illuminate\Database\Concerns;
 
+use Closure;
 use Illuminate\Container\Container;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 trait BuildsQueries
 {
@@ -68,7 +72,7 @@ trait BuildsQueries
      * Execute the query and get the first result.
      *
      * @param  array  $columns
-     * @return \Illuminate\Database\Eloquent\Model|static|null
+     * @return Model|static|null
      */
     public function first($columns = ['*'])
     {
@@ -97,8 +101,8 @@ trait BuildsQueries
     /**
      * Pass the query to a given callback.
      *
-     * @param  \Closure  $callback
-     * @return \Illuminate\Database\Query\Builder
+     * @param  Closure  $callback
+     * @return Builder
      */
     public function tap($callback)
     {
@@ -127,12 +131,12 @@ trait BuildsQueries
     /**
      * Create a new length-aware paginator instance.
      *
-     * @param  \Illuminate\Support\Collection  $items
+     * @param  Collection  $items
      * @param  int  $total
      * @param  int  $perPage
      * @param  int  $currentPage
      * @param  array  $options
-     * @return \Illuminate\Pagination\LengthAwarePaginator
+     * @return LengthAwarePaginator
      */
     protected function paginator($items, $total, $perPage, $currentPage, $options)
     {
@@ -144,11 +148,11 @@ trait BuildsQueries
     /**
      * Create a new simple paginator instance.
      *
-     * @param  \Illuminate\Support\Collection  $items
+     * @param  Collection  $items
      * @param  int $perPage
      * @param  int $currentPage
      * @param  array  $options
-     * @return \Illuminate\Pagination\Paginator
+     * @return Paginator
      */
     protected function simplePaginator($items, $perPage, $currentPage, $options)
     {

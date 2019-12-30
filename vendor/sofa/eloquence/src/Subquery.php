@@ -11,7 +11,7 @@ class Subquery extends Expression
     /**
      * Query builder instance.
      *
-     * @var \Illuminate\Database\Query\Builder
+     * @var QueryBuilder
      */
     protected $query;
 
@@ -25,7 +25,7 @@ class Subquery extends Expression
     /**
      * Create new subquery instance.
      *
-     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder
+     * @param QueryBuilder|EloquentBuilder
      * @param string $alias
      */
     public function __construct($query, $alias = null)
@@ -42,7 +42,7 @@ class Subquery extends Expression
     /**
      * Set underlying query builder.
      *
-     * @param \Illuminate\Database\Query\Builder $query
+     * @param QueryBuilder $query
      */
     public function setQuery(QueryBuilder $query)
     {
@@ -52,7 +52,7 @@ class Subquery extends Expression
     /**
      * Get underlying query builder.
      *
-     * @return \Illuminate\Database\Query\Builder
+     * @return QueryBuilder
      */
     public function getQuery()
     {

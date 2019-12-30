@@ -2,6 +2,7 @@
 
 namespace Foo\DataProviderIssue2922;
 
+use Exception;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -19,6 +20,6 @@ class FirstTest extends TestCase
 
     public function provide()
     {
-        throw new \Exception();
+        throw new Exception();
     }
 }

@@ -2,7 +2,9 @@
 
 namespace Sofa\Eloquence\Mutator;
 
-class InvalidCallableException extends \LogicException
+use LogicException;
+
+class InvalidCallableException extends LogicException
 {
 
 }

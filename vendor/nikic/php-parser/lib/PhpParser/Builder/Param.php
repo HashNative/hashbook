@@ -2,6 +2,7 @@
 
 namespace PhpParser\Builder;
 
+use LogicException;
 use PhpParser;
 use PhpParser\Node;
 
@@ -50,7 +51,7 @@ class Param extends PhpParser\BuilderAbstract
     public function setTypeHint($type) {
         $this->type = $this->normalizeType($type);
         if ($this->type === 'void') {
-            throw new \LogicException('Parameter type cannot be void');
+            throw new LogicException('Parameter type cannot be void');
         }
 
         return $this;

@@ -2,7 +2,14 @@
 
 namespace Dingo\Api\Facade;
 
+use Closure;
+use Dingo\Api\Auth\Auth;
 use Dingo\Api\Http\InternalRequest;
+use Dingo\Api\Http\Response\Factory;
+use Dingo\Api\Routing\Router;
+use Dingo\Api\Transformer\Binding;
+use Illuminate\Auth\GenericUser;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Facade;
 
 class API extends Facade
@@ -33,9 +40,9 @@ class API extends Facade
      * Register a class transformer.
      *
      * @param string          $class
-     * @param string|\Closure $transformer
+     * @param string|Closure $transformer
      *
-     * @return \Dingo\Api\Transformer\Binding
+     * @return Binding
      */
     public static function transform($class, $transformer)
     {
@@ -45,7 +52,7 @@ class API extends Facade
     /**
      * Get the authenticator.
      *
-     * @return \Dingo\Api\Auth\Auth
+     * @return Auth
      */
     public static function auth()
     {
@@ -55,7 +62,7 @@ class API extends Facade
     /**
      * Get the authenticated user.
      *
-     * @return \Illuminate\Auth\GenericUser|\Illuminate\Database\Eloquent\Model
+     * @return GenericUser|Model
      */
     public static function user()
     {
@@ -75,7 +82,7 @@ class API extends Facade
     /**
      * Get the response factory to begin building a response.
      *
-     * @return \Dingo\Api\Http\Response\Factory
+     * @return Factory
      */
     public static function response()
     {
@@ -85,7 +92,7 @@ class API extends Facade
     /**
      * Get the API router instance.
      *
-     * @return \Dingo\Api\Routing\Router
+     * @return Router
      */
     public static function router()
     {

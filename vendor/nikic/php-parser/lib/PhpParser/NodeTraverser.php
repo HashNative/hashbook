@@ -2,6 +2,8 @@
 
 namespace PhpParser;
 
+use LogicException;
+
 class NodeTraverser implements NodeTraverserInterface
 {
     /**
@@ -130,7 +132,7 @@ class NodeTraverser implements NodeTraverserInterface
                         break 2;
                     } else if (null !== $return) {
                         if (is_array($return)) {
-                            throw new \LogicException(
+                            throw new LogicException(
                                 'leaveNode() may only return an array ' .
                                 'if the parent structure is an array'
                             );

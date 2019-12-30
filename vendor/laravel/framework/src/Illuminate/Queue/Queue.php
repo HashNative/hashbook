@@ -2,7 +2,9 @@
 
 namespace Illuminate\Queue;
 
+use DateTime;
 use Illuminate\Container\Container;
+use Illuminate\Contracts\Encryption\Encrypter;
 
 abstract class Queue
 {
@@ -11,14 +13,14 @@ abstract class Queue
     /**
      * The IoC container instance.
      *
-     * @var \Illuminate\Container\Container
+     * @var Container
      */
     protected $container;
 
     /**
      * The encrypter implementation.
      *
-     * @var \Illuminate\Contracts\Encryption\Encrypter
+     * @var Encrypter
      */
     protected $encrypter;
 
@@ -46,7 +48,7 @@ abstract class Queue
      * Push a new job onto the queue after a delay.
      *
      * @param  string  $queue
-     * @param  \DateTime|int  $delay
+     * @param  DateTime|int  $delay
      * @param  string  $job
      * @param  mixed   $data
      * @return mixed
@@ -79,7 +81,7 @@ abstract class Queue
      * @param  string  $queue
      * @return string
      *
-     * @throws \Illuminate\Queue\InvalidPayloadException
+     * @throws InvalidPayloadException
      */
     protected function createPayload($job, $data = '', $queue = null)
     {
@@ -183,7 +185,7 @@ abstract class Queue
     /**
      * Set the IoC container instance.
      *
-     * @param  \Illuminate\Container\Container  $container
+     * @param Container $container
      * @return void
      */
     public function setContainer(Container $container)

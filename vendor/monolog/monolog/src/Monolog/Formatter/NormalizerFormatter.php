@@ -11,8 +11,15 @@
 
 namespace Monolog\Formatter;
 
+use DateTime;
+use DateTimeInterface;
 use Exception;
+use InvalidArgumentException;
+use JsonSerializable;
 use Monolog\Utils;
+use RuntimeException;
+use SoapFault;
+use Throwable;
 
 /**
  * Normalizes incoming records to remove objects/resources so it's easier to dump to various targets
@@ -32,7 +39,7 @@ class NormalizerFormatter implements FormatterInterface
     {
         $this->dateFormat = $dateFormat ?: static::SIMPLE_DATE;
         if (!function_exists('json_encode')) {
-            throw new \RuntimeException('PHP\'s json extension is required to use Monolog\'s NormalizerFormatter');
+            throw new RuntimeException('PHP\'s json extension is required to use Monolog\'s NormalizerFormatter');
         }
     }
 
@@ -91,18 +98,18 @@ class NormalizerFormatter implements FormatterInterface
             return $normalized;
         }
 
-        if ($data instanceof \DateTime) {
+        if ($data instanceof DateTime) {
             return $data->format($this->dateFormat);
         }
 
         if (is_object($data)) {
             // TODO 2.0 only check for Throwable
-            if ($data instanceof Exception || (PHP_VERSION_ID > 70000 && $data instanceof \Throwable)) {
+            if ($data instanceof Exception || (PHP_VERSION_ID > 70000 && $data instanceof Throwable)) {
                 return $this->normalizeException($data);
             }
 
             // non-serializable objects that implement __toString stringified
-            if (method_exists($data, '__toString') && !$data instanceof \JsonSerializable) {
+            if (method_exists($data, '__toString') && !$data instanceof JsonSerializable) {
                 $value = $data->__toString();
             } else {
                 // the rest is json-serialized in some way
@@ -122,8 +129,8 @@ class NormalizerFormatter implements FormatterInterface
     protected function normalizeException($e)
     {
         // TODO 2.0 only check for Throwable
-        if (!$e instanceof Exception && !$e instanceof \Throwable) {
-            throw new \InvalidArgumentException('Exception/Throwable expected, got '.gettype($e).' / '.Utils::getClass($e));
+        if (!$e instanceof Exception && !$e instanceof Throwable) {
+            throw new InvalidArgumentException('Exception/Throwable expected, got '.gettype($e).' / '.Utils::getClass($e));
         }
 
         $data = array(
@@ -133,7 +140,7 @@ class NormalizerFormatter implements FormatterInterface
             'file' => $e->getFile().':'.$e->getLine(),
         );
 
-        if ($e instanceof \SoapFault) {
+        if ($e instanceof SoapFault) {
             if (isset($e->faultcode)) {
                 $data['faultcode'] = $e->faultcode;
             }
@@ -159,7 +166,7 @@ class NormalizerFormatter implements FormatterInterface
                     // Make sure that objects present as arguments are not serialized nicely but rather only
                     // as a class name to avoid any unexpected leak of sensitive information
                     $frame['args'] = array_map(function ($arg) {
-                        if (is_object($arg) && !($arg instanceof \DateTime || $arg instanceof \DateTimeInterface)) {
+                        if (is_object($arg) && !($arg instanceof DateTime || $arg instanceof DateTimeInterface)) {
                             return sprintf("[object] (%s)", Utils::getClass($arg));
                         }
 
@@ -183,7 +190,7 @@ class NormalizerFormatter implements FormatterInterface
      *
      * @param  mixed             $data
      * @param  bool              $ignoreErrors
-     * @throws \RuntimeException if encoding fails and errors are not ignored
+     * @throws RuntimeException if encoding fails and errors are not ignored
      * @return string
      */
     protected function toJson($data, $ignoreErrors = false)
@@ -225,7 +232,7 @@ class NormalizerFormatter implements FormatterInterface
      *
      * @param  int               $code return code of json_last_error function
      * @param  mixed             $data data that was meant to be encoded
-     * @throws \RuntimeException if failure can't be corrected
+     * @throws RuntimeException if failure can't be corrected
      * @return string            JSON encoded data after error correction
      */
     private function handleJsonError($code, $data)
@@ -256,7 +263,7 @@ class NormalizerFormatter implements FormatterInterface
      *
      * @param  int               $code return code of json_last_error function
      * @param  mixed             $data data that was meant to be encoded
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     private function throwEncodeError($code, $data)
     {
@@ -277,7 +284,7 @@ class NormalizerFormatter implements FormatterInterface
                 $msg = 'Unknown error';
         }
 
-        throw new \RuntimeException('JSON encoding failed: '.$msg.'. Encoding: '.var_export($data, true));
+        throw new RuntimeException('JSON encoding failed: '.$msg.'. Encoding: '.var_export($data, true));
     }
 
     /**

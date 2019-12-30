@@ -126,7 +126,7 @@ class glyf extends Table {
       $s .= "<br />
             <canvas width='$width' height='$height' id='glyph-canvas-$g'></canvas>
             </div>
-            <script>Glyph.glyphs.push([$g,$shape_json]);</script>";
+            <script>Glyph.glyphs.push([$g,$shape_json;])</script>";
     }
 
     return $s;

@@ -11,9 +11,23 @@
 
 namespace Psy\Util;
 
+use InvalidArgumentException;
 use Psy\Exception\RuntimeException;
 use Psy\Reflection\ReflectionClassConstant;
 use Psy\Reflection\ReflectionConstant_;
+use ReflectionClass;
+use ReflectionFunction;
+use ReflectionObject;
+use Reflector;
+use function class_exists;
+use function defined;
+use function function_exists;
+use function get_class;
+use function interface_exists;
+use function is_object;
+use function is_string;
+use function sprintf;
+use function trait_exists;
 
 /**
  * A utility class for getting Reflectors.
@@ -33,21 +47,21 @@ class Mirror
      *
      *    $filter = Mirror::CONSTANT | Mirror::STATIC_PROPERTY
      *
-     * @throws \Psy\Exception\RuntimeException when a $member specified but not present on $value
-     * @throws \InvalidArgumentException       if $value is something other than an object or class/function name
+     * @throws RuntimeException when a $member specified but not present on $value
+     * @throws InvalidArgumentException       if $value is something other than an object or class/function name
      *
      * @param mixed  $value  Class or function name, or variable instance
      * @param string $member Optional: property, constant or method name (default: null)
      * @param int    $filter (default: CONSTANT | METHOD | PROPERTY | STATIC_PROPERTY)
      *
-     * @return \Reflector
+     * @return Reflector
      */
     public static function get($value, $member = null, $filter = 15)
     {
-        if ($member === null && \is_string($value)) {
-            if (\function_exists($value)) {
-                return new \ReflectionFunction($value);
-            } elseif (\defined($value) || ReflectionConstant_::isMagicConstant($value)) {
+        if ($member === null && is_string($value)) {
+            if (function_exists($value)) {
+                return new ReflectionFunction($value);
+            } elseif (defined($value) || ReflectionConstant_::isMagicConstant($value)) {
                 return new ReflectionConstant_($value);
             }
         }
@@ -65,10 +79,10 @@ class Mirror
         } elseif ($filter & self::STATIC_PROPERTY && $class->hasProperty($member) && $class->getProperty($member)->isStatic()) {
             return $class->getProperty($member);
         } else {
-            throw new RuntimeException(\sprintf(
+            throw new RuntimeException(sprintf(
                 'Unknown member %s on class %s',
                 $member,
-                \is_object($value) ? \get_class($value) : $value
+                is_object($value) ? get_class($value) : $value
             ));
         }
     }
@@ -76,24 +90,24 @@ class Mirror
     /**
      * Get a ReflectionClass (or ReflectionObject) if possible.
      *
-     * @throws \InvalidArgumentException if $value is not a class name or instance
+     * @throws InvalidArgumentException if $value is not a class name or instance
      *
      * @param mixed $value
      *
-     * @return \ReflectionClass
+     * @return ReflectionClass
      */
     private static function getClass($value)
     {
-        if (\is_object($value)) {
-            return new \ReflectionObject($value);
+        if (is_object($value)) {
+            return new ReflectionObject($value);
         }
 
-        if (!\is_string($value)) {
-            throw new \InvalidArgumentException('Mirror expects an object or class');
-        } elseif (!\class_exists($value) && !\interface_exists($value) && !\trait_exists($value)) {
-            throw new \InvalidArgumentException('Unknown class or function: ' . $value);
+        if (!is_string($value)) {
+            throw new InvalidArgumentException('Mirror expects an object or class');
+        } elseif (!class_exists($value) && !interface_exists($value) && !trait_exists($value)) {
+            throw new InvalidArgumentException('Unknown class or function: ' . $value);
         }
 
-        return new \ReflectionClass($value);
+        return new ReflectionClass($value);
     }
 }

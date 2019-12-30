@@ -11,13 +11,16 @@
 
 namespace Monolog\Formatter;
 
+use DateTime;
 use Monolog\Logger;
+use PHPUnit_Framework_Error_Warning;
+use PHPUnit_Framework_TestCase;
 
-class LogstashFormatterTest extends \PHPUnit_Framework_TestCase
+class LogstashFormatterTest extends PHPUnit_Framework_TestCase
 {
     public function tearDown()
     {
-        \PHPUnit_Framework_Error_Warning::$enabled = true;
+        PHPUnit_Framework_Error_Warning::$enabled = true;
 
         return parent::tearDown();
     }
@@ -33,7 +36,7 @@ class LogstashFormatterTest extends \PHPUnit_Framework_TestCase
             'level_name' => 'ERROR',
             'channel' => 'meh',
             'context' => array(),
-            'datetime' => new \DateTime("@0"),
+            'datetime' => new DateTime("@0"),
             'extra' => array(),
             'message' => 'log',
         );
@@ -66,7 +69,7 @@ class LogstashFormatterTest extends \PHPUnit_Framework_TestCase
             'level_name' => 'ERROR',
             'channel' => 'meh',
             'context' => array('from' => 'logger'),
-            'datetime' => new \DateTime("@0"),
+            'datetime' => new DateTime("@0"),
             'extra' => array('file' => 'test', 'line' => 14),
             'message' => 'log',
         );
@@ -88,7 +91,7 @@ class LogstashFormatterTest extends \PHPUnit_Framework_TestCase
             'level_name' => 'ERROR',
             'channel' => 'meh',
             'context' => array('from' => 'logger'),
-            'datetime' => new \DateTime("@0"),
+            'datetime' => new DateTime("@0"),
             'extra' => array('key' => 'pair'),
             'message' => 'log',
         );
@@ -121,7 +124,7 @@ class LogstashFormatterTest extends \PHPUnit_Framework_TestCase
             'level_name' => 'ERROR',
             'channel' => 'meh',
             'context' => array('from' => 'logger'),
-            'datetime' => new \DateTime("@0"),
+            'datetime' => new DateTime("@0"),
             'extra' => array('key' => 'pair'),
             'message' => 'log',
         );
@@ -151,7 +154,7 @@ class LogstashFormatterTest extends \PHPUnit_Framework_TestCase
             'level_name' => 'ERROR',
             'channel' => 'meh',
             'context' => array('from' => 'logger'),
-            'datetime' => new \DateTime("@0"),
+            'datetime' => new DateTime("@0"),
             'extra' => array('key' => 'pair'),
             'message' => 'log',
         );
@@ -173,7 +176,7 @@ class LogstashFormatterTest extends \PHPUnit_Framework_TestCase
             'level_name' => 'ERROR',
             'channel' => 'meh',
             'context' => array(),
-            'datetime' => new \DateTime("@0"),
+            'datetime' => new DateTime("@0"),
             'extra' => array(),
             'message' => 'log',
         );
@@ -206,7 +209,7 @@ class LogstashFormatterTest extends \PHPUnit_Framework_TestCase
             'level_name' => 'ERROR',
             'channel' => 'meh',
             'context' => array('from' => 'logger'),
-            'datetime' => new \DateTime("@0"),
+            'datetime' => new DateTime("@0"),
             'extra' => array('file' => 'test', 'line' => 14),
             'message' => 'log',
         );
@@ -228,7 +231,7 @@ class LogstashFormatterTest extends \PHPUnit_Framework_TestCase
             'level_name' => 'ERROR',
             'channel' => 'meh',
             'context' => array('from' => 'logger'),
-            'datetime' => new \DateTime("@0"),
+            'datetime' => new DateTime("@0"),
             'extra' => array('key' => 'pair'),
             'message' => 'log',
         );
@@ -257,7 +260,7 @@ class LogstashFormatterTest extends \PHPUnit_Framework_TestCase
             'level_name' => 'ERROR',
             'channel' => 'meh',
             'context' => array('from' => 'logger'),
-            'datetime' => new \DateTime("@0"),
+            'datetime' => new DateTime("@0"),
             'extra' => array('key' => 'pair'),
             'message' => 'log',
         );
@@ -283,7 +286,7 @@ class LogstashFormatterTest extends \PHPUnit_Framework_TestCase
             'level_name' => 'ERROR',
             'channel' => 'meh',
             'context' => array('from' => 'logger'),
-            'datetime' => new \DateTime("@0"),
+            'datetime' => new DateTime("@0"),
             'extra' => array('key' => 'pair'),
             'message' => 'log',
         );
@@ -298,7 +301,7 @@ class LogstashFormatterTest extends \PHPUnit_Framework_TestCase
     {
         if (version_compare(PHP_VERSION, '5.5.0', '<')) {
             // Ignore the warning that will be emitted by PHP <5.5.0
-            \PHPUnit_Framework_Error_Warning::$enabled = false;
+            PHPUnit_Framework_Error_Warning::$enabled = false;
         }
         $formatter = new LogstashFormatter('test', 'hostname');
         $record = array(
@@ -306,7 +309,7 @@ class LogstashFormatterTest extends \PHPUnit_Framework_TestCase
             'level_name' => 'ERROR',
             'channel' => '¯\_(ツ)_/¯',
             'context' => array(),
-            'datetime' => new \DateTime("@0"),
+            'datetime' => new DateTime("@0"),
             'extra' => array(
                 'user_agent' => "\xD6WN; FBCR/OrangeEspa\xF1a; Vers\xE3o/4.0; F\xE4rist",
             ),

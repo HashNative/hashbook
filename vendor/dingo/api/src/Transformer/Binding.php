@@ -11,7 +11,7 @@ class Binding
     /**
      * Illuminate container instance.
      *
-     * @var \Illuminate\Container\Container
+     * @var Container
      */
     protected $container;
 
@@ -32,7 +32,7 @@ class Binding
     /**
      * Callback fired during transformation.
      *
-     * @var \Closure
+     * @var Closure
      */
     protected $callback;
 
@@ -46,10 +46,10 @@ class Binding
     /**
      * Create a new binding instance.
      *
-     * @param \Illuminate\Container\Container $container
+     * @param Container $container
      * @param mixed                           $resolver
      * @param array                           $parameters
-     * @param \Closure                        $callback
+     * @param Closure $callback
      *
      * @return void
      */
@@ -64,7 +64,7 @@ class Binding
     /**
      * Resolve a transformer binding instance.
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      *
      * @return object
      */

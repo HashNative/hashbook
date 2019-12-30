@@ -7,6 +7,7 @@ use App\Models\Common\Company;
 use Artisan;
 use Config;
 use DB;
+use Exception;
 use File;
 
 /**
@@ -164,7 +165,7 @@ class Installer
 
         try {
             DB::connection('install_test')->getPdo();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return false;
         }
 
@@ -252,7 +253,7 @@ class Installer
         // Rename the robots.txt file
         try {
             File::move(base_path('robots.txt.dist'), base_path('robots.txt'));
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             // nothing to do
         }
     }

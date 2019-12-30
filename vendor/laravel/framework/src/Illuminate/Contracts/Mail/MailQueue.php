@@ -2,6 +2,8 @@
 
 namespace Illuminate\Contracts\Mail;
 
+use Closure;
+
 interface MailQueue
 {
     /**
@@ -9,7 +11,7 @@ interface MailQueue
      *
      * @param  string|array  $view
      * @param  array   $data
-     * @param  \Closure|string  $callback
+     * @param  Closure|string  $callback
      * @param  string  $queue
      * @return mixed
      */
@@ -21,7 +23,7 @@ interface MailQueue
      * @param  int  $delay
      * @param  string|array  $view
      * @param  array  $data
-     * @param  \Closure|string  $callback
+     * @param  Closure|string  $callback
      * @param  string  $queue
      * @return mixed
      */

@@ -3,6 +3,8 @@
 namespace Illuminate\Notifications\Channels;
 
 use Closure;
+use Illuminate\Mail\Message;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Contracts\Mail\Mailer;
@@ -14,21 +16,21 @@ class MailChannel
     /**
      * The mailer implementation.
      *
-     * @var \Illuminate\Contracts\Mail\Mailer
+     * @var Mailer
      */
     protected $mailer;
 
     /**
      * The Markdown resolver callback.
      *
-     * @var \Closure
+     * @var Closure
      */
     protected $markdownResolver;
 
     /**
      * Create a new mail channel instance.
      *
-     * @param  \Illuminate\Contracts\Mail\Mailer  $mailer
+     * @param Mailer $mailer
      * @return void
      */
     public function __construct(Mailer $mailer)
@@ -40,7 +42,7 @@ class MailChannel
      * Send the given notification.
      *
      * @param  mixed  $notifiable
-     * @param  \Illuminate\Notifications\Notification  $notification
+     * @param Notification $notification
      * @return void
      */
     public function send($notifiable, Notification $notification)
@@ -63,7 +65,7 @@ class MailChannel
     /**
      * Build the notification's view.
      *
-     * @param  \Illuminate\Notifications\Messages\MailMessage  $message
+     * @param  MailMessage  $message
      * @return void
      */
     protected function buildView($message)
@@ -83,10 +85,10 @@ class MailChannel
     /**
      * Build the mail message.
      *
-     * @param  \Illuminate\Mail\Message  $mailMessage
+     * @param  Message  $mailMessage
      * @param  mixed  $notifiable
-     * @param  \Illuminate\Notifications\Notification  $notification
-     * @param  \Illuminate\Notifications\Messages\MailMessage  $message
+     * @param Notification $notification
+     * @param  MailMessage  $message
      * @return void
      */
     protected function buildMessage($mailMessage, $notifiable, $notification, $message)
@@ -107,9 +109,9 @@ class MailChannel
     /**
      * Address the mail message.
      *
-     * @param  \Illuminate\Mail\Message  $mailMessage
+     * @param  Message  $mailMessage
      * @param  mixed  $notifiable
-     * @param  \Illuminate\Notifications\Messages\MailMessage  $message
+     * @param  MailMessage  $message
      * @return void
      */
     protected function addressMessage($mailMessage, $notifiable, $message)
@@ -130,8 +132,8 @@ class MailChannel
     /**
      * Add the "from" and "reply to" addresses to the message.
      *
-     * @param  \Illuminate\Mail\Message  $mailMessage
-     * @param  \Illuminate\Notifications\Messages\MailMessage  $message
+     * @param  Message  $mailMessage
+     * @param  MailMessage  $message
      * @return void
      */
     protected function addSender($mailMessage, $message)
@@ -149,7 +151,7 @@ class MailChannel
      * Get the recipients of the given message.
      *
      * @param  mixed  $notifiable
-     * @param  \Illuminate\Notifications\Messages\MailMessage  $message
+     * @param  MailMessage  $message
      * @return mixed
      */
     protected function getRecipients($notifiable, $message)
@@ -166,8 +168,8 @@ class MailChannel
     /**
      * Add the attachments to the message.
      *
-     * @param  \Illuminate\Mail\Message  $mailMessage
-     * @param  \Illuminate\Notifications\Messages\MailMessage  $message
+     * @param  Message  $mailMessage
+     * @param  MailMessage  $message
      * @return void
      */
     protected function addAttachments($mailMessage, $message)
@@ -184,7 +186,7 @@ class MailChannel
     /**
      * Set the Markdown resolver callback.
      *
-     * @param  \Closure  $callback
+     * @param Closure $callback
      * @return $this
      */
     public function setMarkdownResolver(Closure $callback)

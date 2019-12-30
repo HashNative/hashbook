@@ -15,6 +15,8 @@ use Symfony\Component\Console\Helper\TableHelper;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use function implode;
+use function sprintf;
 
 /**
  * Help command.
@@ -74,13 +76,13 @@ class HelpCommand extends Command
                 }
 
                 if ($command->getAliases()) {
-                    $aliases = \sprintf('<comment>Aliases:</comment> %s', \implode(', ', $command->getAliases()));
+                    $aliases = sprintf('<comment>Aliases:</comment> %s', implode(', ', $command->getAliases()));
                 } else {
                     $aliases = '';
                 }
 
                 $table->addRow([
-                    \sprintf('<info>%s</info>', $name),
+                    sprintf('<info>%s</info>', $name),
                     $command->getDescription(),
                     $aliases,
                 ]);

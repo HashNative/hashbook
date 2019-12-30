@@ -11,6 +11,10 @@
 
 namespace Monolog\Handler;
 
+use InvalidArgumentException;
+use MongoClient;
+use MongoDB\Client;
+use MongoDB\Collection;
 use Monolog\Logger;
 use Monolog\Formatter\NormalizerFormatter;
 
@@ -31,8 +35,8 @@ class MongoDBHandler extends AbstractProcessingHandler
 
     public function __construct($mongo, $database, $collection, $level = Logger::DEBUG, $bubble = true)
     {
-        if (!($mongo instanceof \MongoClient || $mongo instanceof \Mongo || $mongo instanceof \MongoDB\Client)) {
-            throw new \InvalidArgumentException('MongoClient, Mongo or MongoDB\Client instance required');
+        if (!($mongo instanceof MongoClient || $mongo instanceof \Mongo || $mongo instanceof Client)) {
+            throw new InvalidArgumentException('MongoClient, Mongo or MongoDB\Client instance required');
         }
 
         $this->mongoCollection = $mongo->selectCollection($database, $collection);
@@ -42,7 +46,7 @@ class MongoDBHandler extends AbstractProcessingHandler
 
     protected function write(array $record)
     {
-        if ($this->mongoCollection instanceof \MongoDB\Collection) {
+        if ($this->mongoCollection instanceof Collection) {
             $this->mongoCollection->insertOne($record["formatted"]);
         } else {
             $this->mongoCollection->save($record["formatted"]);

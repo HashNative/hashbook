@@ -11,6 +11,7 @@
 
 namespace Monolog\Handler\Slack;
 
+use Exception;
 use Monolog\Logger;
 use Monolog\TestCase;
 
@@ -355,7 +356,7 @@ class SlackRecordTest extends TestCase
 
     public function testContextHasException()
     {
-        $record = $this->getRecord(Logger::CRITICAL, 'This is a critical message.', array('exception' => new \Exception()));
+        $record = $this->getRecord(Logger::CRITICAL, 'This is a critical message.', array('exception' => new Exception()));
         $slackRecord = new SlackRecord(null, null, true, null, false, true);
         $data = $slackRecord->getSlackData($record);
         $this->assertInternalType('string', $data['attachments'][0]['fields'][1]['value']);

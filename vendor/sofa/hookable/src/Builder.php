@@ -57,7 +57,7 @@ class Builder extends EloquentBuilder
      * Call custom handlers for where call.
      *
      * @param  string $method
-     * @param  \Sofa\Hookable\ArgumentBag $args
+     * @param ArgumentBag $args
      * @return mixed
      */
     protected function callHook($method, ArgumentBag $args)
@@ -87,7 +87,7 @@ class Builder extends EloquentBuilder
      * Pack arguments in ArgumentBag instance.
      *
      * @param  array  $args
-     * @return \Sofa\Hookable\ArgumentBag
+     * @return ArgumentBag
      */
     protected function packArgs(array $args)
     {
@@ -155,7 +155,7 @@ class Builder extends EloquentBuilder
      * @param  boolean $not
      * @return $this
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function whereBetween($column, array $values, $boolean = 'and', $not = false)
     {
@@ -378,7 +378,7 @@ class Builder extends EloquentBuilder
     /**
      * Add an exists clause to the query.
      *
-     * @param  \Closure $callback
+     * @param Closure $callback
      * @param  string   $boolean
      * @param  bool     $not
      * @return $this
@@ -541,7 +541,7 @@ class Builder extends EloquentBuilder
     /**
      * Get a new instance of the Hookable query builder.
      *
-     * @return \Sofa\Hookable\Builder
+     * @return Builder
      */
     public function newQuery()
     {

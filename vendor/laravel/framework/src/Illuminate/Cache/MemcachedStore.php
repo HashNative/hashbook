@@ -12,7 +12,7 @@ class MemcachedStore extends TaggableStore implements Store
     /**
      * The Memcached instance.
      *
-     * @var \Memcached
+     * @var Memcached
      */
     protected $memcached;
 
@@ -33,7 +33,7 @@ class MemcachedStore extends TaggableStore implements Store
     /**
      * Create a new Memcached store.
      *
-     * @param  \Memcached  $memcached
+     * @param Memcached $memcached
      * @param  string      $prefix
      * @return void
      */
@@ -205,7 +205,7 @@ class MemcachedStore extends TaggableStore implements Store
     /**
      * Get the underlying Memcached connection.
      *
-     * @return \Memcached
+     * @return Memcached
      */
     public function getMemcached()
     {

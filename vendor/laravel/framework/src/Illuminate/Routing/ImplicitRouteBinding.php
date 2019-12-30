@@ -2,6 +2,7 @@
 
 namespace Illuminate\Routing;
 
+use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\Model;
 
 class ImplicitRouteBinding
@@ -9,8 +10,8 @@ class ImplicitRouteBinding
     /**
      * Resolve the implicit route bindings for the given route.
      *
-     * @param  \Illuminate\Container\Container  $container
-     * @param  \Illuminate\Routing\Route  $route
+     * @param  Container  $container
+     * @param Route $route
      * @return void
      */
     public static function resolveForRoute($container, $route)

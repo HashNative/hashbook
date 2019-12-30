@@ -2,6 +2,7 @@
 
 namespace Illuminate\Notifications\Channels;
 
+use Illuminate\Database\Eloquent\Model;
 use RuntimeException;
 use Illuminate\Notifications\Notification;
 
@@ -11,8 +12,8 @@ class DatabaseChannel
      * Send the given notification.
      *
      * @param  mixed  $notifiable
-     * @param  \Illuminate\Notifications\Notification  $notification
-     * @return \Illuminate\Database\Eloquent\Model
+     * @param Notification $notification
+     * @return Model
      */
     public function send($notifiable, Notification $notification)
     {
@@ -28,10 +29,10 @@ class DatabaseChannel
      * Get the data for the notification.
      *
      * @param  mixed  $notifiable
-     * @param  \Illuminate\Notifications\Notification  $notification
+     * @param Notification $notification
      * @return array
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     protected function getData($notifiable, Notification $notification)
     {

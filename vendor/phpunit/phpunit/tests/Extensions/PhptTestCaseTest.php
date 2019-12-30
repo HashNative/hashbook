@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-class Extensions_PhptTestCaseTest extends \PHPUnit_Framework_TestCase
+class Extensions_PhptTestCaseTest extends PHPUnit_Framework_TestCase
 {
     const EXPECT_CONTENT = <<<EOF
 --TEST--

@@ -3,6 +3,7 @@
 namespace Illuminate\Cache;
 
 use Closure;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Arr;
 use InvalidArgumentException;
 use Illuminate\Contracts\Cache\Store;
@@ -17,7 +18,7 @@ class CacheManager implements FactoryContract
     /**
      * The application instance.
      *
-     * @var \Illuminate\Foundation\Application
+     * @var Application
      */
     protected $app;
 
@@ -38,7 +39,7 @@ class CacheManager implements FactoryContract
     /**
      * Create a new Cache manager instance.
      *
-     * @param  \Illuminate\Foundation\Application  $app
+     * @param  Application  $app
      * @return void
      */
     public function __construct($app)
@@ -87,7 +88,7 @@ class CacheManager implements FactoryContract
      * @param  string  $name
      * @return \Illuminate\Contracts\Cache\Repository
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     protected function resolve($name)
     {
@@ -125,7 +126,7 @@ class CacheManager implements FactoryContract
      * Create an instance of the APC cache driver.
      *
      * @param  array  $config
-     * @return \Illuminate\Cache\ApcStore
+     * @return ApcStore
      */
     protected function createApcDriver(array $config)
     {
@@ -137,7 +138,7 @@ class CacheManager implements FactoryContract
     /**
      * Create an instance of the array cache driver.
      *
-     * @return \Illuminate\Cache\ArrayStore
+     * @return ArrayStore
      */
     protected function createArrayDriver()
     {
@@ -148,7 +149,7 @@ class CacheManager implements FactoryContract
      * Create an instance of the file cache driver.
      *
      * @param  array  $config
-     * @return \Illuminate\Cache\FileStore
+     * @return FileStore
      */
     protected function createFileDriver(array $config)
     {
@@ -159,7 +160,7 @@ class CacheManager implements FactoryContract
      * Create an instance of the Memcached cache driver.
      *
      * @param  array  $config
-     * @return \Illuminate\Cache\MemcachedStore
+     * @return MemcachedStore
      */
     protected function createMemcachedDriver(array $config)
     {
@@ -178,7 +179,7 @@ class CacheManager implements FactoryContract
     /**
      * Create an instance of the Null cache driver.
      *
-     * @return \Illuminate\Cache\NullStore
+     * @return NullStore
      */
     protected function createNullDriver()
     {
@@ -189,7 +190,7 @@ class CacheManager implements FactoryContract
      * Create an instance of the Redis cache driver.
      *
      * @param  array  $config
-     * @return \Illuminate\Cache\RedisStore
+     * @return RedisStore
      */
     protected function createRedisDriver(array $config)
     {
@@ -204,7 +205,7 @@ class CacheManager implements FactoryContract
      * Create an instance of the database cache driver.
      *
      * @param  array  $config
-     * @return \Illuminate\Cache\DatabaseStore
+     * @return DatabaseStore
      */
     protected function createDatabaseDriver(array $config)
     {
@@ -220,8 +221,8 @@ class CacheManager implements FactoryContract
     /**
      * Create a new cache repository with the given implementation.
      *
-     * @param  \Illuminate\Contracts\Cache\Store  $store
-     * @return \Illuminate\Cache\Repository
+     * @param Store $store
+     * @return Repository
      */
     public function repository(Store $store)
     {
@@ -283,7 +284,7 @@ class CacheManager implements FactoryContract
      * Register a custom driver creator Closure.
      *
      * @param  string    $driver
-     * @param  \Closure  $callback
+     * @param Closure $callback
      * @return $this
      */
     public function extend($driver, Closure $callback)

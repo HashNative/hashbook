@@ -11,9 +11,10 @@
 
 namespace Psy\Test\Exception;
 
+use PHPUnit\Framework\TestCase;
 use Psy\Exception\FatalErrorException;
 
-class FatalErrorExceptionTest extends \PHPUnit\Framework\TestCase
+class FatalErrorExceptionTest extends TestCase
 {
     public function testInstance()
     {

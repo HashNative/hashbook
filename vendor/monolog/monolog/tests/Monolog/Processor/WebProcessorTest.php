@@ -12,6 +12,7 @@
 namespace Monolog\Processor;
 
 use Monolog\TestCase;
+use stdClass;
 
 class WebProcessorTest extends TestCase
 {
@@ -108,6 +109,6 @@ class WebProcessorTest extends TestCase
      */
     public function testInvalidData()
     {
-        new WebProcessor(new \stdClass);
+        new WebProcessor(new stdClass);
     }
 }

@@ -10,6 +10,8 @@
 
 namespace SebastianBergmann\CodeCoverage;
 
+use BankAccountTest;
+use PHPUnit_Framework_TestCase;
 use SebastianBergmann\CodeCoverage\Driver\Xdebug;
 
 /**
@@ -17,7 +19,7 @@ use SebastianBergmann\CodeCoverage\Driver\Xdebug;
  *
  * @since Class available since Release 1.0.0
  */
-abstract class TestCase extends \PHPUnit_Framework_TestCase
+abstract class TestCase extends PHPUnit_Framework_TestCase
 {
     protected static $TEST_TMP_PATH;
 
@@ -100,7 +102,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
         $coverage = new CodeCoverage($stub, $filter);
 
         $coverage->start(
-            new \BankAccountTest('testBalanceIsInitiallyZero'),
+            new BankAccountTest('testBalanceIsInitiallyZero'),
             true
         );
 
@@ -110,7 +112,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
         );
 
         $coverage->start(
-            new \BankAccountTest('testBalanceCannotBecomeNegative')
+            new BankAccountTest('testBalanceCannotBecomeNegative')
         );
 
         $coverage->stop(
@@ -119,7 +121,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
         );
 
         $coverage->start(
-            new \BankAccountTest('testBalanceCannotBecomeNegative2')
+            new BankAccountTest('testBalanceCannotBecomeNegative2')
         );
 
         $coverage->stop(
@@ -128,7 +130,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
         );
 
         $coverage->start(
-            new \BankAccountTest('testDepositWithdrawMoney')
+            new BankAccountTest('testDepositWithdrawMoney')
         );
 
         $coverage->stop(
@@ -164,7 +166,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
         $coverage = new CodeCoverage($stub, $filter);
 
         $coverage->start(
-            new \BankAccountTest('testBalanceIsInitiallyZero'),
+            new BankAccountTest('testBalanceIsInitiallyZero'),
             true
         );
 
@@ -174,7 +176,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
         );
 
         $coverage->start(
-            new \BankAccountTest('testBalanceCannotBecomeNegative')
+            new BankAccountTest('testBalanceCannotBecomeNegative')
         );
 
         $coverage->stop(
@@ -204,7 +206,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
         $coverage = new CodeCoverage($stub, $filter);
 
         $coverage->start(
-            new \BankAccountTest('testBalanceCannotBecomeNegative2')
+            new BankAccountTest('testBalanceCannotBecomeNegative2')
         );
 
         $coverage->stop(
@@ -213,7 +215,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
         );
 
         $coverage->start(
-            new \BankAccountTest('testDepositWithdrawMoney')
+            new BankAccountTest('testDepositWithdrawMoney')
         );
 
         $coverage->stop(

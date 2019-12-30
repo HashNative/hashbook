@@ -5,29 +5,30 @@ namespace Illuminate\Queue\Jobs;
 use Illuminate\Container\Container;
 use Illuminate\Queue\DatabaseQueue;
 use Illuminate\Contracts\Queue\Job as JobContract;
+use stdClass;
 
 class DatabaseJob extends Job implements JobContract
 {
     /**
      * The database queue instance.
      *
-     * @var \Illuminate\Queue\DatabaseQueue
+     * @var DatabaseQueue
      */
     protected $database;
 
     /**
      * The database job payload.
      *
-     * @var \stdClass
+     * @var stdClass
      */
     protected $job;
 
     /**
      * Create a new job instance.
      *
-     * @param  \Illuminate\Container\Container  $container
-     * @param  \Illuminate\Queue\DatabaseQueue  $database
-     * @param  \stdClass  $job
+     * @param Container $container
+     * @param DatabaseQueue $database
+     * @param  stdClass  $job
      * @param  string  $connectionName
      * @param  string  $queue
      * @return void

@@ -7,6 +7,7 @@ use App\Utilities\Updater;
 use App\Utilities\Versions;
 use Illuminate\Http\Request;
 use Module;
+use stdClass;
 
 class Updates extends Controller
 {
@@ -38,7 +39,7 @@ class Updates extends Controller
                     continue;
                 }
 
-                $m = new \stdClass();
+                $m = new stdClass();
                 $m->name = $row->get('name');
                 $m->alias = $row->get('alias');
                 $m->category = $row->get('category');

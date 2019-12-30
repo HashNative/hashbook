@@ -2,6 +2,7 @@
 
 namespace Illuminate\Database\Eloquent;
 
+use Closure;
 use Faker\Generator as Faker;
 use InvalidArgumentException;
 use Illuminate\Support\Traits\Macroable;
@@ -48,7 +49,7 @@ class FactoryBuilder
     /**
      * The Faker instance for the builder.
      *
-     * @var \Faker\Generator
+     * @var Faker
      */
     protected $faker;
 
@@ -66,7 +67,7 @@ class FactoryBuilder
      * @param  string  $name
      * @param  array  $definitions
      * @param  array  $states
-     * @param  \Faker\Generator  $faker
+     * @param Faker $faker
      * @return void
      */
     public function __construct($class, $name, array $definitions, array $states, Faker $faker)
@@ -108,7 +109,7 @@ class FactoryBuilder
      * Create a model and persist it in the database if requested.
      *
      * @param  array  $attributes
-     * @return \Closure
+     * @return Closure
      */
     public function lazy(array $attributes = [])
     {
@@ -215,9 +216,9 @@ class FactoryBuilder
      * Make an instance of the model with the given attributes.
      *
      * @param  array  $attributes
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return Model
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     protected function makeInstance(array $attributes = [])
     {

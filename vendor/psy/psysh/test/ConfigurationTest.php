@@ -11,13 +11,26 @@
 
 namespace Psy\Test;
 
+use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 use Psy\CodeCleaner;
 use Psy\Configuration;
+use Psy\Exception\DeprecatedException;
 use Psy\Output\PassthruPager;
 use Psy\VersionUpdater\GitHubChecker;
 use Symfony\Component\Console\Output\ConsoleOutput;
+use function chdir;
+use function dirname;
+use function func_get_args;
+use function function_exists;
+use function getcwd;
+use function getenv;
+use function implode;
+use function putenv;
+use function realpath;
+use function sys_get_temp_dir;
 
-class ConfigurationTest extends \PHPUnit\Framework\TestCase
+class ConfigurationTest extends TestCase
 {
     private function getConfig($configFile = null)
     {
@@ -30,10 +43,10 @@ class ConfigurationTest extends \PHPUnit\Framework\TestCase
     {
         $config = $this->getConfig();
 
-        $this->assertSame(\function_exists('readline'), $config->hasReadline());
-        $this->assertSame(\function_exists('readline'), $config->useReadline());
-        $this->assertSame(\function_exists('pcntl_signal'), $config->hasPcntl());
-        $this->assertSame(\function_exists('pcntl_signal'), $config->usePcntl());
+        $this->assertSame(function_exists('readline'), $config->hasReadline());
+        $this->assertSame(function_exists('readline'), $config->useReadline());
+        $this->assertSame(function_exists('pcntl_signal'), $config->hasPcntl());
+        $this->assertSame(function_exists('pcntl_signal'), $config->usePcntl());
         $this->assertFalse($config->requireSemicolons());
         $this->assertSame(Configuration::COLOR_MODE_AUTO, $config->colorMode());
         $this->assertNull($config->getStartupMessage());
@@ -57,20 +70,20 @@ class ConfigurationTest extends \PHPUnit\Framework\TestCase
      */
     public function testFilesAndDirectories($home, $configFile, $historyFile, $manualDbFile)
     {
-        $oldHome = \getenv('HOME');
-        \putenv("HOME=$home");
+        $oldHome = getenv('HOME');
+        putenv("HOME=$home");
 
         $config = new Configuration();
-        $this->assertSame(\realpath($configFile),   \realpath($config->getConfigFile()));
-        $this->assertSame(\realpath($historyFile),  \realpath($config->getHistoryFile()));
-        $this->assertSame(\realpath($manualDbFile), \realpath($config->getManualDbFile()));
+        $this->assertSame(realpath($configFile),   realpath($config->getConfigFile()));
+        $this->assertSame(realpath($historyFile),  realpath($config->getHistoryFile()));
+        $this->assertSame(realpath($manualDbFile), realpath($config->getManualDbFile()));
 
-        \putenv("HOME=$oldHome");
+        putenv("HOME=$oldHome");
     }
 
     public function directories()
     {
-        $base = \realpath(__DIR__ . '/fixtures');
+        $base = realpath(__DIR__ . '/fixtures');
 
         return [
             [
@@ -125,21 +138,21 @@ class ConfigurationTest extends \PHPUnit\Framework\TestCase
     {
         $config = $this->getConfig(__DIR__ . '/fixtures/config.php');
 
-        $runtimeDir = $this->joinPath(\realpath(\sys_get_temp_dir()), 'psysh_test', 'withconfig', 'temp');
+        $runtimeDir = $this->joinPath(realpath(sys_get_temp_dir()), 'psysh_test', 'withconfig', 'temp');
 
-        $this->assertStringStartsWith($runtimeDir, \realpath($config->getTempFile('foo', 123)));
-        $this->assertStringStartsWith($runtimeDir, \realpath(\dirname($config->getPipe('pipe', 123))));
-        $this->assertStringStartsWith($runtimeDir, \realpath($config->getRuntimeDir()));
+        $this->assertStringStartsWith($runtimeDir, realpath($config->getTempFile('foo', 123)));
+        $this->assertStringStartsWith($runtimeDir, realpath(dirname($config->getPipe('pipe', 123))));
+        $this->assertStringStartsWith($runtimeDir, realpath($config->getRuntimeDir()));
 
-        $this->assertSame(\function_exists('readline'), $config->useReadline());
+        $this->assertSame(function_exists('readline'), $config->useReadline());
         $this->assertFalse($config->usePcntl());
         $this->assertSame(E_ALL & ~E_NOTICE, $config->errorLoggingLevel());
     }
 
     public function testLoadLocalConfigFile()
     {
-        $oldPwd = \getcwd();
-        \chdir(\realpath(__DIR__ . '/fixtures/project/'));
+        $oldPwd = getcwd();
+        chdir(realpath(__DIR__ . '/fixtures/project/'));
 
         $config = new Configuration();
 
@@ -153,11 +166,11 @@ class ConfigurationTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($config->requireSemicolons());
         $this->assertTrue($config->useUnicode());
 
-        \chdir($oldPwd);
+        chdir($oldPwd);
     }
 
     /**
-     * @expectedException \Psy\Exception\DeprecatedException
+     * @expectedException DeprecatedException
      */
     public function testBaseDirConfigIsDeprecated()
     {
@@ -166,7 +179,7 @@ class ConfigurationTest extends \PHPUnit\Framework\TestCase
 
     private function joinPath()
     {
-        return \implode(DIRECTORY_SEPARATOR, \func_get_args());
+        return implode(DIRECTORY_SEPARATOR, func_get_args());
     }
 
     public function testConfigIncludes()
@@ -235,7 +248,7 @@ class ConfigurationTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException InvalidArgumentException
      * @expectedExceptionMessage invalid color mode: some invalid mode
      */
     public function testSetColorModeInvalid()

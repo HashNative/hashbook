@@ -9,7 +9,7 @@ class ResponseIsMorphing
     /**
      * Response instance.
      *
-     * @var \Dingo\Api\Http\Response
+     * @var Response
      */
     public $response;
 
@@ -24,7 +24,7 @@ class ResponseIsMorphing
      * Create a new response is morphing event. Content is passed by reference
      * so that multiple listeners can modify content.
      *
-     * @param \Dingo\Api\Http\Response $response
+     * @param Response $response
      * @param string                   $content
      *
      * @return void

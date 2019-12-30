@@ -3,6 +3,7 @@
 namespace Sofa\Eloquence\Mappable;
 
 use BadMethodCallException;
+use Closure;
 
 /**
  * This class provides instance scope for the closures
@@ -15,7 +16,7 @@ class Hooks
      *
      * @codeCoverageIgnore
      *
-     * @return \Closure
+     * @return Closure
      */
     public function queryHook()
     {
@@ -41,7 +42,7 @@ class Hooks
      *
      * @codeCoverageIgnore
      *
-     * @return \Closure
+     * @return Closure
      */
     public function save()
     {
@@ -57,7 +58,7 @@ class Hooks
      *
      * @codeCoverageIgnore
      *
-     * @return \Closure
+     * @return Closure
      */
     public function __issetHook()
     {
@@ -77,7 +78,7 @@ class Hooks
      *
      * @codeCoverageIgnore
      *
-     * @return \Closure
+     * @return Closure
      */
     public function __unsetHook()
     {
@@ -97,7 +98,7 @@ class Hooks
      *
      * @codeCoverageIgnore
      *
-     * @return \Closure
+     * @return Closure
      */
     public function getAttribute()
     {
@@ -117,7 +118,7 @@ class Hooks
      *
      * @codeCoverageIgnore
      *
-     * @return \Closure
+     * @return Closure
      */
     public function setAttribute()
     {

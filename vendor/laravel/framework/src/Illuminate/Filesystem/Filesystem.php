@@ -30,7 +30,7 @@ class Filesystem
      * @param  bool  $lock
      * @return string
      *
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     * @throws FileNotFoundException
      */
     public function get($path, $lock = false)
     {
@@ -76,7 +76,7 @@ class Filesystem
      * @param  string  $path
      * @return mixed
      *
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     * @throws FileNotFoundException
      */
     public function getRequire($path)
     {

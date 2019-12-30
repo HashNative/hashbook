@@ -14,7 +14,7 @@ class RequestValidator
     /**
      * Container instance.
      *
-     * @var \Illuminate\Container\Container
+     * @var Container
      */
     protected $container;
 
@@ -31,7 +31,7 @@ class RequestValidator
     /**
      * Create a new request validator instance.
      *
-     * @param \Illuminate\Container\Container $container
+     * @param Container $container
      *
      * @return void
      */
@@ -79,7 +79,7 @@ class RequestValidator
     /**
      * Validate a request.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param IlluminateRequest $request
      *
      * @return bool
      */

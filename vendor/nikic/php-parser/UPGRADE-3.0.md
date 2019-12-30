@@ -42,7 +42,7 @@ Previously, error recovery mode was enabled by setting the `throwOnError` option
 creating the parser, while collected errors were retrieved using the `getErrors()` method:
 
 ```php
-$lexer = ...;
+$lexer = ...
 $parser = (new ParserFactory)->create(ParserFactor::ONLY_PHP7, $lexer, [
     'throwOnError' => true,
 ]);
@@ -59,7 +59,7 @@ Both the `throwOnError` option and the `getErrors()` method have been removed in
 Instead an instance of `ErrorHandler\Collecting` should be passed to the `parse()` method:
 
 ```php
-$lexer = ...;
+$lexer = ...
 $parser = (new ParserFactory)->create(ParserFactor::ONLY_PHP7, $lexer);
 
 $errorHandler = new ErrorHandler\Collecting;
@@ -85,7 +85,7 @@ likely pass unnoticed if you do not specifically test for this syntax.
 It is possible to restore the precise previous behavior with the following code:
 
 ```php
-$lexer = ...;
+$lexer = ...
 $parser7 = new Parser\Php7($lexer);
 $parser5 = new Parser\Php5($lexer);
 
@@ -110,9 +110,9 @@ to optionally accept an `ErrorHandler`:
 
 ```php
 // OLD
-public function startLexing($code);
+public function startLexing($code)
 // NEW
-public function startLexing($code, ErrorHandler $errorHandler = null);
+public function startLexing($code, ErrorHandler $errorHandler = null)
 ```
 
 If you use a custom lexer with overriden `startLexing()` method, it needs to be changed to accept

@@ -10,14 +10,14 @@ class PrepareController
     /**
      * Dingo router instance.
      *
-     * @var \Dingo\Api\Routing\Router
+     * @var Router
      */
     protected $router;
 
     /**
      * Create a new prepare controller instance.
      *
-     * @param \Dingo\Api\Routing\Router $router
+     * @param Router $router
      *
      * @return void
      */
@@ -30,7 +30,7 @@ class PrepareController
      * Handle the request.
      *
      * @param \Dingo\Api\Http\Request $request
-     * @param \Closure                $next
+     * @param Closure $next
      *
      * @return mixed
      */

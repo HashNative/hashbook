@@ -3,6 +3,7 @@
 namespace Illuminate\Contracts\Cache;
 
 use Closure;
+use DateTime;
 
 interface Repository
 {
@@ -37,7 +38,7 @@ interface Repository
      *
      * @param  string  $key
      * @param  mixed   $value
-     * @param  \DateTime|float|int  $minutes
+     * @param  DateTime|float|int  $minutes
      * @return void
      */
     public function put($key, $value, $minutes);
@@ -47,7 +48,7 @@ interface Repository
      *
      * @param  string  $key
      * @param  mixed   $value
-     * @param  \DateTime|float|int  $minutes
+     * @param  DateTime|float|int  $minutes
      * @return bool
      */
     public function add($key, $value, $minutes);
@@ -83,8 +84,8 @@ interface Repository
      * Get an item from the cache, or store the default value.
      *
      * @param  string  $key
-     * @param  \DateTime|float|int  $minutes
-     * @param  \Closure  $callback
+     * @param  DateTime|float|int  $minutes
+     * @param Closure $callback
      * @return mixed
      */
     public function remember($key, $minutes, Closure $callback);
@@ -93,7 +94,7 @@ interface Repository
      * Get an item from the cache, or store the default value forever.
      *
      * @param  string   $key
-     * @param  \Closure  $callback
+     * @param Closure $callback
      * @return mixed
      */
     public function sear($key, Closure $callback);
@@ -102,7 +103,7 @@ interface Repository
      * Get an item from the cache, or store the default value forever.
      *
      * @param  string   $key
-     * @param  \Closure  $callback
+     * @param Closure $callback
      * @return mixed
      */
     public function rememberForever($key, Closure $callback);

@@ -8,6 +8,7 @@
  */
 namespace Dompdf\FrameReflower;
 
+use Dompdf\Canvas;
 use Dompdf\Frame;
 use Dompdf\FrameDecorator\Block as BlockFrameDecorator;
 use Dompdf\FrameDecorator\Page as PageFrameDecorator;
@@ -30,7 +31,7 @@ class Page extends AbstractFrameReflower
     /**
      * Cache of the canvas
      *
-     * @var \Dompdf\Canvas
+     * @var Canvas
      */
     private $_canvas;
 

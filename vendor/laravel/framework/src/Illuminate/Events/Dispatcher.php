@@ -2,7 +2,9 @@
 
 namespace Illuminate\Events;
 
+use Closure;
 use Exception;
+use Illuminate\Contracts\Queue\Queue;
 use ReflectionClass;
 use Illuminate\Support\Str;
 use Illuminate\Container\Container;
@@ -17,7 +19,7 @@ class Dispatcher implements DispatcherContract
     /**
      * The IoC container instance.
      *
-     * @var \Illuminate\Contracts\Container\Container
+     * @var ContainerContract
      */
     protected $container;
 
@@ -45,7 +47,7 @@ class Dispatcher implements DispatcherContract
     /**
      * Create a new event dispatcher instance.
      *
-     * @param  \Illuminate\Contracts\Container\Container|null  $container
+     * @param ContainerContract|null  $container
      * @return void
      */
     public function __construct(ContainerContract $container = null)
@@ -262,7 +264,7 @@ class Dispatcher implements DispatcherContract
     /**
      * Broadcast the given event class.
      *
-     * @param  \Illuminate\Contracts\Broadcasting\ShouldBroadcast  $event
+     * @param ShouldBroadcast $event
      * @return void
      */
     protected function broadcastEvent($event)
@@ -331,9 +333,9 @@ class Dispatcher implements DispatcherContract
     /**
      * Register an event listener with the dispatcher.
      *
-     * @param  string|\Closure  $listener
+     * @param  string|Closure  $listener
      * @param  bool  $wildcard
-     * @return \Closure
+     * @return Closure
      */
     public function makeListener($listener, $wildcard = false)
     {
@@ -355,7 +357,7 @@ class Dispatcher implements DispatcherContract
      *
      * @param  string  $listener
      * @param  bool  $wildcard
-     * @return \Closure
+     * @return Closure
      */
     public function createClassListener($listener, $wildcard = false)
     {
@@ -420,7 +422,7 @@ class Dispatcher implements DispatcherContract
      *
      * @param  string  $class
      * @param  string  $method
-     * @return \Closure
+     * @return Closure
      */
     protected function createQueuedHandlerCallable($class, $method)
     {
@@ -541,7 +543,7 @@ class Dispatcher implements DispatcherContract
     /**
      * Get the queue implementation from the resolver.
      *
-     * @return \Illuminate\Contracts\Queue\Queue
+     * @return Queue
      */
     protected function resolveQueue()
     {

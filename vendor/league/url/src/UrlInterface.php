@@ -12,6 +12,11 @@
 */
 namespace League\Url;
 
+use League\Url\Components\ComponentInterface;
+use League\Url\Components\PathInterface;
+use League\Url\Components\QueryInterface;
+use Traversable;
+
 /**
  * A common interface for URL as Value Object
  *
@@ -65,7 +70,7 @@ interface UrlInterface
     /**
      * Compare two Url object and tells whether they can be considered equal
      *
-     * @param \League\Url\UrlInterface $url
+     * @param UrlInterface $url
      *
      * @return boolean
      */
@@ -83,7 +88,7 @@ interface UrlInterface
     /**
      * get the URL scheme component
      *
-     * @return \League\Url\Components\ComponentInterface
+     * @return ComponentInterface
      */
     public function getScheme();
 
@@ -99,7 +104,7 @@ interface UrlInterface
     /**
      * get the URL pass component
      *
-     * @return \League\Url\Components\ComponentInterface
+     * @return ComponentInterface
      */
     public function getUser();
 
@@ -115,14 +120,14 @@ interface UrlInterface
     /**
      * get the URL pass component
      *
-     * @return \League\Url\Components\ComponentInterface
+     * @return ComponentInterface
      */
     public function getPass();
 
     /**
      * Set the URL host component
      *
-     * @param string|array|\Traversable $data
+     * @param string|array|Traversable $data
      *
      * @return self
      */
@@ -131,7 +136,7 @@ interface UrlInterface
     /**
      * get the URL pass component
      *
-     * @return \League\Url\Components\ComponentInterface
+     * @return ComponentInterface
      */
     public function getHost();
 
@@ -147,14 +152,14 @@ interface UrlInterface
     /**
      * get the URL pass component
      *
-     * @return \League\Url\Components\ComponentInterface
+     * @return ComponentInterface
      */
     public function getPort();
 
     /**
      * Set the URL path component
      *
-     * @param string|array|\Traversable $data
+     * @param string|array|Traversable $data
      *
      * @return self
      */
@@ -163,14 +168,14 @@ interface UrlInterface
     /**
      * get the URL pass component
      *
-     * @return \League\Url\Components\PathInterface
+     * @return PathInterface
      */
     public function getPath();
 
     /**
      * Set the URL query component
      *
-     * @param string|array|\Traversable $data
+     * @param string|array|Traversable $data
      *
      * @return self
      */
@@ -179,7 +184,7 @@ interface UrlInterface
     /**
      * get the URL pass component
      *
-     * @return \League\Url\Components\QueryInterface
+     * @return QueryInterface
      */
     public function getQuery();
 
@@ -195,7 +200,7 @@ interface UrlInterface
     /**
      * get the URL pass component
      *
-     * @return \League\Url\Components\ComponentInterface
+     * @return ComponentInterface
      */
     public function getFragment();
 }

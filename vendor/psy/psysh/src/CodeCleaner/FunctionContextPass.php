@@ -50,7 +50,7 @@ class FunctionContextPass extends CodeCleanerPass
     }
 
     /**
-     * @param \PhpParser\Node $node
+     * @param Node $node
      */
     public function leaveNode(Node $node)
     {

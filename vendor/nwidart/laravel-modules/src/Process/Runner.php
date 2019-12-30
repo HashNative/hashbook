@@ -10,14 +10,14 @@ class Runner implements RunableInterface
     /**
      * The module instance.
      *
-     * @var \Nwidart\Modules\Repository
+     * @var Repository
      */
     protected $module;
 
     /**
      * The constructor.
      *
-     * @param \Nwidart\Modules\Repository $module
+     * @param Repository $module
      */
     public function __construct(Repository $module)
     {

@@ -2,10 +2,12 @@
 
 namespace PhpParser;
 
+use LogicException;
 use PhpParser\Node\Expr;
 use PhpParser\Node\Scalar\String_;
+use PHPUnit_Framework_TestCase;
 
-class NodeTraverserTest extends \PHPUnit_Framework_TestCase
+class NodeTraverserTest extends PHPUnit_Framework_TestCase
 {
     public function testNonModifying() {
         $str1Node = new String_('Foo');
@@ -251,7 +253,7 @@ class NodeTraverserTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \LogicException
+     * @expectedException LogicException
      * @expectedExceptionMessage leaveNode() may only return an array if the parent structure is an array
      */
     public function testReplaceByArrayOnlyAllowedIfParentIsArray() {

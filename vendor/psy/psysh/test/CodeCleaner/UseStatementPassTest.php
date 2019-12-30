@@ -12,6 +12,7 @@
 namespace Psy\Test\CodeCleaner;
 
 use Psy\CodeCleaner\UseStatementPass;
+use function version_compare;
 
 class UseStatementPassTest extends CodeCleanerTestCase
 {
@@ -80,7 +81,7 @@ class UseStatementPassTest extends CodeCleanerTestCase
 
     public function groupUseStatements()
     {
-        if (\version_compare(PHP_VERSION, '7.0', '<')) {
+        if (version_compare(PHP_VERSION, '7.0', '<')) {
             $this->markTestSkipped();
         }
 

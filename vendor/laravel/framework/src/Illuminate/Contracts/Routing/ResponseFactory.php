@@ -2,6 +2,14 @@
 
 namespace Illuminate\Contracts\Routing;
 
+use Closure;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
+use SplFileInfo;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\StreamedResponse;
+
 interface ResponseFactory
 {
     /**
@@ -10,7 +18,7 @@ interface ResponseFactory
      * @param  string  $content
      * @param  int  $status
      * @param  array  $headers
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function make($content = '', $status = 200, array $headers = []);
 
@@ -21,7 +29,7 @@ interface ResponseFactory
      * @param  array  $data
      * @param  int  $status
      * @param  array  $headers
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function view($view, $data = [], $status = 200, array $headers = []);
 
@@ -32,7 +40,7 @@ interface ResponseFactory
      * @param  int  $status
      * @param  array  $headers
      * @param  int  $options
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function json($data = [], $status = 200, array $headers = [], $options = 0);
 
@@ -44,28 +52,28 @@ interface ResponseFactory
      * @param  int  $status
      * @param  array  $headers
      * @param  int  $options
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function jsonp($callback, $data = [], $status = 200, array $headers = [], $options = 0);
 
     /**
      * Return a new streamed response from the application.
      *
-     * @param  \Closure  $callback
+     * @param  Closure  $callback
      * @param  int  $status
      * @param  array  $headers
-     * @return \Symfony\Component\HttpFoundation\StreamedResponse
+     * @return StreamedResponse
      */
     public function stream($callback, $status = 200, array $headers = []);
 
     /**
      * Create a new file download response.
      *
-     * @param  \SplFileInfo|string  $file
+     * @param  SplFileInfo|string  $file
      * @param  string  $name
      * @param  array  $headers
      * @param  string|null  $disposition
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @return BinaryFileResponse
      */
     public function download($file, $name = null, array $headers = [], $disposition = 'attachment');
 
@@ -76,7 +84,7 @@ interface ResponseFactory
      * @param  int  $status
      * @param  array  $headers
      * @param  bool|null  $secure
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function redirectTo($path, $status = 302, $headers = [], $secure = null);
 
@@ -87,7 +95,7 @@ interface ResponseFactory
      * @param  array  $parameters
      * @param  int  $status
      * @param  array  $headers
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function redirectToRoute($route, $parameters = [], $status = 302, $headers = []);
 
@@ -98,7 +106,7 @@ interface ResponseFactory
      * @param  array  $parameters
      * @param  int  $status
      * @param  array  $headers
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function redirectToAction($action, $parameters = [], $status = 302, $headers = []);
 
@@ -109,7 +117,7 @@ interface ResponseFactory
      * @param  int  $status
      * @param  array  $headers
      * @param  bool|null  $secure
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function redirectGuest($path, $status = 302, $headers = [], $secure = null);
 
@@ -120,7 +128,7 @@ interface ResponseFactory
      * @param  int  $status
      * @param  array  $headers
      * @param  bool|null  $secure
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function redirectToIntended($default = '/', $status = 302, $headers = [], $secure = null);
 }

@@ -12,6 +12,9 @@
 namespace Psy\Test\CodeCleaner;
 
 use Psy\CodeCleaner\ValidConstructorPass;
+use Psy\Exception\FatalErrorException;
+use Psy\Exception\ParseErrorException;
+use function version_compare;
 
 class ValidConstructorPassTest extends CodeCleanerTestCase
 {
@@ -22,7 +25,7 @@ class ValidConstructorPassTest extends CodeCleanerTestCase
 
     /**
      * @dataProvider invalidStatements
-     * @expectedException \Psy\Exception\FatalErrorException
+     * @expectedException FatalErrorException
      */
     public function testProcessInvalidStatement($code)
     {
@@ -31,7 +34,7 @@ class ValidConstructorPassTest extends CodeCleanerTestCase
 
     /**
      * @dataProvider invalidParserStatements
-     * @expectedException \Psy\Exception\ParseErrorException
+     * @expectedException ParseErrorException
      */
     public function testProcessInvalidStatementCatchedByParser($code)
     {
@@ -47,7 +50,7 @@ class ValidConstructorPassTest extends CodeCleanerTestCase
             ['class A { private static function a() {}}'],
         ];
 
-        if (\version_compare(PHP_VERSION, '7.0', '>=')) {
+        if (version_compare(PHP_VERSION, '7.0', '>=')) {
             $data[] = ['class A { public function A(): ?array {}}'];
             $data[] = ['class A { public function a(): ?array {}}'];
         }
@@ -82,7 +85,7 @@ class ValidConstructorPassTest extends CodeCleanerTestCase
             ['namespace B; class A { private static function A() {}}'],
         ];
 
-        if (\version_compare(PHP_VERSION, '7.0', '>=')) {
+        if (version_compare(PHP_VERSION, '7.0', '>=')) {
             $data[] = ['class A { public static function A() {} public function __construct() {}}'];
             $data[] = ['class A { private function __construct() {} public static function A(): ?array {}}'];
             $data[] = ['namespace B; class A { private static function A(): ?array {}}'];

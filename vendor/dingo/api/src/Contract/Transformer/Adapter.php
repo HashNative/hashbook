@@ -12,8 +12,8 @@ interface Adapter
      *
      * @param mixed                          $response
      * @param object                         $transformer
-     * @param \Dingo\Api\Transformer\Binding $binding
-     * @param \Dingo\Api\Http\Request        $request
+     * @param Binding $binding
+     * @param Request $request
      *
      * @return array
      */

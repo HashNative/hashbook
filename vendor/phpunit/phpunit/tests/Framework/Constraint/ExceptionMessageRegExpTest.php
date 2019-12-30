@@ -11,7 +11,7 @@
 class ExceptionMessageRegExpTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @expectedException \Exception
+     * @expectedException Exception
      * @expectedExceptionMessageRegExp /^A polymorphic \w+ message/
      */
     public function testRegexMessage()
@@ -20,7 +20,7 @@ class ExceptionMessageRegExpTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Exception
+     * @expectedException Exception
      * @expectedExceptionMessageRegExp /^a poly[a-z]+ [a-zA-Z0-9_]+ me(s){2}age$/i
      */
     public function testRegexMessageExtreme()
@@ -31,7 +31,7 @@ class ExceptionMessageRegExpTest extends PHPUnit_Framework_TestCase
     /**
      * @runInSeparateProcess
      * @requires extension xdebug
-     * @expectedException \Exception
+     * @expectedException Exception
      * @expectedExceptionMessageRegExp #Screaming preg_match#
      */
     public function testMessageXdebugScreamCompatibility()
@@ -41,7 +41,7 @@ class ExceptionMessageRegExpTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Exception variadic
+     * @expectedException Exception variadic
      * @expectedExceptionMessageRegExp /^A variadic \w+ message/
      */
     public function testSimultaneousLiteralAndRegExpExceptionMessage()

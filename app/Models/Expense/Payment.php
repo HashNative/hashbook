@@ -9,6 +9,7 @@ use App\Traits\DateTime;
 use App\Traits\Media;
 use App\Traits\Recurring;
 use Bkwld\Cloner\Cloneable;
+use Illuminate\Database\Eloquent\Builder;
 use Sofa\Eloquence\Eloquence;
 use Date;
 
@@ -86,8 +87,8 @@ class Payment extends Model
     /**
      * Get only transfers.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @param Builder $query
+     * @return Builder
      */
     public function scopeIsTransfer($query)
     {
@@ -97,8 +98,8 @@ class Payment extends Model
     /**
      * Skip transfers.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @param Builder $query
+     * @return Builder
      */
     public function scopeIsNotTransfer($query)
     {

@@ -15,6 +15,7 @@ use Monolog\Handler\FingersCrossed\ErrorLevelActivationStrategy;
 use Monolog\Handler\FingersCrossed\ActivationStrategyInterface;
 use Monolog\Logger;
 use Monolog\ResettableInterface;
+use RuntimeException;
 
 /**
  * Buffers all records until a certain level is reached
@@ -68,7 +69,7 @@ class FingersCrossedHandler extends AbstractHandler
         }
 
         if (!$this->handler instanceof HandlerInterface && !is_callable($this->handler)) {
-            throw new \RuntimeException("The given handler (".json_encode($this->handler).") is not a callable nor a Monolog\Handler\HandlerInterface object");
+            throw new RuntimeException("The given handler (".json_encode($this->handler).") is not a callable nor a Monolog\Handler\HandlerInterface object");
         }
     }
 
@@ -93,7 +94,7 @@ class FingersCrossedHandler extends AbstractHandler
 
             $this->handler = call_user_func($this->handler, $record, $this);
             if (!$this->handler instanceof HandlerInterface) {
-                throw new \RuntimeException("The factory callable should return a HandlerInterface");
+                throw new RuntimeException("The factory callable should return a HandlerInterface");
             }
         }
         $this->handler->handleBatch($this->buffer);

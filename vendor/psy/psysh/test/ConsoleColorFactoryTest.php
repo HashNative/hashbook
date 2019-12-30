@@ -11,10 +11,11 @@
 
 namespace Psy\Test;
 
+use PHPUnit\Framework\TestCase;
 use Psy\Configuration;
 use Psy\ConsoleColorFactory;
 
-class ConsoleColorFactoryTest extends \PHPUnit\Framework\TestCase
+class ConsoleColorFactoryTest extends TestCase
 {
     public function testGetConsoleColorAuto()
     {

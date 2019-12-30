@@ -19,7 +19,7 @@ use FontLib\BinaryStream;
  */
 class Outline extends BinaryStream {
   /**
-   * @var \FontLib\Table\Type\glyf
+   * @var glyf
    */
   protected $table;
 

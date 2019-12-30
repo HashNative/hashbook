@@ -11,6 +11,12 @@
 
 namespace Psy\Exception;
 
+use Error;
+use InvalidArgumentException;
+use Throwable;
+use function get_class;
+use function sprintf;
+
 /**
  * A throw-up exception, used for throwing an exception out of the Psy Shell.
  */
@@ -21,7 +27,7 @@ class ThrowUpException extends \Exception implements Exception
      */
     public function __construct(\Exception $exception)
     {
-        $message = \sprintf("Throwing %s with message '%s'", \get_class($exception), $exception->getMessage());
+        $message = sprintf("Throwing %s with message '%s'", get_class($exception), $exception->getMessage());
         parent::__construct($message, $exception->getCode(), $exception);
     }
 
@@ -38,18 +44,18 @@ class ThrowUpException extends \Exception implements Exception
     /**
      * Create a ThrowUpException from a Throwable.
      *
-     * @param \Throwable $throwable
+     * @param Throwable $throwable
      *
      * @return ThrowUpException
      */
     public static function fromThrowable($throwable)
     {
-        if ($throwable instanceof \Error) {
+        if ($throwable instanceof Error) {
             $throwable = ErrorException::fromError($throwable);
         }
 
         if (!$throwable instanceof \Exception) {
-            throw new \InvalidArgumentException('throw-up can only throw Exceptions and Errors');
+            throw new InvalidArgumentException('throw-up can only throw Exceptions and Errors');
         }
 
         return new self($throwable);

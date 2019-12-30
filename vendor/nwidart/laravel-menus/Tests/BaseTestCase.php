@@ -3,7 +3,14 @@
 namespace Nwidart\Menus\Tests;
 
 use Collective\Html\HtmlServiceProvider;
+use Illuminate\Foundation\Application;
 use Nwidart\Menus\MenusServiceProvider;
+use Nwidart\Menus\Presenters\Bootstrap\NavbarPresenter;
+use Nwidart\Menus\Presenters\Bootstrap\NavbarRightPresenter;
+use Nwidart\Menus\Presenters\Bootstrap\NavMenuPresenter;
+use Nwidart\Menus\Presenters\Bootstrap\NavPillsPresenter;
+use Nwidart\Menus\Presenters\Bootstrap\NavTabPresenter;
+use Nwidart\Menus\Presenters\Bootstrap\SidebarMenuPresenter;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
 abstract class BaseTestCase extends OrchestraTestCase
@@ -26,18 +33,18 @@ abstract class BaseTestCase extends OrchestraTestCase
     /**
      * Set up the environment.
      *
-     * @param \Illuminate\Foundation\Application $app
+     * @param Application $app
      */
     protected function getEnvironmentSetUp($app)
     {
         $app['config']->set('menus', [
             'styles' => [
-                'navbar' => \Nwidart\Menus\Presenters\Bootstrap\NavbarPresenter::class,
-                'navbar-right' => \Nwidart\Menus\Presenters\Bootstrap\NavbarRightPresenter::class,
-                'nav-pills' => \Nwidart\Menus\Presenters\Bootstrap\NavPillsPresenter::class,
-                'nav-tab' => \Nwidart\Menus\Presenters\Bootstrap\NavTabPresenter::class,
-                'sidebar' => \Nwidart\Menus\Presenters\Bootstrap\SidebarMenuPresenter::class,
-                'navmenu' => \Nwidart\Menus\Presenters\Bootstrap\NavMenuPresenter::class,
+                'navbar' => NavbarPresenter::class,
+                'navbar-right' => NavbarRightPresenter::class,
+                'nav-pills' => NavPillsPresenter::class,
+                'nav-tab' => NavTabPresenter::class,
+                'sidebar' => SidebarMenuPresenter::class,
+                'navmenu' => NavMenuPresenter::class,
             ],
 
             'ordering' => false,

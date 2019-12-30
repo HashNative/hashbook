@@ -11,6 +11,7 @@
 
 namespace Monolog\Handler;
 
+use Exception;
 use Monolog\TestCase;
 use Monolog\Logger;
 use Monolog\Formatter\LineFormatter;
@@ -155,7 +156,7 @@ class RavenHandlerTest extends TestCase
 
         try {
             $this->methodThatThrowsAnException();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $record = $this->getRecord(Logger::ERROR, $e->getMessage(), array('exception' => $e));
             $handler->handle($record);
         }
@@ -250,6 +251,6 @@ class RavenHandlerTest extends TestCase
 
     private function methodThatThrowsAnException()
     {
-        throw new \Exception('This is an exception');
+        throw new Exception('This is an exception');
     }
 }

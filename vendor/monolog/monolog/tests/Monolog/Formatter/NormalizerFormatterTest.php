@@ -11,14 +11,25 @@
 
 namespace Monolog\Formatter;
 
+use DateTime;
+use ErrorException;
+use Exception;
+use LogicException;
+use PHPUnit_Framework_Error_Warning;
+use PHPUnit_Framework_TestCase;
+use ReflectionMethod;
+use RuntimeException;
+use SoapFault;
+use stdClass;
+
 /**
  * @covers Monolog\Formatter\NormalizerFormatter
  */
-class NormalizerFormatterTest extends \PHPUnit_Framework_TestCase
+class NormalizerFormatterTest extends PHPUnit_Framework_TestCase
 {
     public function tearDown()
     {
-        \PHPUnit_Framework_Error_Warning::$enabled = true;
+        PHPUnit_Framework_Error_Warning::$enabled = true;
 
         return parent::tearDown();
     }
@@ -30,7 +41,7 @@ class NormalizerFormatterTest extends \PHPUnit_Framework_TestCase
             'level_name' => 'ERROR',
             'channel' => 'meh',
             'message' => 'foo',
-            'datetime' => new \DateTime,
+            'datetime' => new DateTime,
             'extra' => array('foo' => new TestFooNorm, 'bar' => new TestBarNorm, 'baz' => array(), 'res' => fopen('php://memory', 'rb')),
             'context' => array(
                 'foo' => 'bar',
@@ -65,8 +76,8 @@ class NormalizerFormatterTest extends \PHPUnit_Framework_TestCase
     public function testFormatExceptions()
     {
         $formatter = new NormalizerFormatter('Y-m-d');
-        $e = new \LogicException('bar');
-        $e2 = new \RuntimeException('foo', 0, $e);
+        $e = new LogicException('bar');
+        $e2 = new RuntimeException('foo', 0, $e);
         $formatted = $formatter->format(array(
             'exception' => $e2,
         ));
@@ -92,7 +103,7 @@ class NormalizerFormatterTest extends \PHPUnit_Framework_TestCase
         }
 
         $formatter = new NormalizerFormatter('Y-m-d');
-        $e = new \SoapFault('foo', 'bar', 'hello', 'world');
+        $e = new SoapFault('foo', 'bar', 'hello', 'world');
         $formatted = $formatter->format(array(
             'exception' => $e,
         ));
@@ -130,7 +141,7 @@ class NormalizerFormatterTest extends \PHPUnit_Framework_TestCase
                 'channel' => 'test',
                 'message' => 'bar',
                 'context' => array(),
-                'datetime' => new \DateTime,
+                'datetime' => new DateTime,
                 'extra' => array(),
             ),
             array(
@@ -138,7 +149,7 @@ class NormalizerFormatterTest extends \PHPUnit_Framework_TestCase
                 'channel' => 'log',
                 'message' => 'foo',
                 'context' => array(),
-                'datetime' => new \DateTime,
+                'datetime' => new DateTime,
                 'extra' => array(),
             ),
         ));
@@ -168,8 +179,8 @@ class NormalizerFormatterTest extends \PHPUnit_Framework_TestCase
     public function testIgnoresRecursiveObjectReferences()
     {
         // set up the recursion
-        $foo = new \stdClass();
-        $bar = new \stdClass();
+        $foo = new stdClass();
+        $bar = new stdClass();
 
         $foo->bar = $bar;
         $bar->foo = $foo;
@@ -184,7 +195,7 @@ class NormalizerFormatterTest extends \PHPUnit_Framework_TestCase
         });
 
         $formatter = new NormalizerFormatter();
-        $reflMethod = new \ReflectionMethod($formatter, 'toJson');
+        $reflMethod = new ReflectionMethod($formatter, 'toJson');
         $reflMethod->setAccessible(true);
         $res = $reflMethod->invoke($formatter, array($foo, $bar), true);
 
@@ -217,7 +228,7 @@ class NormalizerFormatterTest extends \PHPUnit_Framework_TestCase
         });
 
         $formatter = new NormalizerFormatter();
-        $reflMethod = new \ReflectionMethod($formatter, 'toJson');
+        $reflMethod = new ReflectionMethod($formatter, 'toJson');
         $reflMethod->setAccessible(true);
         $res = $reflMethod->invoke($formatter, array($resource), true);
 
@@ -236,7 +247,7 @@ class NormalizerFormatterTest extends \PHPUnit_Framework_TestCase
             'channel' => 'test',
             'message' => 'bar',
             'context' => array($largeArray),
-            'datetime' => new \DateTime,
+            'datetime' => new DateTime,
             'extra' => array(),
         ));
 
@@ -254,7 +265,7 @@ class NormalizerFormatterTest extends \PHPUnit_Framework_TestCase
             'channel' => 'test',
             'message' => 'bar',
             'context' => array($largeArray),
-            'datetime' => new \DateTime,
+            'datetime' => new DateTime,
             'extra' => array(),
         ));
 
@@ -269,18 +280,18 @@ class NormalizerFormatterTest extends \PHPUnit_Framework_TestCase
     {
         if (version_compare(PHP_VERSION, '5.5.0', '<')) {
             // Ignore the warning that will be emitted by PHP <5.5.0
-            \PHPUnit_Framework_Error_Warning::$enabled = false;
+            PHPUnit_Framework_Error_Warning::$enabled = false;
         }
         $formatter = new NormalizerFormatter();
-        $reflMethod = new \ReflectionMethod($formatter, 'toJson');
+        $reflMethod = new ReflectionMethod($formatter, 'toJson');
         $reflMethod->setAccessible(true);
 
         // send an invalid unicode sequence as a object that can't be cleaned
-        $record = new \stdClass;
+        $record = new stdClass;
         $record->message = "\xB1\x31";
         $res = $reflMethod->invoke($formatter, $record);
         if (PHP_VERSION_ID < 50500 && $res === '{"message":null}') {
-            throw new \RuntimeException('PHP 5.3/5.4 throw a warning and null the value instead of returning false entirely');
+            throw new RuntimeException('PHP 5.3/5.4 throw a warning and null the value instead of returning false entirely');
         }
     }
 
@@ -288,10 +299,10 @@ class NormalizerFormatterTest extends \PHPUnit_Framework_TestCase
     {
         if (version_compare(PHP_VERSION, '5.5.0', '<')) {
             // Ignore the warning that will be emitted by PHP <5.5.0
-            \PHPUnit_Framework_Error_Warning::$enabled = false;
+            PHPUnit_Framework_Error_Warning::$enabled = false;
         }
         $formatter = new NormalizerFormatter();
-        $reflMethod = new \ReflectionMethod($formatter, 'toJson');
+        $reflMethod = new ReflectionMethod($formatter, 'toJson');
         $reflMethod->setAccessible(true);
 
         $res = $reflMethod->invoke($formatter, array('message' => "\xA4\xA6\xA8\xB4\xB8\xBC\xBD\xBE"));
@@ -320,7 +331,7 @@ class NormalizerFormatterTest extends \PHPUnit_Framework_TestCase
 
     public function providesDetectAndCleanUtf8()
     {
-        $obj = new \stdClass;
+        $obj = new stdClass;
 
         return array(
             'null' => array(null, null),
@@ -345,7 +356,7 @@ class NormalizerFormatterTest extends \PHPUnit_Framework_TestCase
     public function testHandleJsonErrorFailure($code, $msg)
     {
         $formatter = new NormalizerFormatter();
-        $reflMethod = new \ReflectionMethod($formatter, 'handleJsonError');
+        $reflMethod = new ReflectionMethod($formatter, 'handleJsonError');
         $reflMethod->setAccessible(true);
 
         $this->setExpectedException('RuntimeException', $msg);
@@ -371,7 +382,7 @@ class NormalizerFormatterTest extends \PHPUnit_Framework_TestCase
         // This happens i.e. in React promises or Guzzle streams where stream wrappers are registered
         // and no file or line are included in the trace because it's treated as internal function
         set_error_handler(function ($errno, $errstr, $errfile, $errline) {
-            throw new \ErrorException($errstr, 0, $errno, $errfile, $errline);
+            throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
         });
 
         try {
@@ -382,7 +393,7 @@ class NormalizerFormatterTest extends \PHPUnit_Framework_TestCase
             $wrappedResource->foo = $resource;
             // Just do something stupid with a resource/wrapped resource as argument
             array_keys($wrappedResource);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             restore_error_handler();
         }
 
@@ -412,8 +423,8 @@ class NormalizerFormatterTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $arg = new TestInfoLeak;
-            call_user_func(array($this, 'throwHelper'), $arg, $dt = new \DateTime());
-        } catch (\Exception $e) {
+            call_user_func(array($this, 'throwHelper'), $arg, $dt = new DateTime());
+        } catch (Exception $e) {
         }
 
         $formatter = new NormalizerFormatter();
@@ -428,7 +439,7 @@ class NormalizerFormatterTest extends \PHPUnit_Framework_TestCase
 
     private function throwHelper($arg)
     {
-        throw new \RuntimeException('Thrown');
+        throw new RuntimeException('Thrown');
     }
 }
 
@@ -468,7 +479,7 @@ class TestToStringError
 {
     public function __toString()
     {
-        throw new \RuntimeException('Could not convert to string');
+        throw new RuntimeException('Could not convert to string');
     }
 }
 

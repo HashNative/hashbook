@@ -141,7 +141,7 @@ class SimpleMessage
     /**
      * Add a line of text to the notification.
      *
-     * @param  \Illuminate\Notifications\Action|string  $line
+     * @param Action|string  $line
      * @return $this
      */
     public function line($line)
@@ -152,7 +152,7 @@ class SimpleMessage
     /**
      * Add a line of text to the notification.
      *
-     * @param  \Illuminate\Notifications\Action|string|array  $line
+     * @param Action|string|array  $line
      * @return $this
      */
     public function with($line)

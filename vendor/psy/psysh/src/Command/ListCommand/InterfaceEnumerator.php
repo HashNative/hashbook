@@ -12,7 +12,11 @@
 namespace Psy\Command\ListCommand;
 
 use Psy\VarDumper\Presenter;
+use Reflector;
 use Symfony\Component\Console\Input\InputInterface;
+use function get_declared_interfaces;
+use function natcasesort;
+use function trigger_error;
 
 /**
  * Interface Enumerator class.
@@ -23,14 +27,14 @@ class InterfaceEnumerator extends Enumerator
 {
     public function __construct(Presenter $presenter)
     {
-        @\trigger_error('InterfaceEnumerator is no longer used', E_USER_DEPRECATED);
+        @trigger_error('InterfaceEnumerator is no longer used', E_USER_DEPRECATED);
         parent::__construct($presenter);
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function listItems(InputInterface $input, \Reflector $reflector = null, $target = null)
+    protected function listItems(InputInterface $input, Reflector $reflector = null, $target = null)
     {
         // only list interfaces when no Reflector is present.
         //
@@ -49,7 +53,7 @@ class InterfaceEnumerator extends Enumerator
             return;
         }
 
-        $interfaces = $this->prepareInterfaces(\get_declared_interfaces());
+        $interfaces = $this->prepareInterfaces(get_declared_interfaces());
 
         if (empty($interfaces)) {
             return;
@@ -69,7 +73,7 @@ class InterfaceEnumerator extends Enumerator
      */
     protected function prepareInterfaces(array $interfaces)
     {
-        \natcasesort($interfaces);
+        natcasesort($interfaces);
 
         // My kingdom for a generator.
         $ret = [];

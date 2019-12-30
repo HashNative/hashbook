@@ -2,6 +2,7 @@
 
 namespace Nwidart\Modules\tests\Commands;
 
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Schema;
 use Nwidart\Modules\Repository;
 use Nwidart\Modules\Tests\BaseTestCase;
@@ -13,7 +14,7 @@ abstract class MigrateCommandTest extends BaseTestCase
      */
     private $repository;
     /**
-     * @var \Illuminate\Filesystem\Filesystem
+     * @var Filesystem
      */
     private $finder;
 

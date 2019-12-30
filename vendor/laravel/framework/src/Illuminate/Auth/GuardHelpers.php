@@ -3,6 +3,7 @@
 namespace Illuminate\Auth;
 
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\UserProvider;
 
 /**
  * These methods are typically the same across all guards.
@@ -12,23 +13,23 @@ trait GuardHelpers
     /**
      * The currently authenticated user.
      *
-     * @var \Illuminate\Contracts\Auth\Authenticatable
+     * @var AuthenticatableContract
      */
     protected $user;
 
     /**
      * The user provider implementation.
      *
-     * @var \Illuminate\Contracts\Auth\UserProvider
+     * @var UserProvider
      */
     protected $provider;
 
     /**
      * Determine if the current user is authenticated.
      *
-     * @return \Illuminate\Contracts\Auth\Authenticatable
+     * @return AuthenticatableContract
      *
-     * @throws \Illuminate\Auth\AuthenticationException
+     * @throws AuthenticationException
      */
     public function authenticate()
     {
@@ -74,7 +75,7 @@ trait GuardHelpers
     /**
      * Set the current user.
      *
-     * @param  \Illuminate\Contracts\Auth\Authenticatable  $user
+     * @param AuthenticatableContract $user
      * @return $this
      */
     public function setUser(AuthenticatableContract $user)

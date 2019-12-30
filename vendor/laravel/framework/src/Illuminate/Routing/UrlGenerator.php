@@ -3,6 +3,8 @@
 namespace Illuminate\Routing;
 
 use Closure;
+use Illuminate\Routing\Exceptions\UrlGenerationException;
+use Illuminate\Session\Store;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use InvalidArgumentException;
@@ -17,14 +19,14 @@ class UrlGenerator implements UrlGeneratorContract
     /**
      * The route collection.
      *
-     * @var \Illuminate\Routing\RouteCollection
+     * @var RouteCollection
      */
     protected $routes;
 
     /**
      * The request instance.
      *
-     * @var \Illuminate\Http\Request
+     * @var Request
      */
     protected $request;
 
@@ -73,29 +75,29 @@ class UrlGenerator implements UrlGeneratorContract
     /**
      * The callback to use to format hosts.
      *
-     * @var \Closure
+     * @var Closure
      */
     protected $formatHostUsing;
 
     /**
      * The callback to use to format paths.
      *
-     * @var \Closure
+     * @var Closure
      */
     protected $formatPathUsing;
 
     /**
      * The route URL generator instance.
      *
-     * @var \Illuminate\Routing\RouteUrlGenerator
+     * @var RouteUrlGenerator
      */
     protected $routeGenerator;
 
     /**
      * Create a new URL Generator instance.
      *
-     * @param  \Illuminate\Routing\RouteCollection  $routes
-     * @param  \Illuminate\Http\Request  $request
+     * @param RouteCollection $routes
+     * @param Request $request
      * @return void
      */
     public function __construct(RouteCollection $routes, Request $request)
@@ -293,7 +295,7 @@ class UrlGenerator implements UrlGeneratorContract
      * @param  bool  $absolute
      * @return string
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function route($name, $parameters = [], $absolute = true)
     {
@@ -307,12 +309,12 @@ class UrlGenerator implements UrlGeneratorContract
     /**
      * Get the URL for a given route instance.
      *
-     * @param  \Illuminate\Routing\Route  $route
+     * @param Route $route
      * @param  mixed  $parameters
      * @param  bool   $absolute
      * @return string
      *
-     * @throws \Illuminate\Routing\Exceptions\UrlGenerationException
+     * @throws UrlGenerationException
      */
     protected function toRoute($route, $parameters, $absolute)
     {
@@ -329,7 +331,7 @@ class UrlGenerator implements UrlGeneratorContract
      * @param  bool    $absolute
      * @return string
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function action($action, $parameters = [], $absolute = true)
     {
@@ -454,7 +456,7 @@ class UrlGenerator implements UrlGeneratorContract
     /**
      * Get the Route URL generator instance.
      *
-     * @return \Illuminate\Routing\RouteUrlGenerator
+     * @return RouteUrlGenerator
      */
     protected function routeUrl()
     {
@@ -505,7 +507,7 @@ class UrlGenerator implements UrlGeneratorContract
     /**
      * Set a callback to be used to format the host of generated URLs.
      *
-     * @param  \Closure  $callback
+     * @param Closure $callback
      * @return $this
      */
     public function formatHostUsing(Closure $callback)
@@ -518,7 +520,7 @@ class UrlGenerator implements UrlGeneratorContract
     /**
      * Set a callback to be used to format the path of generated URLs.
      *
-     * @param  \Closure  $callback
+     * @param Closure $callback
      * @return $this
      */
     public function formatPathUsing(Closure $callback)
@@ -531,7 +533,7 @@ class UrlGenerator implements UrlGeneratorContract
     /**
      * Get the path formatter being used by the URL generator.
      *
-     * @return \Closure
+     * @return Closure
      */
     public function pathFormatter()
     {
@@ -543,7 +545,7 @@ class UrlGenerator implements UrlGeneratorContract
     /**
      * Get the request instance.
      *
-     * @return \Illuminate\Http\Request
+     * @return Request
      */
     public function getRequest()
     {
@@ -553,7 +555,7 @@ class UrlGenerator implements UrlGeneratorContract
     /**
      * Set the current request instance.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @return void
      */
     public function setRequest(Request $request)
@@ -568,7 +570,7 @@ class UrlGenerator implements UrlGeneratorContract
     /**
      * Set the route collection.
      *
-     * @param  \Illuminate\Routing\RouteCollection  $routes
+     * @param RouteCollection $routes
      * @return $this
      */
     public function setRoutes(RouteCollection $routes)
@@ -581,7 +583,7 @@ class UrlGenerator implements UrlGeneratorContract
     /**
      * Get the session implementation from the resolver.
      *
-     * @return \Illuminate\Session\Store|null
+     * @return Store|null
      */
     protected function getSession()
     {

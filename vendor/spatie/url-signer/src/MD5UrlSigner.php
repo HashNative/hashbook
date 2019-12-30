@@ -2,12 +2,14 @@
 
 namespace Spatie\UrlSigner;
 
+use League\Url\UrlImmutable;
+
 class MD5UrlSigner extends BaseUrlSigner
 {
     /**
      * Generate a token to identify the secure action.
      *
-     * @param \League\Url\UrlImmutable|string $url
+     * @param UrlImmutable|string $url
      * @param string                          $expiration
      *
      * @return string

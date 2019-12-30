@@ -124,12 +124,12 @@ abstract class AbstractArray implements IteratorAggregate, Countable
      * convert a given data into an array
      *
      * @param mixed    $data     the data to insert
-     * @param \Closure $callback a callable function to be called to parse
+     * @param Closure $callback a callable function to be called to parse
      *                           a given string into the corresponding component
      *
      * @return array
      *
-     * @throws \RuntimeException if the data is not valid
+     * @throws RuntimeException if the data is not valid
      */
     protected function convertToArray($data, Closure $callback)
     {

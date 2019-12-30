@@ -3,6 +3,12 @@
 namespace Illuminate\Notifications;
 
 use Illuminate\Mail\Markdown;
+use Illuminate\Notifications\Channels\BroadcastChannel;
+use Illuminate\Notifications\Channels\DatabaseChannel;
+use Illuminate\Notifications\Channels\MailChannel;
+use Illuminate\Notifications\Channels\NexmoSmsChannel;
+use Illuminate\Notifications\Channels\SlackWebhookChannel;
+use Illuminate\Support\Collection;
 use InvalidArgumentException;
 use Illuminate\Support\Manager;
 use Nexmo\Client as NexmoClient;
@@ -25,7 +31,7 @@ class ChannelManager extends Manager implements DispatcherContract, FactoryContr
     /**
      * Send the given notification to the given notifiable entities.
      *
-     * @param  \Illuminate\Support\Collection|array|mixed  $notifiables
+     * @param  Collection|array|mixed  $notifiables
      * @param  mixed  $notification
      * @return void
      */
@@ -39,7 +45,7 @@ class ChannelManager extends Manager implements DispatcherContract, FactoryContr
     /**
      * Send the given notification immediately.
      *
-     * @param  \Illuminate\Support\Collection|array|mixed  $notifiables
+     * @param  Collection|array|mixed  $notifiables
      * @param  mixed  $notification
      * @param  array|null  $channels
      * @return void
@@ -65,7 +71,7 @@ class ChannelManager extends Manager implements DispatcherContract, FactoryContr
     /**
      * Create an instance of the database driver.
      *
-     * @return \Illuminate\Notifications\Channels\DatabaseChannel
+     * @return DatabaseChannel
      */
     protected function createDatabaseDriver()
     {
@@ -75,7 +81,7 @@ class ChannelManager extends Manager implements DispatcherContract, FactoryContr
     /**
      * Create an instance of the broadcast driver.
      *
-     * @return \Illuminate\Notifications\Channels\BroadcastChannel
+     * @return BroadcastChannel
      */
     protected function createBroadcastDriver()
     {
@@ -85,7 +91,7 @@ class ChannelManager extends Manager implements DispatcherContract, FactoryContr
     /**
      * Create an instance of the mail driver.
      *
-     * @return \Illuminate\Notifications\Channels\MailChannel
+     * @return MailChannel
      */
     protected function createMailDriver()
     {
@@ -97,7 +103,7 @@ class ChannelManager extends Manager implements DispatcherContract, FactoryContr
     /**
      * Create an instance of the Nexmo driver.
      *
-     * @return \Illuminate\Notifications\Channels\NexmoSmsChannel
+     * @return NexmoSmsChannel
      */
     protected function createNexmoDriver()
     {
@@ -113,7 +119,7 @@ class ChannelManager extends Manager implements DispatcherContract, FactoryContr
     /**
      * Create an instance of the Slack driver.
      *
-     * @return \Illuminate\Notifications\Channels\SlackWebhookChannel
+     * @return SlackWebhookChannel
      */
     protected function createSlackDriver()
     {
@@ -126,7 +132,7 @@ class ChannelManager extends Manager implements DispatcherContract, FactoryContr
      * @param  string  $driver
      * @return mixed
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     protected function createDriver($driver)
     {

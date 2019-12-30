@@ -7,6 +7,7 @@ use Illuminate\Database\Query\Grammars\Grammar;
 use Illuminate\Database\Query\Expression;
 use Illuminate\Database\Eloquent\Model;
 
+use PHPUnit_Framework_TestCase;
 use Sofa\Eloquence\Searchable\ParserFactory;
 use Sofa\Eloquence\Relations\JoinerFactory;
 use Sofa\Eloquence\ArgumentBag;
@@ -15,7 +16,7 @@ use Sofa\Eloquence\Builder;
 
 use Mockery as m;
 
-class SearchableBuilderTest extends \PHPUnit_Framework_TestCase {
+class SearchableBuilderTest extends PHPUnit_Framework_TestCase {
 
     public function setUp()
     {

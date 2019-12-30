@@ -12,8 +12,9 @@
 namespace Monolog;
 
 use Monolog\Handler\TestHandler;
+use PHPUnit_Framework_TestCase;
 
-class ErrorHandlerTest extends \PHPUnit_Framework_TestCase
+class ErrorHandlerTest extends PHPUnit_Framework_TestCase
 {
     public function testHandleError()
     {

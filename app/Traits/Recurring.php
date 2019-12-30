@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use DateTimeZone;
 use Recurr\Rule;
 use Recurr\Transformer\ArrayTransformer;
 use Recurr\Transformer\ArrayTransformerConfig;
@@ -129,7 +130,7 @@ trait Recurring
 
     public function getRuleStartDate()
     {
-        return new \DateTime($this->started_at, new \DateTimeZone($this->getRuleTimeZone()));
+        return new \DateTime($this->started_at, new DateTimeZone($this->getRuleTimeZone()));
     }
 
     public function getRuleTimeZone()

@@ -53,7 +53,7 @@ abstract class BaseUrlSigner implements UrlSigner
      * Get a secure URL to a controller action.
      *
      * @param string        $url
-     * @param \DateTime|int $expiration
+     * @param DateTime|int $expiration
      *
      * @return string
      */
@@ -70,11 +70,11 @@ abstract class BaseUrlSigner implements UrlSigner
     /**
      * Add expiration and signature query parameters to an url.
      *
-     * @param \League\Url\UrlImmutable $url
+     * @param UrlImmutable $url
      * @param string                   $expiration
      * @param string                   $signature
      *
-     * @return \League\Url\UrlImmutable
+     * @return UrlImmutable
      */
     protected function signUrl(UrlImmutable $url, $expiration, $signature)
     {
@@ -123,7 +123,7 @@ abstract class BaseUrlSigner implements UrlSigner
     /**
      * Check if a query is missing a necessary parameter.
      *
-     * @param \League\Url\Components\QueryInterface $query
+     * @param QueryInterface $query
      *
      * @return bool
      */
@@ -155,9 +155,9 @@ abstract class BaseUrlSigner implements UrlSigner
     /**
      * Retrieve the intended URL by stripping off the UrlSigner specific parameters.
      *
-     * @param \League\Url\UrlImmutable $url
+     * @param UrlImmutable $url
      *
-     * @return \League\Url\UrlImmutable
+     * @return UrlImmutable
      */
     protected function getIntendedUrl(UrlImmutable $url)
     {
@@ -176,13 +176,13 @@ abstract class BaseUrlSigner implements UrlSigner
     /**
      * Retrieve the expiration timestamp for a link based on an absolute DateTime or a relative number of days.
      *
-     * @param \DateTime|int $expiration The expiration date of this link.
+     * @param DateTime|int $expiration The expiration date of this link.
      *                                  - DateTime: The value will be used as expiration date
      *                                  - int: The expiration time will be set to X days from now
      *
-     * @throws \Spatie\UrlSigner\Exceptions\InvalidExpiration
-     *
      * @return string
+     *@throws InvalidExpiration
+     *
      */
     protected function getExpirationTimestamp($expiration)
     {
@@ -204,7 +204,7 @@ abstract class BaseUrlSigner implements UrlSigner
     /**
      * Determine if the url has a forged signature.
      *
-     * @param \League\Url\UrlImmutable $url
+     * @param UrlImmutable $url
      *
      * @return bool
      */

@@ -11,6 +11,8 @@
 
 namespace Psy\Command;
 
+use InvalidArgumentException;
+use PhpParser\Error;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\New_;
 use PhpParser\Node\Expr\StaticCall;
@@ -25,6 +27,8 @@ use Psy\Input\CodeArgument;
 use Psy\ParserFactory;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use function count;
+use function strpos;
 
 /**
  * Throw an exception or error out of the Psy Shell.
@@ -125,13 +129,13 @@ HELP
             return [new Arg(new Variable('_e'))];
         }
 
-        if (\strpos('<?', $code) === false) {
+        if (strpos('<?', $code) === false) {
             $code = '<?php ' . $code;
         }
 
         $nodes = $this->parse($code);
-        if (\count($nodes) !== 1) {
-            throw new \InvalidArgumentException('No idea how to throw this');
+        if (count($nodes) !== 1) {
+            throw new InvalidArgumentException('No idea how to throw this');
         }
 
         $node = $nodes[0];
@@ -160,8 +164,8 @@ HELP
     {
         try {
             return $this->parser->parse($code);
-        } catch (\PhpParser\Error $e) {
-            if (\strpos($e->getMessage(), 'unexpected EOF') === false) {
+        } catch (Error $e) {
+            if (strpos($e->getMessage(), 'unexpected EOF') === false) {
                 throw $e;
             }
 

@@ -4,7 +4,9 @@ namespace PhpParser;
 
 /* The autoloader is already active at this point, so we only check effects here. */
 
-class AutoloaderTest extends \PHPUnit_Framework_TestCase {
+use PHPUnit_Framework_TestCase;
+
+class AutoloaderTest extends PHPUnit_Framework_TestCase {
     public function testClassExists() {
         $this->assertTrue(class_exists('PhpParser\NodeVisitorAbstract'));
         $this->assertFalse(class_exists('PHPParser_NodeVisitor_NameResolver'));

@@ -2,6 +2,7 @@
 
 namespace Sofa\Eloquence;
 
+use Illuminate\Database\Connection;
 use Sofa\Hookable\Hookable;
 use Sofa\Eloquence\Mutator\Mutator;
 use Sofa\Hookable\Contracts\ArgumentBag;
@@ -18,7 +19,7 @@ use Sofa\Eloquence\AttributeCleaner\Observer as AttributeCleaner;
  *
  * @version 5.3
  *
- * @method \Illuminate\Database\Connection getConnection()
+ * @method Connection getConnection()
  * @method string getTable()
  */
 trait Eloquence
@@ -28,7 +29,7 @@ trait Eloquence
     /**
      * Attribute mutator instance.
      *
-     * @var \Sofa\Eloquence\Contracts\Mutator
+     * @var MutatorContract
      */
     protected static $attributeMutator;
 
@@ -171,8 +172,8 @@ trait Eloquence
     /**
      * Create new Eloquence query builder for the instance.
      *
-     * @param  \Sofa\Eloquence\Query\Builder
-     * @return \Sofa\Eloquence\Builder
+     * @param QueryBuilder
+     * @return Builder
      */
     public function newEloquentBuilder($query)
     {
@@ -182,7 +183,7 @@ trait Eloquence
     /**
      * Get a new query builder instance for the connection.
      *
-     * @return \Sofa\Eloquence\Query\Builder
+     * @return QueryBuilder
      */
     protected function newBaseQueryBuilder()
     {
@@ -198,7 +199,7 @@ trait Eloquence
      *
      * @codeCoverageIgnore
      *
-     * @param  \Sofa\Eloquence\Contracts\Mutator $mutator
+     * @param MutatorContract $mutator
      * @return void
      */
     public static function setAttributeMutator(MutatorContract $mutator)
@@ -211,7 +212,7 @@ trait Eloquence
      *
      * @codeCoverageIgnore
      *
-     * @return \Sofa\Eloquence\Contracts\Mutator
+     * @return MutatorContract
      */
     public static function getAttributeMutator()
     {

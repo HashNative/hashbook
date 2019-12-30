@@ -3,7 +3,7 @@ $(document).ready(function () {
     $.fn.liveSearch = function (option) {
         return this.each(function () {
             this.timer = null;
-            this.items = new Array();
+            this.items = [];
 
             $.extend(this, option);
 

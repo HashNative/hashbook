@@ -9,7 +9,7 @@ interface Request
     /**
      * Create a new Dingo request instance from an Illuminate request instance.
      *
-     * @param \Illuminate\Http\Request $old
+     * @param IlluminateRequest $old
      *
      * @return \Dingo\Api\Http\Request
      */

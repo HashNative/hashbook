@@ -11,6 +11,8 @@
 
 namespace Prophecy\Argument\Token;
 
+use Countable;
+
 /**
  * Array elements count token.
  *
@@ -69,13 +71,13 @@ class ArrayCountToken implements TokenInterface
      */
     private function isCountable($argument)
     {
-        return (is_array($argument) || $argument instanceof \Countable);
+        return (is_array($argument) || $argument instanceof Countable);
     }
 
     /**
      * Returns true if $argument has expected number of elements
      *
-     * @param array|\Countable $argument
+     * @param array|Countable $argument
      *
      * @return bool
      */

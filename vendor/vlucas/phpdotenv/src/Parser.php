@@ -29,9 +29,9 @@ class Parser
      *
      * @param string $value
      *
-     * @throws \Dotenv\Exception\InvalidFileException
-     *
      * @return string
+     * @throws InvalidFileException
+     *
      */
     public static function parseValue($value)
     {
@@ -49,9 +49,9 @@ class Parser
      *
      * @param string $value
      *
-     * @throws \Dotenv\Exception\InvalidFileException
-     *
      * @return string
+     * @throws InvalidFileException
+     *
      */
     public static function parseQuotedValue($value)
     {
@@ -102,9 +102,9 @@ class Parser
      *
      * @param string $value
      *
-     * @throws \Dotenv\Exception\InvalidFileException
-     *
      * @return string
+     * @throws InvalidFileException
+     *
      */
     public static function parseUnquotedValue($value)
     {

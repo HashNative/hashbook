@@ -9,7 +9,7 @@ interface Validator
     /**
      * Validate a request.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param IlluminateRequest $request
      *
      * @return bool
      */

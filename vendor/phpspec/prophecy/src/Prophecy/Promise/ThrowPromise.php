@@ -12,10 +12,12 @@
 namespace Prophecy\Promise;
 
 use Doctrine\Instantiator\Instantiator;
+use Exception;
 use Prophecy\Prophecy\ObjectProphecy;
 use Prophecy\Prophecy\MethodProphecy;
 use Prophecy\Exception\InvalidArgumentException;
 use ReflectionClass;
+use Throwable;
 
 /**
  * Throw promise.
@@ -27,16 +29,16 @@ class ThrowPromise implements PromiseInterface
     private $exception;
 
     /**
-     * @var \Doctrine\Instantiator\Instantiator
+     * @var Instantiator
      */
     private $instantiator;
 
     /**
      * Initializes promise.
      *
-     * @param string|\Exception|\Throwable $exception Exception class name or instance
+     * @param string|Exception|Throwable $exception Exception class name or instance
      *
-     * @throws \Prophecy\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function __construct($exception)
     {
@@ -47,7 +49,7 @@ class ThrowPromise implements PromiseInterface
                     $exception
                 ));
             }
-        } elseif (!$exception instanceof \Exception && !$exception instanceof \Throwable) {
+        } elseif (!$exception instanceof Exception && !$exception instanceof Throwable) {
             throw new InvalidArgumentException(sprintf(
                 'Exception / Throwable class or instance expected as argument to ThrowPromise, but got %s.',
                 is_object($exception) ? get_class($exception) : gettype($exception)

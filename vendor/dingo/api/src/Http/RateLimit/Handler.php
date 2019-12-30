@@ -15,35 +15,35 @@ class Handler
     /**
      * Container instance.
      *
-     * @var \Illuminate\Container\Container
+     * @var Container
      */
     protected $container;
 
     /**
      * Cache instance.
      *
-     * @var \Illuminate\Cache\CacheManager
+     * @var CacheManager
      */
     protected $cache;
 
     /**
      * Registered throttles.
      *
-     * @var \Illuminate\Support\Collection
+     * @var Collection
      */
     protected $throttles;
 
     /**
      * Throttle used for rate limiting.
      *
-     * @var \Dingo\Api\Contract\Http\RateLimit\Throttle
+     * @var Throttle
      */
     protected $throttle;
 
     /**
      * Request instance being throttled.
      *
-     * @var \Dingo\Api\Http\Request
+     * @var Request
      */
     protected $request;
 
@@ -64,8 +64,8 @@ class Handler
     /**
      * Create a new rate limit handler instance.
      *
-     * @param \Illuminate\Container\Container $container
-     * @param \Illuminate\Cache\CacheManager  $cache
+     * @param Container $container
+     * @param CacheManager $cache
      * @param array                           $throttles
      *
      * @return void
@@ -80,7 +80,7 @@ class Handler
     /**
      * Execute the rate limiting for the given request.
      *
-     * @param \Dingo\Api\Http\Request $request
+     * @param Request $request
      * @param int                     $limit
      * @param int                     $expires
      *
@@ -153,7 +153,7 @@ class Handler
     /**
      * Get matching throttles after executing the condition of each throttle.
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     protected function getMatchingThrottles()
     {
@@ -261,7 +261,7 @@ class Handler
     /**
      * Set the throttle to use for rate limiting.
      *
-     * @param string|\Dingo\Api\Contract\Http\RateLimit\Throttle $throttle
+     * @param string|Throttle $throttle
      *
      * @return void
      */
@@ -277,7 +277,7 @@ class Handler
     /**
      * Get the throttle used to rate limit the request.
      *
-     * @return \Dingo\Api\Contract\Http\RateLimit\Throttle
+     * @return Throttle
      */
     public function getThrottle()
     {

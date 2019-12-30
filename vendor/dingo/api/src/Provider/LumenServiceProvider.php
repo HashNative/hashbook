@@ -85,7 +85,7 @@ class LumenServiceProvider extends DingoServiceProvider
      * Add the request middleware to the beginning of the middleware stack on the
      * Lumen application instance.
      *
-     * @param \ReflectionClass $reflection
+     * @param ReflectionClass $reflection
      *
      * @return void
      */
@@ -106,7 +106,7 @@ class LumenServiceProvider extends DingoServiceProvider
      * Gather the application middleware besides this one so that we can send
      * our request through them, exactly how the developer wanted.
      *
-     * @param \ReflectionClass $reflection
+     * @param ReflectionClass $reflection
      *
      * @return array
      */

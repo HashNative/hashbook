@@ -13,6 +13,7 @@ namespace Psy\Readline;
 
 use Hoa\Console\Readline\Readline as HoaReadline;
 use Psy\Exception\BreakException;
+use function class_exists;
 
 /**
  * Hoa\Console Readline implementation.
@@ -27,7 +28,7 @@ class HoaConsole implements Readline
      */
     public static function isSupported()
     {
-        return \class_exists('\Hoa\Console\Console', true);
+        return class_exists('\Hoa\Console\Console', true);
     }
 
     public function __construct()

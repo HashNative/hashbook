@@ -2,6 +2,8 @@
 
 namespace Illuminate\Filesystem;
 
+use BadMethodCallException;
+use DateTimeInterface;
 use RuntimeException;
 use Illuminate\Http\File;
 use Illuminate\Support\Str;
@@ -19,21 +21,21 @@ use Illuminate\Contracts\Filesystem\Filesystem as FilesystemContract;
 use Illuminate\Contracts\Filesystem\FileNotFoundException as ContractFileNotFoundException;
 
 /**
- * @mixin \League\Flysystem\FilesystemInterface
+ * @mixin FilesystemInterface
  */
 class FilesystemAdapter implements FilesystemContract, CloudFilesystemContract
 {
     /**
      * The Flysystem filesystem implementation.
      *
-     * @var \League\Flysystem\FilesystemInterface
+     * @var FilesystemInterface
      */
     protected $driver;
 
     /**
      * Create a new filesystem adapter instance.
      *
-     * @param  \League\Flysystem\FilesystemInterface  $driver
+     * @param FilesystemInterface $driver
      * @return void
      */
     public function __construct(FilesystemInterface $driver)
@@ -95,7 +97,7 @@ class FilesystemAdapter implements FilesystemContract, CloudFilesystemContract
      * @param  string  $path
      * @return string
      *
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     * @throws ContractFileNotFoundException
      */
     public function get($path)
     {
@@ -137,7 +139,7 @@ class FilesystemAdapter implements FilesystemContract, CloudFilesystemContract
      * Store the uploaded file on the disk.
      *
      * @param  string  $path
-     * @param  \Illuminate\Http\File|\Illuminate\Http\UploadedFile  $file
+     * @param File|UploadedFile $file
      * @param  array  $options
      * @return string|false
      */
@@ -150,7 +152,7 @@ class FilesystemAdapter implements FilesystemContract, CloudFilesystemContract
      * Store the uploaded file on the disk with a given name.
      *
      * @param  string  $path
-     * @param  \Illuminate\Http\File|\Illuminate\Http\UploadedFile  $file
+     * @param File|UploadedFile $file
      * @param  string  $name
      * @param  array  $options
      * @return string|false
@@ -340,7 +342,7 @@ class FilesystemAdapter implements FilesystemContract, CloudFilesystemContract
     /**
      * Get the URL for the file at the given path.
      *
-     * @param  \League\Flysystem\AwsS3v3\AwsS3Adapter  $adapter
+     * @param AwsS3Adapter $adapter
      * @param  string  $path
      * @return string
      */
@@ -384,7 +386,7 @@ class FilesystemAdapter implements FilesystemContract, CloudFilesystemContract
      * Get a temporary URL for the file at the given path.
      *
      * @param  string  $path
-     * @param  \DateTimeInterface  $expiration
+     * @param  DateTimeInterface  $expiration
      * @param  array  $options
      * @return string
      */
@@ -485,7 +487,7 @@ class FilesystemAdapter implements FilesystemContract, CloudFilesystemContract
     /**
      * Get the Flysystem driver.
      *
-     * @return \League\Flysystem\FilesystemInterface
+     * @return FilesystemInterface
      */
     public function getDriver()
     {
@@ -514,7 +516,7 @@ class FilesystemAdapter implements FilesystemContract, CloudFilesystemContract
      * @param  string|null  $visibility
      * @return string|null
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     protected function parseVisibility($visibility)
     {
@@ -539,7 +541,7 @@ class FilesystemAdapter implements FilesystemContract, CloudFilesystemContract
      * @param  array  $parameters
      * @return mixed
      *
-     * @throws \BadMethodCallException
+     * @throws BadMethodCallException
      */
     public function __call($method, array $parameters)
     {

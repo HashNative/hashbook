@@ -11,7 +11,7 @@ class UnknownVersionException extends HttpException
      * Create a new unknown version exception instance.
      *
      * @param string     $message
-     * @param \Exception $previous
+     * @param Exception $previous
      * @param int        $code
      *
      * @return void

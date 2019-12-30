@@ -6,6 +6,7 @@ use App\Http\Controllers\ApiController;
 use App\Http\Requests\Setting\Tax as Request;
 use App\Models\Setting\Tax;
 use App\Transformers\Setting\Tax as Transformer;
+use Dingo\Api\Http\Response;
 use Dingo\Api\Routing\Helpers;
 
 class Taxes extends ApiController
@@ -15,7 +16,7 @@ class Taxes extends ApiController
     /**
      * Display a listing of the resource.
      *
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -28,7 +29,7 @@ class Taxes extends ApiController
      * Display the specified resource.
      *
      * @param  Tax  $tax
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function show(Tax $tax)
     {
@@ -39,7 +40,7 @@ class Taxes extends ApiController
      * Store a newly created resource in storage.
      *
      * @param  $request
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -53,7 +54,7 @@ class Taxes extends ApiController
      *
      * @param  $tax
      * @param  $request
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function update(Tax $tax, Request $request)
     {
@@ -66,7 +67,7 @@ class Taxes extends ApiController
      * Remove the specified resource from storage.
      *
      * @param  Tax  $tax
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function destroy(Tax $tax)
     {

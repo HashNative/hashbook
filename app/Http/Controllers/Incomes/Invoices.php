@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Incomes;
 
+use App;
 use App\Events\InvoiceCreated;
 use App\Events\InvoicePrinting;
 use App\Events\InvoiceUpdated;
@@ -37,6 +38,7 @@ use App\Utilities\Import;
 use App\Utilities\ImportFile;
 use App\Utilities\Modules;
 use Date;
+use Excel;
 use File;
 use Image;
 use Storage;
@@ -289,7 +291,7 @@ class Invoices extends Controller
      */
     public function export()
     {
-        \Excel::create('invoices', function ($excel) {
+        Excel::create('invoices', function ($excel) {
             $invoices = Invoice::with(['items', 'item_taxes', 'histories', 'payments', 'totals'])->filter(request()->input())->get();
 
             $excel->sheet('invoices', function ($sheet) use ($invoices) {
@@ -367,7 +369,7 @@ class Invoices extends Controller
         $view = view($invoice->template_path, compact('invoice'))->render();
         $html = mb_convert_encoding($view, 'HTML-ENTITIES');
 
-        $pdf = \App::make('dompdf.wrapper');
+        $pdf = App::make('dompdf.wrapper');
         $pdf->loadHTML($html);
 
         $file = storage_path('app/temp/invoice_'.time().'.pdf');

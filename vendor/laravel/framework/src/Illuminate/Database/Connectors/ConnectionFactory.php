@@ -2,6 +2,8 @@
 
 namespace Illuminate\Database\Connectors;
 
+use Closure;
+use PDO;
 use PDOException;
 use Illuminate\Support\Arr;
 use InvalidArgumentException;
@@ -18,14 +20,14 @@ class ConnectionFactory
     /**
      * The IoC container instance.
      *
-     * @var \Illuminate\Contracts\Container\Container
+     * @var Container
      */
     protected $container;
 
     /**
      * Create a new connection factory instance.
      *
-     * @param  \Illuminate\Contracts\Container\Container  $container
+     * @param Container $container
      * @return void
      */
     public function __construct(Container $container)
@@ -38,7 +40,7 @@ class ConnectionFactory
      *
      * @param  array   $config
      * @param  string  $name
-     * @return \Illuminate\Database\Connection
+     * @return Connection
      */
     public function make(array $config, $name = null)
     {
@@ -67,7 +69,7 @@ class ConnectionFactory
      * Create a single database connection instance.
      *
      * @param  array  $config
-     * @return \Illuminate\Database\Connection
+     * @return Connection
      */
     protected function createSingleConnection(array $config)
     {
@@ -82,7 +84,7 @@ class ConnectionFactory
      * Create a single database connection instance.
      *
      * @param  array  $config
-     * @return \Illuminate\Database\Connection
+     * @return Connection
      */
     protected function createReadWriteConnection(array $config)
     {
@@ -95,7 +97,7 @@ class ConnectionFactory
      * Create a new PDO instance for reading.
      *
      * @param  array  $config
-     * @return \Closure
+     * @return Closure
      */
     protected function createReadPdo(array $config)
     {
@@ -158,7 +160,7 @@ class ConnectionFactory
      * Create a new Closure that resolves to a PDO instance.
      *
      * @param  array  $config
-     * @return \Closure
+     * @return Closure
      */
     protected function createPdoResolver(array $config)
     {
@@ -171,7 +173,7 @@ class ConnectionFactory
      * Create a new Closure that resolves to a PDO instance with a specific host or an array of hosts.
      *
      * @param  array  $config
-     * @return \Closure
+     * @return Closure
      */
     protected function createPdoResolverWithHosts(array $config)
     {
@@ -213,7 +215,7 @@ class ConnectionFactory
      * Create a new Closure that resolves to a PDO instance where there is no configured host.
      *
      * @param  array  $config
-     * @return \Closure
+     * @return Closure
      */
     protected function createPdoResolverWithoutHosts(array $config)
     {
@@ -226,9 +228,9 @@ class ConnectionFactory
      * Create a connector instance based on the configuration.
      *
      * @param  array  $config
-     * @return \Illuminate\Database\Connectors\ConnectorInterface
+     * @return ConnectorInterface
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function createConnector(array $config)
     {
@@ -258,13 +260,13 @@ class ConnectionFactory
      * Create a new connection instance.
      *
      * @param  string   $driver
-     * @param  \PDO|\Closure     $connection
+     * @param  PDO|Closure     $connection
      * @param  string   $database
      * @param  string   $prefix
      * @param  array    $config
-     * @return \Illuminate\Database\Connection
+     * @return Connection
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     protected function createConnection($driver, $connection, $database, $prefix = '', array $config = [])
     {

@@ -14,19 +14,19 @@ abstract class BaseUrlGenerator implements UrlGeneratorInterface
 {
     /**
      * Configuration Repository.
-     * @var \Illuminate\Contracts\Config\Repository
+     * @var Config
      */
     protected $config;
 
     /**
      * Media instance being linked.
-     * @var \Plank\Mediable\Media
+     * @var Media
      */
     protected $media;
 
     /**
      * Constructor.
-     * @param \Illuminate\Contracts\Config\Repository $config
+     * @param Config $config
      */
     public function __construct(Config $config)
     {
@@ -35,7 +35,7 @@ abstract class BaseUrlGenerator implements UrlGeneratorInterface
 
     /**
      * Set the media being operated on.
-     * @param \Plank\Mediable\Media $media
+     * @param Media $media
      */
     public function setMedia(Media $media)
     {

@@ -3,6 +3,7 @@
 namespace Nwidart\Menus\Presenters\Foundation;
 
 use Nwidart\Menus\Presenters\Presenter;
+use Request;
 
 class ZurbMenuPresenter extends Presenter
 {
@@ -36,7 +37,7 @@ class ZurbMenuPresenter extends Presenter
      */
     public function getActiveState($item)
     {
-        return \Request::is($item->getRequest()) ? ' class="is-active"' : null;
+        return Request::is($item->getRequest()) ? ' class="is-active"' : null;
     }
 
     /**

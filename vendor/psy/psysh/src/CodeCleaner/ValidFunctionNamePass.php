@@ -21,6 +21,10 @@ use PhpParser\Node\Stmt\If_;
 use PhpParser\Node\Stmt\Switch_;
 use PhpParser\Node\Stmt\While_;
 use Psy\Exception\FatalErrorException;
+use function function_exists;
+use function implode;
+use function sprintf;
+use function strtolower;
 
 /**
  * Validate that function calls will succeed.
@@ -49,14 +53,14 @@ class ValidFunctionNamePass extends NamespaceAwarePass
             // @todo add an "else" here which adds a runtime check for instances where we can't tell
             // whether a function is being redefined by static analysis alone.
             if ($this->conditionalScopes === 0) {
-                if (\function_exists($name) ||
-                    isset($this->currentScope[\strtolower($name)])) {
-                    $msg = \sprintf('Cannot redeclare %s()', $name);
+                if (function_exists($name) ||
+                    isset($this->currentScope[strtolower($name)])) {
+                    $msg = sprintf('Cannot redeclare %s()', $name);
                     throw new FatalErrorException($msg, 0, E_ERROR, null, $node->getLine());
                 }
             }
 
-            $this->currentScope[\strtolower($name)] = true;
+            $this->currentScope[strtolower($name)] = true;
         }
     }
 
@@ -76,11 +80,11 @@ class ValidFunctionNamePass extends NamespaceAwarePass
             // if function name is an expression or a variable, give it a pass for now.
             $name = $node->name;
             if (!$name instanceof Expr && !$name instanceof Variable) {
-                $shortName = \implode('\\', $name->parts);
+                $shortName = implode('\\', $name->parts);
                 $fullName  = $this->getFullyQualifiedName($name);
-                $inScope   = isset($this->currentScope[\strtolower($fullName)]);
-                if (!$inScope && !\function_exists($shortName) && !\function_exists($fullName)) {
-                    $message = \sprintf('Call to undefined function %s()', $name);
+                $inScope   = isset($this->currentScope[strtolower($fullName)]);
+                if (!$inScope && !function_exists($shortName) && !function_exists($fullName)) {
+                    $message = sprintf('Call to undefined function %s()', $name);
                     throw new FatalErrorException($message, 0, E_ERROR, null, $node->getLine());
                 }
             }

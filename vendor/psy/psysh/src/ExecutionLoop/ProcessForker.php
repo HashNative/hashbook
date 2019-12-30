@@ -11,9 +11,31 @@
 
 namespace Psy\ExecutionLoop;
 
+use Closure;
+use Exception;
 use Psy\Context;
 use Psy\Exception\BreakException;
 use Psy\Shell;
+use RuntimeException;
+use Throwable;
+use function error_get_last;
+use function fclose;
+use function function_exists;
+use function fwrite;
+use function is_resource;
+use function pcntl_fork;
+use function pcntl_signal_dispatch;
+use function pcntl_waitpid;
+use function pcntl_wexitstatus;
+use function posix_getpid;
+use function posix_kill;
+use function serialize;
+use function sprintf;
+use function stream_get_contents;
+use function stream_select;
+use function stream_socket_pair;
+use function stripos;
+use function unserialize;
 
 /**
  * An execution loop listener that forks the process before executing code.
@@ -33,7 +55,7 @@ class ProcessForker extends AbstractListener
      */
     public static function isSupported()
     {
-        return \function_exists('pcntl_signal') && \function_exists('posix_getpid');
+        return function_exists('pcntl_signal') && function_exists('posix_getpid');
     }
 
     /**
@@ -46,20 +68,20 @@ class ProcessForker extends AbstractListener
      */
     public function beforeRun(Shell $shell)
     {
-        list($up, $down) = \stream_socket_pair(STREAM_PF_UNIX, STREAM_SOCK_STREAM, STREAM_IPPROTO_IP);
+        list($up, $down) = stream_socket_pair(STREAM_PF_UNIX, STREAM_SOCK_STREAM, STREAM_IPPROTO_IP);
 
         if (!$up) {
-            throw new \RuntimeException('Unable to create socket pair');
+            throw new RuntimeException('Unable to create socket pair');
         }
 
-        $pid = \pcntl_fork();
+        $pid = pcntl_fork();
         if ($pid < 0) {
-            throw new \RuntimeException('Unable to start execution loop');
+            throw new RuntimeException('Unable to start execution loop');
         } elseif ($pid > 0) {
             // This is the main thread. We'll just wait for a while.
 
             // We won't be needing this one.
-            \fclose($up);
+            fclose($up);
 
             // Wait for a return value from the loop process.
             $read   = [$down];
@@ -67,40 +89,40 @@ class ProcessForker extends AbstractListener
             $except = null;
 
             do {
-                $n = @\stream_select($read, $write, $except, null);
+                $n = @stream_select($read, $write, $except, null);
 
                 if ($n === 0) {
-                    throw new \RuntimeException('Process timed out waiting for execution loop');
+                    throw new RuntimeException('Process timed out waiting for execution loop');
                 }
 
                 if ($n === false) {
-                    $err = \error_get_last();
-                    if (!isset($err['message']) || \stripos($err['message'], 'interrupted system call') === false) {
+                    $err = error_get_last();
+                    if (!isset($err['message']) || stripos($err['message'], 'interrupted system call') === false) {
                         $msg = $err['message'] ?
-                            \sprintf('Error waiting for execution loop: %s', $err['message']) :
+                            sprintf('Error waiting for execution loop: %s', $err['message']) :
                             'Error waiting for execution loop';
-                        throw new \RuntimeException($msg);
+                        throw new RuntimeException($msg);
                     }
                 }
             } while ($n < 1);
 
-            $content = \stream_get_contents($down);
-            \fclose($down);
+            $content = stream_get_contents($down);
+            fclose($down);
 
             if ($content) {
-                $shell->setScopeVariables(@\unserialize($content));
+                $shell->setScopeVariables(@unserialize($content));
             }
 
             throw new BreakException('Exiting main thread');
         }
 
         // This is the child process. It's going to do all the work.
-        if (\function_exists('setproctitle')) {
+        if (function_exists('setproctitle')) {
             setproctitle('psysh (loop)');
         }
 
         // We won't be needing this one.
-        \fclose($down);
+        fclose($down);
 
         // Save this; we'll need to close it in `afterRun`
         $this->up = $up;
@@ -125,8 +147,8 @@ class ProcessForker extends AbstractListener
     {
         // if there's an old savegame hanging around, let's kill it.
         if (isset($this->savegame)) {
-            \posix_kill($this->savegame, SIGKILL);
-            \pcntl_signal_dispatch();
+            posix_kill($this->savegame, SIGKILL);
+            pcntl_signal_dispatch();
         }
     }
 
@@ -140,10 +162,10 @@ class ProcessForker extends AbstractListener
     {
         // We're a child thread. Send the scope variables back up to the main thread.
         if (isset($this->up)) {
-            \fwrite($this->up, $this->serializeReturn($shell->getScopeVariables(false)));
-            \fclose($this->up);
+            fwrite($this->up, $this->serializeReturn($shell->getScopeVariables(false)));
+            fclose($this->up);
 
-            \posix_kill(\posix_getpid(), SIGKILL);
+            posix_kill(posix_getpid(), SIGKILL);
         }
     }
 
@@ -157,18 +179,18 @@ class ProcessForker extends AbstractListener
     private function createSavegame()
     {
         // the current process will become the savegame
-        $this->savegame = \posix_getpid();
+        $this->savegame = posix_getpid();
 
-        $pid = \pcntl_fork();
+        $pid = pcntl_fork();
         if ($pid < 0) {
-            throw new \RuntimeException('Unable to create savegame fork');
+            throw new RuntimeException('Unable to create savegame fork');
         } elseif ($pid > 0) {
             // we're the savegame now... let's wait and see what happens
-            \pcntl_waitpid($pid, $status);
+            pcntl_waitpid($pid, $status);
 
             // worker exited cleanly, let's bail
-            if (!\pcntl_wexitstatus($status)) {
-                \posix_kill(\posix_getpid(), SIGKILL);
+            if (!pcntl_wexitstatus($status)) {
+                posix_kill(posix_getpid(), SIGKILL);
             }
 
             // worker didn't exit cleanly, we'll need to have another go
@@ -199,21 +221,21 @@ class ProcessForker extends AbstractListener
             }
 
             // Resources and Closures don't error, but they don't serialize well either.
-            if (\is_resource($value) || $value instanceof \Closure) {
+            if (is_resource($value) || $value instanceof Closure) {
                 continue;
             }
 
             try {
-                @\serialize($value);
+                @serialize($value);
                 $serializable[$key] = $value;
-            } catch (\Throwable $e) {
+            } catch (Throwable $e) {
                 // we'll just ignore this one...
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 // and this one too...
                 // @todo remove this once we don't support PHP 5.x anymore :)
             }
         }
 
-        return @\serialize($serializable);
+        return @serialize($serializable);
     }
 }

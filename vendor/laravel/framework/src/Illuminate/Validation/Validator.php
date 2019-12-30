@@ -22,21 +22,21 @@ class Validator implements ValidatorContract
     /**
      * The Translator implementation.
      *
-     * @var \Illuminate\Contracts\Translation\Translator
+     * @var Translator
      */
     protected $translator;
 
     /**
      * The container instance.
      *
-     * @var \Illuminate\Contracts\Container\Container
+     * @var Container
      */
     protected $container;
 
     /**
      * The Presence Verifier implementation.
      *
-     * @var \Illuminate\Validation\PresenceVerifierInterface
+     * @var PresenceVerifierInterface
      */
     protected $presenceVerifier;
 
@@ -50,7 +50,7 @@ class Validator implements ValidatorContract
     /**
      * The message bag instance.
      *
-     * @var \Illuminate\Support\MessageBag
+     * @var MessageBag
      */
     protected $messages;
 
@@ -186,7 +186,7 @@ class Validator implements ValidatorContract
     /**
      * Create a new Validator instance.
      *
-     * @param  \Illuminate\Contracts\Translation\Translator  $translator
+     * @param Translator $translator
      * @param  array  $data
      * @param  array  $rules
      * @param  array  $messages
@@ -297,7 +297,7 @@ class Validator implements ValidatorContract
      *
      * @return void
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function validate()
     {
@@ -610,7 +610,7 @@ class Validator implements ValidatorContract
     /**
      * Get the message container for the validator.
      *
-     * @return \Illuminate\Support\MessageBag
+     * @return MessageBag
      */
     public function messages()
     {
@@ -624,7 +624,7 @@ class Validator implements ValidatorContract
     /**
      * An alternative more semantic shortcut to the message container.
      *
-     * @return \Illuminate\Support\MessageBag
+     * @return MessageBag
      */
     public function errors()
     {
@@ -634,7 +634,7 @@ class Validator implements ValidatorContract
     /**
      * Get the messages for the instance.
      *
-     * @return \Illuminate\Support\MessageBag
+     * @return MessageBag
      */
     public function getMessageBag()
     {
@@ -845,7 +845,7 @@ class Validator implements ValidatorContract
      * Register a custom validator extension.
      *
      * @param  string  $rule
-     * @param  \Closure|string  $extension
+     * @param Closure|string  $extension
      * @return void
      */
     public function addExtension($rule, $extension)
@@ -857,7 +857,7 @@ class Validator implements ValidatorContract
      * Register a custom implicit validator extension.
      *
      * @param  string   $rule
-     * @param  \Closure|string  $extension
+     * @param Closure|string  $extension
      * @return void
      */
     public function addImplicitExtension($rule, $extension)
@@ -871,7 +871,7 @@ class Validator implements ValidatorContract
      * Register a custom dependent validator extension.
      *
      * @param  string   $rule
-     * @param  \Closure|string  $extension
+     * @param Closure|string  $extension
      * @return void
      */
     public function addDependentExtension($rule, $extension)
@@ -902,7 +902,7 @@ class Validator implements ValidatorContract
      * Register a custom validator message replacer.
      *
      * @param  string  $rule
-     * @param  \Closure|string  $replacer
+     * @param Closure|string  $replacer
      * @return void
      */
     public function addReplacer($rule, $replacer)
@@ -987,9 +987,9 @@ class Validator implements ValidatorContract
     /**
      * Get the Presence Verifier implementation.
      *
-     * @return \Illuminate\Validation\PresenceVerifierInterface
+     * @return PresenceVerifierInterface
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     public function getPresenceVerifier()
     {
@@ -1004,9 +1004,9 @@ class Validator implements ValidatorContract
      * Get the Presence Verifier implementation.
      *
      * @param  string  $connection
-     * @return \Illuminate\Validation\PresenceVerifierInterface
+     * @return PresenceVerifierInterface
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     protected function getPresenceVerifierFor($connection)
     {
@@ -1018,7 +1018,7 @@ class Validator implements ValidatorContract
     /**
      * Set the Presence Verifier implementation.
      *
-     * @param  \Illuminate\Validation\PresenceVerifierInterface  $presenceVerifier
+     * @param PresenceVerifierInterface $presenceVerifier
      * @return void
      */
     public function setPresenceVerifier(PresenceVerifierInterface $presenceVerifier)
@@ -1029,7 +1029,7 @@ class Validator implements ValidatorContract
     /**
      * Get the Translator implementation.
      *
-     * @return \Illuminate\Contracts\Translation\Translator
+     * @return Translator
      */
     public function getTranslator()
     {
@@ -1039,7 +1039,7 @@ class Validator implements ValidatorContract
     /**
      * Set the Translator implementation.
      *
-     * @param  \Illuminate\Contracts\Translation\Translator  $translator
+     * @param Translator $translator
      * @return void
      */
     public function setTranslator(Translator $translator)
@@ -1050,7 +1050,7 @@ class Validator implements ValidatorContract
     /**
      * Set the IoC container instance.
      *
-     * @param  \Illuminate\Contracts\Container\Container  $container
+     * @param Container $container
      * @return void
      */
     public function setContainer(Container $container)
@@ -1097,7 +1097,7 @@ class Validator implements ValidatorContract
      * @param  array   $parameters
      * @return mixed
      *
-     * @throws \BadMethodCallException
+     * @throws BadMethodCallException
      */
     public function __call($method, $parameters)
     {

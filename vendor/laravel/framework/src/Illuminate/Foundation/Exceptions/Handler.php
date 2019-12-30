@@ -3,6 +3,7 @@
 namespace Illuminate\Foundation\Exceptions;
 
 use Exception;
+use Illuminate\Http\Request;
 use Psr\Log\LoggerInterface;
 use Illuminate\Http\Response;
 use Illuminate\Http\RedirectResponse;
@@ -11,6 +12,7 @@ use Illuminate\Contracts\Container\Container;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Debug\Exception\FlattenException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -26,7 +28,7 @@ class Handler implements ExceptionHandlerContract
     /**
      * The container implementation.
      *
-     * @var \Illuminate\Contracts\Container\Container
+     * @var Container
      */
     protected $container;
 
@@ -40,7 +42,7 @@ class Handler implements ExceptionHandlerContract
     /**
      * Create a new exception handler instance.
      *
-     * @param  \Illuminate\Contracts\Container\Container  $container
+     * @param Container $container
      * @return void
      */
     public function __construct(Container $container)
@@ -51,10 +53,10 @@ class Handler implements ExceptionHandlerContract
     /**
      * Report or log an exception.
      *
-     * @param  \Exception  $e
+     * @param Exception $e
      * @return void
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function report(Exception $e)
     {
@@ -74,7 +76,7 @@ class Handler implements ExceptionHandlerContract
     /**
      * Determine if the exception should be reported.
      *
-     * @param  \Exception  $e
+     * @param Exception $e
      * @return bool
      */
     public function shouldReport(Exception $e)
@@ -85,7 +87,7 @@ class Handler implements ExceptionHandlerContract
     /**
      * Determine if the exception is in the "do not report" list.
      *
-     * @param  \Exception  $e
+     * @param Exception $e
      * @return bool
      */
     protected function shouldntReport(Exception $e)
@@ -100,9 +102,9 @@ class Handler implements ExceptionHandlerContract
     /**
      * Render an exception into a response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $e
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param  Request  $request
+     * @param Exception $e
+     * @return SymfonyResponse
      */
     public function render($request, Exception $e)
     {
@@ -122,8 +124,8 @@ class Handler implements ExceptionHandlerContract
     /**
      * Prepare exception for rendering.
      *
-     * @param  \Exception  $e
-     * @return \Exception
+     * @param Exception $e
+     * @return Exception
      */
     protected function prepareException(Exception $e)
     {
@@ -139,9 +141,9 @@ class Handler implements ExceptionHandlerContract
     /**
      * Create a response object from the given validation exception.
      *
-     * @param  \Illuminate\Validation\ValidationException  $e
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param ValidationException $e
+     * @param  Request  $request
+     * @return SymfonyResponse
      */
     protected function convertValidationExceptionToResponse(ValidationException $e, $request)
     {
@@ -163,9 +165,9 @@ class Handler implements ExceptionHandlerContract
     /**
      * Prepare response containing exception render.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception $e
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param  Request  $request
+     * @param Exception $e
+     * @return SymfonyResponse
      */
     protected function prepareResponse($request, Exception $e)
     {
@@ -179,8 +181,8 @@ class Handler implements ExceptionHandlerContract
     /**
      * Render the given HttpException.
      *
-     * @param  \Symfony\Component\HttpKernel\Exception\HttpException  $e
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param HttpException $e
+     * @return SymfonyResponse
      */
     protected function renderHttpException(HttpException $e)
     {
@@ -201,8 +203,8 @@ class Handler implements ExceptionHandlerContract
     /**
      * Create a Symfony response for the given exception.
      *
-     * @param  \Exception  $e
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param Exception $e
+     * @return SymfonyResponse
      */
     protected function convertExceptionToResponse(Exception $e)
     {
@@ -216,9 +218,9 @@ class Handler implements ExceptionHandlerContract
     /**
      * Map the given exception into an Illuminate response.
      *
-     * @param  \Symfony\Component\HttpFoundation\Response  $response
-     * @param  \Exception  $e
-     * @return \Illuminate\Http\Response
+     * @param SymfonyResponse $response
+     * @param Exception $e
+     * @return Response
      */
     protected function toIlluminateResponse($response, Exception $e)
     {
@@ -234,8 +236,8 @@ class Handler implements ExceptionHandlerContract
     /**
      * Render an exception to the console.
      *
-     * @param  \Symfony\Component\Console\Output\OutputInterface  $output
-     * @param  \Exception  $e
+     * @param  OutputInterface  $output
+     * @param Exception $e
      * @return void
      */
     public function renderForConsole($output, Exception $e)
@@ -246,7 +248,7 @@ class Handler implements ExceptionHandlerContract
     /**
      * Determine if the given exception is an HTTP exception.
      *
-     * @param  \Exception  $e
+     * @param Exception $e
      * @return bool
      */
     protected function isHttpException(Exception $e)

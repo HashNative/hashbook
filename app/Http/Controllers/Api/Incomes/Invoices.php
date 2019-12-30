@@ -15,6 +15,7 @@ use App\Models\Common\Item;
 use App\Models\Setting\Tax;
 use App\Traits\Incomes;
 use App\Transformers\Income\Invoice as Transformer;
+use Dingo\Api\Http\Response;
 use Dingo\Api\Routing\Helpers;
 
 class Invoices extends ApiController
@@ -24,7 +25,7 @@ class Invoices extends ApiController
     /**
      * Display a listing of the resource.
      *
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -37,7 +38,7 @@ class Invoices extends ApiController
      * Display the specified resource.
      *
      * @param  $id
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function show($id)
     {
@@ -55,7 +56,7 @@ class Invoices extends ApiController
      * Store a newly created resource in storage.
      *
      * @param  $request
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -73,7 +74,7 @@ class Invoices extends ApiController
      *
      * @param  $invoice
      * @param  $request
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function update(Invoice $invoice, Request $request)
     {
@@ -168,7 +169,7 @@ class Invoices extends ApiController
      * Remove the specified resource from storage.
      *
      * @param  Invoice  $invoice
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function destroy(Invoice $invoice)
     {

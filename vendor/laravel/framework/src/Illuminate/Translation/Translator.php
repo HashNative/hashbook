@@ -17,7 +17,7 @@ class Translator extends NamespacedItemResolver implements TranslatorContract
     /**
      * The loader implementation.
      *
-     * @var \Illuminate\Translation\LoaderInterface
+     * @var LoaderInterface
      */
     protected $loader;
 
@@ -45,14 +45,14 @@ class Translator extends NamespacedItemResolver implements TranslatorContract
     /**
      * The message selector.
      *
-     * @var \Illuminate\Translation\MessageSelector
+     * @var MessageSelector
      */
     protected $selector;
 
     /**
      * Create a new translator instance.
      *
-     * @param  \Illuminate\Translation\LoaderInterface  $loader
+     * @param LoaderInterface $loader
      * @param  string  $locale
      * @return void
      */
@@ -175,7 +175,7 @@ class Translator extends NamespacedItemResolver implements TranslatorContract
      * Get a translation according to an integer value.
      *
      * @param  string  $key
-     * @param  int|array|\Countable  $number
+     * @param  int|array|Countable $number
      * @param  array   $replace
      * @param  string  $locale
      * @return string
@@ -189,7 +189,7 @@ class Translator extends NamespacedItemResolver implements TranslatorContract
      * Get a translation according to an integer value.
      *
      * @param  string  $key
-     * @param  int|array|\Countable  $number
+     * @param  int|array|Countable $number
      * @param  array   $replace
      * @param  string  $locale
      * @return string
@@ -382,7 +382,7 @@ class Translator extends NamespacedItemResolver implements TranslatorContract
     /**
      * Get the message selector instance.
      *
-     * @return \Illuminate\Translation\MessageSelector
+     * @return MessageSelector
      */
     public function getSelector()
     {
@@ -396,7 +396,7 @@ class Translator extends NamespacedItemResolver implements TranslatorContract
     /**
      * Set the message selector instance.
      *
-     * @param  \Illuminate\Translation\MessageSelector  $selector
+     * @param MessageSelector $selector
      * @return void
      */
     public function setSelector(MessageSelector $selector)
@@ -407,7 +407,7 @@ class Translator extends NamespacedItemResolver implements TranslatorContract
     /**
      * Get the language line loader implementation.
      *
-     * @return \Illuminate\Translation\LoaderInterface
+     * @return LoaderInterface
      */
     public function getLoader()
     {

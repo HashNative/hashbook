@@ -13,7 +13,7 @@ class StatusTest extends \PHPUnit\Framework\TestCase
 
     public function testError()
     {
-        throw new \Exception;
+        throw new Exception;
     }
 
     public function testIncomplete()

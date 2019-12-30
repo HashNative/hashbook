@@ -2,6 +2,8 @@
 
 namespace Spatie\UrlSigner\Exceptions;
 
-class InvalidExpiration extends \Exception
+use Exception;
+
+class InvalidExpiration extends Exception
 {
 }

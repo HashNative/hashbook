@@ -11,6 +11,7 @@
 
 namespace Monolog\Handler;
 
+use DateTime;
 use Monolog\Formatter\ElasticaFormatter;
 use Monolog\Formatter\NormalizerFormatter;
 use Monolog\TestCase;
@@ -18,6 +19,8 @@ use Monolog\Logger;
 use Elastica\Client;
 use Elastica\Request;
 use Elastica\Response;
+use RuntimeException;
+use stdClass;
 
 class ElasticSearchHandlerTest extends TestCase
 {
@@ -61,8 +64,8 @@ class ElasticSearchHandlerTest extends TestCase
             'level' => Logger::ERROR,
             'level_name' => 'ERROR',
             'channel' => 'meh',
-            'context' => array('foo' => 7, 'bar', 'class' => new \stdClass),
-            'datetime' => new \DateTime("@0"),
+            'context' => array('foo' => 7, 'bar', 'class' => new stdClass),
+            'datetime' => new DateTime("@0"),
             'extra' => array(),
             'message' => 'log',
         );
@@ -166,14 +169,14 @@ class ElasticSearchHandlerTest extends TestCase
             'level' => Logger::ERROR,
             'level_name' => 'ERROR',
             'channel' => 'meh',
-            'context' => array('foo' => 7, 'bar', 'class' => new \stdClass),
-            'datetime' => new \DateTime("@0"),
+            'context' => array('foo' => 7, 'bar', 'class' => new stdClass),
+            'datetime' => new DateTime("@0"),
             'extra' => array(),
             'message' => 'log',
         );
 
         $expected = $msg;
-        $expected['datetime'] = $msg['datetime']->format(\DateTime::ISO8601);
+        $expected['datetime'] = $msg['datetime']->format(DateTime::ISO8601);
         $expected['context'] = array(
             'class' => '[object] (stdClass: {})',
             'foo' => 7,
@@ -184,7 +187,7 @@ class ElasticSearchHandlerTest extends TestCase
         $handler = new ElasticSearchHandler($client, $this->options);
         try {
             $handler->handleBatch(array($msg));
-        } catch (\RuntimeException $e) {
+        } catch (RuntimeException $e) {
             $this->markTestSkipped("Cannot connect to Elastic Search server on localhost");
         }
 

@@ -11,6 +11,9 @@
 
 namespace Monolog\Handler;
 
+use BadMethodCallException;
+use InvalidArgumentException;
+
 /**
  * Used for testing purposes.
  *
@@ -122,7 +125,7 @@ class TestHandler extends AbstractProcessingHandler
     public function hasRecordThatPasses($predicate, $level)
     {
         if (!is_callable($predicate)) {
-            throw new \InvalidArgumentException("Expected a callable for hasRecordThatSucceeds");
+            throw new InvalidArgumentException("Expected a callable for hasRecordThatSucceeds");
         }
 
         if (!isset($this->recordsByLevel[$level])) {
@@ -159,6 +162,6 @@ class TestHandler extends AbstractProcessingHandler
             }
         }
 
-        throw new \BadMethodCallException('Call to undefined method ' . get_class($this) . '::' . $method . '()');
+        throw new BadMethodCallException('Call to undefined method ' . get_class($this) . '::' . $method . '()');
     }
 }

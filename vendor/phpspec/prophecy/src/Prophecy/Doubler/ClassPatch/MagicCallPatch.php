@@ -15,6 +15,7 @@ use Prophecy\Doubler\Generator\Node\ClassNode;
 use Prophecy\Doubler\Generator\Node\MethodNode;
 use Prophecy\PhpDocumentor\ClassAndInterfaceTagRetriever;
 use Prophecy\PhpDocumentor\MethodTagRetrieverInterface;
+use ReflectionClass;
 
 /**
  * Discover Magical API using "@method" PHPDoc format.
@@ -57,7 +58,7 @@ class MagicCallPatch implements ClassPatchInterface
         $types[] = $node->getParentClass();
 
         foreach ($types as $type) {
-            $reflectionClass = new \ReflectionClass($type);
+            $reflectionClass = new ReflectionClass($type);
 
             while ($reflectionClass) {
                 $tagList = $this->tagRetriever->getTagList($reflectionClass);

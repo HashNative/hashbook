@@ -10,6 +10,7 @@
 
 namespace SebastianBergmann\CodeCoverage\Report;
 
+use ReflectionMethod;
 use SebastianBergmann\CodeCoverage\TestCase;
 use SebastianBergmann\CodeCoverage\Node\Builder;
 
@@ -127,7 +128,7 @@ class BuilderTest extends TestCase
 
     public function testBuildDirectoryStructure()
     {
-        $method = new \ReflectionMethod(
+        $method = new ReflectionMethod(
             Builder::class,
             'buildDirectoryStructure'
         );
@@ -153,7 +154,7 @@ class BuilderTest extends TestCase
      */
     public function testReducePaths($reducedPaths, $commonPath, $paths)
     {
-        $method = new \ReflectionMethod(
+        $method = new ReflectionMethod(
             Builder::class,
             'reducePaths'
         );

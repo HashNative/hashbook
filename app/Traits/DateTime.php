@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use Date;
+use DateTimeZone;
 
 trait DateTime
 {
@@ -51,7 +52,7 @@ trait DateTime
         $use_zones = array('Africa', 'America', 'Antarctica', 'Arctic', 'Asia', 'Atlantic', 'Australia', 'Europe', 'Indian', 'Pacific');
 
         // Get the list of time zones from the server.
-        $zones = \DateTimeZone::listIdentifiers();
+        $zones = DateTimeZone::listIdentifiers();
 
         // Build the group lists.
         foreach ($zones as $zone) {

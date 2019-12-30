@@ -3,6 +3,7 @@
 namespace Illuminate\Validation;
 
 use Closure;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Str;
 use Illuminate\Database\ConnectionResolverInterface;
 
@@ -11,7 +12,7 @@ class DatabasePresenceVerifier implements PresenceVerifierInterface
     /**
      * The database connection instance.
      *
-     * @var \Illuminate\Database\ConnectionResolverInterface
+     * @var ConnectionResolverInterface
      */
     protected $db;
 
@@ -25,7 +26,7 @@ class DatabasePresenceVerifier implements PresenceVerifierInterface
     /**
      * Create a new database presence verifier.
      *
-     * @param  \Illuminate\Database\ConnectionResolverInterface  $db
+     * @param ConnectionResolverInterface $db
      * @return void
      */
     public function __construct(ConnectionResolverInterface $db)
@@ -74,9 +75,9 @@ class DatabasePresenceVerifier implements PresenceVerifierInterface
     /**
      * Add the given conditions to the query.
      *
-     * @param  \Illuminate\Database\Query\Builder  $query
+     * @param  Builder  $query
      * @param  array  $conditions
-     * @return \Illuminate\Database\Query\Builder
+     * @return Builder
      */
     protected function addConditions($query, $conditions)
     {
@@ -96,7 +97,7 @@ class DatabasePresenceVerifier implements PresenceVerifierInterface
     /**
      * Add a "where" clause to the given query.
      *
-     * @param  \Illuminate\Database\Query\Builder  $query
+     * @param  Builder  $query
      * @param  string  $key
      * @param  string  $extraValue
      * @return void
@@ -118,7 +119,7 @@ class DatabasePresenceVerifier implements PresenceVerifierInterface
      * Get a query builder for the given table.
      *
      * @param  string  $table
-     * @return \Illuminate\Database\Query\Builder
+     * @return Builder
      */
     protected function table($table)
     {

@@ -3,25 +3,27 @@
 namespace Dingo\Api\Routing;
 
 use Closure;
+use Dingo\Api\Http\RateLimit\Throttle\Throttle;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Container\Container;
 use Dingo\Api\Contract\Routing\Adapter;
+use Laravel\Lumen\Routing\Controller;
 
 class Route
 {
     /**
      * Routing adapter instance.
      *
-     * @var \Dingo\Api\Contract\Routing\Adapter
+     * @var Adapter
      */
     protected $adapter;
 
     /**
      * Container instance.
      *
-     * @var \Illuminate\Container\Container
+     * @var Container
      */
     protected $container;
 
@@ -128,9 +130,9 @@ class Route
     /**
      * Create a new route instance.
      *
-     * @param \Dingo\Api\Contract\Routing\Adapter $adapter
-     * @param \Illuminate\Container\Container     $container
-     * @param \Illuminate\Http\Request            $request
+     * @param Adapter $adapter
+     * @param Container $container
+     * @param Request $request
      * @param array|\Illuminate\Routing\Route     $route
      *
      * @return void
@@ -301,7 +303,7 @@ class Route
     /**
      * Get the routes controller instance.
      *
-     * @return null|\Illuminate\Routing\Controller|\Laravel\Lumen\Routing\Controller
+     * @return null|\Illuminate\Routing\Controller|Controller
      */
     public function getControllerInstance()
     {
@@ -311,7 +313,7 @@ class Route
     /**
      * Make a new controller instance through the container.
      *
-     * @return \Illuminate\Routing\Controller|\Laravel\Lumen\Routing\Controller
+     * @return \Illuminate\Routing\Controller|Controller
      */
     protected function makeControllerInstance()
     {
@@ -373,7 +375,7 @@ class Route
     /**
      * Get the route throttle.
      *
-     * @return string|\Dingo\Api\Http\RateLimit\Throttle\Throttle
+     * @return string|Throttle
      */
     public function throttle()
     {
@@ -383,7 +385,7 @@ class Route
     /**
      * Get the route throttle.
      *
-     * @return string|\Dingo\Api\Http\RateLimit\Throttle\Throttle
+     * @return string|Throttle
      */
     public function getThrottle()
     {

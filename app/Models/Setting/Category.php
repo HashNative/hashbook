@@ -3,6 +3,7 @@
 namespace App\Models\Setting;
 
 use App\Models\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Category extends Model
 {
@@ -50,9 +51,9 @@ class Category extends Model
     /**
      * Scope to only include categories of a given type.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param Builder $query
      * @param mixed $type
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public function scopeType($query, $type)
     {
@@ -62,8 +63,8 @@ class Category extends Model
     /**
      * Scope transfer category.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @param Builder $query
+     * @return Builder
      */
     public function scopeTransfer($query)
     {

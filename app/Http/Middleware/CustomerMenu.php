@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Events\CustomerMenuCreated;
 use Auth;
 use Closure;
+use Illuminate\Http\Request;
 use Menu;
 
 class CustomerMenu
@@ -12,8 +13,8 @@ class CustomerMenu
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param  Request  $request
+     * @param Closure $next
      * @return mixed
      */
     public function handle($request, Closure $next)
