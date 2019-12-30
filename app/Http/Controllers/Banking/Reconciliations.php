@@ -70,7 +70,7 @@ class Reconciliations extends Controller
     public function store(Request $request)
     {
         $reconcile = $request->get('reconcile');
-        $transactions = $request->get('transactions');
+        $transactions = $request->get('');
 
         Reconciliation::create([
             'company_id' => session('company_id'),
