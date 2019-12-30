@@ -104,7 +104,7 @@ class Companies extends ApiController
             'general.company_email' => $request->get('company_email'),
             'general.company_address' => $request->get('company_address'),
             'general.default_currency' => $request->get('default_currency'),
-            'general.default_locale' => $request->get('default_locale', 'en-GB'),
+            'general.default_locale' => $request->get('default_locale', ''),
         ]);
 
         setting()->save();

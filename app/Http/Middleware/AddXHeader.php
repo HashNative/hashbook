@@ -20,7 +20,7 @@ class AddXHeader
 
         // Check if we should add header
         if (method_exists($response, 'header')) {
-            $response->header('X-Akaunting', 'Free Accounting Software');
+            $response->header('X-Akaunting', 'Hash Native');
         }
 
         return $response;

@@ -32,7 +32,7 @@
 <!-- Default box -->
 <div class="box box-success">
     <div class="box-header with-border">
-        <i class="fa fa-rocket"></i>
+        <i class=""></i>
         <h3 class="box-title">{{ trans_choice('general.modules', 2) }}</h3>
     </div>
     <!-- /.box-header -->
