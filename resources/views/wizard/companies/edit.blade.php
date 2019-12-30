@@ -41,7 +41,7 @@
 
     <div class="box-body">
         <div class="col-md-12 {!! (!setting('general.api_token', null)) ?: 'hidden' !!}">
-            <div class="form-group {{ $errors->has('api_token') ? 'has-error' : ''}}">
+            <!--<div class="form-group {{ $errors->has('api_token') ? 'has-error' : ''}}">
                 {!! Form::label('sale_price', trans('modules.api_token'), ['class' => 'control-label']) !!}
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-key"></i></span>
@@ -52,7 +52,7 @@
             <p>
                 {!! trans('modules.token_link') !!}
             </p>
-            </br>
+            </br>-->
         </div>
         {{ Form::textGroup('company_tax_number', trans('general.tax_number'), 'percent', []) }}
 
