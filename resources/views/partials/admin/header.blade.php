@@ -5,14 +5,14 @@
     <a href="{{ url('/') }}" class="logo">
         @if (setting('general.admin_theme', 'skin-green-light') == 'skin-green-light')
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><img src="{{ asset('public/img/hashnative-2.png') }}" class="logo-image-mini" width="25" alt="Akaunting Logo"></span>
+            <span class="logo-mini"><img src="{{ asset('public/img/hashnative-3.png') }}" class="logo-image-mini" width="35" alt="Hashbook Logo"></span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><img src="{{ asset('public/img/hashnative-2.png') }}" class="logo-image-lg" width="25" alt="Akaunting Logo"> <b>book</b></span>
+            <span class="logo-lg"><img src="{{ asset('public/img/hashnative-3.png') }}" class="logo-image-lg" width="35" alt="Hashbook Logo"> <b>book</b></span>
         @else
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><img src="{{ asset('public/img/hashnative-2.png') }}" class="logo-image-mini" width="25" alt="Akaunting Logo"></span>
+            <span class="logo-mini"><img src="{{ asset('public/img/hashnative-3.png') }}" class="logo-image-mini" width="35" alt="Hashbook Logo"></span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><img src="{{ asset('public/img/hashnative-2.png') }}" class="logo-image-lg" width="25" alt="Akaunting Logo"> <b>book</b></span>
+            <span class="logo-lg"><img src="{{ asset('public/img/hashnative-3.png') }}" class="logo-image-lg" width="35" alt="Hashbook Logo"> <b>book</b></span>
         @endif
     </a>
     <!-- Header Navbar: style can be found in header.less -->

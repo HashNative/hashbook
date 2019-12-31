@@ -8,7 +8,7 @@
             @stack('login_box_start')
 
             <div class="login-logo">
-                <img src="{{ asset('public/img/hashnative-2.png') }}" alt="Akaunting" />
+                <img src="{{ asset('public/img/hashnative-3.png') }}" alt="Akaunting" />
             </div>
             <!-- /.login-logo -->
 
@@ -25,9 +25,9 @@
             </div>
             <!-- /.login-box-body -->
 
-            <div class="login-box-footer">
+           <!-- <div class="login-box-footer">
                 {{ trans('footer.powered') }}: <a href="{{ trans('footer.link') }}" target="_blank">{{ trans('footer.software') }}</a>
-            </div>
+            </div> -->
             <!-- /.login-box-footer -->
 
             @stack('login_box_end')
