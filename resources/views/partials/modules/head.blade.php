@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="{{ asset('public/css/akaunting-green.css?v=' . version('short')) }}">
     <link rel="stylesheet" href="{{ asset('public/css/modules.css?v=' . version('short')) }}">
     
-    <link rel="shortcut icon" href="{{ asset('public/img/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('public/img/Logo Final PNG.png') }}">
     
     @stack('css')
 
