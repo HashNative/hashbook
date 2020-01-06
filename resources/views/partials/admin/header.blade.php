@@ -158,14 +158,14 @@
                 </li>
                 @permission('read-install-updates')
                 <!-- Updates: style can be found in dropdown.less -->
-                <li>
+                <!-- <li>
                     <a href="{{ url('install/updates') }}" data-toggle="tooltip" data-placement="bottom" title="{{ $updates }} Updates Available">
                         <i class="fa fa-refresh"></i>
                         @if ($updates)
                         <span class="label label-danger">{{ $updates }}</span>
                         @endif
                     </a>
-                </li>
+                </li> -->
                 @endpermission
                 <!-- Updates: style can be found in dropdown.less -->
                 <li class="hidden-xs">

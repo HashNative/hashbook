@@ -12,6 +12,6 @@ return [
         'items_reminder'    => '{1} You have :count item left|[2,*] You have :count items left',
         'view_all'          => 'View All'
     ],
-    'docs_link'             => 'https://akaunting.com/docs',
+    'docs_link'             => 'https://hashnative.com',
 
 ];

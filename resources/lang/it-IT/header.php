@@ -11,6 +11,6 @@ return [
         'items_stock'       => '{1} :count articolo esaurito|[2, *] :count articoli esauriti',
         'view_all'          => 'Visualizza tutti'
     ],
-    'docs_link'             => 'https://akaunting.com/docs',
+    'docs_link'             => 'https://hashnative.com',
 
 ];
