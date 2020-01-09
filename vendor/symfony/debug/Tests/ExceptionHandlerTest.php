@@ -39,7 +39,7 @@ class ExceptionHandlerTest extends TestCase
         $handler->sendPhpResponse(new \RuntimeException('Foo'));
         $response = ob_get_clean();
 
-        $this->assertContains('Whoops, looks like something went wrong.', $response);
+        $this->assertContains('Please Check Your Database Connection.', $response);
         $this->assertNotContains('<div class="trace trace-as-html">', $response);
 
         $handler = new ExceptionHandler(true);
@@ -48,7 +48,7 @@ class ExceptionHandlerTest extends TestCase
         $handler->sendPhpResponse(new \RuntimeException('Foo'));
         $response = ob_get_clean();
 
-        $this->assertContains('Whoops, looks like something went wrong.', $response);
+        $this->assertContains('Please Check Your Database Connection.', $response);
         $this->assertContains('<div class="trace trace-as-html">', $response);
     }
 
