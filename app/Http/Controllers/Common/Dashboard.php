@@ -8,6 +8,7 @@ use App\Models\Expense\Bill;
 use App\Models\Expense\BillPayment;
 use App\Models\Expense\Payment;
 use App\Models\Income\Invoice;
+use App\Models\Common\Item;
 use App\Models\Income\InvoicePayment;
 use App\Models\Income\Revenue;
 use App\Models\Setting\Category;
@@ -15,6 +16,7 @@ use App\Traits\Currencies;
 use App\Traits\DateTime;
 use Charts;
 use Date;
+use DB;
 
 class Dashboard extends Controller
 {
@@ -29,8 +31,12 @@ class Dashboard extends Controller
 
     public $expense_donut = ['colors' => [], 'labels' => [], 'values' => []];
 
+    //public $item_donut = ['colors' => ['black','green'], 'labels' => ['books','pen'], 'values' => [5,4]];
+    public $item_donut = ['colors' => [], 'labels' => [], 'values' => []];
+
+
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource. 
      *
      * @return Response
      */
@@ -42,8 +48,8 @@ class Dashboard extends Controller
         list($total_incomes, $total_expenses, $total_profit) = $this->getTotals();
 
         $cashflow = $this->getCashFlow();
-
-        list($donut_incomes, $donut_expenses) = $this->getDonuts();
+        $donut_items = $this->getItemDonut();
+        list($donut_incomes,$donut_expenses) = $this->getDonuts();
 
         $accounts = Account::enabled()->take(6)->get();
 
@@ -61,7 +67,8 @@ class Dashboard extends Controller
             'accounts',
             'latest_incomes',
             'latest_expenses',
-            'financial_start'
+            'financial_start',
+            'donut_items'
         ));
     }
 
@@ -186,7 +193,9 @@ class Dashboard extends Controller
 
     private function getDonuts()
     {
-        // Show donut prorated if there is no income
+        
+
+             // Show donut prorated if there is no income
         if (array_sum($this->income_donut['values']) == 0) {
             foreach ($this->income_donut['values'] as $key => $value) {
                 $this->income_donut['values'][$key] = 1;
@@ -232,7 +241,35 @@ class Dashboard extends Controller
             ->credits(false)
             ->view('vendor.consoletvs.charts.chartjs.donut');
 
+
         return array($donut_incomes, $donut_expenses);
+    }
+    private function getItemDonut()
+    {
+        
+            // Show donut prorated if there is no income
+            if (array_sum($this->item_donut['values']) == 0) {
+                foreach ($this->item_donut['values'] as $key => $value) {
+                    $this->item_donut['values'][$key] = 1;
+                }
+            }
+    
+            // Get 6 categories by amount
+            $colors = $labels = [];
+            $values = collect($this->item_donut['values'])->sort()->reverse()->take(6)->all();
+            foreach ($values as $id => $val) {
+                $colors[$id] = $this->item_donut['colors'][$id];
+                $labels[$id] = $this->item_donut['labels'][$id];
+            }
+    
+            $donut_items = Charts::create('donut', 'chartjs')
+                ->colors($colors)
+                ->labels($labels)
+                ->values($values)
+                ->dimensions(0, 160)
+                ->credits(false)
+                ->view('vendor.consoletvs.charts.chartjs.donut');
+                return $donut_items;
     }
 
     private function getLatestIncomes()
@@ -260,15 +297,15 @@ class Dashboard extends Controller
 
         return $latest;
     }
-
+ 
     private function calculateAmounts()
     {
         $incomes_amount = $open_invoice = $overdue_invoice = 0;
         $expenses_amount = $open_bill = $overdue_bill = 0;
 
         // Get categories
-        $categories = Category::with(['bills', 'invoices', 'payments', 'revenues'])->orWhere('type', 'income')->orWhere('type', 'expense')->enabled()->get();
-
+        $categories = Category::with(['bills', 'invoices', 'payments', 'revenues'])->orWhere('type', 'income')->orWhere('type', 'expense')->orWhere('type', 'item')->enabled()->get();
+      
         foreach ($categories as $category) {
             switch ($category->type) {
                 case 'income':
@@ -321,12 +358,24 @@ class Dashboard extends Controller
                     $this->addToExpenseDonut($category->color, $amount, $category->name);
 
                     break;
+                    case 'item':
+                    
+
+                        $quantity = DB::table('items')
+                        ->where('name',$category->name)         
+                        ->sum('quantity');
+                        
+                        $this->addToItemDonut($category->color, $quantity, $category->name);
+    
+                        break;
+                    
+              
             }
         }
 
         return array($incomes_amount, $open_invoice, $overdue_invoice, $expenses_amount, $open_bill, $overdue_bill);
     }
-
+  
     private function calculateCashFlowTotals($type, $start, $end, $period)
     {
         $totals = array();
@@ -455,5 +504,12 @@ class Dashboard extends Controller
         $this->expense_donut['colors'][] = $color;
         $this->expense_donut['labels'][] = money($amount, setting('general.default_currency'), true)->format() . ' - ' . $text;
         $this->expense_donut['values'][] = (int) $amount;
+    }
+    private function addToItemDonut($color, $quantity, $text)
+    {
+       
+        $this->item_donut['colors'][] = $color;
+        $this->item_donut['labels'][] = $quantity . ' - ' . $text;
+        $this->item_donut['values'][] = (int) $quantity;
     }
 }
