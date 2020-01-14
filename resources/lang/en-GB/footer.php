@@ -3,7 +3,7 @@
 return [
 
     'version'               => 'Version',
-    'powered'               => 'Powered By Akaunting',
+    'powered'               => 'Powered By',
     'link'                  => 'https://hashnative.com/',
     'software'              => 'Hash Native',
 

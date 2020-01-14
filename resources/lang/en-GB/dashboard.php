@@ -20,5 +20,6 @@ return [
     'account_balance'           => 'Account Balance',
     'latest_incomes'            => 'Latest Incomes',
     'latest_expenses'           => 'Latest Expenses',
+    'Stock'                     => 'Stock'
 
 ];
