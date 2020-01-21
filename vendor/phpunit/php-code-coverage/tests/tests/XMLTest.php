@@ -10,7 +10,9 @@
 
 namespace SebastianBergmann\CodeCoverage\Report\Xml;
 
+use FilesystemIterator;
 use SebastianBergmann\CodeCoverage\TestCase;
+use SplFileInfo;
 
 class XMLTest extends TestCase
 {
@@ -27,10 +29,10 @@ class XMLTest extends TestCase
     {
         parent::tearDown();
 
-        $tmpFilesIterator = new \FilesystemIterator(self::$TEST_TMP_PATH);
+        $tmpFilesIterator = new FilesystemIterator(self::$TEST_TMP_PATH);
 
         foreach ($tmpFilesIterator as $path => $fileInfo) {
-            /* @var \SplFileInfo $fileInfo */
+            /* @var SplFileInfo $fileInfo */
             unlink($fileInfo->getPathname());
         }
     }
@@ -72,8 +74,8 @@ class XMLTest extends TestCase
      */
     private function assertFilesEquals($expectedFilesPath, $actualFilesPath)
     {
-        $expectedFilesIterator = new \FilesystemIterator($expectedFilesPath);
-        $actualFilesIterator   = new \FilesystemIterator($actualFilesPath);
+        $expectedFilesIterator = new FilesystemIterator($expectedFilesPath);
+        $actualFilesIterator   = new FilesystemIterator($actualFilesPath);
 
         $this->assertEquals(
             iterator_count($expectedFilesIterator),
@@ -82,7 +84,7 @@ class XMLTest extends TestCase
         );
 
         foreach ($expectedFilesIterator as $path => $fileInfo) {
-            /* @var \SplFileInfo $fileInfo */
+            /* @var SplFileInfo $fileInfo */
             $filename = $fileInfo->getFilename();
 
             $actualFile = $actualFilesPath . DIRECTORY_SEPARATOR . $filename;

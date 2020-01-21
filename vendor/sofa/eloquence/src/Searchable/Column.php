@@ -6,7 +6,7 @@ use Illuminate\Database\Grammar;
 
 class Column
 {
-    /** @var \Illuminate\Database\Grammar */
+    /** @var Grammar */
     protected $grammar;
 
     /** @var string */

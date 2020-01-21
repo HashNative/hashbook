@@ -2,7 +2,38 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\AddXHeader;
+use App\Http\Middleware\AdminMenu;
+use App\Http\Middleware\ApiCompany;
+use App\Http\Middleware\CanInstall;
+use App\Http\Middleware\CustomerMenu;
+use App\Http\Middleware\DateFormat;
+use App\Http\Middleware\EncryptCookies;
+use App\Http\Middleware\LoadCurrencies;
+use App\Http\Middleware\LoadSettings;
+use App\Http\Middleware\Money;
+use App\Http\Middleware\RedirectIfAuthenticated;
+use App\Http\Middleware\RedirectIfNotInstalled;
+use App\Http\Middleware\RedirectIfWizardCompleted;
+use App\Http\Middleware\SignedUrlCompany;
+use App\Http\Middleware\TrimStrings;
+use App\Http\Middleware\VerifyCsrfToken;
+use Fideloper\Proxy\TrustProxies;
+use Illuminate\Auth\Middleware\Authenticate;
+use Illuminate\Auth\Middleware\AuthenticateWithBasicAuth;
+use Illuminate\Auth\Middleware\Authorize;
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode;
+use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
+use Illuminate\Foundation\Http\Middleware\ValidatePostSize;
+use Illuminate\Routing\Middleware\SubstituteBindings;
+use Illuminate\Routing\Middleware\ThrottleRequests;
+use Illuminate\Session\Middleware\StartSession;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Laratrust\Middleware\LaratrustAbility;
+use Laratrust\Middleware\LaratrustPermission;
+use Laratrust\Middleware\LaratrustRole;
 
 class Kernel extends HttpKernel
 {
@@ -14,11 +45,11 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
-        \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
-        \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
-        \App\Http\Middleware\TrimStrings::class,
-        \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        \Fideloper\Proxy\TrustProxies::class,
+        CheckForMaintenanceMode::class,
+        ValidatePostSize::class,
+        TrimStrings::class,
+        ConvertEmptyStringsToNull::class,
+        TrustProxies::class,
     ];
 
     /**
@@ -28,18 +59,18 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
-            \App\Http\Middleware\EncryptCookies::class,
-            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-            \Illuminate\Session\Middleware\StartSession::class,
+            EncryptCookies::class,
+            AddQueuedCookiesToResponse::class,
+            StartSession::class,
             // \Illuminate\Session\Middleware\AuthenticateSession::class,
-            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \App\Http\Middleware\VerifyCsrfToken::class,
-            \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            \App\Http\Middleware\RedirectIfNotInstalled::class,
-            \App\Http\Middleware\AddXHeader::class,
+            ShareErrorsFromSession::class,
+            VerifyCsrfToken::class,
+            SubstituteBindings::class,
+            RedirectIfNotInstalled::class,
+            AddXHeader::class,
             'company.settings',
             'company.currencies',
-            \App\Http\Middleware\RedirectIfWizardCompleted::class,
+            RedirectIfWizardCompleted::class,
         ],
 
         'wizard' => [
@@ -76,15 +107,15 @@ class Kernel extends HttpKernel
         ],
 
         'signed' => [
-            \App\Http\Middleware\EncryptCookies::class,
-            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-            \Illuminate\Session\Middleware\StartSession::class,
-            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \App\Http\Middleware\VerifyCsrfToken::class,
+            EncryptCookies::class,
+            AddQueuedCookiesToResponse::class,
+            StartSession::class,
+            ShareErrorsFromSession::class,
+            VerifyCsrfToken::class,
             'signed-url',
             'signed-url.company',
-            \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            \App\Http\Middleware\AddXHeader::class,
+            SubstituteBindings::class,
+            AddXHeader::class,
             'company.settings',
             'company.currencies',
         ]
@@ -98,23 +129,23 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
-        'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
-        'can' => \Illuminate\Auth\Middleware\Authorize::class,
-        'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
-        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'adminmenu' => \App\Http\Middleware\AdminMenu::class,
-        'customermenu' => \App\Http\Middleware\CustomerMenu::class,
-        'role' => \Laratrust\Middleware\LaratrustRole::class,
-        'permission' => \Laratrust\Middleware\LaratrustPermission::class,
-        'ability' => \Laratrust\Middleware\LaratrustAbility::class,
-        'api.company' => \App\Http\Middleware\ApiCompany::class,
-        'install' => \App\Http\Middleware\CanInstall::class,
-        'company.settings' => \App\Http\Middleware\LoadSettings::class,
-        'company.currencies' => \App\Http\Middleware\LoadCurrencies::class,
-        'dateformat' => \App\Http\Middleware\DateFormat::class,
-        'money' => \App\Http\Middleware\Money::class,
-        'signed-url.company' => \App\Http\Middleware\SignedUrlCompany::class,
+        'auth' => Authenticate::class,
+        'auth.basic' => AuthenticateWithBasicAuth::class,
+        'bindings' => SubstituteBindings::class,
+        'can' => Authorize::class,
+        'guest' => RedirectIfAuthenticated::class,
+        'throttle' => ThrottleRequests::class,
+        'adminmenu' => AdminMenu::class,
+        'customermenu' => CustomerMenu::class,
+        'role' => LaratrustRole::class,
+        'permission' => LaratrustPermission::class,
+        'ability' => LaratrustAbility::class,
+        'api.company' => ApiCompany::class,
+        'install' => CanInstall::class,
+        'company.settings' => LoadSettings::class,
+        'company.currencies' => LoadCurrencies::class,
+        'dateformat' => DateFormat::class,
+        'money' => Money::class,
+        'signed-url.company' => SignedUrlCompany::class,
     ];
 }

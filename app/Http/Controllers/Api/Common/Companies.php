@@ -6,6 +6,7 @@ use App\Http\Controllers\ApiController;
 use App\Http\Requests\Common\Company as Request;
 use App\Models\Common\Company;
 use App\Transformers\Common\Company as Transformer;
+use Dingo\Api\Http\Response;
 use Dingo\Api\Routing\Helpers;
 
 class Companies extends ApiController
@@ -15,7 +16,7 @@ class Companies extends ApiController
     /**
      * Display a listing of the resource.
      *
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -32,7 +33,7 @@ class Companies extends ApiController
      * Display the specified resource.
      *
      * @param  Company  $company
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function show(Company $company)
     {
@@ -51,7 +52,7 @@ class Companies extends ApiController
      * Store a newly created resource in storage.
      *
      * @param  $request
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -80,7 +81,7 @@ class Companies extends ApiController
      *
      * @param  $company
      * @param  $request
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function update(Company $company, Request $request)
     {
@@ -115,7 +116,7 @@ class Companies extends ApiController
      * Remove the specified resource from storage.
      *
      * @param  Company  $company
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function destroy(Company $company)
     {

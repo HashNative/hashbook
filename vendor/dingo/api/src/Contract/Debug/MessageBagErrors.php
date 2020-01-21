@@ -2,12 +2,14 @@
 
 namespace Dingo\Api\Contract\Debug;
 
+use Illuminate\Support\MessageBag;
+
 interface MessageBagErrors
 {
     /**
      * Get the errors message bag.
      *
-     * @return \Illuminate\Support\MessageBag
+     * @return MessageBag
      */
     public function getErrors();
 

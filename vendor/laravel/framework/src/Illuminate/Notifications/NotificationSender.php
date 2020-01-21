@@ -2,6 +2,7 @@
 
 namespace Illuminate\Notifications;
 
+use Illuminate\Contracts\Events\Dispatcher;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +14,7 @@ class NotificationSender
     /**
      * The notification manager instance.
      *
-     * @var \Illuminate\Notifications\ChannelManager
+     * @var ChannelManager
      */
     protected $manager;
 
@@ -27,16 +28,16 @@ class NotificationSender
     /**
      * The event dispatcher.
      *
-     * @var \Illuminate\Contracts\Events\Dispatcher
+     * @var Dispatcher
      */
     protected $events;
 
     /**
      * Create a new notification sender instance.
      *
-     * @param  \Illuminate\Notifications\ChannelManager  $manager
+     * @param ChannelManager $manager
      * @param  \Illuminate\Contracts\Bus\Dispatcher  $bus
-     * @param  \Illuminate\Contracts\Events\Dispatcher  $events
+     * @param  Dispatcher  $events
      * @return void
      */
     public function __construct($manager, $bus, $events)
@@ -49,7 +50,7 @@ class NotificationSender
     /**
      * Send the given notification to the given notifiable entities.
      *
-     * @param  \Illuminate\Support\Collection|array|mixed  $notifiables
+     * @param Collection|array|mixed  $notifiables
      * @param  mixed  $notification
      * @return void
      */
@@ -67,7 +68,7 @@ class NotificationSender
     /**
      * Send the given notification immediately.
      *
-     * @param  \Illuminate\Support\Collection|array|mixed  $notifiables
+     * @param Collection|array|mixed  $notifiables
      * @param  mixed  $notification
      * @param  array  $channels
      * @return void

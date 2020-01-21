@@ -12,13 +12,14 @@ use Illuminate\Support\Collection as IlluminateCollection;
 use League\Fractal\Resource\Collection as FractalCollection;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Contracts\Pagination\Paginator as IlluminatePaginator;
+use League\Fractal\TransformerAbstract;
 
 class Fractal implements Adapter
 {
     /**
      * Fractal manager instance.
      *
-     * @var \League\Fractal\Manager
+     * @var FractalManager
      */
     protected $fractal;
 
@@ -46,7 +47,7 @@ class Fractal implements Adapter
     /**
      * Create a new fractal transformer instance.
      *
-     * @param \League\Fractal\Manager $fractal
+     * @param FractalManager $fractal
      * @param string                  $includeKey
      * @param string                  $includeSeparator
      * @param bool                    $eagerLoading
@@ -66,8 +67,8 @@ class Fractal implements Adapter
      *
      * @param mixed                          $response
      * @param object                         $transformer
-     * @param \Dingo\Api\Transformer\Binding $binding
-     * @param \Dingo\Api\Http\Request        $request
+     * @param Binding $binding
+     * @param Request $request
      *
      * @return array
      */
@@ -123,9 +124,9 @@ class Fractal implements Adapter
     /**
      * Create the Fractal paginator adapter.
      *
-     * @param \Illuminate\Contracts\Pagination\Paginator $paginator
+     * @param IlluminatePaginator $paginator
      *
-     * @return \League\Fractal\Pagination\IlluminatePaginatorAdapter
+     * @return IlluminatePaginatorAdapter
      */
     protected function createPaginatorAdapter(IlluminatePaginator $paginator)
     {
@@ -136,10 +137,10 @@ class Fractal implements Adapter
      * Create a Fractal resource instance.
      *
      * @param mixed                               $response
-     * @param \League\Fractal\TransformerAbstract $transformer
+     * @param TransformerAbstract $transformer
      * @param array                               $parameters
      *
-     * @return \League\Fractal\Resource\Item|\League\Fractal\Resource\Collection
+     * @return FractalItem|FractalCollection
      */
     protected function createResource($response, $transformer, array $parameters)
     {
@@ -155,7 +156,7 @@ class Fractal implements Adapter
     /**
      * Parse the includes.
      *
-     * @param \Dingo\Api\Http\Request $request
+     * @param Request $request
      *
      * @return void
      */
@@ -173,7 +174,7 @@ class Fractal implements Adapter
     /**
      * Get the underlying Fractal instance.
      *
-     * @return \League\Fractal\Manager
+     * @return FractalManager
      */
     public function getFractal()
     {
@@ -183,7 +184,7 @@ class Fractal implements Adapter
     /**
      * Get includes as their array keys for eager loading.
      *
-     * @param \League\Fractal\TransformerAbstract $transformer
+     * @param TransformerAbstract $transformer
      * @param string|array                        $requestedIncludes
      *
      * @return array
@@ -204,7 +205,7 @@ class Fractal implements Adapter
     /**
      * Disable eager loading.
      *
-     * @return \Dingo\Api\Transformer\Adapter\Fractal
+     * @return Fractal
      */
     public function disableEagerLoading()
     {
@@ -216,7 +217,7 @@ class Fractal implements Adapter
     /**
      * Enable eager loading.
      *
-     * @return \Dingo\Api\Transformer\Adapter\Fractal
+     * @return Fractal
      */
     public function enableEagerLoading()
     {

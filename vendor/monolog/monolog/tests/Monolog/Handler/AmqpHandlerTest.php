@@ -15,6 +15,7 @@ use Monolog\TestCase;
 use Monolog\Logger;
 use PhpAmqpLib\Message\AMQPMessage;
 use PhpAmqpLib\Connection\AMQPConnection;
+use stdClass;
 
 /**
  * @covers Monolog\Handler\RotatingFileHandler
@@ -47,7 +48,7 @@ class AmqpHandlerTest extends TestCase
 
         $handler = new AmqpHandler($exchange, 'log');
 
-        $record = $this->getRecord(Logger::WARNING, 'test', array('data' => new \stdClass, 'foo' => 34));
+        $record = $this->getRecord(Logger::WARNING, 'test', array('data' => new stdClass, 'foo' => 34));
 
         $expected = array(
             array(
@@ -96,7 +97,7 @@ class AmqpHandlerTest extends TestCase
 
         $handler = new AmqpHandler($exchange, 'log');
 
-        $record = $this->getRecord(Logger::WARNING, 'test', array('data' => new \stdClass, 'foo' => 34));
+        $record = $this->getRecord(Logger::WARNING, 'test', array('data' => new stdClass, 'foo' => 34));
 
         $expected = array(
             array(

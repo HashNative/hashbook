@@ -3,6 +3,7 @@
 namespace App\Transformers\Auth;
 
 use App\Models\Auth\Role as Model;
+use League\Fractal\Resource\Collection;
 use League\Fractal\TransformerAbstract;
 
 class Role extends TransformerAbstract
@@ -29,7 +30,7 @@ class Role extends TransformerAbstract
 
     /**
      * @param Model $model
-     * @return \League\Fractal\Resource\Collection
+     * @return Collection
      */
     public function includePermissions(Model $model)
     {

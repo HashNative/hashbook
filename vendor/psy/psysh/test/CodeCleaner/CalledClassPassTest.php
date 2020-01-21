@@ -12,6 +12,7 @@
 namespace Psy\Test\CodeCleaner;
 
 use Psy\CodeCleaner\CalledClassPass;
+use Psy\Exception\ErrorException;
 
 class CalledClassPassTest extends CodeCleanerTestCase
 {
@@ -22,7 +23,7 @@ class CalledClassPassTest extends CodeCleanerTestCase
 
     /**
      * @dataProvider invalidStatements
-     * @expectedException \Psy\Exception\ErrorException
+     * @expectedException ErrorException
      */
     public function testProcessStatementFails($code)
     {

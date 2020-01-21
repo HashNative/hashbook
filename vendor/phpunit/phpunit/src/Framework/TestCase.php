@@ -8,6 +8,7 @@
  * file that was distributed with this source code.
  */
 
+use Prophecy\Prophecy\ObjectProphecy;
 use SebastianBergmann\GlobalState\Snapshot;
 use SebastianBergmann\GlobalState\Restorer;
 use SebastianBergmann\GlobalState\Blacklist;
@@ -581,7 +582,7 @@ abstract class PHPUnit_Framework_TestCase extends PHPUnit_Framework_Assert imple
     public function expectExceptionCode($code)
     {
         if (!$this->expectedException) {
-            $this->expectedException = \Exception::class;
+            $this->expectedException = Exception::class;
         }
 
         if (!is_int($code) && !is_string($code)) {
@@ -599,7 +600,7 @@ abstract class PHPUnit_Framework_TestCase extends PHPUnit_Framework_Assert imple
     public function expectExceptionMessage($message)
     {
         if (!$this->expectedException) {
-            $this->expectedException = \Exception::class;
+            $this->expectedException = Exception::class;
         }
 
         if (!is_string($message)) {
@@ -1752,9 +1753,9 @@ abstract class PHPUnit_Framework_TestCase extends PHPUnit_Framework_Assert imple
     /**
      * @param string|null $classOrInterface
      *
-     * @return \Prophecy\Prophecy\ObjectProphecy
+     * @return ObjectProphecy
      *
-     * @throws \LogicException
+     * @throws LogicException
      */
     protected function prophesize($classOrInterface = null)
     {

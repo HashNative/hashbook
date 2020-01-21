@@ -3,8 +3,10 @@
 namespace Kyslik\ColumnSortable;
 
 use BadMethodCallException;
+use Exception;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Schema;
@@ -17,11 +19,11 @@ trait Sortable
 {
 
     /**
-     * @param \Illuminate\Database\Query\Builder $query
+     * @param Builder $query
      * @param array|null                         $defaultSortParameters
      *
-     * @return \Illuminate\Database\Query\Builder
-     * @throws \Kyslik\ColumnSortable\Exceptions\ColumnSortableException
+     * @return Builder
+     * @throws ColumnSortableException
      */
     public function scopeSortable($query, $defaultSortParameters = null)
     {
@@ -41,10 +43,10 @@ trait Sortable
     }
 
     /**
-     * @param \Illuminate\Database\Query\Builder $query
+     * @param Builder $query
      * @param array                              $sortParameters
      *
-     * @return \Illuminate\Database\Query\Builder
+     * @return Builder
      *
      * @throws ColumnSortableException
      */
@@ -64,7 +66,7 @@ trait Sortable
                 $query    = $this->queryJoinBuilder($query, $relation);
             } catch (BadMethodCallException $e) {
                 throw new ColumnSortableException($relationName, 1, $e);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 throw new ColumnSortableException($relationName, 2, $e);
             }
             $model = $relation->getRelated();
@@ -98,12 +100,12 @@ trait Sortable
         return [$column, $direction];
     }
     /**
-     * @param \Illuminate\Database\Query\Builder $query
+     * @param Builder $query
      * @param                                    $relation
      *
-     * @return \Illuminate\Database\Query\Builder
+     * @return Builder
      *
-     * @throws \Exception
+     * @throws Exception
      */
     private function queryJoinBuilder($query, $relation)
     {
@@ -123,7 +125,7 @@ trait Sortable
             $parentPrimaryKey  = $relation->getQualifiedForeignKey();
             return $this->formJoin($query, $parentTable, $relatedTable, $parentPrimaryKey, $relatedPrimaryKey);
         } else {
-            throw new \Exception();
+            throw new Exception();
         }
     }
     /**

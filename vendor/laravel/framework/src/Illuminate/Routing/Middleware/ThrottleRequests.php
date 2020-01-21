@@ -5,6 +5,7 @@ namespace Illuminate\Routing\Middleware;
 use Closure;
 use Carbon\Carbon;
 use Illuminate\Cache\RateLimiter;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class ThrottleRequests
@@ -12,14 +13,14 @@ class ThrottleRequests
     /**
      * The rate limiter instance.
      *
-     * @var \Illuminate\Cache\RateLimiter
+     * @var RateLimiter
      */
     protected $limiter;
 
     /**
      * Create a new request throttler.
      *
-     * @param  \Illuminate\Cache\RateLimiter  $limiter
+     * @param RateLimiter $limiter
      * @return void
      */
     public function __construct(RateLimiter $limiter)
@@ -30,8 +31,8 @@ class ThrottleRequests
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param  Request  $request
+     * @param Closure $next
      * @param  int  $maxAttempts
      * @param  float|int  $decayMinutes
      * @return mixed
@@ -57,7 +58,7 @@ class ThrottleRequests
     /**
      * Resolve request signature.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @return string
      */
     protected function resolveRequestSignature($request)
@@ -70,7 +71,7 @@ class ThrottleRequests
      *
      * @param  string  $key
      * @param  int  $maxAttempts
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     protected function buildResponse($key, $maxAttempts)
     {
@@ -88,11 +89,11 @@ class ThrottleRequests
     /**
      * Add the limit header information to the given response.
      *
-     * @param  \Symfony\Component\HttpFoundation\Response  $response
+     * @param Response $response
      * @param  int  $maxAttempts
      * @param  int  $remainingAttempts
      * @param  int|null  $retryAfter
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     protected function addHeaders(Response $response, $maxAttempts, $remainingAttempts, $retryAfter = null)
     {

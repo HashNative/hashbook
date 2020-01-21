@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Customers;
 
+use App;
 use App\Http\Controllers\Controller;
 use App\Events\InvoicePrinting;
 use App\Models\Banking\Account;
@@ -100,7 +101,7 @@ class Invoices extends Controller
         $view = view($invoice->template_path, compact('invoice', 'currency_style'))->render();
         $html = mb_convert_encoding($view, 'HTML-ENTITIES');
 
-        $pdf = \App::make('dompdf.wrapper');
+        $pdf = App::make('dompdf.wrapper');
         $pdf->loadHTML($html);
 
         //$pdf->setPaper('A4', 'portrait');

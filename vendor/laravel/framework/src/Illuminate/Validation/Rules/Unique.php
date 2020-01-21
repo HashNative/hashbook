@@ -44,7 +44,7 @@ class Unique
     /**
      * The custom query callback.
      *
-     * @var \Closure|null
+     * @var Closure|null
      */
     protected $using;
 
@@ -131,7 +131,7 @@ class Unique
     /**
      * Register a custom query callback.
      *
-     * @param  \Closure $callback
+     * @param Closure $callback
      * @return $this
      */
     public function using(Closure $callback)

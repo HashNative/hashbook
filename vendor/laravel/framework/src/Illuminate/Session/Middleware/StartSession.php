@@ -4,6 +4,7 @@ namespace Illuminate\Session\Middleware;
 
 use Closure;
 use Carbon\Carbon;
+use DateTimeInterface;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Illuminate\Session\SessionManager;
@@ -17,7 +18,7 @@ class StartSession
     /**
      * The session manager.
      *
-     * @var \Illuminate\Session\SessionManager
+     * @var SessionManager
      */
     protected $manager;
 
@@ -31,7 +32,7 @@ class StartSession
     /**
      * Create a new session middleware.
      *
-     * @param  \Illuminate\Session\SessionManager  $manager
+     * @param SessionManager $manager
      * @return void
      */
     public function __construct(SessionManager $manager)
@@ -42,8 +43,8 @@ class StartSession
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param Request $request
+     * @param Closure $next
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -78,8 +79,8 @@ class StartSession
     /**
      * Perform any final actions for the request lifecycle.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Symfony\Component\HttpFoundation\Response  $response
+     * @param Request $request
+     * @param Response $response
      * @return void
      */
     public function terminate($request, $response)
@@ -92,8 +93,8 @@ class StartSession
     /**
      * Start the session for the given request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Contracts\Session\Session
+     * @param Request $request
+     * @return Session
      */
     protected function startSession(Request $request)
     {
@@ -107,8 +108,8 @@ class StartSession
     /**
      * Get the session implementation from the manager.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Contracts\Session\Session
+     * @param Request $request
+     * @return Session
      */
     public function getSession(Request $request)
     {
@@ -120,7 +121,7 @@ class StartSession
     /**
      * Remove the garbage from the session if necessary.
      *
-     * @param  \Illuminate\Contracts\Session\Session  $session
+     * @param Session $session
      * @return void
      */
     protected function collectGarbage(Session $session)
@@ -149,8 +150,8 @@ class StartSession
     /**
      * Store the current URL for the request if necessary.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Illuminate\Contracts\Session\Session  $session
+     * @param Request $request
+     * @param Session $session
      * @return void
      */
     protected function storeCurrentUrl(Request $request, $session)
@@ -163,8 +164,8 @@ class StartSession
     /**
      * Add the session cookie to the application response.
      *
-     * @param  \Symfony\Component\HttpFoundation\Response  $response
-     * @param  \Illuminate\Contracts\Session\Session  $session
+     * @param Response $response
+     * @param Session $session
      * @return void
      */
     protected function addCookieToResponse(Response $response, Session $session)
@@ -195,7 +196,7 @@ class StartSession
     /**
      * Get the cookie lifetime in seconds.
      *
-     * @return \DateTimeInterface
+     * @return DateTimeInterface
      */
     protected function getCookieExpirationDate()
     {

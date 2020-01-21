@@ -3,11 +3,12 @@
 use Mockery as m;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\MessageBag;
+use PHPUnit_Framework_TestCase;
 use Sofa\Eloquence\Eloquence;
 use Sofa\Eloquence\Validable;
 use Sofa\Eloquence\Validable\Observer;
 
-class ValidableTest extends \PHPUnit_Framework_TestCase {
+class ValidableTest extends PHPUnit_Framework_TestCase {
 
     public function setUp()
     {

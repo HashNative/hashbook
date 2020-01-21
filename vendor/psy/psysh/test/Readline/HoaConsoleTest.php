@@ -11,9 +11,10 @@
 
 namespace Psy\Test\Readline;
 
+use PHPUnit\Framework\TestCase;
 use Psy\Readline\HoaConsole;
 
-class HoaConsoleTest extends \PHPUnit\Framework\TestCase
+class HoaConsoleTest extends TestCase
 {
     public function testHistory()
     {

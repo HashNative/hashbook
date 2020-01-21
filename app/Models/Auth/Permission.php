@@ -3,6 +3,7 @@
 namespace App\Models\Auth;
 
 use EloquentFilter\Filterable;
+use Illuminate\Database\Eloquent\Builder;
 use Laratrust\LaratrustPermission;
 use Laratrust\Traits\LaratrustPermissionTrait;
 use Kyslik\ColumnSortable\Sortable;
@@ -53,10 +54,10 @@ class Permission extends LaratrustPermission
     /**
      * Scope to get all rows filtered, sorted and paginated.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param Builder $query
      * @param $sort
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public function scopeCollect($query, $sort = 'display_name')
     {

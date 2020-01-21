@@ -23,7 +23,7 @@ class Observer
     /**
      * Halt creating if model doesn't pass validation.
      *
-     * @param  \Sofa\Eloquence\Contracts\Validable $model
+     * @param Validable $model
      * @return void|false
      */
     public function creating(Validable $model)
@@ -36,7 +36,7 @@ class Observer
     /**
      * Updating event handler.
      *
-     * @param  \Sofa\Eloquence\Contracts\Validable $model
+     * @param Validable $model
      * @return void|false
      */
     public function updating(Validable $model)
@@ -49,7 +49,7 @@ class Observer
     /**
      * Halt updating if model doesn't pass validation.
      *
-     * @param  \Sofa\Eloquence\Contracts\Validable $model
+     * @param Validable $model
      * @return void|false
      */
     protected function validateUpdate(Validable $model)
@@ -71,7 +71,7 @@ class Observer
     /**
      * Enable validation for the model if skipped only once.
      *
-     * @param  \Sofa\Eloquence\Contracts\Validable $model
+     * @param Validable $model
      * @return void
      */
     public function saved(Validable $model)

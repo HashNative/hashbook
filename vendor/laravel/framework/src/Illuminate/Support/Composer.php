@@ -12,7 +12,7 @@ class Composer
     /**
      * The filesystem instance.
      *
-     * @var \Illuminate\Filesystem\Filesystem
+     * @var Filesystem
      */
     protected $files;
 
@@ -26,7 +26,7 @@ class Composer
     /**
      * Create a new Composer manager instance.
      *
-     * @param  \Illuminate\Filesystem\Filesystem  $files
+     * @param Filesystem $files
      * @param  string|null  $workingPath
      * @return void
      */
@@ -78,7 +78,7 @@ class Composer
     /**
      * Get a new Symfony process instance.
      *
-     * @return \Symfony\Component\Process\Process
+     * @return Process
      */
     protected function getProcess()
     {

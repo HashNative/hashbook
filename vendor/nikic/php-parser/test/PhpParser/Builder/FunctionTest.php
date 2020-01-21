@@ -2,13 +2,15 @@
 
 namespace PhpParser\Builder;
 
+use LogicException;
 use PhpParser\Comment;
 use PhpParser\Node;
 use PhpParser\Node\Expr\Print_;
 use PhpParser\Node\Scalar\String_;
 use PhpParser\Node\Stmt;
+use PHPUnit_Framework_TestCase;
 
-class FunctionTest extends \PHPUnit_Framework_TestCase
+class FunctionTest extends PHPUnit_Framework_TestCase
 {
     public function createFunctionBuilder($name) {
         return new Function_($name);
@@ -87,7 +89,7 @@ class FunctionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \LogicException
+     * @expectedException LogicException
      * @expectedExceptionMessage void type cannot be nullable
      */
     public function testInvalidNullableVoidType() {
@@ -95,7 +97,7 @@ class FunctionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \LogicException
+     * @expectedException LogicException
      * @expectedExceptionMessage Expected parameter node, got "Name"
      */
     public function testInvalidParamError() {

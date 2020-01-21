@@ -5,7 +5,9 @@ namespace Illuminate\Queue;
 use Illuminate\Contracts\Queue\QueueableEntity;
 use Illuminate\Contracts\Database\ModelIdentifier;
 use Illuminate\Contracts\Queue\QueueableCollection;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+use Illuminate\Database\Eloquent\Model;
 
 trait SerializesAndRestoresModelIdentifiers
 {
@@ -49,8 +51,8 @@ trait SerializesAndRestoresModelIdentifiers
     /**
      * Restore a queueable collection instance.
      *
-     * @param  \Illuminate\Contracts\Database\ModelIdentifier  $value
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @param ModelIdentifier $value
+     * @return EloquentCollection
      */
     protected function restoreCollection($value)
     {
@@ -67,8 +69,8 @@ trait SerializesAndRestoresModelIdentifiers
     /**
      * Get the query for restoration.
      *
-     * @param  \Illuminate\Database\Eloquent\Model  $model
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @param  Model  $model
+     * @return Builder
      */
     protected function getQueryForModelRestoration($model)
     {

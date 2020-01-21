@@ -3,31 +3,34 @@
 namespace Illuminate\Auth\Middleware;
 
 use Closure;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Contracts\Auth\Factory as Auth;
+use Illuminate\Http\Request;
 
 class Authorize
 {
     /**
      * The authentication factory instance.
      *
-     * @var \Illuminate\Contracts\Auth\Factory
+     * @var Auth
      */
     protected $auth;
 
     /**
      * The gate instance.
      *
-     * @var \Illuminate\Contracts\Auth\Access\Gate
+     * @var Gate
      */
     protected $gate;
 
     /**
      * Create a new middleware instance.
      *
-     * @param  \Illuminate\Contracts\Auth\Factory  $auth
-     * @param  \Illuminate\Contracts\Auth\Access\Gate  $gate
+     * @param Auth $auth
+     * @param Gate $gate
      * @return void
      */
     public function __construct(Auth $auth, Gate $gate)
@@ -39,14 +42,14 @@ class Authorize
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param  Request  $request
+     * @param Closure $next
      * @param  string  $ability
      * @param  array|null  $models
      * @return mixed
      *
-     * @throws \Illuminate\Auth\AuthenticationException
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @throws AuthenticationException
+     * @throws AuthorizationException
      */
     public function handle($request, Closure $next, $ability, ...$models)
     {
@@ -60,9 +63,9 @@ class Authorize
     /**
      * Get the arguments parameter for the gate.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @param  array|null  $models
-     * @return array|string|\Illuminate\Database\Eloquent\Model
+     * @return array|string|Model
      */
     protected function getGateArguments($request, $models)
     {
@@ -78,9 +81,9 @@ class Authorize
     /**
      * Get the model to authorize.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @param  string  $model
-     * @return string|\Illuminate\Database\Eloquent\Model
+     * @return string|Model
      */
     protected function getModel($request, $model)
     {

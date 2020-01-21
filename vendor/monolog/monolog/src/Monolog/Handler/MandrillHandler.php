@@ -11,7 +11,9 @@
 
 namespace Monolog\Handler;
 
+use InvalidArgumentException;
 use Monolog\Logger;
+use Swift_Message;
 
 /**
  * MandrillHandler uses cURL to send the emails to the Mandrill API
@@ -25,7 +27,7 @@ class MandrillHandler extends MailHandler
 
     /**
      * @param string                  $apiKey  A valid Mandrill API key
-     * @param callable|\Swift_Message $message An example message for real messages, only the body will be replaced
+     * @param callable|Swift_Message $message An example message for real messages, only the body will be replaced
      * @param int                     $level   The minimum logging level at which this handler will be triggered
      * @param bool                    $bubble  Whether the messages that are handled can bubble up the stack or not
      */
@@ -33,11 +35,11 @@ class MandrillHandler extends MailHandler
     {
         parent::__construct($level, $bubble);
 
-        if (!$message instanceof \Swift_Message && is_callable($message)) {
+        if (!$message instanceof Swift_Message && is_callable($message)) {
             $message = call_user_func($message);
         }
-        if (!$message instanceof \Swift_Message) {
-            throw new \InvalidArgumentException('You must provide either a Swift_Message instance or a callable returning it');
+        if (!$message instanceof Swift_Message) {
+            throw new InvalidArgumentException('You must provide either a Swift_Message instance or a callable returning it');
         }
         $this->message = $message;
         $this->apiKey = $apiKey;

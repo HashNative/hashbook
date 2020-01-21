@@ -2,9 +2,12 @@
 
 namespace PhpParser\Serializer;
 
+use InvalidArgumentException;
 use PhpParser;
+use PHPUnit_Framework_TestCase;
+use stdClass;
 
-class XMLTest extends \PHPUnit_Framework_TestCase
+class XMLTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @covers PhpParser\Serializer\XML<extended>
@@ -162,11 +165,11 @@ XML;
     }
 
     /**
-     * @expectedException        \InvalidArgumentException
+     * @expectedException        InvalidArgumentException
      * @expectedExceptionMessage Unexpected node type
      */
     public function testError() {
         $serializer = new XML;
-        $serializer->serialize(array(new \stdClass));
+        $serializer->serialize(array(new stdClass));
     }
 }

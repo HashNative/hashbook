@@ -17,9 +17,11 @@ use Countable;
 use DateInterval;
 use DateTime;
 use DateTimeInterface;
+use DateTimeZone;
 use InvalidArgumentException;
 use Iterator;
 use ReflectionClass;
+use ReflectionException;
 use ReflectionFunction;
 use ReflectionMethod;
 use RuntimeException;
@@ -205,7 +207,7 @@ class CarbonPeriod implements Iterator, Countable
     /**
      * Timezone of current date. Taken from the start date.
      *
-     * @var \DateTimeZone|null
+     * @var DateTimeZone|null
      */
     protected $timezone;
 
@@ -267,7 +269,7 @@ class CarbonPeriod implements Iterator, Countable
     /**
      * Return whether given interval contains non zero value of any time unit.
      *
-     * @param \DateInterval $interval
+     * @param DateInterval $interval
      *
      * @return bool
      */
@@ -385,7 +387,7 @@ class CarbonPeriod implements Iterator, Countable
      *
      * @param object $mixin
      *
-     * @throws \ReflectionException
+     * @throws ReflectionException
      *
      * @return void
      */
@@ -482,9 +484,9 @@ class CarbonPeriod implements Iterator, Countable
      *
      * @param DateInterval|string $interval
      *
-     * @throws \InvalidArgumentException
-     *
      * @return $this
+     * @throws InvalidArgumentException
+     *
      */
     public function setDateInterval($interval)
     {
@@ -538,9 +540,9 @@ class CarbonPeriod implements Iterator, Countable
      *
      * @param int|null $options
      *
-     * @throws \InvalidArgumentException
-     *
      * @return $this
+     * @throws InvalidArgumentException
+     *
      */
     public function setOptions($options)
     {
@@ -571,9 +573,9 @@ class CarbonPeriod implements Iterator, Countable
      * @param int       $options
      * @param bool|null $state
      *
-     * @throws \InvalidArgumentException
-     *
      * @return $this
+     * @throws InvalidArgumentException
+     *
      */
     public function toggleOptions($options, $state = null)
     {
@@ -849,9 +851,9 @@ class CarbonPeriod implements Iterator, Countable
      *
      * @param int|null $recurrences
      *
-     * @throws \InvalidArgumentException
-     *
      * @return $this
+     * @throws InvalidArgumentException
+     *
      */
     public function setRecurrences($recurrences)
     {
@@ -877,7 +879,7 @@ class CarbonPeriod implements Iterator, Countable
     /**
      * Recurrences filter callback (limits number of recurrences).
      *
-     * @param \Carbon\Carbon $current
+     * @param Carbon $current
      * @param int            $key
      *
      * @return bool|string
@@ -897,9 +899,9 @@ class CarbonPeriod implements Iterator, Countable
      * @param DateTime|DateTimeInterface|string $date
      * @param bool|null                         $inclusive
      *
-     * @throws \InvalidArgumentException
-     *
      * @return $this
+     * @throws InvalidArgumentException
+     *
      */
     public function setStartDate($date, $inclusive = null)
     {
@@ -922,9 +924,9 @@ class CarbonPeriod implements Iterator, Countable
      * @param DateTime|DateTimeInterface|string|null $date
      * @param bool|null                              $inclusive
      *
-     * @throws \InvalidArgumentException
-     *
      * @return $this
+     * @throws InvalidArgumentException
+     *
      */
     public function setEndDate($date, $inclusive = null)
     {
@@ -954,7 +956,7 @@ class CarbonPeriod implements Iterator, Countable
     /**
      * End date filter callback.
      *
-     * @param \Carbon\Carbon $current
+     * @param Carbon $current
      *
      * @return bool|string
      */
@@ -1092,9 +1094,9 @@ class CarbonPeriod implements Iterator, Countable
     /**
      * Move forward to the next date.
      *
-     * @throws \RuntimeException
-     *
      * @return void
+     * @throws RuntimeException
+     *
      */
     public function next()
     {
@@ -1118,7 +1120,7 @@ class CarbonPeriod implements Iterator, Countable
      * @see https://bugs.php.net/bug.php?id=74274
      * @see https://wiki.php.net/rfc/datetime_and_daylight_saving_time
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      *
      * @return void
      */
@@ -1158,9 +1160,9 @@ class CarbonPeriod implements Iterator, Countable
     /**
      * Keep incrementing the current date until a valid date is found or the iteration is ended.
      *
-     * @throws \RuntimeException
-     *
      * @return void
+     * @throws RuntimeException
+     *
      */
     protected function incrementCurrentDateUntilValid()
     {

@@ -2,13 +2,14 @@
 
 namespace Nwidart\Modules\tests\Commands;
 
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Artisan;
 use Nwidart\Modules\Tests\BaseTestCase;
 
 class ModuleGeneratorTest extends BaseTestCase
 {
     /**
-     * @var \Illuminate\Filesystem\Filesystem
+     * @var Filesystem
      */
     private $finder;
     /**

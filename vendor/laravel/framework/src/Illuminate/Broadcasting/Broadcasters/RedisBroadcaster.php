@@ -2,6 +2,7 @@
 
 namespace Illuminate\Broadcasting\Broadcasters;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Contracts\Redis\Factory as Redis;
@@ -12,7 +13,7 @@ class RedisBroadcaster extends Broadcaster
     /**
      * The Redis instance.
      *
-     * @var \Illuminate\Contracts\Redis\Factory
+     * @var Redis
      */
     protected $redis;
 
@@ -26,7 +27,7 @@ class RedisBroadcaster extends Broadcaster
     /**
      * Create a new broadcaster instance.
      *
-     * @param  \Illuminate\Contracts\Redis\Factory  $redis
+     * @param Redis $redis
      * @param  string  $connection
      * @return void
      */
@@ -39,7 +40,7 @@ class RedisBroadcaster extends Broadcaster
     /**
      * Authenticate the incoming request for a given channel.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @return mixed
      */
     public function auth($request)
@@ -61,7 +62,7 @@ class RedisBroadcaster extends Broadcaster
     /**
      * Return the valid authentication response.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @param  mixed  $result
      * @return mixed
      */

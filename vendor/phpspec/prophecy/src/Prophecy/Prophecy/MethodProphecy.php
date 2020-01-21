@@ -11,6 +11,7 @@
 
 namespace Prophecy\Prophecy;
 
+use Exception;
 use Prophecy\Argument;
 use Prophecy\Prophet;
 use Prophecy\Promise;
@@ -18,6 +19,7 @@ use Prophecy\Prediction;
 use Prophecy\Exception\Doubler\MethodNotFoundException;
 use Prophecy\Exception\InvalidArgumentException;
 use Prophecy\Exception\Prophecy\MethodProphecyException;
+use ReflectionMethod;
 
 /**
  * Method prophecy.
@@ -42,7 +44,7 @@ class MethodProphecy
      * @param string                                $methodName
      * @param null|Argument\ArgumentsWildcard|array $arguments
      *
-     * @throws \Prophecy\Exception\Doubler\MethodNotFoundException If method not found
+     * @throws MethodNotFoundException If method not found
      */
     public function __construct(ObjectProphecy $objectProphecy, $methodName, $arguments = null)
     {
@@ -56,7 +58,7 @@ class MethodProphecy
         $this->objectProphecy = $objectProphecy;
         $this->methodName     = $methodName;
 
-        $reflectedMethod = new \ReflectionMethod($double, $methodName);
+        $reflectedMethod = new ReflectionMethod($double, $methodName);
         if ($reflectedMethod->isFinal()) {
             throw new MethodProphecyException(sprintf(
                 "Can not add prophecy for a method `%s::%s()`\n".
@@ -112,7 +114,7 @@ class MethodProphecy
      *
      * @return $this
      *
-     * @throws \Prophecy\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function withArguments($arguments)
     {
@@ -140,7 +142,7 @@ class MethodProphecy
      *
      * @return $this
      *
-     * @throws \Prophecy\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function will($promise)
     {
@@ -201,11 +203,11 @@ class MethodProphecy
     /**
      * Sets throw promise to the prophecy.
      *
-     * @see \Prophecy\Promise\ThrowPromise
-     *
-     * @param string|\Exception $exception Exception class or instance
+     * @param string|Exception $exception Exception class or instance
      *
      * @return $this
+     *@see \Prophecy\Promise\ThrowPromise
+     *
      */
     public function willThrow($exception)
     {
@@ -219,7 +221,7 @@ class MethodProphecy
      *
      * @return $this
      *
-     * @throws \Prophecy\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function should($prediction)
     {
@@ -297,7 +299,7 @@ class MethodProphecy
      *
      * @return $this
      *
-     * @throws \Prophecy\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function shouldHave($prediction)
     {
@@ -324,7 +326,7 @@ class MethodProphecy
         try {
             $prediction->check($calls, $this->getObjectProphecy(), $this);
             $this->checkedPredictions[] = $prediction;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->checkedPredictions[] = $prediction;
 
             throw $e;

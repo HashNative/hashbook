@@ -10,12 +10,14 @@
 namespace Dompdf\Renderer;
 
 use Dompdf\Adapter\CPDF;
+use Dompdf\Canvas;
 use Dompdf\Css\Color;
 use Dompdf\Css\Style;
 use Dompdf\Dompdf;
 use Dompdf\Helpers;
 use Dompdf\Frame;
 use Dompdf\Image\Cache;
+use Exception;
 
 /**
  * Base renderer class
@@ -28,7 +30,7 @@ abstract class AbstractRenderer
     /**
      * Rendering backend
      *
-     * @var \Dompdf\Canvas
+     * @var Canvas
      */
     protected $_canvas;
 
@@ -69,12 +71,12 @@ abstract class AbstractRenderer
      * @param float $height The height of the rectangular area
      * @param Style $style  The associated Style object
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function _background_image($url, $x, $y, $width, $height, $style)
     {
         if (!function_exists("imagecreatetruecolor")) {
-            throw new \Exception("The PHP GD extension is required, but is not installed.");
+            throw new Exception("The PHP GD extension is required, but is not installed.");
         }
 
         $sheet = $style->get_stylesheet();

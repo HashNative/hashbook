@@ -11,11 +11,13 @@
 
 namespace Psy\Test\Input;
 
+use PHPUnit\Framework\TestCase;
+use Psy\Exception\RuntimeException;
 use Psy\Input\FilterOptions;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\StringInput;
 
-class FilterOptionsTest extends \PHPUnit\Framework\TestCase
+class FilterOptionsTest extends TestCase
 {
     public function testGetOptions()
     {
@@ -48,7 +50,7 @@ class FilterOptionsTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider invalidInputs
-     * @expectedException \Psy\Exception\RuntimeException
+     * @expectedException RuntimeException
      */
     public function testBindInvalidInput($input)
     {

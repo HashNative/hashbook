@@ -2,8 +2,11 @@
 
 namespace Illuminate\Support\Testing\Fakes;
 
+use DateTime;
+use Illuminate\Contracts\Queue\Job;
 use Illuminate\Queue\QueueManager;
 use Illuminate\Contracts\Queue\Queue;
+use Illuminate\Support\Collection;
 use PHPUnit\Framework\Assert as PHPUnit;
 
 class QueueFake extends QueueManager implements Queue
@@ -69,7 +72,7 @@ class QueueFake extends QueueManager implements Queue
      *
      * @param  string  $job
      * @param  callable|null  $callback
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function pushed($job, $callback = null)
     {
@@ -101,7 +104,7 @@ class QueueFake extends QueueManager implements Queue
      * Resolve a queue connection instance.
      *
      * @param  mixed  $value
-     * @return \Illuminate\Contracts\Queue\Queue
+     * @return Queue
      */
     public function connection($value = null)
     {
@@ -151,7 +154,7 @@ class QueueFake extends QueueManager implements Queue
     /**
      * Push a new job onto the queue after a delay.
      *
-     * @param  \DateTime|int  $delay
+     * @param  DateTime|int  $delay
      * @param  string  $job
      * @param  mixed   $data
      * @param  string  $queue
@@ -179,7 +182,7 @@ class QueueFake extends QueueManager implements Queue
      * Push a new job onto the queue after a delay.
      *
      * @param  string  $queue
-     * @param  \DateTime|int  $delay
+     * @param  DateTime|int  $delay
      * @param  string  $job
      * @param  mixed   $data
      * @return mixed
@@ -193,7 +196,7 @@ class QueueFake extends QueueManager implements Queue
      * Pop the next job off of the queue.
      *
      * @param  string  $queue
-     * @return \Illuminate\Contracts\Queue\Job|null
+     * @return Job|null
      */
     public function pop($queue = null)
     {

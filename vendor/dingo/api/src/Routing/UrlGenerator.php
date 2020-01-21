@@ -31,7 +31,7 @@ class UrlGenerator extends IlluminateUrlGenerator
      *
      * @param string $version
      *
-     * @return \Dingo\Api\Routing\UrlGenerator
+     * @return UrlGenerator
      */
     public function version($version)
     {

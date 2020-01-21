@@ -5,11 +5,13 @@ namespace Sofa\Eloquence\Tests;
 use Illuminate\Database\Query\Builder as Query;
 use Illuminate\Database\Query\Grammars\Grammar;
 use Illuminate\Database\Eloquent\Model;
+use LogicException;
+use PHPUnit_Framework_TestCase;
 use Sofa\Eloquence\Relations\JoinerFactory;
 
 use Mockery as m;
 
-class JoinerTest extends \PHPUnit_Framework_TestCase {
+class JoinerTest extends PHPUnit_Framework_TestCase {
 
     public function setUp()
     {
@@ -41,7 +43,7 @@ class JoinerTest extends \PHPUnit_Framework_TestCase {
     /**
      * @test
      *
-     * @expectedException \LogicException
+     * @expectedException LogicException
      */
     public function it_cant_join_morphTo()
     {

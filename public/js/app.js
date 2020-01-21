@@ -3,7 +3,7 @@ $(document).ready(function () {
     $.fn.liveSearch = function (option) {
         return this.each(function () {
             this.timer = null;
-            this.items = new Array();
+            this.items = [];
 
             $.extend(this, option);
 
@@ -166,7 +166,7 @@ $(document).ready(function () {
             enable_input = $('input[name="' + disable_input.attr('name') + '"]:checked');
             enable_label = enable_input.parent();
 
-            enable_label.removeClass('btn-success active');
+            enable_label.removeClass('btn-danger active');
             enable_label.removeClass('btn-danger active');
 
             enable_input.removeAttr('checked');

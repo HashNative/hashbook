@@ -10,6 +10,7 @@ use App\Models\Setting\Currency;
 use App\Traits\DateTime;
 use App\Transformers\Income\InvoicePayments as Transformer;
 use Date;
+use Dingo\Api\Http\Response;
 use Dingo\Api\Routing\Helpers;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
@@ -24,7 +25,7 @@ class InvoicePayments extends BaseController
      * Display a listing of the resource.
      *
      * @param  $invoice_id
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function index($invoice_id)
     {
@@ -38,7 +39,7 @@ class InvoicePayments extends BaseController
      *
      * @param  $invoice_id
      * @param  $id
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function show($invoice_id, $id)
     {
@@ -52,7 +53,7 @@ class InvoicePayments extends BaseController
      *
      * @param  $invoice_id
      * @param  $request
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function store($invoice_id, Request $request)
     {
@@ -113,7 +114,7 @@ class InvoicePayments extends BaseController
      *
      * @param  $invoice_id
      * @param  $id
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function destroy($invoice_id, $id)
     {

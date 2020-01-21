@@ -19,14 +19,14 @@ class View implements ArrayAccess, ViewContract
     /**
      * The view factory instance.
      *
-     * @var \Illuminate\View\Factory
+     * @var Factory
      */
     protected $factory;
 
     /**
      * The engine implementation.
      *
-     * @var \Illuminate\View\Engines\EngineInterface
+     * @var EngineInterface
      */
     protected $engine;
 
@@ -54,8 +54,8 @@ class View implements ArrayAccess, ViewContract
     /**
      * Create a new view instance.
      *
-     * @param  \Illuminate\View\Factory  $factory
-     * @param  \Illuminate\View\Engines\EngineInterface  $engine
+     * @param Factory $factory
+     * @param EngineInterface $engine
      * @param  string  $view
      * @param  string  $path
      * @param  mixed  $data
@@ -77,7 +77,7 @@ class View implements ArrayAccess, ViewContract
      * @param  callable|null  $callback
      * @return string
      *
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function render(callable $callback = null)
     {
@@ -201,7 +201,7 @@ class View implements ArrayAccess, ViewContract
     /**
      * Add validation errors to the view.
      *
-     * @param  \Illuminate\Contracts\Support\MessageProvider|array  $provider
+     * @param MessageProvider|array  $provider
      * @return $this
      */
     public function withErrors($provider)
@@ -214,8 +214,8 @@ class View implements ArrayAccess, ViewContract
     /**
      * Format the given message provider into a MessageBag.
      *
-     * @param  \Illuminate\Contracts\Support\MessageProvider|array  $provider
-     * @return \Illuminate\Support\MessageBag
+     * @param MessageProvider|array  $provider
+     * @return MessageBag
      */
     protected function formatErrors($provider)
     {
@@ -277,7 +277,7 @@ class View implements ArrayAccess, ViewContract
     /**
      * Get the view factory instance.
      *
-     * @return \Illuminate\View\Factory
+     * @return Factory
      */
     public function getFactory()
     {
@@ -287,7 +287,7 @@ class View implements ArrayAccess, ViewContract
     /**
      * Get the view's rendering engine.
      *
-     * @return \Illuminate\View\Engines\EngineInterface
+     * @return EngineInterface
      */
     public function getEngine()
     {
@@ -389,9 +389,9 @@ class View implements ArrayAccess, ViewContract
      *
      * @param  string  $method
      * @param  array   $parameters
-     * @return \Illuminate\View\View
+     * @return View
      *
-     * @throws \BadMethodCallException
+     * @throws BadMethodCallException
      */
     public function __call($method, $parameters)
     {

@@ -2,6 +2,7 @@
 
 namespace Illuminate\Routing;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Routing\Exceptions\UrlGenerationException;
@@ -11,14 +12,14 @@ class RouteUrlGenerator
     /**
      * The URL generator instance.
      *
-     * @param  \Illuminate\Routing\UrlGenerator
+     * @param UrlGenerator
      */
     protected $url;
 
     /**
      * The request instance.
      *
-     * @var \Illuminate\Http\Request
+     * @var Request
      */
     protected $request;
 
@@ -54,8 +55,8 @@ class RouteUrlGenerator
     /**
      * Create a new Route URL generator.
      *
-     * @param  \Illuminate\Routing\UrlGenerator  $url
-     * @param  \Illuminate\Http\Request  $request
+     * @param UrlGenerator $url
+     * @param  Request  $request
      * @return void
      */
     public function __construct($url, $request)
@@ -67,12 +68,12 @@ class RouteUrlGenerator
     /**
      * Generate a URL for the given route.
      *
-     * @param  \Illuminate\Routing\Route  $route
+     * @param Route $route
      * @param  array  $parameters
      * @param  bool  $absolute
      * @return string
      *
-     * @throws \Illuminate\Routing\Exceptions\UrlGenerationException
+     * @throws UrlGenerationException
      */
     public function to($route, $parameters = [], $absolute = false)
     {
@@ -105,7 +106,7 @@ class RouteUrlGenerator
     /**
      * Get the formatted domain for a given route.
      *
-     * @param  \Illuminate\Routing\Route  $route
+     * @param Route $route
      * @param  array  $parameters
      * @return string
      */
@@ -117,7 +118,7 @@ class RouteUrlGenerator
     /**
      * Format the domain and port for the route and request.
      *
-     * @param  \Illuminate\Routing\Route  $route
+     * @param Route $route
      * @param  array  $parameters
      * @return string
      */
@@ -131,7 +132,7 @@ class RouteUrlGenerator
     /**
      * Get the scheme for the given route.
      *
-     * @param  \Illuminate\Routing\Route  $route
+     * @param Route $route
      * @return string
      */
     protected function getRouteScheme($route)
@@ -164,7 +165,7 @@ class RouteUrlGenerator
     /**
      * Replace the parameters on the root path.
      *
-     * @param  \Illuminate\Routing\Route  $route
+     * @param Route $route
      * @param  string  $domain
      * @param  array  $parameters
      * @return string

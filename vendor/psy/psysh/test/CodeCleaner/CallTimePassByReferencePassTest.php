@@ -12,6 +12,7 @@
 namespace Psy\Test\CodeCleaner;
 
 use Psy\CodeCleaner\CallTimePassByReferencePass;
+use Psy\Exception\FatalErrorException;
 
 class CallTimePassByReferencePassTest extends CodeCleanerTestCase
 {
@@ -22,7 +23,7 @@ class CallTimePassByReferencePassTest extends CodeCleanerTestCase
 
     /**
      * @dataProvider invalidStatements
-     * @expectedException \Psy\Exception\FatalErrorException
+     * @expectedException FatalErrorException
      */
     public function testProcessStatementFails($code)
     {

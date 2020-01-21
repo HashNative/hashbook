@@ -3190,8 +3190,8 @@ fieldset[disabled] .btn-primary.focus {
 .btn-success.active,
 .open > .dropdown-toggle.btn-success {
   color: #fff;
-  background-color: #449d44;
-  border-color: #398439;
+  background-color: #ff8e0d;
+  border-color: #ff8e0d;
 }
 .btn-success:active:hover,
 .btn-success.active:hover,

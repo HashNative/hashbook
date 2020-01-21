@@ -5,6 +5,7 @@ namespace App\Utilities;
 use App\Traits\SiteApi;
 use Cache;
 use Date;
+use GuzzleHttp\Client;
 use Parsedown;
 use GuzzleHttp\Exception\RequestException;
 
@@ -18,7 +19,7 @@ class Versions
 
         $url = 'https://api.github.com/repos/akaunting/akaunting/releases';
 
-        $http = new \GuzzleHttp\Client(['verify' => false]);
+        $http = new Client(['verify' => false]);
 
         $json = $http->get($url, ['timeout' => 30])->getBody()->getContents();
 

@@ -3,6 +3,8 @@
 namespace Illuminate\Queue;
 
 use Aws\Sqs\SqsClient;
+use DateTime;
+use Illuminate\Contracts\Queue\Job;
 use Illuminate\Queue\Jobs\SqsJob;
 use Illuminate\Contracts\Queue\Queue as QueueContract;
 
@@ -11,7 +13,7 @@ class SqsQueue extends Queue implements QueueContract
     /**
      * The Amazon SQS instance.
      *
-     * @var \Aws\Sqs\SqsClient
+     * @var SqsClient
      */
     protected $sqs;
 
@@ -32,7 +34,7 @@ class SqsQueue extends Queue implements QueueContract
     /**
      * Create a new Amazon SQS queue instance.
      *
-     * @param  \Aws\Sqs\SqsClient  $sqs
+     * @param SqsClient $sqs
      * @param  string  $default
      * @param  string  $prefix
      * @return void
@@ -93,7 +95,7 @@ class SqsQueue extends Queue implements QueueContract
     /**
      * Push a new job onto the queue after a delay.
      *
-     * @param  \DateTime|int  $delay
+     * @param  DateTime|int  $delay
      * @param  string  $job
      * @param  mixed   $data
      * @param  string  $queue
@@ -112,7 +114,7 @@ class SqsQueue extends Queue implements QueueContract
      * Pop the next job off of the queue.
      *
      * @param  string  $queue
-     * @return \Illuminate\Contracts\Queue\Job|null
+     * @return Job|null
      */
     public function pop($queue = null)
     {
@@ -146,7 +148,7 @@ class SqsQueue extends Queue implements QueueContract
     /**
      * Get the underlying SQS instance.
      *
-     * @return \Aws\Sqs\SqsClient
+     * @return SqsClient
      */
     public function getSqs()
     {

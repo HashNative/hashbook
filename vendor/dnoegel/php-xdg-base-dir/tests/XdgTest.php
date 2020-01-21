@@ -1,13 +1,15 @@
 <?php
 
+use XdgBaseDir\Xdg;
+
 class XdgTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @return \XdgBaseDir\Xdg
+     * @return Xdg
      */
     public function getXdg()
     {
-        return new \XdgBaseDir\Xdg();
+        return new Xdg();
     }
 
     public function testGetHomeDir()
@@ -73,7 +75,7 @@ class XdgTest extends PHPUnit_Framework_TestCase
     /**
      * In strict mode, an exception should be shown if XDG_RUNTIME_DIR does not exist
      *
-     * @expectedException \RuntimeException
+     * @expectedException RuntimeException
      */
     public function testGetRuntimeDirShouldThrowException()
     {

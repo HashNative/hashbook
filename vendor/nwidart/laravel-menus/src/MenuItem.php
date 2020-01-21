@@ -153,7 +153,7 @@ class MenuItem implements ArrayableContract
      *
      * @return $this
      */
-    public function dropdown($title, \Closure $callback, $order = 0, array $attributes = array())
+    public function dropdown($title, Closure $callback, $order = 0, array $attributes = array())
     {
         $properties = compact('title', 'order', 'attributes');
 
@@ -486,7 +486,7 @@ class MenuItem implements ArrayableContract
             return $inactive;
         }
 
-        if ($inactive instanceof \Closure) {
+        if ($inactive instanceof Closure) {
             return call_user_func($inactive);
         }
 
@@ -530,7 +530,7 @@ class MenuItem implements ArrayableContract
             return $active;
         }
 
-        if ($active instanceof \Closure) {
+        if ($active instanceof Closure) {
             return call_user_func($active);
         }
 

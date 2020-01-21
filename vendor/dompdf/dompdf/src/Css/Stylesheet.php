@@ -268,7 +268,7 @@ class Stylesheet
      * @param string $key the Style's selector
      * @param Style $style the Style to be added
      *
-     * @throws \Dompdf\Exception
+     * @throws Exception
      */
     function add_style($key, Style $style)
     {
@@ -930,7 +930,7 @@ class Stylesheet
      * {@link FrameTree}.  Aside from parsing CSS, this is the main purpose
      * of this class.
      *
-     * @param \Dompdf\Frame\FrameTree $tree
+     * @param FrameTree $tree
      */
     function apply_styles(FrameTree $tree)
     {
@@ -968,7 +968,7 @@ class Stylesheet
                     continue;
                 }
 
-                /** @var \DOMElement $node */
+                /** @var DOMElement $node */
                 foreach ($nodes as $node) {
                     // Only DOMElements get styles
                     if ($node->nodeType != XML_ELEMENT_NODE) {
@@ -1435,7 +1435,7 @@ class Stylesheet
             print "<pre>[_image\n";
             print_r($parsed_url);
             print $this->get_protocol() . "\n" . $this->get_base_path() . "\n" . $path . "\n";
-            print "_image]</pre>";;
+            print "_image]</pre>";
         }
 
         return $path;

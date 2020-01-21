@@ -2,6 +2,7 @@
 
 namespace Illuminate\Routing;
 
+use Closure;
 use Illuminate\Support\ServiceProvider;
 use Psr\Http\Message\ResponseInterface;
 use Zend\Diactoros\Response as PsrResponse;
@@ -83,7 +84,7 @@ class RoutingServiceProvider extends ServiceProvider
     /**
      * Get the URL generator request rebinder.
      *
-     * @return \Closure
+     * @return Closure
      */
     protected function requestRebinder()
     {

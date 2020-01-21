@@ -5,7 +5,9 @@ namespace App\Models\Auth;
 use App\Notifications\Auth\Reset;
 use Date;
 use EloquentFilter\Filterable;
+use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -78,7 +80,7 @@ class User extends Authenticatable
                 // Check for gravatar
                 $url = 'https://www.gravatar.com/avatar/' . md5(strtolower($this->getAttribute('email'))).'?size=90&d=404';
 
-                $client = new \GuzzleHttp\Client(['verify' => false]);
+                $client = new Client(['verify' => false]);
 
                 $client->request('GET', $url)->getBody()->getContents();
 
@@ -165,10 +167,10 @@ class User extends Authenticatable
     /**
      * Scope to get all rows filtered, sorted and paginated.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param Builder $query
      * @param $sort
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public function scopeCollect($query, $sort = 'name')
     {
@@ -183,8 +185,8 @@ class User extends Authenticatable
     /**
      * Scope to only include active currencies.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @param Builder $query
+     * @return Builder
      */
     public function scopeEnabled($query)
     {

@@ -14,6 +14,8 @@
 
 namespace Ramsey\Uuid\Generator;
 
+use function Sodium\randombytes_buf;
+
 /**
  * SodiumRandomGenerator provides functionality to generate strings of random
  * binary data using the PECL libsodium extension
@@ -31,6 +33,6 @@ class SodiumRandomGenerator implements RandomGeneratorInterface
      */
     public function generate($length)
     {
-        return \Sodium\randombytes_buf($length);
+        return randombytes_buf($length);
     }
 }

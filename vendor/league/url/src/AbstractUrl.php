@@ -328,7 +328,7 @@ abstract class AbstractUrl implements UrlInterface
      *
      * @return string
      *
-     * @throws \RuntimeException If no host is detected
+     * @throws RuntimeException If no host is detected
      */
     protected static function fetchServerHost(array $server)
     {

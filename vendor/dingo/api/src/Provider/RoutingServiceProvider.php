@@ -2,6 +2,7 @@
 
 namespace Dingo\Api\Provider;
 
+use Closure;
 use Dingo\Api\Routing\Router;
 use Dingo\Api\Routing\UrlGenerator;
 use Dingo\Api\Contract\Routing\Adapter;
@@ -61,7 +62,7 @@ class RoutingServiceProvider extends ServiceProvider
     /**
      * Get the URL generator request rebinder.
      *
-     * @return \Closure
+     * @return Closure
      */
     private function requestRebinder()
     {

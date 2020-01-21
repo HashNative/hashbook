@@ -10,7 +10,12 @@
 
 namespace SebastianBergmann\CodeCoverage\Report\Html;
 
+use FilesystemIterator;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+use RegexIterator;
 use SebastianBergmann\CodeCoverage\TestCase;
+use SplFileInfo;
 
 class HTMLTest extends TestCase
 {
@@ -27,13 +32,13 @@ class HTMLTest extends TestCase
     {
         parent::tearDown();
 
-        $tmpFilesIterator = new \RecursiveIteratorIterator(
-            new \RecursiveDirectoryIterator(self::$TEST_TMP_PATH, \RecursiveDirectoryIterator::SKIP_DOTS),
-            \RecursiveIteratorIterator::CHILD_FIRST
+        $tmpFilesIterator = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator(self::$TEST_TMP_PATH, RecursiveDirectoryIterator::SKIP_DOTS),
+            RecursiveIteratorIterator::CHILD_FIRST
         );
 
         foreach ($tmpFilesIterator as $path => $fileInfo) {
-            /* @var \SplFileInfo $fileInfo */
+            /* @var SplFileInfo $fileInfo */
             $pathname = $fileInfo->getPathname();
             $fileInfo->isDir() ? rmdir($pathname) : unlink($pathname);
         }
@@ -76,8 +81,8 @@ class HTMLTest extends TestCase
      */
     private function assertFilesEquals($expectedFilesPath, $actualFilesPath)
     {
-        $expectedFilesIterator = new \FilesystemIterator($expectedFilesPath);
-        $actualFilesIterator   = new \RegexIterator(new \FilesystemIterator($actualFilesPath), '/.html/');
+        $expectedFilesIterator = new FilesystemIterator($expectedFilesPath);
+        $actualFilesIterator   = new RegexIterator(new FilesystemIterator($actualFilesPath), '/.html/');
 
         $this->assertEquals(
             iterator_count($expectedFilesIterator),
@@ -86,7 +91,7 @@ class HTMLTest extends TestCase
         );
 
         foreach ($expectedFilesIterator as $path => $fileInfo) {
-            /* @var \SplFileInfo $fileInfo */
+            /* @var SplFileInfo $fileInfo */
             $filename = $fileInfo->getFilename();
 
             $actualFile = $actualFilesPath . DIRECTORY_SEPARATOR . $filename;

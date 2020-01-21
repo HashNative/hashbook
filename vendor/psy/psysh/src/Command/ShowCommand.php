@@ -11,6 +11,8 @@
 
 namespace Psy\Command;
 
+use Exception;
+use InvalidArgumentException;
 use JakubOnderka\PhpConsoleHighlighter\Highlighter;
 use Psy\Configuration;
 use Psy\ConsoleColorFactory;
@@ -19,10 +21,25 @@ use Psy\Formatter\CodeFormatter;
 use Psy\Formatter\SignatureFormatter;
 use Psy\Input\CodeArgument;
 use Psy\Output\ShellOutput;
+use ReflectionClass;
+use ReflectionFunction;
 use Symfony\Component\Console\Formatter\OutputFormatter;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use function array_unshift;
+use function count;
+use function dirname;
+use function file_get_contents;
+use function getcwd;
+use function intval;
+use function is_file;
+use function max;
+use function preg_match;
+use function preg_quote;
+use function preg_replace;
+use function rtrim;
+use function sprintf;
 
 /**
  * Show the code for an object, class, constant, method or property.
@@ -96,7 +113,7 @@ HELP
         // because it's `null`, and "--ex 1", because it's the string "1".
         if ($opts['ex'] !== 1) {
             if ($input->getArgument('target')) {
-                throw new \InvalidArgumentException('Too many arguments (supply either "target" or "--ex")');
+                throw new InvalidArgumentException('Too many arguments (supply either "target" or "--ex")');
             }
 
             return $this->writeExceptionContext($input, $output);
@@ -140,16 +157,16 @@ HELP
                 $index = 0;
             }
         } else {
-            $index = \max(0, \intval($input->getOption('ex')) - 1);
+            $index = max(0, intval($input->getOption('ex')) - 1);
         }
 
         $trace = $exception->getTrace();
-        \array_unshift($trace, [
+        array_unshift($trace, [
             'file' => $exception->getFile(),
             'line' => $exception->getLine(),
         ]);
 
-        if ($index >= \count($trace)) {
+        if ($index >= count($trace)) {
             $index = 0;
         }
 
@@ -169,25 +186,25 @@ HELP
         $file = isset($trace[$index]['file']) ? $this->replaceCwd($trace[$index]['file']) : 'n/a';
         $line = isset($trace[$index]['line']) ? $trace[$index]['line'] : 'n/a';
 
-        $output->writeln(\sprintf(
+        $output->writeln(sprintf(
             'From <info>%s:%d</info> at <strong>level %d</strong> of backtrace (of %d).',
             OutputFormatter::escape($file),
             OutputFormatter::escape($line),
             $index + 1,
-            \count($trace)
+            count($trace)
         ));
     }
 
     private function replaceCwd($file)
     {
-        if ($cwd = \getcwd()) {
-            $cwd = \rtrim($cwd, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+        if ($cwd = getcwd()) {
+            $cwd = rtrim($cwd, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
         }
 
         if ($cwd === false) {
             return $file;
         } else {
-            return \preg_replace('/^' . \preg_quote($cwd, '/') . '/', '', $file);
+            return preg_replace('/^' . preg_quote($cwd, '/') . '/', '', $file);
         }
     }
 
@@ -208,8 +225,8 @@ HELP
             $line = $trace[$index]['line'];
         }
 
-        if (\is_file($file)) {
-            $code = @\file_get_contents($file);
+        if (is_file($file)) {
+            $code = @file_get_contents($file);
         }
 
         if (empty($code)) {
@@ -240,22 +257,22 @@ HELP
             }
 
             try {
-                $refl = new \ReflectionClass($context['class']);
+                $refl = new ReflectionClass($context['class']);
                 if ($namespace = $refl->getNamespaceName()) {
                     $vars['__namespace'] = $namespace;
                 }
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 // oh well
             }
         } elseif (isset($context['function'])) {
             $vars['__function'] = $context['function'];
 
             try {
-                $refl = new \ReflectionFunction($context['function']);
+                $refl = new ReflectionFunction($context['function']);
                 if ($namespace = $refl->getNamespaceName()) {
                     $vars['__namespace'] = $namespace;
                 }
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 // oh well
             }
         }
@@ -268,12 +285,12 @@ HELP
                 $line = $context['line'];
             }
 
-            if (\is_file($file)) {
+            if (is_file($file)) {
                 $vars['__file'] = $file;
                 if (isset($line)) {
                     $vars['__line'] = $line;
                 }
-                $vars['__dir'] = \dirname($file);
+                $vars['__dir'] = dirname($file);
             }
         }
 
@@ -282,7 +299,7 @@ HELP
 
     private function extractEvalFileAndLine($file)
     {
-        if (\preg_match('/(.*)\\((\\d+)\\) : eval\\(\\)\'d code$/', $file, $matches)) {
+        if (preg_match('/(.*)\\((\\d+)\\) : eval\\(\\)\'d code$/', $file, $matches)) {
             return [$matches[1], $matches[2]];
         }
     }

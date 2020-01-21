@@ -4,6 +4,7 @@ namespace Illuminate\Database\Eloquent\Relations;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
 
 abstract class MorphOneOrMany extends HasOneOrMany
 {
@@ -24,8 +25,8 @@ abstract class MorphOneOrMany extends HasOneOrMany
     /**
      * Create a new morph one or many relationship instance.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  \Illuminate\Database\Eloquent\Model  $parent
+     * @param Builder $query
+     * @param Model $parent
      * @param  string  $type
      * @param  string  $id
      * @param  string  $localKey
@@ -44,7 +45,7 @@ abstract class MorphOneOrMany extends HasOneOrMany
      * Create and return an un-saved instance of the related model.
      *
      * @param  array  $attributes
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return Model
      */
     public function make(array $attributes = [])
     {
@@ -88,7 +89,7 @@ abstract class MorphOneOrMany extends HasOneOrMany
      *
      * @param  mixed  $id
      * @param  array  $columns
-     * @return \Illuminate\Support\Collection|\Illuminate\Database\Eloquent\Model
+     * @return Collection|Model
      */
     public function findOrNew($id, $columns = ['*'])
     {
@@ -108,7 +109,7 @@ abstract class MorphOneOrMany extends HasOneOrMany
      * Get the first related model record matching the attributes or instantiate it.
      *
      * @param  array  $attributes
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return Model
      */
     public function firstOrNew(array $attributes)
     {
@@ -128,7 +129,7 @@ abstract class MorphOneOrMany extends HasOneOrMany
      * Get the first related record matching the attributes or create it.
      *
      * @param  array  $attributes
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return Model
      */
     public function firstOrCreate(array $attributes)
     {
@@ -144,7 +145,7 @@ abstract class MorphOneOrMany extends HasOneOrMany
      *
      * @param  array  $attributes
      * @param  array  $values
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return Model
      */
     public function updateOrCreate(array $attributes, array $values = [])
     {
@@ -158,8 +159,8 @@ abstract class MorphOneOrMany extends HasOneOrMany
     /**
      * Attach a model instance to the parent model.
      *
-     * @param  \Illuminate\Database\Eloquent\Model  $model
-     * @return \Illuminate\Database\Eloquent\Model
+     * @param Model $model
+     * @return Model
      */
     public function save(Model $model)
     {
@@ -172,7 +173,7 @@ abstract class MorphOneOrMany extends HasOneOrMany
      * Create a new instance of the related model.
      *
      * @param  array  $attributes
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return Model
      */
     public function create(array $attributes)
     {
@@ -191,7 +192,7 @@ abstract class MorphOneOrMany extends HasOneOrMany
     /**
      * Set the foreign ID and type for creating a related model.
      *
-     * @param  \Illuminate\Database\Eloquent\Model  $model
+     * @param Model $model
      * @return void
      */
     protected function setForeignAttributesForCreate(Model $model)
@@ -204,10 +205,10 @@ abstract class MorphOneOrMany extends HasOneOrMany
     /**
      * Get the relationship query.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  \Illuminate\Database\Eloquent\Builder  $parentQuery
+     * @param Builder $query
+     * @param Builder $parentQuery
      * @param  array|mixed  $columns
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public function getRelationExistenceQuery(Builder $query, Builder $parentQuery, $columns = ['*'])
     {

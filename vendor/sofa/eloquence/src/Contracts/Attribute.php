@@ -2,6 +2,8 @@
 
 namespace Sofa\Eloquence\Contracts;
 
+use Sofa\Eloquence\Exceptions\InvalidTypeException;
+
 interface Attribute
 {
     /**
@@ -31,7 +33,7 @@ interface Attribute
      *
      * @param mixed $value
      *
-     * @throws \Sofa\Eloquence\Exceptions\InvalidTypeException
+     * @throws InvalidTypeException
      */
     public function setValue($value);
 

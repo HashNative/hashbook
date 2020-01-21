@@ -15,14 +15,14 @@ class Dispatcher implements QueueingDispatcher
     /**
      * The container implementation.
      *
-     * @var \Illuminate\Contracts\Container\Container
+     * @var Container
      */
     protected $container;
 
     /**
      * The pipeline instance for the bus.
      *
-     * @var \Illuminate\Pipeline\Pipeline
+     * @var Pipeline
      */
     protected $pipeline;
 
@@ -43,15 +43,15 @@ class Dispatcher implements QueueingDispatcher
     /**
      * The queue resolver callback.
      *
-     * @var \Closure|null
+     * @var Closure|null
      */
     protected $queueResolver;
 
     /**
      * Create a new command dispatcher instance.
      *
-     * @param  \Illuminate\Contracts\Container\Container  $container
-     * @param  \Closure|null  $queueResolver
+     * @param Container $container
+     * @param Closure|null  $queueResolver
      * @return void
      */
     public function __construct(Container $container, Closure $queueResolver = null)
@@ -141,7 +141,7 @@ class Dispatcher implements QueueingDispatcher
      * @param  mixed  $command
      * @return mixed
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     public function dispatchToQueue($command)
     {
@@ -163,7 +163,7 @@ class Dispatcher implements QueueingDispatcher
     /**
      * Push the command onto the given queue instance.
      *
-     * @param  \Illuminate\Contracts\Queue\Queue  $queue
+     * @param Queue $queue
      * @param  mixed  $command
      * @return mixed
      */

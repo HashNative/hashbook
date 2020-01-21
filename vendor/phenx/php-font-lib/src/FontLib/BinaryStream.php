@@ -8,6 +8,8 @@
 
 namespace FontLib;
 
+use Exception;
+
 /**
  * Generic font file binary stream.
  *
@@ -58,12 +60,12 @@ class BinaryStream {
    * @param string $filename The file name of the font to open
    * @param string $mode     The opening mode
    *
-   * @throws \Exception
+   * @throws Exception
    * @return bool
    */
   public function open($filename, $mode = self::modeRead) {
     if (!in_array($mode, array(self::modeRead, self::modeWrite, self::modeReadWrite))) {
-      throw new \Exception("Unkown file open mode");
+      throw new Exception("Unkown file open mode");
     }
 
     $this->f = fopen($filename, $mode);
@@ -83,11 +85,11 @@ class BinaryStream {
    *
    * @param resource $fp
    *
-   * @throws \Exception
+   * @throws Exception
    */
   public function setFile($fp) {
     if (!is_resource($fp)) {
-      throw new \Exception('$fp is not a valid resource');
+      throw new Exception('$fp is not a valid resource');
     }
 
     $this->f = $fp;

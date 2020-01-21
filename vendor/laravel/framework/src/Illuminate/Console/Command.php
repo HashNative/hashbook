@@ -2,6 +2,7 @@
 
 namespace Illuminate\Console;
 
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Support\Arrayable;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -25,14 +26,14 @@ class Command extends SymfonyCommand
     /**
      * The input interface implementation.
      *
-     * @var \Symfony\Component\Console\Input\InputInterface
+     * @var InputInterface
      */
     protected $input;
 
     /**
      * The output interface implementation.
      *
-     * @var \Illuminate\Console\OutputStyle
+     * @var OutputStyle
      */
     protected $output;
 
@@ -157,8 +158,8 @@ class Command extends SymfonyCommand
     /**
      * Run the console command.
      *
-     * @param  \Symfony\Component\Console\Input\InputInterface  $input
-     * @param  \Symfony\Component\Console\Output\OutputInterface  $output
+     * @param InputInterface $input
+     * @param OutputInterface $output
      * @return int
      */
     public function run(InputInterface $input, OutputInterface $output)
@@ -171,8 +172,8 @@ class Command extends SymfonyCommand
     /**
      * Execute the console command.
      *
-     * @param  \Symfony\Component\Console\Input\InputInterface  $input
-     * @param  \Symfony\Component\Console\Output\OutputInterface  $output
+     * @param InputInterface $input
+     * @param OutputInterface $output
      * @return mixed
      */
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -379,7 +380,7 @@ class Command extends SymfonyCommand
      * Format input to textual table.
      *
      * @param  array   $headers
-     * @param  \Illuminate\Contracts\Support\Arrayable|array  $rows
+     * @param Arrayable|array  $rows
      * @param  string  $style
      * @return void
      */
@@ -541,7 +542,7 @@ class Command extends SymfonyCommand
     /**
      * Get the output implementation.
      *
-     * @return \Symfony\Component\Console\Output\OutputInterface
+     * @return OutputInterface
      */
     public function getOutput()
     {
@@ -561,7 +562,7 @@ class Command extends SymfonyCommand
     /**
      * Set the Laravel application instance.
      *
-     * @param  \Illuminate\Contracts\Container\Container  $laravel
+     * @param  Container  $laravel
      * @return void
      */
     public function setLaravel($laravel)

@@ -15,6 +15,7 @@ use SebastianBergmann\CodeCoverage\Node\File as FileNode;
 use SebastianBergmann\CodeCoverage\Node\Directory as DirectoryNode;
 use SebastianBergmann\Environment\Runtime;
 use SebastianBergmann\Version;
+use Text_Template;
 
 /**
  * Base class for node renderers.
@@ -73,12 +74,12 @@ abstract class Renderer
     }
 
     /**
-     * @param \Text_Template $template
+     * @param Text_Template $template
      * @param array          $data
      *
      * @return string
      */
-    protected function renderItemTemplate(\Text_Template $template, array $data)
+    protected function renderItemTemplate(Text_Template $template, array $data)
     {
         $numSeparator  = '&nbsp;/&nbsp;';
 
@@ -154,10 +155,10 @@ abstract class Renderer
     }
 
     /**
-     * @param \Text_Template $template
+     * @param Text_Template $template
      * @param AbstractNode   $node
      */
-    protected function setCommonTemplateVariables(\Text_Template $template, AbstractNode $node)
+    protected function setCommonTemplateVariables(Text_Template $template, AbstractNode $node)
     {
         $template->setVar(
             [
@@ -244,7 +245,7 @@ abstract class Renderer
     {
         $level = $this->getColorLevel($percent);
 
-        $template = new \Text_Template(
+        $template = new Text_Template(
             $this->templatePath . 'coverage_bar.html',
             '{{',
             '}}'

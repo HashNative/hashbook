@@ -11,6 +11,7 @@
 
 namespace League\Fractal;
 
+use Exception;
 use League\Fractal\Resource\Collection;
 use League\Fractal\Resource\Item;
 use League\Fractal\Resource\NullResource;
@@ -71,7 +72,7 @@ abstract class TransformerAbstract
     /**
      * Getter for currentScope.
      *
-     * @return \League\Fractal\Scope
+     * @return Scope
      */
     public function getCurrentScope()
     {
@@ -175,9 +176,9 @@ abstract class TransformerAbstract
      * @param string $includeName
      * @param mixed  $data
      *
-     * @throws \Exception
+     * @throws Exception
      *
-     * @return \League\Fractal\Resource\ResourceInterface
+     * @return ResourceInterface
      */
     protected function callIncludeMethod(Scope $scope, $includeName, $data)
     {
@@ -194,7 +195,7 @@ abstract class TransformerAbstract
         }
 
         if (! $resource instanceof ResourceInterface) {
-            throw new \Exception(sprintf(
+            throw new Exception(sprintf(
                 'Invalid return value from %s::%s(). Expected %s, received %s.',
                 __CLASS__,
                 $methodName,

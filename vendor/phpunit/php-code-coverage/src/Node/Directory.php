@@ -10,12 +10,14 @@
 
 namespace SebastianBergmann\CodeCoverage\Node;
 
+use IteratorAggregate;
+use RecursiveIteratorIterator;
 use SebastianBergmann\CodeCoverage\InvalidArgumentException;
 
 /**
  * Represents a directory in the code coverage information tree.
  */
-class Directory extends AbstractNode implements \IteratorAggregate
+class Directory extends AbstractNode implements IteratorAggregate
 {
     /**
      * @var AbstractNode[]
@@ -128,13 +130,13 @@ class Directory extends AbstractNode implements \IteratorAggregate
     /**
      * Returns an iterator for this node.
      *
-     * @return \RecursiveIteratorIterator
+     * @return RecursiveIteratorIterator
      */
     public function getIterator()
     {
-        return new \RecursiveIteratorIterator(
+        return new RecursiveIteratorIterator(
             new Iterator($this),
-            \RecursiveIteratorIterator::SELF_FIRST
+            RecursiveIteratorIterator::SELF_FIRST
         );
     }
 

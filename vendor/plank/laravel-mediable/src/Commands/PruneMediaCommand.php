@@ -29,13 +29,13 @@ class PruneMediaCommand extends Command
 
     /**
      * Filesystem Manager instance.
-     * @var \Illuminate\Filesystem\FilesystemManager
+     * @var FilesystemManager
      */
     protected $filesystem;
 
     /**
      * Constructor.
-     * @param \Illuminate\Filesystem\FilesystemManager $filesystem
+     * @param FilesystemManager $filesystem
      */
     public function __construct(FileSystemManager $filesystem)
     {

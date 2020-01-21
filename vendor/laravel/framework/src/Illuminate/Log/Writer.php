@@ -23,14 +23,14 @@ class Writer implements LogContract, PsrLoggerInterface
     /**
      * The Monolog logger instance.
      *
-     * @var \Monolog\Logger
+     * @var MonologLogger
      */
     protected $monolog;
 
     /**
      * The event dispatcher instance.
      *
-     * @var \Illuminate\Contracts\Events\Dispatcher
+     * @var Dispatcher
      */
     protected $dispatcher;
 
@@ -53,8 +53,8 @@ class Writer implements LogContract, PsrLoggerInterface
     /**
      * Create a new log writer instance.
      *
-     * @param  \Monolog\Logger  $monolog
-     * @param  \Illuminate\Contracts\Events\Dispatcher  $dispatcher
+     * @param MonologLogger $monolog
+     * @param Dispatcher $dispatcher
      * @return void
      */
     public function __construct(MonologLogger $monolog, Dispatcher $dispatcher = null)
@@ -240,7 +240,7 @@ class Writer implements LogContract, PsrLoggerInterface
      * @param  string  $name
      * @param  string  $level
      * @param  mixed  $facility
-     * @return \Psr\Log\LoggerInterface
+     * @return PsrLoggerInterface
      */
     public function useSyslog($name = 'laravel', $level = 'debug', $facility = LOG_USER)
     {
@@ -266,10 +266,10 @@ class Writer implements LogContract, PsrLoggerInterface
     /**
      * Register a new callback handler for when a log event is triggered.
      *
-     * @param  \Closure  $callback
+     * @param Closure $callback
      * @return void
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     public function listen(Closure $callback)
     {
@@ -323,7 +323,7 @@ class Writer implements LogContract, PsrLoggerInterface
      * @param  string  $level
      * @return int
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     protected function parseLevel($level)
     {
@@ -337,7 +337,7 @@ class Writer implements LogContract, PsrLoggerInterface
     /**
      * Get the underlying Monolog instance.
      *
-     * @return \Monolog\Logger
+     * @return MonologLogger
      */
     public function getMonolog()
     {
@@ -347,7 +347,7 @@ class Writer implements LogContract, PsrLoggerInterface
     /**
      * Get a default Monolog formatter instance.
      *
-     * @return \Monolog\Formatter\LineFormatter
+     * @return LineFormatter
      */
     protected function getDefaultFormatter()
     {
@@ -357,7 +357,7 @@ class Writer implements LogContract, PsrLoggerInterface
     /**
      * Get the event dispatcher instance.
      *
-     * @return \Illuminate\Contracts\Events\Dispatcher
+     * @return Dispatcher
      */
     public function getEventDispatcher()
     {
@@ -367,7 +367,7 @@ class Writer implements LogContract, PsrLoggerInterface
     /**
      * Set the event dispatcher instance.
      *
-     * @param  \Illuminate\Contracts\Events\Dispatcher  $dispatcher
+     * @param Dispatcher $dispatcher
      * @return void
      */
     public function setEventDispatcher(Dispatcher $dispatcher)

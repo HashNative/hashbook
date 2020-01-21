@@ -4,10 +4,11 @@ namespace Sofa\Eloquence\Tests;
 
 use Mockery as m;
 use Illuminate\Database\Eloquent\Model;
+use PHPUnit_Framework_TestCase;
 use Sofa\Eloquence\Eloquence;
 use Sofa\Eloquence\Mutable;
 
-class MutableTest extends \PHPUnit_Framework_TestCase
+class MutableTest extends PHPUnit_Framework_TestCase
 {
     public function tearDown()
     {

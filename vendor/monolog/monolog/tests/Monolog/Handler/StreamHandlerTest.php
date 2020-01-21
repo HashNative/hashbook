@@ -13,6 +13,7 @@ namespace Monolog\Handler;
 
 use Monolog\TestCase;
 use Monolog\Logger;
+use ReflectionProperty;
 
 class StreamHandlerTest extends TestCase
 {
@@ -51,7 +52,7 @@ class StreamHandlerTest extends TestCase
     {
         $handler = new StreamHandler('php://memory');
         $handler->handle($this->getRecord(Logger::WARNING, 'test'));
-        $streamProp = new \ReflectionProperty('Monolog\Handler\StreamHandler', 'stream');
+        $streamProp = new ReflectionProperty('Monolog\Handler\StreamHandler', 'stream');
         $streamProp->setAccessible(true);
         $handle = $streamProp->getValue($handler);
 

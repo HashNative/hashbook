@@ -3,8 +3,9 @@
 namespace Nwidart\Modules\tests;
 
 use Nwidart\Modules\Support\Migrations\NameParser;
+use PHPUnit_Framework_TestCase;
 
-class NameParserTest extends \PHPUnit_Framework_TestCase
+class NameParserTest extends PHPUnit_Framework_TestCase
 {
     /** @test */
     public function it_gets_the_original_name()

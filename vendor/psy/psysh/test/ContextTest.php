@@ -11,9 +11,15 @@
 
 namespace Psy\Test;
 
+use Exception;
+use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 use Psy\Context;
+use StdClass;
+use function array_values;
+use function compact;
 
-class ContextTest extends \PHPUnit\Framework\TestCase
+class ContextTest extends TestCase
 {
     public function testGet()
     {
@@ -34,8 +40,8 @@ class ContextTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals(['_' => null], $context->getAll());
 
-        $e = new \Exception('eeeeeee');
-        $obj = new \StdClass();
+        $e = new Exception('eeeeeee');
+        $obj = new StdClass();
         $context->setLastException($e);
         $context->setLastStdout('out');
         $context->setBoundObject($obj);
@@ -71,7 +77,7 @@ class ContextTest extends \PHPUnit\Framework\TestCase
     {
         $context = new Context();
 
-        $baz = new \StdClass();
+        $baz = new StdClass();
         $vars = [
             'foo' => 'Foo',
             'bar' => 123,
@@ -103,7 +109,7 @@ class ContextTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider specialNames
-     * @expectedException \InvalidArgumentException
+     * @expectedException InvalidArgumentException
      * @expectedExceptionMessageRegEx /Unknown variable: \$\w+/
      */
     public function testSetAllDoesNotSetSpecial($name)
@@ -140,7 +146,7 @@ class ContextTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($val, $context->getReturnValue());
         $this->assertEquals($val, $context->get('_'));
 
-        $obj = new \StdClass();
+        $obj = new StdClass();
         $context->setReturnValue($obj);
         $this->assertSame($obj, $context->getReturnValue());
         $this->assertSame($obj, $context->get('_'));
@@ -152,14 +158,14 @@ class ContextTest extends \PHPUnit\Framework\TestCase
     public function testLastException()
     {
         $context = new Context();
-        $e = new \Exception('wat');
+        $e = new Exception('wat');
         $context->setLastException($e);
         $this->assertSame($e, $context->getLastException());
         $this->assertSame($e, $context->get('_e'));
     }
 
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException InvalidArgumentException
      * @expectedExceptionMessage No most-recent exception
      */
     public function testLastExceptionThrowsSometimes()
@@ -177,7 +183,7 @@ class ContextTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException InvalidArgumentException
      * @expectedExceptionMessage No most-recent output
      */
     public function testLastStdoutThrowsSometimes()
@@ -191,7 +197,7 @@ class ContextTest extends \PHPUnit\Framework\TestCase
         $context = new Context();
         $this->assertNull($context->getBoundObject());
 
-        $obj = new \StdClass();
+        $obj = new StdClass();
         $context->setBoundObject($obj);
         $this->assertSame($obj, $context->getBoundObject());
         $this->assertSame($obj, $context->get('this'));
@@ -201,7 +207,7 @@ class ContextTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException InvalidArgumentException
      * @expectedExceptionMessage Unknown variable: $this
      */
     public function testBoundObjectThrowsSometimes()
@@ -221,7 +227,7 @@ class ContextTest extends \PHPUnit\Framework\TestCase
         $context->setBoundClass('Psy\Shell');
         $this->assertEquals('Psy\Shell', $context->getBoundClass());
 
-        $context->setBoundObject(new \StdClass());
+        $context->setBoundObject(new StdClass());
         $this->assertNotNull($context->getBoundObject());
         $this->assertNull($context->getBoundClass());
 
@@ -244,7 +250,7 @@ class ContextTest extends \PHPUnit\Framework\TestCase
         $__line      = 'dixie';
         $__dir       = 'wrinkly';
 
-        $vars = \compact('__function', '__method', '__class', '__namespace', '__file', '__line', '__dir');
+        $vars = compact('__function', '__method', '__class', '__namespace', '__file', '__line', '__dir');
 
         $context = new Context();
         $context->setCommandScopeVariables($vars);
@@ -259,7 +265,7 @@ class ContextTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($__line, $context->get('__line'));
         $this->assertEquals($__dir, $context->get('__dir'));
 
-        $someVars = \compact('__function', '__namespace', '__file', '__line', '__dir');
+        $someVars = compact('__function', '__namespace', '__file', '__line', '__dir');
         $context->setCommandScopeVariables($someVars);
     }
 
@@ -282,7 +288,7 @@ class ContextTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals(
             ['__method', '__class'],
-            \array_values($context->getUnusedCommandScopeVariableNames())
+            array_values($context->getUnusedCommandScopeVariableNames())
         );
     }
 

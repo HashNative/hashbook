@@ -49,7 +49,7 @@ trait ManagesStacks
      * Stop injecting content into a push section.
      *
      * @return string
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function stopPush()
     {
@@ -104,7 +104,7 @@ trait ManagesStacks
      * Stop prepending content into a push section.
      *
      * @return string
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function stopPrepend()
     {

@@ -9,7 +9,7 @@ class Authenticated extends Throttle
     /**
      * Authenticated throttle will be matched when request is authenticated.
      *
-     * @param \Illuminate\Container\Container $container
+     * @param Container $container
      *
      * @return bool
      */

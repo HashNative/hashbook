@@ -2,12 +2,13 @@
 
 namespace Nwidart\Modules\tests\Commands;
 
+use Illuminate\Filesystem\Filesystem;
 use Nwidart\Modules\tests\BaseTestCase;
 
 class GenerateMailCommandTest extends BaseTestCase
 {
     /**
-     * @var \Illuminate\Filesystem\Filesystem
+     * @var Filesystem
      */
     private $finder;
     /**

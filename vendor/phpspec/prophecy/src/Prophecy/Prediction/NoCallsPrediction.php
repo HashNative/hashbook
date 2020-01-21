@@ -43,7 +43,7 @@ class NoCallsPrediction implements PredictionInterface
      * @param ObjectProphecy $object
      * @param MethodProphecy $method
      *
-     * @throws \Prophecy\Exception\Prediction\UnexpectedCallsException
+     * @throws UnexpectedCallsException
      */
     public function check(array $calls, ObjectProphecy $object, MethodProphecy $method)
     {

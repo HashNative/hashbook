@@ -2,9 +2,13 @@
 
 namespace Nwidart\Menus;
 
+use Closure;
 use Countable;
 use Illuminate\Config\Repository;
+use Illuminate\Support\Collection;
 use Illuminate\View\Factory as ViewFactory;
+use Illuminate\View\View;
+use Nwidart\Menus\Presenters\PresenterInterface;
 
 class MenuBuilder implements Countable
 {
@@ -53,7 +57,7 @@ class MenuBuilder implements Countable
     /**
      * The laravel view factory instance.
      *
-     * @var \Illuminate\View\Factory
+     * @var ViewFactory
      */
     protected $views;
 
@@ -120,7 +124,7 @@ class MenuBuilder implements Countable
      *
      * @param  string $key
      * @param  string $value
-     * @return \Nwidart\Menus\MenuItem
+     * @return MenuItem
      */
     public function findBy($key, $value)
     {
@@ -194,7 +198,7 @@ class MenuBuilder implements Countable
     /**
      * Get presenter instance.
      *
-     * @return \Nwidart\Menus\Presenters\PresenterInterface
+     * @return PresenterInterface
      */
     public function getPresenter()
     {
@@ -324,7 +328,7 @@ class MenuBuilder implements Countable
      *
      * @param array $attributes
      *
-     * @return \Nwidart\Menus\MenuItem
+     * @return MenuItem
      */
     public function add(array $attributes = array())
     {
@@ -344,7 +348,7 @@ class MenuBuilder implements Countable
      *
      * @return $this
      */
-    public function dropdown($title, \Closure $callback, $order = null, array $attributes = array())
+    public function dropdown($title, Closure $callback, $order = null, array $attributes = array())
     {
         $properties = compact('title', 'order', 'attributes');
 
@@ -447,7 +451,7 @@ class MenuBuilder implements Countable
      * Add new divider item.
      *
      * @param int $order
-     * @return \Nwidart\Menus\MenuItem
+     * @return MenuItem
      */
     public function addDivider($order = null)
     {
@@ -459,7 +463,7 @@ class MenuBuilder implements Countable
     /**
      * Add new header item.
      *
-     * @return \Nwidart\Menus\MenuItem
+     * @return MenuItem
      */
     public function addHeader($title, $order = null)
     {
@@ -543,7 +547,7 @@ class MenuBuilder implements Countable
     /**
      * Render menu via view presenter.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function renderView($presenter = null)
     {
@@ -565,7 +569,7 @@ class MenuBuilder implements Countable
     /**
      * Get menu items as laravel collection instance.
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function toCollection()
     {

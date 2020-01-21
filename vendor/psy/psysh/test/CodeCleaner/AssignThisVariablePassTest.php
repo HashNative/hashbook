@@ -12,6 +12,7 @@
 namespace Psy\Test\CodeCleaner;
 
 use Psy\CodeCleaner\AssignThisVariablePass;
+use Psy\Exception\FatalErrorException;
 
 class AssignThisVariablePassTest extends CodeCleanerTestCase
 {
@@ -22,7 +23,7 @@ class AssignThisVariablePassTest extends CodeCleanerTestCase
 
     /**
      * @dataProvider invalidStatements
-     * @expectedException \Psy\Exception\FatalErrorException
+     * @expectedException FatalErrorException
      */
     public function testProcessStatementFails($code)
     {

@@ -23,6 +23,7 @@ use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\PropertyFetch;
 use PhpParser\Node\Expr\Variable;
 use Psy\Exception\ParseErrorException;
+use function version_compare;
 
 /**
  * Validate that the list assignment.
@@ -33,7 +34,7 @@ class ListPass extends CodeCleanerPass
 
     public function __construct()
     {
-        $this->atLeastPhp71 = \version_compare(PHP_VERSION, '7.1', '>=');
+        $this->atLeastPhp71 = version_compare(PHP_VERSION, '7.1', '>=');
     }
 
     /**

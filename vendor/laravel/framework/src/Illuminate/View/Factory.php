@@ -2,8 +2,10 @@
 
 namespace Illuminate\View;
 
+use Closure;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Illuminate\View\Engines\EngineInterface;
 use InvalidArgumentException;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Contracts\Support\Arrayable;
@@ -23,28 +25,28 @@ class Factory implements FactoryContract
     /**
      * The engine implementation.
      *
-     * @var \Illuminate\View\Engines\EngineResolver
+     * @var EngineResolver
      */
     protected $engines;
 
     /**
      * The view finder implementation.
      *
-     * @var \Illuminate\View\ViewFinderInterface
+     * @var ViewFinderInterface
      */
     protected $finder;
 
     /**
      * The event dispatcher instance.
      *
-     * @var \Illuminate\Contracts\Events\Dispatcher
+     * @var Dispatcher
      */
     protected $events;
 
     /**
      * The IoC container instance.
      *
-     * @var \Illuminate\Contracts\Container\Container
+     * @var Container
      */
     protected $container;
 
@@ -83,9 +85,9 @@ class Factory implements FactoryContract
     /**
      * Create a new view factory instance.
      *
-     * @param  \Illuminate\View\Engines\EngineResolver  $engines
-     * @param  \Illuminate\View\ViewFinderInterface  $finder
-     * @param  \Illuminate\Contracts\Events\Dispatcher  $events
+     * @param EngineResolver $engines
+     * @param ViewFinderInterface $finder
+     * @param Dispatcher $events
      * @return void
      */
     public function __construct(EngineResolver $engines, ViewFinderInterface $finder, Dispatcher $events)
@@ -248,9 +250,9 @@ class Factory implements FactoryContract
      * Get the appropriate view engine for the given path.
      *
      * @param  string  $path
-     * @return \Illuminate\View\Engines\EngineInterface
+     * @return EngineInterface
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function getEngineFromPath($path)
     {
@@ -384,7 +386,7 @@ class Factory implements FactoryContract
      *
      * @param  string    $extension
      * @param  string    $engine
-     * @param  \Closure  $resolver
+     * @param  Closure  $resolver
      * @return void
      */
     public function addExtension($extension, $engine, $resolver = null)
@@ -438,7 +440,7 @@ class Factory implements FactoryContract
     /**
      * Get the engine resolver instance.
      *
-     * @return \Illuminate\View\Engines\EngineResolver
+     * @return EngineResolver
      */
     public function getEngineResolver()
     {
@@ -448,7 +450,7 @@ class Factory implements FactoryContract
     /**
      * Get the view finder instance.
      *
-     * @return \Illuminate\View\ViewFinderInterface
+     * @return ViewFinderInterface
      */
     public function getFinder()
     {
@@ -458,7 +460,7 @@ class Factory implements FactoryContract
     /**
      * Set the view finder instance.
      *
-     * @param  \Illuminate\View\ViewFinderInterface  $finder
+     * @param ViewFinderInterface $finder
      * @return void
      */
     public function setFinder(ViewFinderInterface $finder)
@@ -479,7 +481,7 @@ class Factory implements FactoryContract
     /**
      * Get the event dispatcher instance.
      *
-     * @return \Illuminate\Contracts\Events\Dispatcher
+     * @return Dispatcher
      */
     public function getDispatcher()
     {
@@ -489,7 +491,7 @@ class Factory implements FactoryContract
     /**
      * Set the event dispatcher instance.
      *
-     * @param  \Illuminate\Contracts\Events\Dispatcher  $events
+     * @param Dispatcher $events
      * @return void
      */
     public function setDispatcher(Dispatcher $events)
@@ -500,7 +502,7 @@ class Factory implements FactoryContract
     /**
      * Get the IoC container instance.
      *
-     * @return \Illuminate\Contracts\Container\Container
+     * @return Container
      */
     public function getContainer()
     {
@@ -510,7 +512,7 @@ class Factory implements FactoryContract
     /**
      * Set the IoC container instance.
      *
-     * @param  \Illuminate\Contracts\Container\Container  $container
+     * @param Container $container
      * @return void
      */
     public function setContainer(Container $container)

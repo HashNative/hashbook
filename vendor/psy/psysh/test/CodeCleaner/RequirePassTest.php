@@ -12,6 +12,9 @@
 namespace Psy\Test\CodeCleaner;
 
 use Psy\CodeCleaner\RequirePass;
+use Psy\Exception\ErrorException;
+use Psy\Exception\FatalErrorException;
+use function error_reporting;
 
 class RequirePassTest extends CodeCleanerTestCase
 {
@@ -54,7 +57,7 @@ class RequirePassTest extends CodeCleanerTestCase
     }
 
     /**
-     * @expectedException \Psy\Exception\FatalErrorException
+     * @expectedException FatalErrorException
      * @expectedExceptionMessage Failed opening required 'not a file name' in eval()'d code on line 2
      */
     public function testResolve()
@@ -65,12 +68,12 @@ class RequirePassTest extends CodeCleanerTestCase
     /**
      * @dataProvider emptyWarnings
      *
-     * @expectedException \Psy\Exception\ErrorException
+     * @expectedException ErrorException
      * @expectedExceptionMessage Filename cannot be empty on line 1
      */
     public function testResolveEmptyWarnings($file)
     {
-        if (!E_WARNING & \error_reporting()) {
+        if (!E_WARNING & error_reporting()) {
             $this->markTestSkipped();
         }
 

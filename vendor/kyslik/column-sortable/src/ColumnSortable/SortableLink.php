@@ -66,7 +66,7 @@ class SortableLink
      *
      * @return array
      *
-     * @throws \Kyslik\ColumnSortable\Exceptions\ColumnSortableException
+     * @throws ColumnSortableException
      */
     public static function explodeSortParameter($parameter)
     {

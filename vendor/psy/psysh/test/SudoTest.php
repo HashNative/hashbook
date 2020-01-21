@@ -11,13 +11,15 @@
 
 namespace Psy\Test;
 
+use PHPUnit\Framework\TestCase;
 use Psy\Sudo;
+use function version_compare;
 
-class SudoTest extends \PHPUnit\Framework\TestCase
+class SudoTest extends TestCase
 {
     public function setUp()
     {
-        if (\version_compare(PHP_VERSION, '7.1.0', '<')) {
+        if (version_compare(PHP_VERSION, '7.1.0', '<')) {
             $this->markTestSkipped('YOLO');
         }
     }

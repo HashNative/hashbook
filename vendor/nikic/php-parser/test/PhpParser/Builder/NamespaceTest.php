@@ -5,8 +5,9 @@ namespace PhpParser\Builder;
 use PhpParser\Comment\Doc;
 use PhpParser\Node;
 use PhpParser\Node\Stmt;
+use PHPUnit_Framework_TestCase;
 
-class NamespaceTest extends \PHPUnit_Framework_TestCase
+class NamespaceTest extends PHPUnit_Framework_TestCase
 {
     protected function createNamespaceBuilder($fqn) {
         return new Namespace_($fqn);

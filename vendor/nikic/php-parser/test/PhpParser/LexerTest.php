@@ -3,8 +3,9 @@
 namespace PhpParser;
 
 use PhpParser\Parser\Tokens;
+use PHPUnit_Framework_TestCase;
 
-class LexerTest extends \PHPUnit_Framework_TestCase
+class LexerTest extends PHPUnit_Framework_TestCase
 {
     /* To allow overwriting in parent class */
     protected function getLexer(array $options = array()) {
@@ -235,7 +236,7 @@ class LexerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \PhpParser\Error
+     * @expectedException Error
      * @expectedExceptionMessage __HALT_COMPILER must be followed by "();"
      */
     public function testHandleHaltCompilerError() {

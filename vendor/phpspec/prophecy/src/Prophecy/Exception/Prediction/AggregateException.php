@@ -12,8 +12,9 @@
 namespace Prophecy\Exception\Prediction;
 
 use Prophecy\Prophecy\ObjectProphecy;
+use RuntimeException;
 
-class AggregateException extends \RuntimeException implements PredictionException
+class AggregateException extends RuntimeException implements PredictionException
 {
     private $exceptions = array();
     private $objectProphecy;

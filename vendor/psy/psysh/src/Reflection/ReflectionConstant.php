@@ -11,6 +11,8 @@
 
 namespace Psy\Reflection;
 
+use function trigger_error;
+
 /**
  * @deprecated ReflectionConstant is now ReflectionClassConstant. This class
  *             name will be reclaimed in the next stable release, to be used for
@@ -23,7 +25,7 @@ class ReflectionConstant extends ReflectionClassConstant
      */
     public function __construct($class, $name)
     {
-        @\trigger_error('ReflectionConstant is now ReflectionClassConstant', E_USER_DEPRECATED);
+        @trigger_error('ReflectionConstant is now ReflectionClassConstant', E_USER_DEPRECATED);
 
         parent::__construct($class, $name);
     }

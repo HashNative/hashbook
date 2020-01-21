@@ -20,6 +20,7 @@ use PhpConsole\Dispatcher\Debug as DebugDispatcher;
 use PhpConsole\Dispatcher\Errors as ErrorDispatcher;
 use PhpConsole\Handler;
 use PHPUnit_Framework_MockObject_MockObject;
+use Psr\Log\LogLevel;
 
 /**
  * @covers Monolog\Handler\PHPConsoleHandler
@@ -181,7 +182,7 @@ class PHPConsoleHandlerTest extends TestCase
         );
         $handler = $this->initLogger();
         $handler->log(
-            \Psr\Log\LogLevel::ERROR,
+            LogLevel::ERROR,
             sprintf('Uncaught Exception %s: "%s" at %s line %s', get_class($e), $e->getMessage(), $e->getFile(), $e->getLine()),
             array('exception' => $e)
         );

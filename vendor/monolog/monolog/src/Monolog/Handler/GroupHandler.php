@@ -11,6 +11,7 @@
 
 namespace Monolog\Handler;
 
+use InvalidArgumentException;
 use Monolog\Formatter\FormatterInterface;
 use Monolog\ResettableInterface;
 
@@ -31,7 +32,7 @@ class GroupHandler extends AbstractHandler
     {
         foreach ($handlers as $handler) {
             if (!$handler instanceof HandlerInterface) {
-                throw new \InvalidArgumentException('The first argument of the GroupHandler must be an array of HandlerInterface instances.');
+                throw new InvalidArgumentException('The first argument of the GroupHandler must be an array of HandlerInterface instances.');
             }
         }
 

@@ -4,6 +4,7 @@ namespace App\Transformers\Auth;
 
 use App\Transformers\Company\Company;
 use App\Models\Auth\User as Model;
+use League\Fractal\Resource\Collection;
 use League\Fractal\TransformerAbstract;
 
 class User extends TransformerAbstract
@@ -30,7 +31,7 @@ class User extends TransformerAbstract
 
     /**
      * @param Model $model
-     * @return \League\Fractal\Resource\Collection
+     * @return Collection
      */
     public function includeCompanies(Model $model)
     {
@@ -39,7 +40,7 @@ class User extends TransformerAbstract
 
     /**
      * @param Model $model
-     * @return \League\Fractal\Resource\Collection
+     * @return Collection
      */
     public function includeRoles(Model $model)
     {

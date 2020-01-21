@@ -38,7 +38,7 @@ trait ValidatesWhenResolvedTrait
     /**
      * Get the validator instance for the request.
      *
-     * @return \Illuminate\Validation\Validator
+     * @return Validator
      */
     protected function getValidatorInstance()
     {
@@ -48,10 +48,10 @@ trait ValidatesWhenResolvedTrait
     /**
      * Handle a failed validation attempt.
      *
-     * @param  \Illuminate\Validation\Validator  $validator
+     * @param Validator $validator
      * @return void
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     protected function failedValidation(Validator $validator)
     {
@@ -77,7 +77,7 @@ trait ValidatesWhenResolvedTrait
      *
      * @return void
      *
-     * @throws \Illuminate\Validation\UnauthorizedException
+     * @throws UnauthorizedException
      */
     protected function failedAuthorization()
     {

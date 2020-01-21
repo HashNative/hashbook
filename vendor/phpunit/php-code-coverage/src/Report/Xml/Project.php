@@ -10,6 +10,8 @@
 
 namespace SebastianBergmann\CodeCoverage\Report\Xml;
 
+use DOMDocument;
+
 class Project extends Node
 {
     public function __construct($name)
@@ -20,7 +22,7 @@ class Project extends Node
 
     private function init()
     {
-        $dom = new \DOMDocument;
+        $dom = new DOMDocument;
         $dom->loadXML('<?xml version="1.0" ?><phpunit xmlns="http://schema.phpunit.de/coverage/1.0"><project/></phpunit>');
 
         $this->setContextNode(

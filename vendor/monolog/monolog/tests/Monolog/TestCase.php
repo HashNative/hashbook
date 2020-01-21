@@ -11,7 +11,10 @@
 
 namespace Monolog;
 
-class TestCase extends \PHPUnit_Framework_TestCase
+use DateTime;
+use PHPUnit_Framework_TestCase;
+
+class TestCase extends PHPUnit_Framework_TestCase
 {
     /**
      * @return array Record
@@ -24,7 +27,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
             'level' => $level,
             'level_name' => Logger::getLevelName($level),
             'channel' => 'test',
-            'datetime' => \DateTime::createFromFormat('U.u', sprintf('%.6F', microtime(true))),
+            'datetime' => DateTime::createFromFormat('U.u', sprintf('%.6F', microtime(true))),
             'extra' => array(),
         );
     }

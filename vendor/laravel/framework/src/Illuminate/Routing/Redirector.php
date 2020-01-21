@@ -10,21 +10,21 @@ class Redirector
     /**
      * The URL generator instance.
      *
-     * @var \Illuminate\Routing\UrlGenerator
+     * @var UrlGenerator
      */
     protected $generator;
 
     /**
      * The session store instance.
      *
-     * @var \Illuminate\Session\Store
+     * @var SessionStore
      */
     protected $session;
 
     /**
      * Create a new Redirector instance.
      *
-     * @param  \Illuminate\Routing\UrlGenerator  $generator
+     * @param UrlGenerator $generator
      * @return void
      */
     public function __construct(UrlGenerator $generator)
@@ -36,7 +36,7 @@ class Redirector
      * Create a new redirect response to the "home" route.
      *
      * @param  int  $status
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function home($status = 302)
     {
@@ -49,7 +49,7 @@ class Redirector
      * @param  int    $status
      * @param  array  $headers
      * @param  mixed  $fallback
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function back($status = 302, $headers = [], $fallback = false)
     {
@@ -61,7 +61,7 @@ class Redirector
      *
      * @param  int    $status
      * @param  array  $headers
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function refresh($status = 302, $headers = [])
     {
@@ -75,7 +75,7 @@ class Redirector
      * @param  int     $status
      * @param  array   $headers
      * @param  bool    $secure
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function guest($path, $status = 302, $headers = [], $secure = null)
     {
@@ -91,7 +91,7 @@ class Redirector
      * @param  int     $status
      * @param  array   $headers
      * @param  bool    $secure
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function intended($default = '/', $status = 302, $headers = [], $secure = null)
     {
@@ -107,7 +107,7 @@ class Redirector
      * @param  int     $status
      * @param  array   $headers
      * @param  bool    $secure
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function to($path, $status = 302, $headers = [], $secure = null)
     {
@@ -120,7 +120,7 @@ class Redirector
      * @param  string  $path
      * @param  int     $status
      * @param  array   $headers
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function away($path, $status = 302, $headers = [])
     {
@@ -133,7 +133,7 @@ class Redirector
      * @param  string  $path
      * @param  int     $status
      * @param  array   $headers
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function secure($path, $status = 302, $headers = [])
     {
@@ -147,7 +147,7 @@ class Redirector
      * @param  array   $parameters
      * @param  int     $status
      * @param  array   $headers
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function route($route, $parameters = [], $status = 302, $headers = [])
     {
@@ -161,7 +161,7 @@ class Redirector
      * @param  array   $parameters
      * @param  int     $status
      * @param  array   $headers
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function action($action, $parameters = [], $status = 302, $headers = [])
     {
@@ -174,7 +174,7 @@ class Redirector
      * @param  string  $path
      * @param  int     $status
      * @param  array   $headers
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     protected function createRedirect($path, $status, $headers)
     {
@@ -190,7 +190,7 @@ class Redirector
     /**
      * Get the URL generator instance.
      *
-     * @return \Illuminate\Routing\UrlGenerator
+     * @return UrlGenerator
      */
     public function getUrlGenerator()
     {
@@ -200,7 +200,7 @@ class Redirector
     /**
      * Set the active session store.
      *
-     * @param  \Illuminate\Session\Store  $session
+     * @param SessionStore $session
      * @return void
      */
     public function setSession(SessionStore $session)

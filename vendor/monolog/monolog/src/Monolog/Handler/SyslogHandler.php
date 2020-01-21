@@ -11,6 +11,7 @@
 
 namespace Monolog\Handler;
 
+use LogicException;
 use Monolog\Logger;
 
 /**
@@ -60,7 +61,7 @@ class SyslogHandler extends AbstractSyslogHandler
     protected function write(array $record)
     {
         if (!openlog($this->ident, $this->logopts, $this->facility)) {
-            throw new \LogicException('Can\'t open syslog for ident "'.$this->ident.'" and facility "'.$this->facility.'"');
+            throw new LogicException('Can\'t open syslog for ident "'.$this->ident.'" and facility "'.$this->facility.'"');
         }
         syslog($this->logLevels[$record['level']], (string) $record['formatted']);
     }

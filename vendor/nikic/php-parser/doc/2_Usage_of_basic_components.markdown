@@ -247,10 +247,11 @@ All visitors must implement the `PhpParser\NodeVisitor` interface, which defines
 methods:
 
 ```php
-public function beforeTraverse(array $nodes);
-public function enterNode(\PhpParser\Node $node);
-public function leaveNode(\PhpParser\Node $node);
-public function afterTraverse(array $nodes);
+
+use PhpParser\Node;public function beforeTraverse(array $nodes)
+public function enterNode(Node $node)
+public function leaveNode(Node $node)
+public function afterTraverse(array $nodes)
 ```
 
 The `beforeTraverse()` method is called once before the traversal begins and is passed the nodes the
@@ -327,8 +328,8 @@ $traverser->addVisitor(new NameResolver); // we will need resolved names
 $traverser->addVisitor(new NamespaceConverter); // our own node visitor
 
 // iterate over all .php files in the directory
-$files = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($inDir));
-$files = new \RegexIterator($files, '/\.php$/');
+$files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($inDir));
+$files = new RegexIterator($files, '/\.php$/');
 
 foreach ($files as $file) {
     try {
@@ -359,9 +360,9 @@ Now lets start with the main code, the `NodeVisitor\NamespaceConverter`. One thi
 is convert `A\\B` style names to `A_B` style ones.
 
 ```php
-use PhpParser\Node;
+use PhpParser\Node;use PhpParser\NodeVisitorAbstract;
 
-class NamespaceConverter extends \PhpParser\NodeVisitorAbstract
+class NamespaceConverter extends NodeVisitorAbstract
 {
     public function leaveNode(Node $node) {
         if ($node instanceof Node\Name) {
@@ -383,9 +384,9 @@ the namespace prefix:
 
 ```php
 use PhpParser\Node;
-use PhpParser\Node\Stmt;
+use PhpParser\Node\Stmt;use PhpParser\NodeVisitorAbstract;
 
-class NodeVisitor_NamespaceConverter extends \PhpParser\NodeVisitorAbstract
+class NodeVisitor_NamespaceConverter extends NodeVisitorAbstract
 {
     public function leaveNode(Node $node) {
         if ($node instanceof Node\Name) {
@@ -409,9 +410,9 @@ The last thing we need to do is remove the `namespace` and `use` statements:
 
 ```php
 use PhpParser\Node;
-use PhpParser\Node\Stmt;
+use PhpParser\Node\Stmt;use PhpParser\NodeVisitorAbstract;
 
-class NodeVisitor_NamespaceConverter extends \PhpParser\NodeVisitorAbstract
+class NodeVisitor_NamespaceConverter extends NodeVisitorAbstract
 {
     public function leaveNode(Node $node) {
         if ($node instanceof Node\Name) {

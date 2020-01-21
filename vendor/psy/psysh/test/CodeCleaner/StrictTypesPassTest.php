@@ -12,12 +12,14 @@
 namespace Psy\Test\CodeCleaner;
 
 use Psy\CodeCleaner\StrictTypesPass;
+use Psy\Exception\FatalErrorException;
+use function version_compare;
 
 class StrictTypesPassTest extends CodeCleanerTestCase
 {
     public function setUp()
     {
-        if (\version_compare(PHP_VERSION, '7.0', '<')) {
+        if (version_compare(PHP_VERSION, '7.0', '<')) {
             $this->markTestSkipped();
         }
 
@@ -34,7 +36,7 @@ class StrictTypesPassTest extends CodeCleanerTestCase
 
     /**
      * @dataProvider invalidDeclarations
-     * @expectedException \Psy\Exception\FatalErrorException
+     * @expectedException FatalErrorException
      */
     public function testInvalidDeclarations($code)
     {

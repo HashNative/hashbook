@@ -12,8 +12,10 @@
 namespace Monolog\Formatter;
 
 use Exception;
+use InvalidArgumentException;
 use Monolog\Utils;
 use Throwable;
+use Traversable;
 
 /**
  * Encodes whatever record data is passed to it as json
@@ -145,7 +147,7 @@ class JsonFormatter extends NormalizerFormatter
             return 'Over 9 levels deep, aborting normalization';
         }
 
-        if (is_array($data) || $data instanceof \Traversable) {
+        if (is_array($data) || $data instanceof Traversable) {
             $normalized = array();
 
             $count = 1;
@@ -180,7 +182,7 @@ class JsonFormatter extends NormalizerFormatter
     {
         // TODO 2.0 only check for Throwable
         if (!$e instanceof Exception && !$e instanceof Throwable) {
-            throw new \InvalidArgumentException('Exception/Throwable expected, got '.gettype($e).' / '.Utils::getClass($e));
+            throw new InvalidArgumentException('Exception/Throwable expected, got '.gettype($e).' / '.Utils::getClass($e));
         }
 
         $data = array(

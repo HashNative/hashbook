@@ -4,6 +4,7 @@ namespace Illuminate\Queue\Console;
 
 use Illuminate\Support\Arr;
 use Illuminate\Console\Command;
+use stdClass;
 use Symfony\Component\Console\Input\InputArgument;
 
 class RetryCommand extends Command
@@ -63,7 +64,7 @@ class RetryCommand extends Command
     /**
      * Retry the queue job.
      *
-     * @param  \stdClass  $job
+     * @param  stdClass  $job
      * @return void
      */
     protected function retryJob($job)

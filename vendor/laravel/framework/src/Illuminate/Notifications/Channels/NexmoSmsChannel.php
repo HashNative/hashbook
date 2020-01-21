@@ -5,13 +5,14 @@ namespace Illuminate\Notifications\Channels;
 use Nexmo\Client as NexmoClient;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\NexmoMessage;
+use Nexmo\Message\Message;
 
 class NexmoSmsChannel
 {
     /**
      * The Nexmo client instance.
      *
-     * @var \Nexmo\Client
+     * @var NexmoClient
      */
     protected $nexmo;
 
@@ -25,7 +26,7 @@ class NexmoSmsChannel
     /**
      * Create a new Nexmo channel instance.
      *
-     * @param  \Nexmo\Client  $nexmo
+     * @param NexmoClient $nexmo
      * @param  string  $from
      * @return void
      */
@@ -39,8 +40,8 @@ class NexmoSmsChannel
      * Send the given notification.
      *
      * @param  mixed  $notifiable
-     * @param  \Illuminate\Notifications\Notification  $notification
-     * @return \Nexmo\Message\Message
+     * @param Notification $notification
+     * @return Message
      */
     public function send($notifiable, Notification $notification)
     {

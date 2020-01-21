@@ -49,7 +49,7 @@ class CallTimesPrediction implements PredictionInterface
      * @param ObjectProphecy $object
      * @param MethodProphecy $method
      *
-     * @throws \Prophecy\Exception\Prediction\UnexpectedCallsCountException
+     * @throws UnexpectedCallsCountException
      */
     public function check(array $calls, ObjectProphecy $object, MethodProphecy $method)
     {

@@ -2,7 +2,9 @@
 
 namespace PhpParser\Node\Stmt;
 
-class PropertyTest extends \PHPUnit_Framework_TestCase
+use PHPUnit_Framework_TestCase;
+
+class PropertyTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider provideModifiers

@@ -6,6 +6,7 @@ use App\Http\Controllers\ApiController;
 use App\Http\Requests\Income\Customer as Request;
 use App\Models\Income\Customer;
 use App\Transformers\Income\Customer as Transformer;
+use Dingo\Api\Http\Response;
 use Dingo\Api\Routing\Helpers;
 
 class Customers extends ApiController
@@ -15,7 +16,7 @@ class Customers extends ApiController
     /**
      * Display a listing of the resource.
      *
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -28,7 +29,7 @@ class Customers extends ApiController
      * Display the specified resource.
      *
      * @param  int|string  $id
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function show($id)
     {
@@ -46,7 +47,7 @@ class Customers extends ApiController
      * Store a newly created resource in storage.
      *
      * @param  $request
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -60,7 +61,7 @@ class Customers extends ApiController
      *
      * @param  $customer
      * @param  $request
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function update(Customer $customer, Request $request)
     {
@@ -73,7 +74,7 @@ class Customers extends ApiController
      * Remove the specified resource from storage.
      *
      * @param  Customer  $customer
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function destroy(Customer $customer)
     {

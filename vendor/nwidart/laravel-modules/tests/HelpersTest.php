@@ -2,10 +2,12 @@
 
 namespace Nwidart\Modules\tests;
 
+use Illuminate\Filesystem\Filesystem;
+
 class HelpersTest extends BaseTestCase
 {
     /**
-     * @var \Illuminate\Filesystem\Filesystem
+     * @var Filesystem
      */
     private $finder;
     /**

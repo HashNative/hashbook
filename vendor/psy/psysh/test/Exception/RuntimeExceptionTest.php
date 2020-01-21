@@ -11,9 +11,10 @@
 
 namespace Psy\Test\Exception;
 
+use PHPUnit\Framework\TestCase;
 use Psy\Exception\RuntimeException;
 
-class RuntimeExceptionTest extends \PHPUnit\Framework\TestCase
+class RuntimeExceptionTest extends TestCase
 {
     public function testException()
     {

@@ -2,6 +2,7 @@
 
 namespace Illuminate\Foundation\Testing\Concerns;
 
+use Illuminate\Http\Response;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Testing\TestResponse;
@@ -48,7 +49,7 @@ trait MakesHttpRequests
      *
      * @param  string  $uri
      * @param  array  $headers
-     * @return \Illuminate\Foundation\Testing\TestResponse
+     * @return TestResponse
      */
     public function get($uri, array $headers = [])
     {
@@ -62,7 +63,7 @@ trait MakesHttpRequests
      *
      * @param  string  $uri
      * @param  array  $headers
-     * @return \Illuminate\Foundation\Testing\TestResponse
+     * @return TestResponse
      */
     public function getJson($uri, array $headers = [])
     {
@@ -75,7 +76,7 @@ trait MakesHttpRequests
      * @param  string  $uri
      * @param  array  $data
      * @param  array  $headers
-     * @return \Illuminate\Foundation\Testing\TestResponse
+     * @return TestResponse
      */
     public function post($uri, array $data = [], array $headers = [])
     {
@@ -90,7 +91,7 @@ trait MakesHttpRequests
      * @param  string  $uri
      * @param  array  $data
      * @param  array  $headers
-     * @return \Illuminate\Foundation\Testing\TestResponse
+     * @return TestResponse
      */
     public function postJson($uri, array $data = [], array $headers = [])
     {
@@ -103,7 +104,7 @@ trait MakesHttpRequests
      * @param  string  $uri
      * @param  array  $data
      * @param  array  $headers
-     * @return \Illuminate\Foundation\Testing\TestResponse
+     * @return TestResponse
      */
     public function put($uri, array $data = [], array $headers = [])
     {
@@ -118,7 +119,7 @@ trait MakesHttpRequests
      * @param  string  $uri
      * @param  array  $data
      * @param  array  $headers
-     * @return \Illuminate\Foundation\Testing\TestResponse
+     * @return TestResponse
      */
     public function putJson($uri, array $data = [], array $headers = [])
     {
@@ -131,7 +132,7 @@ trait MakesHttpRequests
      * @param  string  $uri
      * @param  array  $data
      * @param  array  $headers
-     * @return \Illuminate\Foundation\Testing\TestResponse
+     * @return TestResponse
      */
     public function patch($uri, array $data = [], array $headers = [])
     {
@@ -146,7 +147,7 @@ trait MakesHttpRequests
      * @param  string  $uri
      * @param  array  $data
      * @param  array  $headers
-     * @return \Illuminate\Foundation\Testing\TestResponse
+     * @return TestResponse
      */
     public function patchJson($uri, array $data = [], array $headers = [])
     {
@@ -159,7 +160,7 @@ trait MakesHttpRequests
      * @param  string  $uri
      * @param  array  $data
      * @param  array  $headers
-     * @return \Illuminate\Foundation\Testing\TestResponse
+     * @return TestResponse
      */
     public function delete($uri, array $data = [], array $headers = [])
     {
@@ -174,7 +175,7 @@ trait MakesHttpRequests
      * @param  string  $uri
      * @param  array  $data
      * @param  array  $headers
-     * @return \Illuminate\Foundation\Testing\TestResponse
+     * @return TestResponse
      */
     public function deleteJson($uri, array $data = [], array $headers = [])
     {
@@ -188,7 +189,7 @@ trait MakesHttpRequests
      * @param  string  $uri
      * @param  array  $data
      * @param  array  $headers
-     * @return \Illuminate\Foundation\Testing\TestResponse
+     * @return TestResponse
      */
     public function json($method, $uri, array $data = [], array $headers = [])
     {
@@ -217,7 +218,7 @@ trait MakesHttpRequests
      * @param  array  $files
      * @param  array  $server
      * @param  string  $content
-     * @return \Illuminate\Foundation\Testing\TestResponse
+     * @return TestResponse
      */
     public function call($method, $uri, $parameters = [], $cookies = [], $files = [], $server = [], $content = null)
     {
@@ -318,8 +319,8 @@ trait MakesHttpRequests
     /**
      * Create the test response instance from the given response.
      *
-     * @param  \Illuminate\Http\Response  $response
-     * @return \Illuminate\Foundation\Testing\TestResponse
+     * @param  Response  $response
+     * @return TestResponse
      */
     protected function createTestResponse($response)
     {

@@ -2,6 +2,7 @@
 
 namespace Illuminate\Foundation\Testing\Concerns;
 
+use Exception;
 use Mockery;
 use Illuminate\Contracts\Bus\Dispatcher as BusDispatcherContract;
 use Illuminate\Contracts\Events\Dispatcher as EventsDispatcherContract;
@@ -45,7 +46,7 @@ trait MocksApplicationServices
      * @param  array|string  $events
      * @return $this
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function expectsEvents($events)
     {

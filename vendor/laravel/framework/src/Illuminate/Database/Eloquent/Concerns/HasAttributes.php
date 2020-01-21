@@ -3,6 +3,7 @@
 namespace Illuminate\Database\Eloquent\Concerns;
 
 use Carbon\Carbon;
+use DateTime;
 use LogicException;
 use DateTimeInterface;
 use Illuminate\Support\Arr;
@@ -393,7 +394,7 @@ trait HasAttributes
      * @param  string  $method
      * @return mixed
      *
-     * @throws \LogicException
+     * @throws LogicException
      */
     protected function getRelationshipFromMethod($method)
     {
@@ -657,7 +658,7 @@ trait HasAttributes
      * Return a timestamp as DateTime object with time set to 00:00:00.
      *
      * @param  mixed  $value
-     * @return \Carbon\Carbon
+     * @return Carbon
      */
     protected function asDate($value)
     {
@@ -668,7 +669,7 @@ trait HasAttributes
      * Return a timestamp as DateTime object.
      *
      * @param  mixed  $value
-     * @return \Carbon\Carbon
+     * @return Carbon
      */
     protected function asDateTime($value)
     {
@@ -724,7 +725,7 @@ trait HasAttributes
     /**
      * Convert a DateTime to a storable string.
      *
-     * @param  \DateTime|int  $value
+     * @param  DateTime|int  $value
      * @return string
      */
     public function fromDateTime($value)
@@ -748,7 +749,7 @@ trait HasAttributes
     /**
      * Prepare a date for array / JSON serialization.
      *
-     * @param  \DateTimeInterface  $date
+     * @param DateTimeInterface $date
      * @return string
      */
     protected function serializeDate(DateTimeInterface $date)

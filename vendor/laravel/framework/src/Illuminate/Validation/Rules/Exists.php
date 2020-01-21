@@ -30,7 +30,7 @@ class Exists
     /**
      * The custom query callback.
      *
-     * @var \Closure|null
+     * @var Closure|null
      */
     protected $using;
 
@@ -102,7 +102,7 @@ class Exists
     /**
      * Register a custom query callback.
      *
-     * @param  \Closure $callback
+     * @param Closure $callback
      * @return $this
      */
     public function using(Closure $callback)

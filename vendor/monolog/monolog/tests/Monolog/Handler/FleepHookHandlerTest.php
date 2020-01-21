@@ -11,6 +11,7 @@
 
 namespace Monolog\Handler;
 
+use DateTime;
 use Monolog\Formatter\LineFormatter;
 use Monolog\Logger;
 use Monolog\TestCase;
@@ -62,7 +63,7 @@ class FleepHookHandlerTest extends TestCase
             'level' => Logger::DEBUG,
             'level_name' => Logger::getLevelName(Logger::DEBUG),
             'channel' => 'channel',
-            'datetime' => new \DateTime(),
+            'datetime' => new DateTime(),
             'extra' => array(),
         );
 

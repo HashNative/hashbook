@@ -11,12 +11,24 @@
 
 namespace Psy\Command;
 
+use InvalidArgumentException;
 use Psy\Context;
 use Psy\ContextAware;
+use Symfony\Component\Console\Exception\LogicException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use UnexpectedValueException;
+use function escapeshellarg;
+use function file_get_contents;
+use function getenv;
+use function preg_replace;
+use function proc_close;
+use function proc_open;
+use function strlen;
+use function tempnam;
+use function unlink;
 
 class EditCommand extends Command implements ContextAware
 {
@@ -36,7 +48,7 @@ class EditCommand extends Command implements ContextAware
      * @param string      $runtimeDir The directory to use for temporary files
      * @param string|null $name       The name of the command; passing null means it must be set in configure()
      *
-     * @throws \Symfony\Component\Console\Exception\LogicException When the command name is empty
+     * @throws LogicException When the command name is empty
      */
     public function __construct($runtimeDir, $name = null)
     {
@@ -74,14 +86,14 @@ class EditCommand extends Command implements ContextAware
      * @param InputInterface  $input
      * @param OutputInterface $output
      *
-     * @throws \InvalidArgumentException when both exec and no-exec flags are given or if a given variable is not found in the current context
-     * @throws \UnexpectedValueException if file_get_contents on the edited file returns false instead of a string
+     * @throws InvalidArgumentException when both exec and no-exec flags are given or if a given variable is not found in the current context
+     * @throws UnexpectedValueException if file_get_contents on the edited file returns false instead of a string
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         if ($input->getOption('exec') &&
             $input->getOption('no-exec')) {
-            throw new \InvalidArgumentException('The --exec and --no-exec flags are mutually exclusive');
+            throw new InvalidArgumentException('The --exec and --no-exec flags are mutually exclusive');
         }
 
         $filePath = $this->extractFilePath($input->getArgument('file'));
@@ -95,7 +107,7 @@ class EditCommand extends Command implements ContextAware
         $shouldRemoveFile = false;
 
         if ($filePath === null) {
-            $filePath = \tempnam($this->runtimeDir, 'psysh-edit-command');
+            $filePath = tempnam($this->runtimeDir, 'psysh-edit-command');
             $shouldRemoveFile = true;
         }
 
@@ -132,15 +144,15 @@ class EditCommand extends Command implements ContextAware
      *
      * @return string|null The file path to edit, null if the input was null, or the value of the referenced variable
      *
-     * @throws \InvalidArgumentException If the variable is not found in the current context
+     * @throws InvalidArgumentException If the variable is not found in the current context
      */
     private function extractFilePath($fileArgument)
     {
         // If the file argument was a variable, get it from the context
         if ($fileArgument !== null &&
-            \strlen($fileArgument) > 0 &&
+            strlen($fileArgument) > 0 &&
             $fileArgument[0] === '$') {
-            $fileArgument = $this->context->get(\preg_replace('/^\$/', '', $fileArgument));
+            $fileArgument = $this->context->get(preg_replace('/^\$/', '', $fileArgument));
         }
 
         return $fileArgument;
@@ -152,24 +164,24 @@ class EditCommand extends Command implements ContextAware
      *
      * @return string
      *
-     * @throws \UnexpectedValueException if file_get_contents on $filePath returns false instead of a string
+     * @throws UnexpectedValueException if file_get_contents on $filePath returns false instead of a string
      */
     private function editFile($filePath, $shouldRemoveFile)
     {
-        $escapedFilePath = \escapeshellarg($filePath);
+        $escapedFilePath = escapeshellarg($filePath);
 
         $pipes = [];
-        $proc = \proc_open((\getenv('EDITOR') ?: 'nano') . " {$escapedFilePath}", [STDIN, STDOUT, STDERR], $pipes);
-        \proc_close($proc);
+        $proc = proc_open((getenv('EDITOR') ?: 'nano') . " {$escapedFilePath}", [STDIN, STDOUT, STDERR], $pipes);
+        proc_close($proc);
 
-        $editedContent = @\file_get_contents($filePath);
+        $editedContent = @file_get_contents($filePath);
 
         if ($shouldRemoveFile) {
-            @\unlink($filePath);
+            @unlink($filePath);
         }
 
         if ($editedContent === false) {
-            throw new \UnexpectedValueException("Reading {$filePath} returned false");
+            throw new UnexpectedValueException("Reading {$filePath} returned false");
         }
 
         return $editedContent;

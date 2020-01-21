@@ -3,9 +3,10 @@
 namespace Sofa\Eloquence\Tests;
 
 use Mockery as m;
+use PHPUnit_Framework_TestCase;
 use Sofa\Eloquence\AttributeCleaner\Observer;
 
-class CleansAttributesObserverTest extends \PHPUnit_Framework_TestCase {
+class CleansAttributesObserverTest extends PHPUnit_Framework_TestCase {
 
     public function tearDown()
     {

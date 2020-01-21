@@ -89,7 +89,7 @@ class ViewServiceProvider extends ServiceProvider
     /**
      * Register the file engine implementation.
      *
-     * @param  \Illuminate\View\Engines\EngineResolver  $resolver
+     * @param EngineResolver $resolver
      * @return void
      */
     public function registerFileEngine($resolver)
@@ -102,7 +102,7 @@ class ViewServiceProvider extends ServiceProvider
     /**
      * Register the PHP engine implementation.
      *
-     * @param  \Illuminate\View\Engines\EngineResolver  $resolver
+     * @param EngineResolver $resolver
      * @return void
      */
     public function registerPhpEngine($resolver)
@@ -115,7 +115,7 @@ class ViewServiceProvider extends ServiceProvider
     /**
      * Register the Blade engine implementation.
      *
-     * @param  \Illuminate\View\Engines\EngineResolver  $resolver
+     * @param EngineResolver $resolver
      * @return void
      */
     public function registerBladeEngine($resolver)

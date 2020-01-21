@@ -3,6 +3,7 @@
 namespace App\Models\Module;
 
 use App\Models\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Sofa\Eloquence\Eloquence;
 
 class Module extends Model
@@ -21,9 +22,9 @@ class Module extends Model
     /**
      * Scope alias.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param Builder $query
      * @param string $alias
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public function scopeAlias($query, $alias)
     {

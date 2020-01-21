@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Database\Eloquent\Collection;
 use Plank\Mediable\Media;
 use Plank\Mediable\MediableCollection;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
@@ -20,7 +21,7 @@ class MediableTest extends TestCase
         $mediable->attachMedia($media1, 'foo');
         $result = $mediable->getMedia('foo');
 
-        $this->assertInstanceOf(\Illuminate\Database\Eloquent\Collection::class, $result);
+        $this->assertInstanceOf(Collection::class, $result);
         $this->assertEquals([2], $result->pluck('id')->toArray());
     }
 

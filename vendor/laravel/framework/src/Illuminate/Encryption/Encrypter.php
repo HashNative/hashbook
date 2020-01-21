@@ -6,6 +6,8 @@ use RuntimeException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Contracts\Encryption\EncryptException;
 use Illuminate\Contracts\Encryption\Encrypter as EncrypterContract;
+use function openssl_decrypt;
+use function openssl_encrypt;
 
 class Encrypter implements EncrypterContract
 {
@@ -30,7 +32,7 @@ class Encrypter implements EncrypterContract
      * @param  string  $cipher
      * @return void
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     public function __construct($key, $cipher = 'AES-128-CBC')
     {
@@ -66,7 +68,7 @@ class Encrypter implements EncrypterContract
      * @param  bool  $serialize
      * @return string
      *
-     * @throws \Illuminate\Contracts\Encryption\EncryptException
+     * @throws EncryptException
      */
     public function encrypt($value, $serialize = true)
     {
@@ -75,7 +77,7 @@ class Encrypter implements EncrypterContract
         // First we will encrypt the value using OpenSSL. After this is encrypted we
         // will proceed to calculating a MAC for the encrypted value so that this
         // value can be verified later as not having been changed by the users.
-        $value = \openssl_encrypt(
+        $value = openssl_encrypt(
             $serialize ? serialize($value) : $value,
             $this->cipher, $this->key, 0, $iv
         );
@@ -116,7 +118,7 @@ class Encrypter implements EncrypterContract
      * @param  bool  $unserialize
      * @return string
      *
-     * @throws \Illuminate\Contracts\Encryption\DecryptException
+     * @throws DecryptException
      */
     public function decrypt($payload, $unserialize = true)
     {
@@ -127,7 +129,7 @@ class Encrypter implements EncrypterContract
         // Here we will decrypt the value. If we are able to successfully decrypt it
         // we will then unserialize it and return it out to the caller. If we are
         // unable to decrypt this value we will throw out an exception message.
-        $decrypted = \openssl_decrypt(
+        $decrypted = openssl_decrypt(
             $payload['value'], $this->cipher, $this->key, 0, $iv
         );
 
@@ -167,7 +169,7 @@ class Encrypter implements EncrypterContract
      * @param  string  $payload
      * @return array
      *
-     * @throws \Illuminate\Contracts\Encryption\DecryptException
+     * @throws DecryptException
      */
     protected function getJsonPayload($payload)
     {

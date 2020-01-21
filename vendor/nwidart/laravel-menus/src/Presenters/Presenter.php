@@ -27,7 +27,7 @@ abstract class Presenter implements PresenterInterface
     /**
      * Get menu tag without dropdown wrapper.
      *
-     * @param \Nwidart\Menus\MenuItem $item
+     * @param MenuItem $item
      *
      * @return string
      */
@@ -47,7 +47,7 @@ abstract class Presenter implements PresenterInterface
     /**
      * Get header dropdown tag wrapper.
      *
-     * @param \Nwidart\Menus\MenuItem $item
+     * @param MenuItem $item
      *
      * @return string
      */
@@ -58,7 +58,7 @@ abstract class Presenter implements PresenterInterface
     /**
      * Get menu tag with dropdown wrapper.
      *
-     * @param \Nwidart\Menus\MenuItem $item
+     * @param MenuItem $item
      *
      * @return string
      */
@@ -69,7 +69,7 @@ abstract class Presenter implements PresenterInterface
     /**
      * Get multi level dropdown menu wrapper.
      *
-     * @param \Nwidart\Menus\MenuItem $item
+     * @param MenuItem $item
      *
      * @return string
      */
@@ -80,7 +80,7 @@ abstract class Presenter implements PresenterInterface
     /**
      * Get child menu items.
      *
-     * @param \Nwidart\Menus\MenuItem $item
+     * @param MenuItem $item
      *
      * @return string
      */

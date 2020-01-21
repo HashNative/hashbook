@@ -199,24 +199,24 @@ class Framework_AssertTest extends PHPUnit_Framework_TestCase
 
     public function testAssertArraySubsetWithNoStrictCheckAndObjects()
     {
-        $obj       = new \stdClass;
+        $obj       = new stdClass;
         $reference = &$obj;
         $array     = ['a' => $obj];
 
         $this->assertArraySubset(['a' => $reference], $array);
-        $this->assertArraySubset(['a' => new \stdClass], $array);
+        $this->assertArraySubset(['a' => new stdClass], $array);
     }
 
     public function testAssertArraySubsetWithStrictCheckAndObjects()
     {
-        $obj       = new \stdClass;
+        $obj       = new stdClass;
         $reference = &$obj;
         $array     = ['a' => $obj];
 
         $this->assertArraySubset(['a' => $reference], $array, true);
 
         try {
-            $this->assertArraySubset(['a' => new \stdClass], $array, true);
+            $this->assertArraySubset(['a' => new stdClass], $array, true);
         } catch (PHPUnit_Framework_AssertionFailedError $e) {
             return;
         }

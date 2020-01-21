@@ -11,6 +11,10 @@
 
 namespace Psy\Exception;
 
+use Error;
+use function preg_match;
+use function sprintf;
+
 /**
  * A custom error Exception for Psy with a formatted $message.
  */
@@ -32,7 +36,7 @@ class ErrorException extends \ErrorException implements Exception
     {
         $this->rawMessage = $message;
 
-        if (!empty($filename) && \preg_match('{Psy[/\\\\]ExecutionLoop}', $filename)) {
+        if (!empty($filename) && preg_match('{Psy[/\\\\]ExecutionLoop}', $filename)) {
             $filename = '';
         }
 
@@ -67,7 +71,7 @@ class ErrorException extends \ErrorException implements Exception
                 break;
         }
 
-        $message = \sprintf('PHP %s:  %s%s on line %d', $type, $message, $filename ? ' in ' . $filename : '', $lineno);
+        $message = sprintf('PHP %s:  %s%s on line %d', $type, $message, $filename ? ' in ' . $filename : '', $lineno);
         parent::__construct($message, $code, $severity, $filename, $lineno, $previous);
     }
 
@@ -103,11 +107,11 @@ class ErrorException extends \ErrorException implements Exception
     /**
      * Create an ErrorException from an Error.
      *
-     * @param \Error $e
+     * @param Error $e
      *
      * @return ErrorException
      */
-    public static function fromError(\Error $e)
+    public static function fromError(Error $e)
     {
         return new self($e->getMessage(), $e->getCode(), 1, $e->getFile(), $e->getLine(), $e);
     }

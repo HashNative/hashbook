@@ -12,7 +12,11 @@
 namespace Psy\Command\ListCommand;
 
 use Psy\Reflection\ReflectionClassConstant;
+use ReflectionClass;
+use Reflector;
 use Symfony\Component\Console\Input\InputInterface;
+use function ksort;
+use function method_exists;
 
 /**
  * Class Constant Enumerator class.
@@ -22,7 +26,7 @@ class ClassConstantEnumerator extends Enumerator
     /**
      * {@inheritdoc}
      */
-    protected function listItems(InputInterface $input, \Reflector $reflector = null, $target = null)
+    protected function listItems(InputInterface $input, Reflector $reflector = null, $target = null)
     {
         // only list constants when a Reflector is present.
 
@@ -31,7 +35,7 @@ class ClassConstantEnumerator extends Enumerator
         }
 
         // We can only list constants on actual class (or object) reflectors.
-        if (!$reflector instanceof \ReflectionClass) {
+        if (!$reflector instanceof ReflectionClass) {
             // @todo handle ReflectionExtension as well
             return;
         }
@@ -57,12 +61,12 @@ class ClassConstantEnumerator extends Enumerator
     /**
      * Get defined constants for the given class or object Reflector.
      *
-     * @param \Reflector $reflector
+     * @param Reflector $reflector
      * @param bool       $noInherit Exclude inherited constants
      *
      * @return array
      */
-    protected function getConstants(\Reflector $reflector, $noInherit = false)
+    protected function getConstants(Reflector $reflector, $noInherit = false)
     {
         $className = $reflector->getName();
 
@@ -77,7 +81,7 @@ class ClassConstantEnumerator extends Enumerator
             $constants[$name] = $constReflector;
         }
 
-        \ksort($constants, SORT_NATURAL | SORT_FLAG_CASE);
+        ksort($constants, SORT_NATURAL | SORT_FLAG_CASE);
 
         return $constants;
     }
@@ -110,15 +114,15 @@ class ClassConstantEnumerator extends Enumerator
     /**
      * Get a label for the particular kind of "class" represented.
      *
-     * @param \ReflectionClass $reflector
+     * @param ReflectionClass $reflector
      *
      * @return string
      */
-    protected function getKindLabel(\ReflectionClass $reflector)
+    protected function getKindLabel(ReflectionClass $reflector)
     {
         if ($reflector->isInterface()) {
             return 'Interface Constants';
-        } elseif (\method_exists($reflector, 'isTrait') && $reflector->isTrait()) {
+        } elseif (method_exists($reflector, 'isTrait') && $reflector->isTrait()) {
             return 'Trait Constants';
         } else {
             return 'Class Constants';

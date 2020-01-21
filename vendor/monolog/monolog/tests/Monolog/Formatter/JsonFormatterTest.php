@@ -11,8 +11,14 @@
 
 namespace Monolog\Formatter;
 
+use DateTime;
+use Error;
+use Exception;
+use LogicException;
 use Monolog\Logger;
 use Monolog\TestCase;
+use RuntimeException;
+use Throwable;
 
 class JsonFormatterTest extends TestCase
 {
@@ -79,7 +85,7 @@ class JsonFormatterTest extends TestCase
     public function testDefFormatWithException()
     {
         $formatter = new JsonFormatter();
-        $exception = new \RuntimeException('Foo');
+        $exception = new RuntimeException('Foo');
         $formattedException = $this->formatException($exception);
 
         $message = $this->formatRecordWithExceptionInContext($formatter, $exception);
@@ -90,7 +96,7 @@ class JsonFormatterTest extends TestCase
     public function testDefFormatWithPreviousException()
     {
         $formatter = new JsonFormatter();
-        $exception = new \RuntimeException('Foo', 0, new \LogicException('Wut?'));
+        $exception = new RuntimeException('Foo', 0, new LogicException('Wut?'));
         $formattedPrevException = $this->formatException($exception->getPrevious());
         $formattedException = $this->formatException($exception, $formattedPrevException);
 
@@ -106,7 +112,7 @@ class JsonFormatterTest extends TestCase
         }
 
         $formatter = new JsonFormatter();
-        $throwable = new \Error('Foo');
+        $throwable = new Error('Foo');
         $formattedThrowable = $this->formatException($throwable);
 
         $message = $this->formatRecordWithExceptionInContext($formatter, $throwable);
@@ -130,7 +136,7 @@ class JsonFormatterTest extends TestCase
 
     /**
      * @param JsonFormatter $formatter
-     * @param \Exception|\Throwable $exception
+     * @param Exception|Throwable $exception
      *
      * @return string
      */
@@ -148,7 +154,7 @@ class JsonFormatterTest extends TestCase
     }
 
     /**
-     * @param \Exception|\Throwable $exception
+     * @param Exception|Throwable $exception
      *
      * @return string
      */
@@ -163,7 +169,7 @@ class JsonFormatterTest extends TestCase
     }
 
     /**
-     * @param \Exception|\Throwable $exception
+     * @param Exception|Throwable $exception
      *
      * @param null|string $previous
      *
@@ -191,7 +197,7 @@ class JsonFormatterTest extends TestCase
             'channel' => 'test',
             'message' => 'bar',
             'context' => array($largeArray),
-            'datetime' => new \DateTime,
+            'datetime' => new DateTime,
             'extra' => array(),
         ));
 
@@ -209,7 +215,7 @@ class JsonFormatterTest extends TestCase
             'channel' => 'test',
             'message' => 'bar',
             'context' => array($largeArray),
-            'datetime' => new \DateTime,
+            'datetime' => new DateTime,
             'extra' => array(),
         ));
 

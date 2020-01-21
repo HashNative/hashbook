@@ -17,6 +17,8 @@ use Psy\Input\CodeArgument;
 use Psy\Reflection\ReflectionLanguageConstruct;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use function get_class;
+use function sprintf;
 
 /**
  * Read the documentation for an object, class, constant, method or property.
@@ -86,7 +88,7 @@ HELP
 
     private function getManualDoc($reflector)
     {
-        switch (\get_class($reflector)) {
+        switch (get_class($reflector)) {
             case 'ReflectionClass':
             case 'ReflectionObject':
             case 'ReflectionFunction':
@@ -124,7 +126,7 @@ HELP
     {
         if ($db = $this->getApplication()->getManualDb()) {
             return $db
-                ->query(\sprintf('SELECT doc FROM php_manual WHERE id = %s', $db->quote($id)))
+                ->query(sprintf('SELECT doc FROM php_manual WHERE id = %s', $db->quote($id)))
                 ->fetchColumn(0);
         }
     }

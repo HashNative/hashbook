@@ -41,7 +41,7 @@ class Table extends AbstractFrameDecorator
      * The Cellmap object for this table.  The cellmap maps table cells
      * to rows and columns, and aids in calculating column widths.
      *
-     * @var \Dompdf\Cellmap
+     * @var Cellmap
      */
     protected $_cellmap;
 
@@ -205,7 +205,7 @@ class Table extends AbstractFrameDecorator
     /**
      * Return this table's Cellmap
      *
-     * @return \Dompdf\Cellmap
+     * @return Cellmap
      */
     public function get_cellmap()
     {

@@ -12,6 +12,8 @@
 namespace Psy\Test\CodeCleaner;
 
 use Psy\CodeCleaner\LegacyEmptyPass;
+use Psy\Exception\ParseErrorException;
+use function version_compare;
 
 class LegacyEmptyPassTest extends CodeCleanerTestCase
 {
@@ -22,7 +24,7 @@ class LegacyEmptyPassTest extends CodeCleanerTestCase
 
     /**
      * @dataProvider invalidStatements
-     * @expectedException \Psy\Exception\ParseErrorException
+     * @expectedException ParseErrorException
      */
     public function testProcessInvalidStatement($code)
     {
@@ -31,7 +33,7 @@ class LegacyEmptyPassTest extends CodeCleanerTestCase
 
     public function invalidStatements()
     {
-        if (\version_compare(PHP_VERSION, '5.5', '>=')) {
+        if (version_compare(PHP_VERSION, '5.5', '>=')) {
             return [
                 ['empty()'],
             ];
@@ -58,7 +60,7 @@ class LegacyEmptyPassTest extends CodeCleanerTestCase
 
     public function validStatements()
     {
-        if (\version_compare(PHP_VERSION, '5.5', '<')) {
+        if (version_compare(PHP_VERSION, '5.5', '<')) {
             return [
                 ['empty($foo)'],
             ];

@@ -8,6 +8,7 @@ use Illuminate\Routing\UrlGenerator;
 use Illuminate\Contracts\Validation\Factory;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpFoundation\Response;
 
 trait ValidatesRequests
 {
@@ -21,8 +22,8 @@ trait ValidatesRequests
     /**
      * Run the validation routine against the given validator.
      *
-     * @param  \Illuminate\Contracts\Validation\Validator|array  $validator
-     * @param  \Illuminate\Http\Request|null  $request
+     * @param Validator|array  $validator
+     * @param Request|null  $request
      * @return void
      */
     public function validateWith($validator, Request $request = null)
@@ -41,7 +42,7 @@ trait ValidatesRequests
     /**
      * Validate the given request with the given rules.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param  array  $rules
      * @param  array  $messages
      * @param  array  $customAttributes
@@ -60,13 +61,13 @@ trait ValidatesRequests
      * Validate the given request with the given rules.
      *
      * @param  string  $errorBag
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param  array  $rules
      * @param  array  $messages
      * @param  array  $customAttributes
      * @return void
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function validateWithBag($errorBag, Request $request, array $rules, array $messages = [], array $customAttributes = [])
     {
@@ -94,11 +95,11 @@ trait ValidatesRequests
     /**
      * Throw the failed validation exception.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Illuminate\Contracts\Validation\Validator  $validator
+     * @param Request $request
+     * @param Validator $validator
      * @return void
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     protected function throwValidationException(Request $request, $validator)
     {
@@ -110,9 +111,9 @@ trait ValidatesRequests
     /**
      * Create the response for when a request fails validation.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param  array  $errors
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     protected function buildFailedValidationResponse(Request $request, array $errors)
     {
@@ -128,7 +129,7 @@ trait ValidatesRequests
     /**
      * Format the validation errors to be returned.
      *
-     * @param  \Illuminate\Contracts\Validation\Validator  $validator
+     * @param Validator $validator
      * @return array
      */
     protected function formatValidationErrors(Validator $validator)
@@ -159,7 +160,7 @@ trait ValidatesRequests
     /**
      * Get a validation factory instance.
      *
-     * @return \Illuminate\Contracts\Validation\Factory
+     * @return Factory
      */
     protected function getValidationFactory()
     {

@@ -11,11 +11,14 @@
 
 namespace Symfony\Component\Console\Tests\Command;
 
+use InvalidArgumentException;
+use PhpParser\Error;
+use PHPUnit\Framework\TestCase;
 use Psy\Command\ThrowUpCommand;
 use Psy\Shell;
 use Symfony\Component\Console\Tester\CommandTester;
 
-class ThrowUpCommandTest extends \PHPUnit\Framework\TestCase
+class ThrowUpCommandTest extends TestCase
 {
     /**
      * @dataProvider executeThis
@@ -64,7 +67,7 @@ class ThrowUpCommandTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException InvalidArgumentException
      * @expectedExceptionMessage No idea how to throw this
      */
     public function testMultipleArgsThrowsException()
@@ -76,7 +79,7 @@ class ThrowUpCommandTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @expectedException \PhpParser\Error
+     * @expectedException Error
      * @expectedExceptionMessage Syntax error, unexpected ')' on line 1
      */
     public function testParseErrorThrowsException()

@@ -15,28 +15,28 @@ class Docs extends Command
     /**
      * Router instance.
      *
-     * @var \Dingo\Api\Routing\Router
+     * @var Router
      */
     protected $router;
 
     /**
      * The blueprint instance.
      *
-     * @var \Dingo\Blueprint\Blueprint
+     * @var Blueprint
      */
     protected $blueprint;
 
     /**
      * Blueprint instance.
      *
-     * @var \Dingo\Blueprint\Blueprint
+     * @var Blueprint
      */
     protected $docs;
 
     /**
      * Writer instance.
      *
-     * @var \Dingo\Blueprint\Writer
+     * @var Writer
      */
     protected $writer;
 
@@ -74,9 +74,9 @@ class Docs extends Command
     /**
      * Create a new docs command instance.
      *
-     * @param \Dingo\Api\Routing\Router  $router
-     * @param \Dingo\Blueprint\Blueprint $blueprint
-     * @param \Dingo\Blueprint\Writer    $writer
+     * @param Router $router
+     * @param Blueprint $blueprint
+     * @param Writer $writer
      * @param string                     $name
      * @param string                     $version
      *
@@ -182,7 +182,7 @@ class Docs extends Command
      * controller implements an interface suffixed with "Docs" it
      * will be used instead of the controller.
      *
-     * @param \Illuminate\Support\Collection $controllers
+     * @param Collection $controllers
      * @param object                         $controller
      *
      * @return void

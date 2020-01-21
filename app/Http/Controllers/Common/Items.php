@@ -12,6 +12,8 @@ use App\Models\Setting\Tax;
 use App\Traits\Uploads;
 use App\Utilities\Import;
 use App\Utilities\ImportFile;
+use Excel;
+use stdClass;
 
 class Items extends Controller
 {
@@ -238,7 +240,7 @@ class Items extends Controller
      */
     public function export()
     {
-        \Excel::create('items', function($excel) {
+        Excel::create('items', function($excel) {
             $excel->sheet('items', function($sheet) {
                 $sheet->fromModel(Item::filter(request()->input())->get()->makeHidden([
                     'id', 'company_id', 'item_id', 'created_at', 'updated_at', 'deleted_at'
@@ -310,7 +312,7 @@ class Items extends Controller
             $currency_code = setting('general.default_currency');
         }
 
-        $json = new \stdClass;
+        $json = new stdClass;
 
         $sub_total = 0;
         $tax_total = 0;

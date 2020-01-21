@@ -10,17 +10,19 @@
 
 namespace SebastianBergmann\CodeCoverage\Report\Xml;
 
+use DOMElement;
 use SebastianBergmann\CodeCoverage\RuntimeException;
+use XMLWriter;
 
 class Coverage
 {
     /**
-     * @var \XMLWriter
+     * @var XMLWriter
      */
     private $writer;
 
     /**
-     * @var \DOMElement
+     * @var DOMElement
      */
     private $contextNode;
 
@@ -29,11 +31,11 @@ class Coverage
      */
     private $finalized = false;
 
-    public function __construct(\DOMElement $context, $line)
+    public function __construct(DOMElement $context, $line)
     {
         $this->contextNode = $context;
 
-        $this->writer = new \XMLWriter;
+        $this->writer = new XMLWriter;
         $this->writer->openMemory();
         $this->writer->startElementNs(null, $context->nodeName, 'http://schema.phpunit.de/coverage/1.0');
         $this->writer->writeAttribute('nr', $line);

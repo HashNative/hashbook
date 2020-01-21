@@ -11,10 +11,11 @@
 
 namespace Psy\Test\VersionUpdater;
 
+use PHPUnit\Framework\TestCase;
 use Psy\Shell;
 use Psy\VersionUpdater\NoopChecker;
 
-class NoopCheckerTest extends \PHPUnit\Framework\TestCase
+class NoopCheckerTest extends TestCase
 {
     public function testTheThings()
     {

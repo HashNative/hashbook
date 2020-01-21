@@ -172,7 +172,7 @@
     <style type="text/css">
         .select2-results__option.select2-results__message:hover {
             color: white;
-            background: #6da252;
+            background: #ff3401;
             cursor: pointer;
         }
     </style>
@@ -272,7 +272,7 @@
                     html += '<div class="discount box-footer">';
                     html += '    <div class="col-md-12">';
                     html += '        <div class="form-group no-margin">';
-                    html += '            {!! Form::button('<span class="fa fa-save"></span> &nbsp;' . trans('general.save'), ['type' => 'button', 'id' => 'save-discount','class' => 'btn btn-success']) !!}';
+                    html += '            {!! Form::button('<span class="fa fa-save"></span> &nbsp;' . trans('general.save'), ['type' => 'button', 'id' => 'save-discount','class' => 'btn btn-dark']) !!}';
                     html += '            <a href="javascript:void(0)" id="cancel-discount" class="btn btn-default"><span class="fa fa-times-circle"></span> &nbsp;{{ trans('general.cancel') }}</a>';
                     html += '       </div>';
                     html += '    </div>';

@@ -21,7 +21,7 @@ class BcryptHasher implements HasherContract
      * @param  array   $options
      * @return string
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     public function make($value, array $options = [])
     {

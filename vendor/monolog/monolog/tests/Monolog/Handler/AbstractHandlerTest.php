@@ -15,6 +15,7 @@ use Monolog\TestCase;
 use Monolog\Logger;
 use Monolog\Formatter\LineFormatter;
 use Monolog\Processor\WebProcessor;
+use stdClass;
 
 class AbstractHandlerTest extends TestCase
 {
@@ -110,6 +111,6 @@ class AbstractHandlerTest extends TestCase
     {
         $handler = $this->getMockForAbstractClass('Monolog\Handler\AbstractHandler');
 
-        $handler->pushProcessor(new \stdClass());
+        $handler->pushProcessor(new stdClass());
     }
 }

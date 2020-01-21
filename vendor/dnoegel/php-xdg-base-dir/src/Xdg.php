@@ -2,6 +2,8 @@
 
 namespace XdgBaseDir;
 
+use RuntimeException;
+
 /**
  * Simple implementation of the XDG standard http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
  *
@@ -87,7 +89,7 @@ class Xdg
         }
 
         if ($strict) {
-            throw new \RuntimeException('XDG_RUNTIME_DIR was not set');
+            throw new RuntimeException('XDG_RUNTIME_DIR was not set');
         }
 
         $fallback = sys_get_temp_dir() . DIRECTORY_SEPARATOR . self::RUNTIME_DIR_FALLBACK . getenv('USER');

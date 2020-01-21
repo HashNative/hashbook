@@ -11,7 +11,11 @@
 
 namespace Monolog\Formatter;
 
-class ScalarFormatterTest extends \PHPUnit_Framework_TestCase
+use DateTime;
+use Exception;
+use PHPUnit_Framework_TestCase;
+
+class ScalarFormatterTest extends PHPUnit_Framework_TestCase
 {
     private $formatter;
 
@@ -20,7 +24,7 @@ class ScalarFormatterTest extends \PHPUnit_Framework_TestCase
         $this->formatter = new ScalarFormatter();
     }
 
-    public function buildTrace(\Exception $e)
+    public function buildTrace(Exception $e)
     {
         $data = array();
         $trace = $e->getTrace();
@@ -46,14 +50,14 @@ class ScalarFormatterTest extends \PHPUnit_Framework_TestCase
 
     public function testFormat()
     {
-        $exception = new \Exception('foo');
+        $exception = new Exception('foo');
         $formatted = $this->formatter->format(array(
             'foo' => 'string',
             'bar' => 1,
             'baz' => false,
             'bam' => array(1, 2, 3),
             'bat' => array('foo' => 'bar'),
-            'bap' => \DateTime::createFromFormat(\DateTime::ISO8601, '1970-01-01T00:00:00+0000'),
+            'bap' => DateTime::createFromFormat(DateTime::ISO8601, '1970-01-01T00:00:00+0000'),
             'ban' => $exception,
         ));
 
@@ -88,7 +92,7 @@ class ScalarFormatterTest extends \PHPUnit_Framework_TestCase
 
     public function testFormatWithExceptionContext()
     {
-        $exception = new \Exception('foo');
+        $exception = new Exception('foo');
         $formatted = $this->formatter->format(array(
             'context' => array(
                 'exception' => $exception,

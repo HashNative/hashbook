@@ -2,6 +2,8 @@
 
 namespace Illuminate\Contracts\View;
 
+use Closure;
+
 interface Factory
 {
     /**
@@ -18,7 +20,7 @@ interface Factory
      * @param  string  $path
      * @param  array  $data
      * @param  array  $mergeData
-     * @return \Illuminate\Contracts\View\View
+     * @return View
      */
     public function file($path, $data = [], $mergeData = []);
 
@@ -28,7 +30,7 @@ interface Factory
      * @param  string  $view
      * @param  array  $data
      * @param  array  $mergeData
-     * @return \Illuminate\Contracts\View\View
+     * @return View
      */
     public function make($view, $data = [], $mergeData = []);
 
@@ -45,7 +47,7 @@ interface Factory
      * Register a view composer event.
      *
      * @param  array|string  $views
-     * @param  \Closure|string  $callback
+     * @param  Closure|string  $callback
      * @return array
      */
     public function composer($views, $callback);
@@ -54,7 +56,7 @@ interface Factory
      * Register a view creator event.
      *
      * @param  array|string  $views
-     * @param  \Closure|string  $callback
+     * @param  Closure|string  $callback
      * @return array
      */
     public function creator($views, $callback);

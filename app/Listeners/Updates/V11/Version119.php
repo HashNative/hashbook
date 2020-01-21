@@ -6,6 +6,9 @@ use App\Events\UpdateFinished;
 use App\Listeners\Updates\Listener;
 use App\Models\Auth\Role;
 use App\Models\Auth\Permission;
+use App\Models\Common\Company;
+use App\Models\Common\Media;
+use App\Models\Setting\Setting;
 use Illuminate\Support\Facades\Schema;
 use MediaUploader;
 use Storage;
@@ -106,7 +109,7 @@ class Version119 extends Listener
                 }
 
                 if (!empty($path) && Storage::exists($path)) {
-                    $media = \App\Models\Common\Media::where('filename', '=', pathinfo(basename($path), PATHINFO_FILENAME))->first();
+                    $media = Media::where('filename', '=', pathinfo(basename($path), PATHINFO_FILENAME))->first();
 
                     if ($media) {
                         $item->attachMedia($media, $name);
@@ -121,8 +124,8 @@ class Version119 extends Listener
             }
         }
 
-        $settings['company_logo'] = \App\Models\Setting\Setting::where('key', '=', 'general.company_logo')->where('company_id', '<>', '0')->get();
-        $settings['invoice_logo'] = \App\Models\Setting\Setting::where('key', '=', 'general.invoice_logo')->where('company_id', '<>', '0')->get();
+        $settings['company_logo'] = Setting::where('key', '=', 'general.company_logo')->where('company_id', '<>', '0')->get();
+        $settings['invoice_logo'] = Setting::where('key', '=', 'general.invoice_logo')->where('company_id', '<>', '0')->get();
 
         foreach ($settings as $name => $items) {
             foreach ($items as $item) {
@@ -139,9 +142,9 @@ class Version119 extends Listener
                 }
 
                 if (!empty($path) && Storage::exists($path)) {
-                    $company = \App\Models\Common\Company::find($item->company_id);
+                    $company = Company::find($item->company_id);
 
-                    $media = \App\Models\Common\Media::where('filename', '=', pathinfo(basename($path), PATHINFO_FILENAME))->first();
+                    $media = Media::where('filename', '=', pathinfo(basename($path), PATHINFO_FILENAME))->first();
 
                     if ($company && !$media) {
                         $media = MediaUploader::importPath(config('mediable.default_disk'), $path);

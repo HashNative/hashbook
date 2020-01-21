@@ -2,21 +2,21 @@
 
 return [
 
-    'name'      =>  'Akaunting',
+    'name'      =>  'hashbook',
 
     'code'      =>  'Reconciliation',
 
     'major'     =>  '1',
 
-    'minor'     =>  '3',
+    'minor'     =>  '0',
 
-    'patch'     =>  '17',
+    'patch'     =>  '0',
 
     'build'     =>  '',
 
     'status'    =>  'Stable',
 
-    'date'      =>  '10-April-2019',
+    'date'      =>  '10-dec-2019',
 
     'time'      =>  '21:45',
 

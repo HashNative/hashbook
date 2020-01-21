@@ -2,6 +2,7 @@
 
 namespace Illuminate\Database\Eloquent;
 
+use ArrayAccess;
 use LogicException;
 use Illuminate\Support\Arr;
 use Illuminate\Contracts\Queue\QueueableCollection;
@@ -14,7 +15,7 @@ class Collection extends BaseCollection implements QueueableCollection
      *
      * @param  mixed  $key
      * @param  mixed  $default
-     * @return \Illuminate\Database\Eloquent\Model|static
+     * @return Model|static
      */
     public function find($key, $default = null)
     {
@@ -109,7 +110,7 @@ class Collection extends BaseCollection implements QueueableCollection
     /**
      * Merge the collection with the given items.
      *
-     * @param  \ArrayAccess|array  $items
+     * @param  ArrayAccess|array  $items
      * @return static
      */
     public function merge($items)
@@ -127,7 +128,7 @@ class Collection extends BaseCollection implements QueueableCollection
      * Run a map over each of the items.
      *
      * @param  callable  $callback
-     * @return \Illuminate\Support\Collection|static
+     * @return BaseCollection|static
      */
     public function map(callable $callback)
     {
@@ -166,7 +167,7 @@ class Collection extends BaseCollection implements QueueableCollection
     /**
      * Diff the collection with the given items.
      *
-     * @param  \ArrayAccess|array  $items
+     * @param  ArrayAccess|array  $items
      * @return static
      */
     public function diff($items)
@@ -187,7 +188,7 @@ class Collection extends BaseCollection implements QueueableCollection
     /**
      * Intersect the collection with the given items.
      *
-     * @param  \ArrayAccess|array  $items
+     * @param  ArrayAccess|array  $items
      * @return static
      */
     public function intersect($items)
@@ -210,7 +211,7 @@ class Collection extends BaseCollection implements QueueableCollection
      *
      * @param  string|callable|null  $key
      * @param  bool  $strict
-     * @return static|\Illuminate\Support\Collection
+     * @return static|BaseCollection
      */
     public function unique($key = null, $strict = false)
     {
@@ -280,7 +281,7 @@ class Collection extends BaseCollection implements QueueableCollection
     /**
      * Get a dictionary keyed by primary keys.
      *
-     * @param  \ArrayAccess|array|null  $items
+     * @param  ArrayAccess|array|null  $items
      * @return array
      */
     public function getDictionary($items = null)
@@ -305,7 +306,7 @@ class Collection extends BaseCollection implements QueueableCollection
      *
      * @param  string  $value
      * @param  string|null  $key
-     * @return \Illuminate\Support\Collection
+     * @return BaseCollection
      */
     public function pluck($value, $key = null)
     {
@@ -315,7 +316,7 @@ class Collection extends BaseCollection implements QueueableCollection
     /**
      * Get the keys of the collection items.
      *
-     * @return \Illuminate\Support\Collection
+     * @return BaseCollection
      */
     public function keys()
     {
@@ -326,7 +327,7 @@ class Collection extends BaseCollection implements QueueableCollection
      * Zip the collection together with one or more arrays.
      *
      * @param  mixed ...$items
-     * @return \Illuminate\Support\Collection
+     * @return BaseCollection
      */
     public function zip($items)
     {
@@ -336,7 +337,7 @@ class Collection extends BaseCollection implements QueueableCollection
     /**
      * Collapse the collection of items into a single array.
      *
-     * @return \Illuminate\Support\Collection
+     * @return BaseCollection
      */
     public function collapse()
     {
@@ -347,7 +348,7 @@ class Collection extends BaseCollection implements QueueableCollection
      * Get a flattened array of the items in the collection.
      *
      * @param  int  $depth
-     * @return \Illuminate\Support\Collection
+     * @return BaseCollection
      */
     public function flatten($depth = INF)
     {
@@ -357,7 +358,7 @@ class Collection extends BaseCollection implements QueueableCollection
     /**
      * Flip the items in the collection.
      *
-     * @return \Illuminate\Support\Collection
+     * @return BaseCollection
      */
     public function flip()
     {

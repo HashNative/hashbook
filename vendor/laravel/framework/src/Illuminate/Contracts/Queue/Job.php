@@ -2,6 +2,8 @@
 
 namespace Illuminate\Contracts\Queue;
 
+use Throwable;
+
 interface Job
 {
     /**
@@ -50,7 +52,7 @@ interface Job
     /**
      * Process an exception that caused the job to fail.
      *
-     * @param  \Throwable  $e
+     * @param  Throwable  $e
      * @return void
      */
     public function failed($e);

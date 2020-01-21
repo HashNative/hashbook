@@ -12,6 +12,7 @@ use App\Traits\Uploads;
 use App\Utilities\Import;
 use App\Utilities\ImportFile;
 use Date;
+use Excel;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
@@ -295,7 +296,7 @@ class Vendors extends Controller
      */
     public function export()
     {
-        \Excel::create('vendors', function($excel) {
+        Excel::create('vendors', function($excel) {
             $excel->sheet('vendors', function($sheet) {
                 $sheet->fromModel(Vendor::filter(request()->input())->get()->makeHidden([
                     'id', 'company_id', 'created_at', 'updated_at', 'deleted_at'

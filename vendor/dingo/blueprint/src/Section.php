@@ -25,7 +25,7 @@ abstract class Section
     /**
      * Get a sections parameter annotations.
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function getParameters()
     {
@@ -43,7 +43,7 @@ abstract class Section
     /**
      * Get a sections attribute annotations.
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function getAttributes()
     {

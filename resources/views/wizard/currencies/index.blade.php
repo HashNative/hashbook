@@ -34,7 +34,7 @@
 
     <div class="box-header with-border">
         <h3 class="box-title">{{ trans_choice('general.currencies', 2) }}</h3>
-        <span class="new-button"><a href="javascript:void(0);" data-href="{{ url('wizard/currencies/create') }}" class="btn btn-success btn-sm currency-create"><span class="fa fa-plus"></span> &nbsp;{{ trans('general.add_new') }}</a></span>
+        <span class="new-button"><a href="javascript:void(0);" data-href="{{ url('wizard/currencies/create') }}" class="btn btn-danger btn-sm currency-create"><span class="fa fa-plus"></span> &nbsp;{{ trans('general.add_new') }}</a></span>
     </div>
     <!-- /.box-header -->
 

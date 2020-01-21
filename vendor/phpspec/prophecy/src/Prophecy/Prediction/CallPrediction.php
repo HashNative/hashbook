@@ -45,7 +45,7 @@ class CallPrediction implements PredictionInterface
      * @param ObjectProphecy $object
      * @param MethodProphecy $method
      *
-     * @throws \Prophecy\Exception\Prediction\NoCallsException
+     * @throws NoCallsException
      */
     public function check(array $calls, ObjectProphecy $object, MethodProphecy $method)
     {

@@ -7,8 +7,9 @@ use PhpParser\Node\Expr;
 use PhpParser\Node\Name;
 use PhpParser\Node\Scalar;
 use PhpParser\Node\Stmt;
+use PHPUnit_Framework_TestCase;
 
-class PropertyTest extends \PHPUnit_Framework_TestCase
+class PropertyTest extends PHPUnit_Framework_TestCase
 {
     public function createPropertyBuilder($name) {
         return new Property($name);

@@ -12,6 +12,7 @@ use Dompdf\Canvas;
 use Dompdf\Dompdf;
 use Dompdf\Image\Cache;
 use Dompdf\Helpers;
+use Exception;
 
 /**
  * Image rendering interface
@@ -715,7 +716,7 @@ class GD implements Canvas
      * @param string $resolution
      * @return void
      *
-     * @throws \Exception
+     * @throws Exception
      * @internal param string $img_type the type (e.g. extension) of the image
      */
     public function image($img_url, $x, $y, $w, $h, $resolution = "normal")
@@ -729,7 +730,7 @@ class GD implements Canvas
         $func_name = "imagecreatefrom$img_type";
         if (!function_exists($func_name)) {
             if (!method_exists("Dompdf\Helpers", $func_name)) {
-                throw new \Exception("Function $func_name() not found.  Cannot convert $img_type image: $img_url.  Please install the image PHP extension.");
+                throw new Exception("Function $func_name() not found.  Cannot convert $img_type image: $img_url.  Please install the image PHP extension.");
             }
             $func_name = "\\Dompdf\\Helpers::" . $func_name;
         }

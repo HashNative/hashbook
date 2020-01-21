@@ -14,6 +14,8 @@ namespace League\Url\Components;
 
 use ArrayAccess;
 use InvalidArgumentException;
+use RuntimeException;
+use Traversable;
 
 /**
  *  A class to manipulate URL Segment like components
@@ -67,7 +69,7 @@ abstract class AbstractSegment extends AbstractArray implements ArrayAccess
 
     /**
      * {@inheritdoc}
-     * @param string|array|\Traversable $data the data
+     * @param string|array|Traversable $data the data
      */
     public function remove($data)
     {
@@ -139,13 +141,13 @@ abstract class AbstractSegment extends AbstractArray implements ArrayAccess
      *
      * @return array
      *
-     * @throws \InvalidArgumentException If The data is invalid
+     * @throws InvalidArgumentException If The data is invalid
      */
     abstract protected function validate($data);
 
     /**
      * {@inheritdoc}
-     * @param string|array|\Traversable $data
+     * @param string|array|Traversable $data
      * @param string                    $whence
      * @param integer                   $whence_index
      */
@@ -161,7 +163,7 @@ abstract class AbstractSegment extends AbstractArray implements ArrayAccess
 
     /**
      * {@inheritdoc}
-     * @param string|array|\Traversable $data
+     * @param string|array|Traversable $data
      * @param string                    $whence
      * @param integer                   $whence_index
      */
@@ -178,7 +180,7 @@ abstract class AbstractSegment extends AbstractArray implements ArrayAccess
     /**
      * Format removing component labels
      *
-     * @param string|array|\Traversable $data the component value to be validate
+     * @param string|array|Traversable $data the component value to be validate
      *
      * @return array
      */
@@ -194,7 +196,7 @@ abstract class AbstractSegment extends AbstractArray implements ArrayAccess
      *
      * @return array
      *
-     * @throws \RuntimeException if the data is not valid
+     * @throws RuntimeException if the data is not valid
      */
     protected function validateSegment($data)
     {
@@ -271,7 +273,7 @@ abstract class AbstractSegment extends AbstractArray implements ArrayAccess
      *
      * @return string|null
      *
-     * @throws \RuntimeException If $value is invalid
+     * @throws RuntimeException If $value is invalid
      */
     protected function fetchRemainingSegment(array $data, $value)
     {

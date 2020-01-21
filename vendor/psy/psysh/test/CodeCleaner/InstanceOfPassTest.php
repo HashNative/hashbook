@@ -12,6 +12,7 @@
 namespace Psy\Test\CodeCleaner;
 
 use Psy\CodeCleaner\InstanceOfPass;
+use Psy\Exception\FatalErrorException;
 
 class InstanceOfPassTest extends CodeCleanerTestCase
 {
@@ -22,7 +23,7 @@ class InstanceOfPassTest extends CodeCleanerTestCase
 
     /**
      * @dataProvider invalidStatements
-     * @expectedException \Psy\Exception\FatalErrorException
+     * @expectedException FatalErrorException
      */
     public function testProcessInvalidStatement($code)
     {

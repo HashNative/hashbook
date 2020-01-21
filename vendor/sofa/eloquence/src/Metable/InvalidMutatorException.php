@@ -2,7 +2,9 @@
 
 namespace Sofa\Eloquence\Metable;
 
-class InvalidMutatorException extends \LogicException
+use LogicException;
+
+class InvalidMutatorException extends LogicException
 {
 
 }

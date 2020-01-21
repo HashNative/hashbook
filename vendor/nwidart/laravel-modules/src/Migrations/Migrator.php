@@ -3,6 +3,7 @@
 namespace Nwidart\Modules\Migrations;
 
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection;
 use Nwidart\Modules\Module;
 
@@ -11,7 +12,7 @@ class Migrator
     /**
      * Pingpong Module instance.
      *
-     * @var \Nwidart\Modules\Module
+     * @var Module
      */
     protected $module;
 
@@ -32,7 +33,7 @@ class Migrator
     /**
      * Create new instance.
      *
-     * @param \Nwidart\Modules\Module $module
+     * @param Module $module
      */
     public function __construct(Module $module)
     {
@@ -219,7 +220,7 @@ class Migrator
     /**
      * Get table instance.
      *
-     * @return \Illuminate\Database\Query\Builder
+     * @return Builder
      */
     public function table()
     {

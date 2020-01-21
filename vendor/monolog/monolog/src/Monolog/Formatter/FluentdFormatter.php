@@ -11,6 +11,8 @@
 
 namespace Monolog\Formatter;
 
+use RuntimeException;
+
 /**
  * Class FluentdFormatter
  *
@@ -42,7 +44,7 @@ class FluentdFormatter implements FormatterInterface
     public function __construct($levelTag = false)
     {
         if (!function_exists('json_encode')) {
-            throw new \RuntimeException('PHP\'s json extension is required to use Monolog\'s FluentdUnixFormatter');
+            throw new RuntimeException('PHP\'s json extension is required to use Monolog\'s FluentdUnixFormatter');
         }
 
         $this->levelTag = (bool) $levelTag;

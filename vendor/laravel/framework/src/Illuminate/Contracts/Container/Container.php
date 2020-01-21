@@ -3,6 +3,7 @@
 namespace Illuminate\Contracts\Container;
 
 use Closure;
+use InvalidArgumentException;
 
 interface Container
 {
@@ -44,7 +45,7 @@ interface Container
      * Register a binding with the container.
      *
      * @param  string|array  $abstract
-     * @param  \Closure|string|null  $concrete
+     * @param Closure|string|null  $concrete
      * @param  bool  $shared
      * @return void
      */
@@ -54,7 +55,7 @@ interface Container
      * Register a binding if it hasn't already been registered.
      *
      * @param  string  $abstract
-     * @param  \Closure|string|null  $concrete
+     * @param Closure|string|null  $concrete
      * @param  bool  $shared
      * @return void
      */
@@ -64,7 +65,7 @@ interface Container
      * Register a shared binding in the container.
      *
      * @param  string|array  $abstract
-     * @param  \Closure|string|null  $concrete
+     * @param Closure|string|null  $concrete
      * @return void
      */
     public function singleton($abstract, $concrete = null);
@@ -73,10 +74,10 @@ interface Container
      * "Extend" an abstract type in the container.
      *
      * @param  string    $abstract
-     * @param  \Closure  $closure
+     * @param Closure $closure
      * @return void
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function extend($abstract, Closure $closure);
 
@@ -93,7 +94,7 @@ interface Container
      * Define a contextual binding.
      *
      * @param  string  $concrete
-     * @return \Illuminate\Contracts\Container\ContextualBindingBuilder
+     * @return ContextualBindingBuilder
      */
     public function when($concrete);
 
@@ -101,7 +102,7 @@ interface Container
      * Get a closure to resolve the given type from the container.
      *
      * @param  string  $abstract
-     * @return \Closure
+     * @return Closure
      */
     public function factory($abstract);
 
@@ -135,7 +136,7 @@ interface Container
      * Register a new resolving callback.
      *
      * @param  string    $abstract
-     * @param  \Closure|null  $callback
+     * @param Closure|null  $callback
      * @return void
      */
     public function resolving($abstract, Closure $callback = null);
@@ -144,7 +145,7 @@ interface Container
      * Register a new after resolving callback.
      *
      * @param  string    $abstract
-     * @param  \Closure|null  $callback
+     * @param Closure|null  $callback
      * @return void
      */
     public function afterResolving($abstract, Closure $callback = null);

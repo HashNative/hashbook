@@ -23,14 +23,14 @@ class ScheduleRunCommand extends Command
     /**
      * The schedule instance.
      *
-     * @var \Illuminate\Console\Scheduling\Schedule
+     * @var Schedule
      */
     protected $schedule;
 
     /**
      * Create a new command instance.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     * @param Schedule $schedule
      * @return void
      */
     public function __construct(Schedule $schedule)

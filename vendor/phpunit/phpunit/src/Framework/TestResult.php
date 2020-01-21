@@ -717,7 +717,7 @@ class PHPUnit_Framework_TestResult implements Countable
             $error = true;
         } catch (Throwable $e) {
             // @see https://github.com/sebastianbergmann/phpunit/issues/2394
-            if (PHP_MAJOR_VERSION === 7 && $e instanceof \AssertionError) {
+            if (PHP_MAJOR_VERSION === 7 && $e instanceof AssertionError) {
                 $test->addToAssertionCount(1);
 
                 $failure = true;

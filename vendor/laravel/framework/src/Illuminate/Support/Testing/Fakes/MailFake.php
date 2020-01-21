@@ -2,8 +2,11 @@
 
 namespace Illuminate\Support\Testing\Fakes;
 
+use Closure;
 use Illuminate\Contracts\Mail\Mailer;
 use Illuminate\Contracts\Mail\Mailable;
+use Illuminate\Mail\PendingMail;
+use Illuminate\Support\Collection;
 use PHPUnit\Framework\Assert as PHPUnit;
 
 class MailFake implements Mailer
@@ -60,7 +63,7 @@ class MailFake implements Mailer
      *
      * @param  string  $mailable
      * @param  callable|null  $callback
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function sent($mailable, $callback = null)
     {
@@ -92,7 +95,7 @@ class MailFake implements Mailer
      * Get all of the mailed mailables for a given type.
      *
      * @param  string  $type
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     protected function mailablesOf($type)
     {
@@ -105,7 +108,7 @@ class MailFake implements Mailer
      * Begin the process of mailing a mailable class instance.
      *
      * @param  mixed  $users
-     * @return \Illuminate\Mail\PendingMail
+     * @return PendingMail
      */
     public function to($users)
     {
@@ -116,7 +119,7 @@ class MailFake implements Mailer
      * Begin the process of mailing a mailable class instance.
      *
      * @param  mixed  $users
-     * @return \Illuminate\Mail\PendingMail
+     * @return PendingMail
      */
     public function bcc($users)
     {
@@ -127,7 +130,7 @@ class MailFake implements Mailer
      * Send a new message when only a raw text part.
      *
      * @param  string  $text
-     * @param  \Closure|string  $callback
+     * @param  Closure|string  $callback
      * @return int
      */
     public function raw($text, $callback)
@@ -140,7 +143,7 @@ class MailFake implements Mailer
      *
      * @param  string|array  $view
      * @param  array  $data
-     * @param  \Closure|string  $callback
+     * @param  Closure|string  $callback
      * @return void
      */
     public function send($view, array $data = [], $callback = null)
@@ -157,7 +160,7 @@ class MailFake implements Mailer
      *
      * @param  string|array  $view
      * @param  array  $data
-     * @param  \Closure|string  $callback
+     * @param  Closure|string  $callback
      * @param  string|null  $queue
      * @return mixed
      */

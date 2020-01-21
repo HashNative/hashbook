@@ -14,9 +14,12 @@ namespace Psy\Command;
 use Psy\Input\CodeArgument;
 use Psy\VarDumper\Presenter;
 use Psy\VarDumper\PresenterAware;
+use ReflectionObject;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use function is_object;
+use function trigger_error;
 
 /**
  * Dump an object or primitive.
@@ -73,8 +76,8 @@ HELP
         $target = $this->resolveCode($input->getArgument('target'));
         $output->page($this->presenter->present($target, $depth, $input->getOption('all') ? Presenter::VERBOSE : 0));
 
-        if (\is_object($target)) {
-            $this->setCommandScopeVariables(new \ReflectionObject($target));
+        if (is_object($target)) {
+            $this->setCommandScopeVariables(new ReflectionObject($target));
         }
     }
 
@@ -87,7 +90,7 @@ HELP
      */
     protected function resolveTarget($name)
     {
-        @\trigger_error('`resolveTarget` is deprecated; use `resolveCode` instead.', E_USER_DEPRECATED);
+        @trigger_error('`resolveTarget` is deprecated; use `resolveCode` instead.', E_USER_DEPRECATED);
 
         return $this->resolveCode($name);
     }

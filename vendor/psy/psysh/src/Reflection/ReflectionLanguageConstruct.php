@@ -11,10 +11,16 @@
 
 namespace Psy\Reflection;
 
+use InvalidArgumentException;
+use ReflectionFunctionAbstract;
+use RuntimeException;
+use function array_key_exists;
+use function array_push;
+
 /**
  * A fake ReflectionFunction but for language constructs.
  */
-class ReflectionLanguageConstruct extends \ReflectionFunctionAbstract
+class ReflectionLanguageConstruct extends ReflectionFunctionAbstract
 {
     public $keyword;
 
@@ -77,7 +83,7 @@ class ReflectionLanguageConstruct extends \ReflectionFunctionAbstract
     public function __construct($keyword)
     {
         if (!self::isLanguageConstruct($keyword)) {
-            throw new \InvalidArgumentException('Unknown language construct: ' . $keyword);
+            throw new InvalidArgumentException('Unknown language construct: ' . $keyword);
         }
 
         $this->keyword = $keyword;
@@ -86,11 +92,11 @@ class ReflectionLanguageConstruct extends \ReflectionFunctionAbstract
     /**
      * This can't (and shouldn't) do anything :).
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     public static function export($name)
     {
-        throw new \RuntimeException('Not yet implemented because it\'s unclear what I should do here :)');
+        throw new RuntimeException('Not yet implemented because it\'s unclear what I should do here :)');
     }
 
     /**
@@ -122,7 +128,7 @@ class ReflectionLanguageConstruct extends \ReflectionFunctionAbstract
     {
         $params = [];
         foreach (self::$languageConstructs[$this->keyword] as $parameter => $opts) {
-            \array_push($params, new ReflectionLanguageConstructParameter($this->keyword, $parameter, $opts));
+            array_push($params, new ReflectionLanguageConstructParameter($this->keyword, $parameter, $opts));
         }
 
         return $params;
@@ -159,6 +165,6 @@ class ReflectionLanguageConstruct extends \ReflectionFunctionAbstract
      */
     public static function isLanguageConstruct($keyword)
     {
-        return \array_key_exists($keyword, self::$languageConstructs);
+        return array_key_exists($keyword, self::$languageConstructs);
     }
 }

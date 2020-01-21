@@ -42,9 +42,9 @@ class Menu implements Countable
      * @param string $name
      * @param Closure $callback
      *
-     * @return \Nwidart\Menus\MenuBuilder
+     * @return MenuBuilder
      */
-    public function make($name, \Closure $callback)
+    public function make($name, Closure $callback)
     {
         return $this->create($name, $callback);
     }
@@ -55,7 +55,7 @@ class Menu implements Countable
      * @param string   $name
      * @param Callable $resolver
      *
-     * @return \Nwidart\Menus\MenuBuilder
+     * @return MenuBuilder
      */
     public function create($name, Closure $resolver)
     {

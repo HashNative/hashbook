@@ -81,7 +81,7 @@ class PDFLib implements Canvas
     );
 
     /**
-     * @var \Dompdf\Dompdf
+     * @var Dompdf
      */
     private $_dompdf;
 

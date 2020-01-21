@@ -3,6 +3,7 @@
 namespace Illuminate\Notifications\Messages;
 
 use Carbon\Carbon;
+use Closure;
 
 class SlackAttachment
 {
@@ -140,7 +141,7 @@ class SlackAttachment
     /**
      * Add a field to the attachment.
      *
-     * @param  \Closure|string $title
+     * @param  Closure|string $title
      * @param  string $content
      * @return $this
      */

@@ -2,11 +2,13 @@
 
 namespace PhpParser\Builder;
 
+use LogicException;
 use PhpParser\Comment;
 use PhpParser\Node\Name;
 use PhpParser\Node\Stmt;
+use PHPUnit_Framework_TestCase;
 
-class TraitTest extends \PHPUnit_Framework_TestCase
+class TraitTest extends PHPUnit_Framework_TestCase
 {
     protected function createTraitBuilder($class) {
         return new Trait_($class);
@@ -37,7 +39,7 @@ class TraitTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \LogicException
+     * @expectedException LogicException
      * @expectedExceptionMessage Unexpected node of type "Stmt_Echo"
      */
     public function testInvalidStmtError() {

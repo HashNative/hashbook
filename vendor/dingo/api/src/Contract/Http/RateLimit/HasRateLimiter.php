@@ -10,8 +10,8 @@ interface HasRateLimiter
     /**
      * Get rate limiter callable.
      *
-     * @param \Illuminate\Container\Container $app
-     * @param \Dingo\Api\Http\Request         $request
+     * @param Container $app
+     * @param Request $request
      *
      * @return string
      */

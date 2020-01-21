@@ -2,6 +2,7 @@
 
 namespace PhpParser\Builder;
 
+use LogicException;
 use PhpParser;
 use PhpParser\Node\Name;
 use PhpParser\Node\Stmt;
@@ -97,7 +98,7 @@ class Class_ extends Declaration
 
         $type = $stmt->getType();
         if (!isset($targets[$type])) {
-            throw new \LogicException(sprintf('Unexpected node of type "%s"', $type));
+            throw new LogicException(sprintf('Unexpected node of type "%s"', $type));
         }
 
         $targets[$type][] = $stmt;

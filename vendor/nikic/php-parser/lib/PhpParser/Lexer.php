@@ -3,6 +3,9 @@
 namespace PhpParser;
 
 use PhpParser\Parser\Tokens;
+use RuntimeException;
+use function is_string;
+use function strlen;
 
 class Lexer
 {
@@ -148,8 +151,8 @@ class Lexer
         $filePos = 0;
         $line = 1;
         foreach ($this->tokens as $i => $token) {
-            $tokenValue = \is_string($token) ? $token : $token[1];
-            $tokenLen = \strlen($tokenValue);
+            $tokenValue = is_string($token) ? $token : $token[1];
+            $tokenLen = strlen($tokenValue);
 
             if (substr($this->code, $filePos, $tokenLen) !== $tokenValue) {
                 // Something is missing, must be an invalid character
@@ -163,7 +166,7 @@ class Lexer
             $line += substr_count($tokenValue, "\n");
         }
 
-        if ($filePos !== \strlen($this->code)) {
+        if ($filePos !== strlen($this->code)) {
             if (substr($this->code, $filePos, 2) === '/*') {
                 // Unlike PHP, HHVM will drop unterminated comments entirely
                 $comment = substr($this->code, $filePos);
@@ -171,7 +174,7 @@ class Lexer
                     'startLine' => $line,
                     'endLine' => $line + substr_count($comment, "\n"),
                     'startFilePos' => $filePos,
-                    'endFilePos' => $filePos + \strlen($comment),
+                    'endFilePos' => $filePos + strlen($comment),
                 ]));
 
                 // Emulate the PHP behavior
@@ -180,7 +183,7 @@ class Lexer
             } else {
                 // Invalid characters at the end of the input
                 $this->handleInvalidCharacterRange(
-                    $filePos, \strlen($this->code), $line, $errorHandler);
+                    $filePos, strlen($this->code), $line, $errorHandler);
             }
             return;
         }
@@ -192,7 +195,7 @@ class Lexer
                 $errorHandler->handleError(new Error('Unterminated comment', [
                     'startLine' => $line - substr_count($lastToken[1], "\n"),
                     'endLine' => $line,
-                    'startFilePos' => $filePos - \strlen($lastToken[1]),
+                    'startFilePos' => $filePos - strlen($lastToken[1]),
                     'endFilePos' => $filePos,
                 ]));
             }
@@ -243,7 +246,7 @@ class Lexer
                 $startAttributes['startFilePos'] = $this->filePos;
             }
 
-            if (\is_string($token)) {
+            if (is_string($token)) {
                 $value = $token;
                 if (isset($token[1])) {
                     // bug in token_get_all
@@ -263,7 +266,7 @@ class Lexer
                 }
 
                 $this->line += substr_count($value, "\n");
-                $this->filePos += \strlen($value);
+                $this->filePos += strlen($value);
             } else {
                 if (T_COMMENT === $token[0] || T_DOC_COMMENT === $token[0]) {
                     if (isset($this->usedAttributes['comments'])) {
@@ -275,7 +278,7 @@ class Lexer
                 }
 
                 $this->line += substr_count($token[1], "\n");
-                $this->filePos += \strlen($token[1]);
+                $this->filePos += strlen($token[1]);
                 continue;
             }
 
@@ -292,7 +295,7 @@ class Lexer
             return $id;
         }
 
-        throw new \RuntimeException('Reached end of lexer loop');
+        throw new RuntimeException('Reached end of lexer loop');
     }
 
     /**

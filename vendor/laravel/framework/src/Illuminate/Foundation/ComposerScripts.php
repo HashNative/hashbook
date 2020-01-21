@@ -9,7 +9,7 @@ class ComposerScripts
     /**
      * Handle the post-install Composer event.
      *
-     * @param  \Composer\Script\Event  $event
+     * @param Event $event
      * @return void
      */
     public static function postInstall(Event $event)
@@ -22,7 +22,7 @@ class ComposerScripts
     /**
      * Handle the post-update Composer event.
      *
-     * @param  \Composer\Script\Event  $event
+     * @param Event $event
      * @return void
      */
     public static function postUpdate(Event $event)

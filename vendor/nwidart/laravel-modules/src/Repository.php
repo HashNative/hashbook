@@ -4,6 +4,7 @@ namespace Nwidart\Modules;
 
 use Countable;
 use Illuminate\Container\Container;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Macroable;
 use Nwidart\Modules\Contracts\RepositoryInterface;
@@ -11,6 +12,7 @@ use Nwidart\Modules\Exceptions\InvalidAssetPath;
 use Nwidart\Modules\Exceptions\ModuleNotFoundException;
 use Nwidart\Modules\Process\Installer;
 use Nwidart\Modules\Process\Updater;
+use Symfony\Component\Process\Process;
 
 class Repository implements RepositoryInterface, Countable
 {
@@ -500,7 +502,7 @@ class Repository implements RepositoryInterface, Countable
     /**
      * Get laravel filesystem instance.
      *
-     * @return \Illuminate\Filesystem\Filesystem
+     * @return Filesystem
      */
     public function getFiles()
     {
@@ -616,7 +618,7 @@ class Repository implements RepositoryInterface, Countable
      * @param string $type
      * @param bool   $subtree
      *
-     * @return \Symfony\Component\Process\Process
+     * @return Process
      */
     public function install($name, $version = 'dev-master', $type = 'composer', $subtree = false)
     {

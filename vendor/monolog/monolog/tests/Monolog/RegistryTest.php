@@ -11,7 +11,10 @@
 
 namespace Monolog;
 
-class RegistryTest extends \PHPUnit_Framework_TestCase
+use InvalidArgumentException;
+use PHPUnit_Framework_TestCase;
+
+class RegistryTest extends PHPUnit_Framework_TestCase
 {
     protected function setUp()
     {
@@ -114,7 +117,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException InvalidArgumentException
      * @covers Monolog\Registry::getInstance
      */
     public function testFailsOnNonExistantLogger()
@@ -138,7 +141,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException InvalidArgumentException
      * @covers Monolog\Registry::addLogger
      */
     public function testFailsOnUnspecifiedReplacement()

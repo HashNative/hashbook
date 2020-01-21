@@ -11,9 +11,12 @@
 
 namespace Monolog\Formatter;
 
+use DateTime;
 use Monolog\Logger;
+use PHPUnit_Framework_TestCase;
+use stdClass;
 
-class ElasticaFormatterTest extends \PHPUnit_Framework_TestCase
+class ElasticaFormatterTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
@@ -34,8 +37,8 @@ class ElasticaFormatterTest extends \PHPUnit_Framework_TestCase
             'level' => Logger::ERROR,
             'level_name' => 'ERROR',
             'channel' => 'meh',
-            'context' => array('foo' => 7, 'bar', 'class' => new \stdClass),
-            'datetime' => new \DateTime("@0"),
+            'context' => array('foo' => 7, 'bar', 'class' => new stdClass),
+            'datetime' => new DateTime("@0"),
             'extra' => array(),
             'message' => 'log',
         );

@@ -109,7 +109,7 @@ class LaravelServiceProvider extends DingoServiceProvider
     /**
      * Add the request middleware to the beginning of the kernel.
      *
-     * @param \Illuminate\Contracts\Http\Kernel $kernel
+     * @param Kernel $kernel
      *
      * @return void
      */
@@ -143,7 +143,7 @@ class LaravelServiceProvider extends DingoServiceProvider
      * Gather the application middleware besides this one so that we can send
      * our request through them, exactly how the developer wanted.
      *
-     * @param \Illuminate\Contracts\Http\Kernel $kernel
+     * @param Kernel $kernel
      *
      * @return array
      */

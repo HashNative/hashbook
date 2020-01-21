@@ -14,6 +14,9 @@ use Illuminate\Routing\Matching\HostValidator;
 use Illuminate\Routing\Matching\MethodValidator;
 use Illuminate\Routing\Matching\SchemeValidator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\CompiledRoute;
+use UnexpectedValueException;
 
 class Route
 {
@@ -85,21 +88,21 @@ class Route
     /**
      * The compiled version of the route.
      *
-     * @var \Symfony\Component\Routing\CompiledRoute
+     * @var CompiledRoute
      */
     public $compiled;
 
     /**
      * The router instance used by the route.
      *
-     * @var \Illuminate\Routing\Router
+     * @var Router
      */
     protected $router;
 
     /**
      * The container instance used by the route.
      *
-     * @var \Illuminate\Container\Container
+     * @var Container
      */
     protected $container;
 
@@ -115,7 +118,7 @@ class Route
      *
      * @param  array|string  $methods
      * @param  string  $uri
-     * @param  \Closure|array  $action
+     * @param Closure|array  $action
      * @return void
      */
     public function __construct($methods, $uri, $action)
@@ -139,7 +142,7 @@ class Route
      * @param  callable|array|null  $action
      * @return array
      *
-     * @throws \UnexpectedValueException
+     * @throws UnexpectedValueException
      */
     protected function parseAction($action)
     {
@@ -195,7 +198,7 @@ class Route
      *
      * @return mixed
      *
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @throws NotFoundHttpException
      */
     protected function runController()
     {
@@ -243,7 +246,7 @@ class Route
     /**
      * Determine if the route matches given request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param  bool  $includingMethod
      * @return bool
      */
@@ -281,7 +284,7 @@ class Route
     /**
      * Bind the route to a given request for execution.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @return $this
      */
     public function bind(Request $request)
@@ -363,7 +366,7 @@ class Route
      *
      * @return array
      *
-     * @throws \LogicException
+     * @throws LogicException
      */
     public function parameters()
     {
@@ -618,7 +621,7 @@ class Route
     /**
      * Set the handler for the route.
      *
-     * @param  \Closure|string  $action
+     * @param Closure|string  $action
      * @return $this
      */
     public function uses($action)
@@ -771,7 +774,7 @@ class Route
     /**
      * Get the compiled version of the route.
      *
-     * @return \Symfony\Component\Routing\CompiledRoute
+     * @return CompiledRoute
      */
     public function getCompiled()
     {
@@ -781,7 +784,7 @@ class Route
     /**
      * Set the router instance on the route.
      *
-     * @param  \Illuminate\Routing\Router  $router
+     * @param Router $router
      * @return $this
      */
     public function setRouter(Router $router)
@@ -794,7 +797,7 @@ class Route
     /**
      * Set the container instance on the route.
      *
-     * @param  \Illuminate\Container\Container  $container
+     * @param Container $container
      * @return $this
      */
     public function setContainer(Container $container)
@@ -809,7 +812,7 @@ class Route
      *
      * @return void
      *
-     * @throws \LogicException
+     * @throws LogicException
      */
     public function prepareForSerialization()
     {

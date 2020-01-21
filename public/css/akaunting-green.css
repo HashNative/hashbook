@@ -3,7 +3,7 @@
 }
 
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
-    background-color: #6e7094 !important;
+    background-color: #d62a2a !important;
 
 }
 
@@ -39,7 +39,7 @@
 }
 
 .btn-success.active, .btn-success:active {
-    background-color: #6e7094;
+    background-color: #ff3401;
     border-color: #ff3401;
 }
 

@@ -12,6 +12,7 @@
 namespace Psy\Test\CodeCleaner;
 
 use Psy\CodeCleaner\LeavePsyshAlonePass;
+use Psy\Exception\RuntimeException;
 
 class LeavePsyshAlonePassTest extends CodeCleanerTestCase
 {
@@ -50,7 +51,7 @@ class LeavePsyshAlonePassTest extends CodeCleanerTestCase
 
     /**
      * @dataProvider invalidStatements
-     * @expectedException \Psy\Exception\RuntimeException
+     * @expectedException RuntimeException
      */
     public function testProcessStatementFails($code)
     {

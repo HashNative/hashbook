@@ -9,7 +9,7 @@ interface Adapter
     /**
      * Dispatch a request.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param string                   $version
      *
      * @return mixed
@@ -20,7 +20,7 @@ interface Adapter
      * Get the URI, methods, and action from the route.
      *
      * @param mixed                    $route
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
      * @return array
      */

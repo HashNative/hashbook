@@ -14,7 +14,7 @@ class PredisConnector
      *
      * @param  array  $config
      * @param  array  $options
-     * @return \Illuminate\Redis\Connections\PredisConnection
+     * @return PredisConnection
      */
     public function connect(array $config, array $options)
     {
@@ -31,7 +31,7 @@ class PredisConnector
      * @param  array  $config
      * @param  array  $clusterOptions
      * @param  array  $options
-     * @return \Illuminate\Redis\Connections\PredisClusterConnection
+     * @return PredisClusterConnection
      */
     public function connectToCluster(array $config, array $clusterOptions, array $options)
     {

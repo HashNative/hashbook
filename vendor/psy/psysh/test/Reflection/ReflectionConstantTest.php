@@ -11,11 +11,15 @@
 
 namespace Psy\Test\Reflection;
 
+use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 use Psy\Reflection\ReflectionConstant_;
+use RuntimeException;
+use function define;
 
-\define('Psy\\Test\\Reflection\\SOME_CONSTANT', 'yep');
+define('Psy\\Test\\Reflection\\SOME_CONSTANT', 'yep');
 
-class ReflectionConstantTest extends \PHPUnit\Framework\TestCase
+class ReflectionConstantTest extends TestCase
 {
     public function testConstruction()
     {
@@ -69,7 +73,7 @@ class ReflectionConstantTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException InvalidArgumentException
      */
     public function testUnknownConstantThrowsException()
     {
@@ -95,7 +99,7 @@ class ReflectionConstantTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @expectedException \RuntimeException
+     * @expectedException RuntimeException
      * @dataProvider notYetImplemented
      */
     public function testNotYetImplemented($method)

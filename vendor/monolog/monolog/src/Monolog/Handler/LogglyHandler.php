@@ -11,6 +11,7 @@
 
 namespace Monolog\Handler;
 
+use LogicException;
 use Monolog\Logger;
 use Monolog\Formatter\LogglyFormatter;
 
@@ -34,7 +35,7 @@ class LogglyHandler extends AbstractProcessingHandler
     public function __construct($token, $level = Logger::DEBUG, $bubble = true)
     {
         if (!extension_loaded('curl')) {
-            throw new \LogicException('The curl extension is needed to use the LogglyHandler');
+            throw new LogicException('The curl extension is needed to use the LogglyHandler');
         }
 
         $this->token = $token;

@@ -15,15 +15,15 @@ further changes.
 Old (still works, but discouraged):
 
 ```php
-$parser = new \PHPParser_Parser(new \PHPParser_Lexer_Emulative);
-$prettyPrinter = new \PHPParser_PrettyPrinter_Default;
+$parser = new PHPParser_Parser(new PHPParser_Lexer_Emulative);
+$prettyPrinter = new PHPParser_PrettyPrinter_Default;
 ```
 
 New:
 
 ```php
-$parser = new \PhpParser\Parser(new PhpParser\Lexer\Emulative);
-$prettyPrinter = new \PhpParser\PrettyPrinter\Standard;
+use PhpParser\Parser;use PhpParser\PrettyPrinter\Standard;$parser = new Parser(new PhpParser\Lexer\Emulative);
+$prettyPrinter = new Standard;
 ```
 
 Note that the `PHPParser` prefix was changed to `PhpParser`. While PHP class names are technically case-insensitive,

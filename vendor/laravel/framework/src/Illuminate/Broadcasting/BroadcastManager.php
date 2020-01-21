@@ -2,6 +2,9 @@
 
 namespace Illuminate\Broadcasting;
 
+use Illuminate\Contracts\Broadcasting\Broadcaster;
+use Illuminate\Foundation\Application;
+use Illuminate\Http\Request;
 use Pusher;
 use Closure;
 use Illuminate\Support\Arr;
@@ -15,14 +18,14 @@ use Illuminate\Broadcasting\Broadcasters\PusherBroadcaster;
 use Illuminate\Contracts\Broadcasting\Factory as FactoryContract;
 
 /**
- * @mixin \Illuminate\Contracts\Broadcasting\Broadcaster
+ * @mixin Broadcaster
  */
 class BroadcastManager implements FactoryContract
 {
     /**
      * The application instance.
      *
-     * @var \Illuminate\Foundation\Application
+     * @var Application
      */
     protected $app;
 
@@ -43,7 +46,7 @@ class BroadcastManager implements FactoryContract
     /**
      * Create a new manager instance.
      *
-     * @param  \Illuminate\Foundation\Application  $app
+     * @param  Application  $app
      * @return void
      */
     public function __construct($app)
@@ -73,7 +76,7 @@ class BroadcastManager implements FactoryContract
     /**
      * Get the socket ID for the given request.
      *
-     * @param  \Illuminate\Http\Request|null  $request
+     * @param  Request|null  $request
      * @return string|null
      */
     public function socket($request = null)
@@ -93,7 +96,7 @@ class BroadcastManager implements FactoryContract
      * Begin broadcasting an event.
      *
      * @param  mixed|null  $event
-     * @return \Illuminate\Broadcasting\PendingBroadcast|void
+     * @return PendingBroadcast|void
      */
     public function event($event = null)
     {
@@ -157,7 +160,7 @@ class BroadcastManager implements FactoryContract
      * Attempt to get the connection from the local cache.
      *
      * @param  string  $name
-     * @return \Illuminate\Contracts\Broadcasting\Broadcaster
+     * @return Broadcaster
      */
     protected function get($name)
     {
@@ -168,9 +171,9 @@ class BroadcastManager implements FactoryContract
      * Resolve the given store.
      *
      * @param  string  $name
-     * @return \Illuminate\Contracts\Broadcasting\Broadcaster
+     * @return Broadcaster
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     protected function resolve($name)
     {
@@ -208,7 +211,7 @@ class BroadcastManager implements FactoryContract
      * Create an instance of the driver.
      *
      * @param  array  $config
-     * @return \Illuminate\Contracts\Broadcasting\Broadcaster
+     * @return Broadcaster
      */
     protected function createPusherDriver(array $config)
     {
@@ -222,7 +225,7 @@ class BroadcastManager implements FactoryContract
      * Create an instance of the driver.
      *
      * @param  array  $config
-     * @return \Illuminate\Contracts\Broadcasting\Broadcaster
+     * @return Broadcaster
      */
     protected function createRedisDriver(array $config)
     {
@@ -235,7 +238,7 @@ class BroadcastManager implements FactoryContract
      * Create an instance of the driver.
      *
      * @param  array  $config
-     * @return \Illuminate\Contracts\Broadcasting\Broadcaster
+     * @return Broadcaster
      */
     protected function createLogDriver(array $config)
     {
@@ -248,7 +251,7 @@ class BroadcastManager implements FactoryContract
      * Create an instance of the driver.
      *
      * @param  array  $config
-     * @return \Illuminate\Contracts\Broadcasting\Broadcaster
+     * @return Broadcaster
      */
     protected function createNullDriver(array $config)
     {
@@ -291,7 +294,7 @@ class BroadcastManager implements FactoryContract
      * Register a custom driver creator Closure.
      *
      * @param  string    $driver
-     * @param  \Closure  $callback
+     * @param Closure $callback
      * @return $this
      */
     public function extend($driver, Closure $callback)

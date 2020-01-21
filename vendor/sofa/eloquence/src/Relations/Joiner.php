@@ -20,22 +20,22 @@ class Joiner implements JoinerContract
     /**
      * Processed query instance.
      *
-     * @var \Illuminate\Database\Query\Builder
+     * @var Builder
      */
     protected $query;
 
     /**
      * Parent model.
      *
-     * @var \Illuminate\Database\Eloquent\Model
+     * @var Model
      */
     protected $model;
 
     /**
      * Create new joiner instance.
      *
-     * @param \Illuminate\Database\Query\Builder
-     * @param \Illuminate\Database\Eloquent\Model
+     * @param Builder
+     * @param Model
      */
     public function __construct(Builder $query, Model $model)
     {
@@ -48,7 +48,7 @@ class Joiner implements JoinerContract
      *
      * @param  string $target
      * @param  string $type
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return Model
      */
     public function join($target, $type = 'inner')
     {
@@ -65,7 +65,7 @@ class Joiner implements JoinerContract
      * Left join related tables.
      *
      * @param  string $target
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return Model
      */
     public function leftJoin($target)
     {
@@ -76,7 +76,7 @@ class Joiner implements JoinerContract
      * Right join related tables.
      *
      * @param  string $target
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return Model
      */
     public function rightJoin($target)
     {
@@ -86,10 +86,10 @@ class Joiner implements JoinerContract
     /**
      * Join relation's table accordingly.
      *
-     * @param  \Illuminate\Database\Eloquent\Model $parent
+     * @param Model $parent
      * @param  string $segment
      * @param  string $type
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return Model
      */
     protected function joinSegment(Model $parent, $segment, $type)
     {
@@ -111,7 +111,7 @@ class Joiner implements JoinerContract
     /**
      * Determine whether the related table has been already joined.
      *
-     * @param  \Illuminate\Database\Query\JoinClause $join
+     * @param Join $join
      * @return boolean
      */
     protected function alreadyJoined(Join $join)
@@ -122,11 +122,11 @@ class Joiner implements JoinerContract
     /**
      * Get the join clause for related table.
      *
-     * @param  \Illuminate\Database\Eloquent\Model $parent
-     * @param  \Illuminate\Database\Eloquent\Relations\Relation $relation
+     * @param Model $parent
+     * @param Relation $relation
      * @param  string $type
      * @param  string $table
-     * @return \Illuminate\Database\Query\JoinClause
+     * @return Join
      */
     protected function getJoinClause(Model $parent, Relation $relation, $table, $type)
     {
@@ -144,8 +144,8 @@ class Joiner implements JoinerContract
     /**
      * Join pivot or 'through' table.
      *
-     * @param  \Illuminate\Database\Eloquent\Model $parent
-     * @param  \Illuminate\Database\Eloquent\Relations\Relation $relation
+     * @param Model $parent
+     * @param Relation $relation
      * @param  string $type
      * @return void
      */
@@ -169,10 +169,10 @@ class Joiner implements JoinerContract
     /**
      * Get pair of the keys from relation in order to join the table.
      *
-     * @param  \Illuminate\Database\Eloquent\Relations\Relation $relation
+     * @param Relation $relation
      * @return array
      *
-     * @throws \LogicException
+     * @throws LogicException
      */
     protected function getJoinKeys(Relation $relation)
     {

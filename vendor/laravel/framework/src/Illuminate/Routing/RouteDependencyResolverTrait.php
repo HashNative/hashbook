@@ -32,7 +32,7 @@ trait RouteDependencyResolverTrait
      * Resolve the given method's type-hinted dependencies.
      *
      * @param  array  $parameters
-     * @param  \ReflectionFunctionAbstract  $reflector
+     * @param ReflectionFunctionAbstract $reflector
      * @return array
      */
     public function resolveMethodDependencies(array $parameters, ReflectionFunctionAbstract $reflector)
@@ -62,7 +62,7 @@ trait RouteDependencyResolverTrait
     /**
      * Attempt to transform the given parameter into a class instance.
      *
-     * @param  \ReflectionParameter  $parameter
+     * @param ReflectionParameter $parameter
      * @param  array  $parameters
      * @return mixed
      */

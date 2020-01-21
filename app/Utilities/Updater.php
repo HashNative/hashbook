@@ -8,6 +8,7 @@ use App\Models\Module\ModuleHistory as ModelHistory;
 use App\Traits\SiteApi;
 use Cache;
 use Date;
+use Exception;
 use File;
 use Module;
 use ZipArchive;
@@ -286,7 +287,7 @@ class Updater
                 'errors' => false,
                 'data' => []
             ];
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return [
                 'success' => false,
                 'errors' => trans('modules.errors.migrate', ['module' => $name]),

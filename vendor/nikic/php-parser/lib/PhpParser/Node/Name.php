@@ -2,7 +2,11 @@
 
 namespace PhpParser\Node;
 
+use InvalidArgumentException;
+use OutOfBoundsException;
 use PhpParser\NodeAbstract;
+use function is_array;
+use function is_string;
 
 class Name extends NodeAbstract
 {
@@ -121,7 +125,7 @@ class Name extends NodeAbstract
 
         $realOffset = $offset < 0 ? $offset + $numParts : $offset;
         if ($realOffset < 0 || $realOffset > $numParts) {
-            throw new \OutOfBoundsException(sprintf('Offset %d is out of bounds', $offset));
+            throw new OutOfBoundsException(sprintf('Offset %d is out of bounds', $offset));
         }
 
         if (null === $length) {
@@ -129,7 +133,7 @@ class Name extends NodeAbstract
         } else {
             $realLength = $length < 0 ? $length + $numParts - $realOffset : $length;
             if ($realLength < 0 || $realLength > $numParts) {
-                throw new \OutOfBoundsException(sprintf('Length %d is out of bounds', $length));
+                throw new OutOfBoundsException(sprintf('Length %d is out of bounds', $length));
             }
         }
 
@@ -181,15 +185,15 @@ class Name extends NodeAbstract
      * @return array Prepared name
      */
     private static function prepareName($name) {
-        if (\is_string($name)) {
+        if (is_string($name)) {
             return explode('\\', $name);
-        } elseif (\is_array($name)) {
+        } elseif (is_array($name)) {
             return $name;
         } elseif ($name instanceof self) {
             return $name->parts;
         }
 
-        throw new \InvalidArgumentException(
+        throw new InvalidArgumentException(
             'Expected string, array of parts or Name instance'
         );
     }

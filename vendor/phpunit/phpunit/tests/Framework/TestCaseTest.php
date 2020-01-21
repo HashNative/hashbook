@@ -650,7 +650,7 @@ class Framework_TestCaseTest extends PHPUnit_Framework_TestCase
 
     public function testProvidingOfAutoreferencedArray()
     {
-        $test = new \TestAutoreferenced('testJsonEncodeException', $this->getAutoreferencedArray());
+        $test = new TestAutoreferenced('testJsonEncodeException', $this->getAutoreferencedArray());
         $test->runBare();
 
         $this->assertInternalType('array', $test->myTestData);
@@ -681,7 +681,7 @@ class Framework_TestCaseTest extends PHPUnit_Framework_TestCase
             [$this->createMock(Mockable::class)],
         ];
 
-        $test = new \TestAutoreferenced('testJsonEncodeException', [$data]);
+        $test = new TestAutoreferenced('testJsonEncodeException', [$data]);
         $test->runBare();
 
         $this->assertInternalType('array', $test->myTestData);

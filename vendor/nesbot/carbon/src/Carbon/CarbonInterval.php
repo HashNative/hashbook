@@ -15,6 +15,7 @@ use Closure;
 use DateInterval;
 use InvalidArgumentException;
 use ReflectionClass;
+use ReflectionException;
 use ReflectionFunction;
 use ReflectionMethod;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -90,7 +91,7 @@ class CarbonInterval extends DateInterval
     /**
      * A translator to ... er ... translate stuff
      *
-     * @var \Symfony\Component\Translation\TranslatorInterface
+     * @var TranslatorInterface
      */
     protected static $translator;
 
@@ -551,7 +552,7 @@ class CarbonInterval extends DateInterval
     /**
      * Initialize the translator instance if necessary.
      *
-     * @return \Symfony\Component\Translation\TranslatorInterface
+     * @return TranslatorInterface
      */
     protected static function translator()
     {
@@ -565,7 +566,7 @@ class CarbonInterval extends DateInterval
     /**
      * Get the translator instance in use.
      *
-     * @return \Symfony\Component\Translation\TranslatorInterface
+     * @return TranslatorInterface
      */
     public static function getTranslator()
     {
@@ -611,9 +612,9 @@ class CarbonInterval extends DateInterval
      *
      * @param string $name
      *
-     * @throws \InvalidArgumentException
-     *
      * @return int|float
+     * @throws InvalidArgumentException
+     *
      */
     public function __get($name)
     {
@@ -658,7 +659,7 @@ class CarbonInterval extends DateInterval
      * @param string $name
      * @param int    $val
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function __set($name, $val)
     {
@@ -726,7 +727,7 @@ class CarbonInterval extends DateInterval
      *
      * @param object $mixin
      *
-     * @throws \ReflectionException
+     * @throws ReflectionException
      *
      * @return void
      */
@@ -1086,9 +1087,9 @@ class CarbonInterval extends DateInterval
      *
      * @param string $unit
      *
-     * @throws \InvalidArgumentException
-     *
      * @return float
+     * @throws InvalidArgumentException
+     *
      */
     public function total($unit)
     {
@@ -1143,7 +1144,7 @@ class CarbonInterval extends DateInterval
         }
 
         if (!$unitFound) {
-            throw new \InvalidArgumentException("Unit $unit have no configuration to get total from other units.");
+            throw new InvalidArgumentException("Unit $unit have no configuration to get total from other units.");
         }
 
         if ($unit === 'weeks') {

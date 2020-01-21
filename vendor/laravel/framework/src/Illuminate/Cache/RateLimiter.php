@@ -10,14 +10,14 @@ class RateLimiter
     /**
      * The cache store implementation.
      *
-     * @var \Illuminate\Contracts\Cache\Repository
+     * @var Cache
      */
     protected $cache;
 
     /**
      * Create a new rate limiter instance.
      *
-     * @param  \Illuminate\Contracts\Cache\Repository  $cache
+     * @param Cache $cache
      * @return void
      */
     public function __construct(Cache $cache)

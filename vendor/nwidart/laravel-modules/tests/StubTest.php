@@ -2,12 +2,13 @@
 
 namespace Nwidart\Modules\tests;
 
+use Illuminate\Filesystem\Filesystem;
 use Nwidart\Modules\Support\Stub;
 
 class StubTest extends BaseTestCase
 {
     /**
-     * @var \Illuminate\Filesystem\Filesystem
+     * @var Filesystem
      */
     private $finder;
 

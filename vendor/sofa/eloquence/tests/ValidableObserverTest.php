@@ -3,9 +3,10 @@
 namespace Sofa\Eloquence\Tests;
 
 use Mockery as m;
+use PHPUnit_Framework_TestCase;
 use Sofa\Eloquence\Validable\Observer;
 
-class ValidableObserverTest extends \PHPUnit_Framework_TestCase {
+class ValidableObserverTest extends PHPUnit_Framework_TestCase {
 
     public function tearDown()
     {

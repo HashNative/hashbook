@@ -2,7 +2,9 @@
 
 namespace PhpParser;
 
-class CommentTest extends \PHPUnit_Framework_TestCase
+use PHPUnit_Framework_TestCase;
+
+class CommentTest extends PHPUnit_Framework_TestCase
 {
     public function testGetSet() {
         $comment = new Comment('/* Some comment */', 1, 10);

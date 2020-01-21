@@ -10,6 +10,8 @@
 
 namespace SebastianBergmann\CodeCoverage\Report\Xml;
 
+use DOMElement;
+
 class Tests
 {
     private $contextNode;
@@ -24,7 +26,7 @@ class Tests
         6 => 'WARNING'     // PHPUnit_Runner_BaseTestRunner::STATUS_WARNING
     ];
 
-    public function __construct(\DOMElement $context)
+    public function __construct(DOMElement $context)
     {
         $this->contextNode = $context;
     }

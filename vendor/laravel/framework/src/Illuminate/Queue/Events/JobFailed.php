@@ -2,6 +2,9 @@
 
 namespace Illuminate\Queue\Events;
 
+use Exception;
+use Illuminate\Contracts\Queue\Job;
+
 class JobFailed
 {
     /**
@@ -14,14 +17,14 @@ class JobFailed
     /**
      * The job instance.
      *
-     * @var \Illuminate\Contracts\Queue\Job
+     * @var Job
      */
     public $job;
 
     /**
      * The exception that caused the job to fail.
      *
-     * @var \Exception
+     * @var Exception
      */
     public $exception;
 
@@ -29,8 +32,8 @@ class JobFailed
      * Create a new event instance.
      *
      * @param  string  $connectionName
-     * @param  \Illuminate\Contracts\Queue\Job  $job
-     * @param  \Exception  $exception
+     * @param  Job  $job
+     * @param  Exception  $exception
      * @return void
      */
     public function __construct($connectionName, $job, $exception)

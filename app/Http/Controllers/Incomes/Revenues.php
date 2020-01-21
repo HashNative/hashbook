@@ -15,6 +15,7 @@ use App\Traits\Uploads;
 use App\Utilities\Import;
 use App\Utilities\ImportFile;
 use App\Utilities\Modules;
+use Excel;
 
 class Revenues extends Controller
 {
@@ -224,7 +225,7 @@ class Revenues extends Controller
      */
     public function export()
     {
-        \Excel::create('revenues', function($excel) {
+        Excel::create('revenues', function($excel) {
             $excel->sheet('revenues', function($sheet) {
                 $sheet->fromModel(Revenue::filter(request()->input())->get()->makeHidden([
                     'id', 'company_id', 'parent_id', 'created_at', 'updated_at', 'deleted_at'

@@ -3,19 +3,21 @@
 namespace Illuminate\Session;
 
 use Carbon\Carbon;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Arr;
 use SessionHandlerInterface;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Contracts\Container\Container;
+use stdClass;
 
 class DatabaseSessionHandler implements SessionHandlerInterface, ExistenceAwareInterface
 {
     /**
      * The database connection instance.
      *
-     * @var \Illuminate\Database\ConnectionInterface
+     * @var ConnectionInterface
      */
     protected $connection;
 
@@ -36,7 +38,7 @@ class DatabaseSessionHandler implements SessionHandlerInterface, ExistenceAwareI
     /**
      * The container instance.
      *
-     * @var \Illuminate\Contracts\Container\Container
+     * @var Container
      */
     protected $container;
 
@@ -50,10 +52,10 @@ class DatabaseSessionHandler implements SessionHandlerInterface, ExistenceAwareI
     /**
      * Create a new database session handler instance.
      *
-     * @param  \Illuminate\Database\ConnectionInterface  $connection
+     * @param ConnectionInterface $connection
      * @param  string  $table
      * @param  int  $minutes
-     * @param  \Illuminate\Contracts\Container\Container|null  $container
+     * @param Container|null  $container
      * @return void
      */
     public function __construct(ConnectionInterface $connection, $table, $minutes, Container $container = null)
@@ -103,7 +105,7 @@ class DatabaseSessionHandler implements SessionHandlerInterface, ExistenceAwareI
     /**
      * Determine if the session is expired.
      *
-     * @param  \stdClass  $session
+     * @param  stdClass  $session
      * @return bool
      */
     protected function expired($session)
@@ -267,7 +269,7 @@ class DatabaseSessionHandler implements SessionHandlerInterface, ExistenceAwareI
     /**
      * Get a fresh query builder instance for the table.
      *
-     * @return \Illuminate\Database\Query\Builder
+     * @return Builder
      */
     protected function getQuery()
     {

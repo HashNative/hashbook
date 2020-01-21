@@ -29,8 +29,8 @@ class SourceAdapterFactory
     /**
      * Create a Source Adapter for the provided source.
      * @param  object|string $source
-     * @return \Plank\Mediable\SourceAdapters\SourceAdapterInterface
-     * @throws \Plank\Mediable\Exceptions\MediaUpload\ConfigurationException If the provided source does not match any of the mapped classes or patterns
+     * @return SourceAdapterInterface
+     * @throws ConfigurationException If the provided source does not match any of the mapped classes or patterns
      */
     public function create($source)
     {
@@ -80,7 +80,7 @@ class SourceAdapterFactory
     /**
      * Choose an adapter class for the class of the provided object.
      * @param  object $source
-     * @return \Plank\Mediable\SourceAdapters\SourceAdapterInterface|null
+     * @return SourceAdapterInterface|null
      */
     private function adaptClass($source)
     {
@@ -94,7 +94,7 @@ class SourceAdapterFactory
     /**
      * Choose an adapter class for the provided string.
      * @param  string $source
-     * @return \Plank\Mediable\SourceAdapters\SourceAdapterInterface|null
+     * @return SourceAdapterInterface|null
      */
     private function adaptString($source)
     {
@@ -109,8 +109,8 @@ class SourceAdapterFactory
     /**
      * Verify that the provided class implements the SourceAdapter interface.
      * @param  string $class
-     * @throws \Plank\Mediable\Exceptions\MediaUpload\ConfigurationException If class is not valid
      * @return void
+     * @throws ConfigurationException If class is not valid
      */
     private function validateAdapterClass($class)
     {

@@ -2,6 +2,8 @@
 
 namespace Illuminate\Queue\Failed;
 
+use Exception;
+
 class NullFailedJobProvider implements FailedJobProviderInterface
 {
     /**
@@ -10,7 +12,7 @@ class NullFailedJobProvider implements FailedJobProviderInterface
      * @param  string  $connection
      * @param  string  $queue
      * @param  string  $payload
-     * @param  \Exception  $exception
+     * @param  Exception  $exception
      * @return int|null
      */
     public function log($connection, $queue, $payload, $exception)

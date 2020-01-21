@@ -35,7 +35,7 @@ class BroadcastEvent implements ShouldQueue
     /**
      * Handle the queued job.
      *
-     * @param  \Illuminate\Contracts\Broadcasting\Broadcaster  $broadcaster
+     * @param Broadcaster $broadcaster
      * @return void
      */
     public function handle(Broadcaster $broadcaster)

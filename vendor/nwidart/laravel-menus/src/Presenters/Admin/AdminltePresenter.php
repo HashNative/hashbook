@@ -2,6 +2,7 @@
 
 namespace Nwidart\Menus\Presenters\Admin;
 
+use Nwidart\Menus\MenuItem;
 use Nwidart\Menus\Presenters\Presenter;
 
 class AdminltePresenter extends Presenter
@@ -89,7 +90,7 @@ class AdminltePresenter extends Presenter
     /**
      * Get multilevel menu wrapper.
      *
-     * @param \Nwidart\Menus\MenuItem $item
+     * @param MenuItem $item
      *
      * @return string`
      */

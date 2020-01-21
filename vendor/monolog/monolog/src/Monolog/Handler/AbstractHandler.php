@@ -11,10 +11,14 @@
 
 namespace Monolog\Handler;
 
+use Exception;
+use InvalidArgumentException;
+use LogicException;
 use Monolog\Formatter\FormatterInterface;
 use Monolog\Formatter\LineFormatter;
 use Monolog\Logger;
 use Monolog\ResettableInterface;
+use Throwable;
 
 /**
  * Base Handler class providing the Handler structure
@@ -75,7 +79,7 @@ abstract class AbstractHandler implements HandlerInterface, ResettableInterface
     public function pushProcessor($callback)
     {
         if (!is_callable($callback)) {
-            throw new \InvalidArgumentException('Processors must be valid callables (callback or object with an __invoke method), '.var_export($callback, true).' given');
+            throw new InvalidArgumentException('Processors must be valid callables (callback or object with an __invoke method), '.var_export($callback, true).' given');
         }
         array_unshift($this->processors, $callback);
 
@@ -88,7 +92,7 @@ abstract class AbstractHandler implements HandlerInterface, ResettableInterface
     public function popProcessor()
     {
         if (!$this->processors) {
-            throw new \LogicException('You tried to pop from an empty processor stack.');
+            throw new LogicException('You tried to pop from an empty processor stack.');
         }
 
         return array_shift($this->processors);
@@ -168,9 +172,9 @@ abstract class AbstractHandler implements HandlerInterface, ResettableInterface
     {
         try {
             $this->close();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             // do nothing
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             // do nothing
         }
     }

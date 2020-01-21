@@ -6,6 +6,7 @@ use App\Http\Controllers\ApiController;
 use App\Http\Requests\Expense\Payment as Request;
 use App\Models\Expense\Payment;
 use App\Transformers\Expense\Payment as Transformer;
+use Dingo\Api\Http\Response;
 use Dingo\Api\Routing\Helpers;
 
 class Payments extends ApiController
@@ -15,7 +16,7 @@ class Payments extends ApiController
     /**
      * Display a listing of the resource.
      *
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -28,7 +29,7 @@ class Payments extends ApiController
      * Display the specified resource.
      *
      * @param  Payment  $payment
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function show(Payment $payment)
     {
@@ -39,7 +40,7 @@ class Payments extends ApiController
      * Store a newly created resource in storage.
      *
      * @param  $request
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -53,7 +54,7 @@ class Payments extends ApiController
      *
      * @param  $payment
      * @param  $request
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function update(Payment $payment, Request $request)
     {
@@ -66,7 +67,7 @@ class Payments extends ApiController
      * Remove the specified resource from storage.
      *
      * @param  Payment  $payment
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function destroy(Payment $payment)
     {

@@ -45,8 +45,8 @@ class LazyDouble
      *
      * @param string|ReflectionClass $class
      *
-     * @throws \Prophecy\Exception\Doubler\ClassNotFoundException
-     * @throws \Prophecy\Exception\Doubler\DoubleException
+     * @throws ClassNotFoundException
+     * @throws DoubleException
      */
     public function setParentClass($class)
     {
@@ -70,8 +70,8 @@ class LazyDouble
      *
      * @param string|ReflectionClass $interface
      *
-     * @throws \Prophecy\Exception\Doubler\InterfaceNotFoundException
-     * @throws \Prophecy\Exception\Doubler\DoubleException
+     * @throws InterfaceNotFoundException
+     * @throws DoubleException
      */
     public function addInterface($interface)
     {

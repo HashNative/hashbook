@@ -165,7 +165,7 @@ class SlackMessage
     /**
      * Define an attachment for the message.
      *
-     * @param  \Closure  $callback
+     * @param Closure $callback
      * @return $this
      */
     public function attachment(Closure $callback)

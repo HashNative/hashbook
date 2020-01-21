@@ -7,7 +7,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Routing\UrlGenerator;
 
 /**
- * @mixin \Illuminate\Routing\Router
+ * @mixin Router
  */
 class RouteServiceProvider extends ServiceProvider
 {

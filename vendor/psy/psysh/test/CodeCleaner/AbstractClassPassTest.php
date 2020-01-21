@@ -12,6 +12,7 @@
 namespace Psy\Test\CodeCleaner;
 
 use Psy\CodeCleaner\AbstractClassPass;
+use Psy\Exception\FatalErrorException;
 
 class AbstractClassPassTest extends CodeCleanerTestCase
 {
@@ -22,7 +23,7 @@ class AbstractClassPassTest extends CodeCleanerTestCase
 
     /**
      * @dataProvider invalidStatements
-     * @expectedException \Psy\Exception\FatalErrorException
+     * @expectedException FatalErrorException
      */
     public function testProcessStatementFails($code)
     {

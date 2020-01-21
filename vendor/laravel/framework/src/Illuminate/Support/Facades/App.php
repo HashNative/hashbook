@@ -2,13 +2,15 @@
 
 namespace Illuminate\Support\Facades;
 
+use Illuminate\Support\ServiceProvider;
+
 /**
  * @method static string version()
  * @method static string basePath()
  * @method static string environment()
  * @method static bool isDownForMaintenance()
  * @method static void registerConfiguredProviders()
- * @method static \Illuminate\Support\ServiceProvider register(\Illuminate\Support\ServiceProvider|string $provider, array $options = [], bool $force = false)
+ * @method static ServiceProvider register(ServiceProvider|string $provider, array $options = [], bool $force = false)
  * @method static void registerDeferredProvider(string $provider, string $service = null)
  * @method static void boot()
  * @method static void booting(mixed $callback)

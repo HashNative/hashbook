@@ -15,6 +15,7 @@ use Monolog\TestCase;
 use Monolog\Logger;
 use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\Slack\SlackRecord;
+use ReflectionProperty;
 
 /**
  * @author Greg Kedzierski <greg@gregkedzierski.com>
@@ -136,7 +137,7 @@ class SlackHandlerTest extends TestCase
             $constructorArgs
         );
 
-        $reflectionProperty = new \ReflectionProperty('\Monolog\Handler\SocketHandler', 'connectionString');
+        $reflectionProperty = new ReflectionProperty('\Monolog\Handler\SocketHandler', 'connectionString');
         $reflectionProperty->setAccessible(true);
         $reflectionProperty->setValue($this->handler, 'localhost:1234');
 

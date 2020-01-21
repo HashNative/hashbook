@@ -9,20 +9,21 @@ use Illuminate\Contracts\Foundation\Application;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Debug\Exception\FatalErrorException;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
+use Throwable;
 
 class HandleExceptions
 {
     /**
      * The application instance.
      *
-     * @var \Illuminate\Contracts\Foundation\Application
+     * @var Application
      */
     protected $app;
 
     /**
      * Bootstrap the given application.
      *
-     * @param  \Illuminate\Contracts\Foundation\Application  $app
+     * @param Application $app
      * @return void
      */
     public function bootstrap(Application $app)
@@ -52,7 +53,7 @@ class HandleExceptions
      * @param  array  $context
      * @return void
      *
-     * @throws \ErrorException
+     * @throws ErrorException
      */
     public function handleError($level, $message, $file = '', $line = 0, $context = [])
     {
@@ -68,7 +69,7 @@ class HandleExceptions
      * the HTTP and Console kernels. But, fatal error exceptions must
      * be handled differently since they are not normal exceptions.
      *
-     * @param  \Throwable  $e
+     * @param  Throwable  $e
      * @return void
      */
     public function handleException($e)
@@ -93,7 +94,7 @@ class HandleExceptions
     /**
      * Render an exception to the console.
      *
-     * @param  \Exception  $e
+     * @param Exception $e
      * @return void
      */
     protected function renderForConsole(Exception $e)
@@ -104,7 +105,7 @@ class HandleExceptions
     /**
      * Render an exception as an HTTP response and send it.
      *
-     * @param  \Exception  $e
+     * @param Exception $e
      * @return void
      */
     protected function renderHttpResponse(Exception $e)
@@ -129,7 +130,7 @@ class HandleExceptions
      *
      * @param  array  $error
      * @param  int|null  $traceOffset
-     * @return \Symfony\Component\Debug\Exception\FatalErrorException
+     * @return FatalErrorException
      */
     protected function fatalExceptionFromError(array $error, $traceOffset = null)
     {
@@ -152,7 +153,7 @@ class HandleExceptions
     /**
      * Get an instance of the exception handler.
      *
-     * @return \Illuminate\Contracts\Debug\ExceptionHandler
+     * @return ExceptionHandler
      */
     protected function getExceptionHandler()
     {

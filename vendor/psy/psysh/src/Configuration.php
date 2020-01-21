@@ -11,6 +11,10 @@
 
 namespace Psy;
 
+use InvalidArgumentDescription;
+use InvalidArgumentException;
+use PDO;
+use PDOException;
 use Psy\Exception\DeprecatedException;
 use Psy\Exception\RuntimeException;
 use Psy\Output\OutputPager;
@@ -26,6 +30,24 @@ use Psy\VersionUpdater\Checker;
 use Psy\VersionUpdater\GitHubChecker;
 use Psy\VersionUpdater\IntervalChecker;
 use Psy\VersionUpdater\NoopChecker;
+use function array_merge;
+use function count;
+use function exec;
+use function function_exists;
+use function getcwd;
+use function getenv;
+use function implode;
+use function in_array;
+use function ini_get;
+use function is_array;
+use function is_dir;
+use function is_file;
+use function is_string;
+use function mkdir;
+use function sprintf;
+use function tempnam;
+use function trigger_error;
+use function ucfirst;
 
 /**
  * The Psy Shell configuration.
@@ -114,7 +136,7 @@ class Configuration
         // explicit configFile option
         if (isset($config['configFile'])) {
             $this->configFile = $config['configFile'];
-        } elseif ($configFile = \getenv('PSYSH_CONFIG')) {
+        } elseif ($configFile = getenv('PSYSH_CONFIG')) {
             $this->configFile = $configFile;
         }
 
@@ -145,8 +167,8 @@ class Configuration
     public function init()
     {
         // feature detection
-        $this->hasReadline = \function_exists('readline');
-        $this->hasPcntl    = \function_exists('pcntl_signal') && \function_exists('posix_getpid');
+        $this->hasReadline = function_exists('readline');
+        $this->hasPcntl    = function_exists('pcntl_signal') && function_exists('posix_getpid');
 
         if ($configFile = $this->getConfigFile()) {
             $this->loadConfigFile($configFile);
@@ -180,9 +202,9 @@ class Configuration
         $files = ConfigPaths::getConfigFiles(['config.php', 'rc.php'], $this->configDir);
 
         if (!empty($files)) {
-            if ($this->warnOnMultipleConfigs && \count($files) > 1) {
-                $msg = \sprintf('Multiple configuration files found: %s. Using %s', \implode($files, ', '), $files[0]);
-                \trigger_error($msg, E_USER_NOTICE);
+            if ($this->warnOnMultipleConfigs && count($files) > 1) {
+                $msg = sprintf('Multiple configuration files found: %s. Using %s', implode($files, ', '), $files[0]);
+                trigger_error($msg, E_USER_NOTICE);
             }
 
             return $files[0];
@@ -199,9 +221,9 @@ class Configuration
      */
     public function getLocalConfigFile()
     {
-        $localConfig = \getcwd() . '/.psysh.php';
+        $localConfig = getcwd() . '/.psysh.php';
 
-        if (@\is_file($localConfig)) {
+        if (@is_file($localConfig)) {
             return $localConfig;
         }
     }
@@ -215,7 +237,7 @@ class Configuration
     {
         foreach (self::$AVAILABLE_OPTIONS as $option) {
             if (isset($options[$option])) {
-                $method = 'set' . \ucfirst($option);
+                $method = 'set' . ucfirst($option);
                 $this->$method($options[$option]);
             }
         }
@@ -223,14 +245,14 @@ class Configuration
         // legacy `tabCompletion` option
         if (isset($options['tabCompletion'])) {
             $msg = '`tabCompletion` is deprecated; use `useTabCompletion` instead.';
-            @\trigger_error($msg, E_USER_DEPRECATED);
+            @trigger_error($msg, E_USER_DEPRECATED);
 
             $this->setUseTabCompletion($options['tabCompletion']);
         }
 
         foreach (['commands', 'matchers', 'casters'] as $option) {
             if (isset($options[$option])) {
-                $method = 'add' . \ucfirst($option);
+                $method = 'add' . ucfirst($option);
                 $this->$method($options[$option]);
             }
         }
@@ -238,7 +260,7 @@ class Configuration
         // legacy `tabCompletionMatchers` option
         if (isset($options['tabCompletionMatchers'])) {
             $msg = '`tabCompletionMatchers` is deprecated; use `matchers` instead.';
-            @\trigger_error($msg, E_USER_DEPRECATED);
+            @trigger_error($msg, E_USER_DEPRECATED);
 
             $this->addMatchers($options['tabCompletionMatchers']);
         }
@@ -251,7 +273,7 @@ class Configuration
      * The config file may directly manipulate the configuration, or may return
      * an array of options which will be merged with the current configuration.
      *
-     * @throws \InvalidArgumentException if the config file returns a non-array result
+     * @throws InvalidArgumentException if the config file returns a non-array result
      *
      * @param string $file
      */
@@ -267,10 +289,10 @@ class Configuration
         $result = $load($this);
 
         if (!empty($result)) {
-            if (\is_array($result)) {
+            if (is_array($result)) {
                 $this->loadConfig($result);
             } else {
-                throw new \InvalidArgumentException('Psy Shell configuration must return an array of options');
+                throw new InvalidArgumentException('Psy Shell configuration must return an array of options');
             }
         }
     }
@@ -359,8 +381,8 @@ class Configuration
             $this->runtimeDir = ConfigPaths::getRuntimeDir();
         }
 
-        if (!\is_dir($this->runtimeDir)) {
-            \mkdir($this->runtimeDir, 0700, true);
+        if (!is_dir($this->runtimeDir)) {
+            mkdir($this->runtimeDir, 0700, true);
         }
 
         return $this->runtimeDir;
@@ -393,9 +415,9 @@ class Configuration
         $files = ConfigPaths::getConfigFiles(['psysh_history', 'history'], $this->configDir);
 
         if (!empty($files)) {
-            if ($this->warnOnMultipleConfigs && \count($files) > 1) {
-                $msg = \sprintf('Multiple history files found: %s. Using %s', \implode($files, ', '), $files[0]);
-                \trigger_error($msg, E_USER_NOTICE);
+            if ($this->warnOnMultipleConfigs && count($files) > 1) {
+                $msg = sprintf('Multiple history files found: %s. Using %s', implode($files, ', '), $files[0]);
+                trigger_error($msg, E_USER_NOTICE);
             }
 
             $this->setHistoryFile($files[0]);
@@ -462,7 +484,7 @@ class Configuration
      */
     public function getTempFile($type, $pid)
     {
-        return \tempnam($this->getRuntimeDir(), $type . '_' . $pid . '_');
+        return tempnam($this->getRuntimeDir(), $type . '_' . $pid . '_');
     }
 
     /**
@@ -477,7 +499,7 @@ class Configuration
      */
     public function getPipe($type, $pid)
     {
-        return \sprintf('%s/%s_%s', $this->getRuntimeDir(), $type, $pid);
+        return sprintf('%s/%s_%s', $this->getRuntimeDir(), $type, $pid);
     }
 
     /**
@@ -855,14 +877,14 @@ class Configuration
      * If a string is supplied, a ProcOutputPager will be used which shells out
      * to the specified command.
      *
-     * @throws \InvalidArgumentException if $pager is not a string or OutputPager instance
+     * @throws InvalidArgumentException if $pager is not a string or OutputPager instance
      *
      * @param string|OutputPager $pager
      */
     public function setPager($pager)
     {
-        if ($pager && !\is_string($pager) && !$pager instanceof OutputPager) {
-            throw new \InvalidArgumentException('Unexpected pager instance');
+        if ($pager && !is_string($pager) && !$pager instanceof OutputPager) {
+            throw new InvalidArgumentException('Unexpected pager instance');
         }
 
         $this->pager = $pager;
@@ -879,10 +901,10 @@ class Configuration
     public function getPager()
     {
         if (!isset($this->pager) && $this->usePcntl()) {
-            if ($pager = \ini_get('cli.pager')) {
+            if ($pager = ini_get('cli.pager')) {
                 // use the default pager
                 $this->pager = $pager;
-            } elseif ($less = \exec('which less 2>/dev/null')) {
+            } elseif ($less = exec('which less 2>/dev/null')) {
                 // check for the presence of less...
                 $this->pager = $less . ' -R -S -F -X';
             }
@@ -937,7 +959,7 @@ class Configuration
      */
     public function addMatchers(array $matchers)
     {
-        $this->newMatchers = \array_merge($this->newMatchers, $matchers);
+        $this->newMatchers = array_merge($this->newMatchers, $matchers);
         if (isset($this->shell)) {
             $this->doAddMatchers();
         }
@@ -977,7 +999,7 @@ class Configuration
      */
     public function addCommands(array $commands)
     {
-        $this->newCommands = \array_merge($this->newCommands, $commands);
+        $this->newCommands = array_merge($this->newCommands, $commands);
         if (isset($this->shell)) {
             $this->doAddCommands();
         }
@@ -1033,9 +1055,9 @@ class Configuration
 
         $files = ConfigPaths::getDataFiles(['php_manual.sqlite'], $this->dataDir);
         if (!empty($files)) {
-            if ($this->warnOnMultipleConfigs && \count($files) > 1) {
-                $msg = \sprintf('Multiple manual database files found: %s. Using %s', \implode($files, ', '), $files[0]);
-                \trigger_error($msg, E_USER_NOTICE);
+            if ($this->warnOnMultipleConfigs && count($files) > 1) {
+                $msg = sprintf('Multiple manual database files found: %s. Using %s', implode($files, ', '), $files[0]);
+                trigger_error($msg, E_USER_NOTICE);
             }
 
             return $this->manualDbFile = $files[0];
@@ -1045,16 +1067,16 @@ class Configuration
     /**
      * Get a PHP manual database connection.
      *
-     * @return \PDO
+     * @return PDO
      */
     public function getManualDb()
     {
         if (!isset($this->manualDb)) {
             $dbFile = $this->getManualDbFile();
-            if (\is_file($dbFile)) {
+            if (is_file($dbFile)) {
                 try {
-                    $this->manualDb = new \PDO('sqlite:' . $dbFile);
-                } catch (\PDOException $e) {
+                    $this->manualDb = new PDO('sqlite:' . $dbFile);
+                } catch (PDOException $e) {
                     if ($e->getMessage() === 'could not find driver') {
                         throw new RuntimeException('SQLite PDO driver not found', 0, $e);
                     } else {
@@ -1133,10 +1155,10 @@ class Configuration
             self::COLOR_MODE_DISABLED,
         ];
 
-        if (\in_array($colorMode, $validColorModes)) {
+        if (in_array($colorMode, $validColorModes)) {
             $this->colorMode = $colorMode;
         } else {
-            throw new \InvalidArgumentException('invalid color mode: ' . $colorMode);
+            throw new InvalidArgumentException('invalid color mode: ' . $colorMode);
         }
     }
 
@@ -1212,7 +1234,7 @@ class Configuration
     /**
      * Set the update check interval.
      *
-     * @throws \InvalidArgumentDescription if the update check interval is unknown
+     * @throws InvalidArgumentDescription if the update check interval is unknown
      *
      * @param string $interval
      */
@@ -1226,8 +1248,8 @@ class Configuration
             Checker::NEVER,
         ];
 
-        if (!\in_array($interval, $validIntervals)) {
-            throw new \InvalidArgumentException('invalid update check interval: ' . $interval);
+        if (!in_array($interval, $validIntervals)) {
+            throw new InvalidArgumentException('invalid update check interval: ' . $interval);
         }
 
         $this->updateCheck = $interval;

@@ -2,6 +2,7 @@
 
 namespace PhpParser\Builder;
 
+use LogicException;
 use PhpParser\BuilderAbstract;
 use PhpParser\Node;
 use PhpParser\Node\Stmt;
@@ -41,7 +42,7 @@ class Use_ extends BuilderAbstract {
             return call_user_func_array(array($this, $name . '_'), $args);
         }
 
-        throw new \LogicException(sprintf('Method "%s" does not exist', $name));
+        throw new LogicException(sprintf('Method "%s" does not exist', $name));
     }
 
     /**

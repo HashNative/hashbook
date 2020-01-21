@@ -11,7 +11,7 @@
 class ExceptionMessageTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @expectedException \Exception
+     * @expectedException Exception
      * @expectedExceptionMessage A literal exception message
      */
     public function testLiteralMessage()
@@ -20,7 +20,7 @@ class ExceptionMessageTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Exception
+     * @expectedException Exception
      * @expectedExceptionMessage A partial
      */
     public function testPartialMessageBegin()
@@ -29,7 +29,7 @@ class ExceptionMessageTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Exception
+     * @expectedException Exception
      * @expectedExceptionMessage partial exception
      */
     public function testPartialMessageMiddle()
@@ -38,7 +38,7 @@ class ExceptionMessageTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Exception
+     * @expectedException Exception
      * @expectedExceptionMessage exception message
      */
     public function testPartialMessageEnd()

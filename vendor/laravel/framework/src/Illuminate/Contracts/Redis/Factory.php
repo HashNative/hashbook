@@ -2,13 +2,15 @@
 
 namespace Illuminate\Contracts\Redis;
 
+use Illuminate\Redis\Connections\Connection;
+
 interface Factory
 {
     /**
      * Get a Redis connection by name.
      *
      * @param  string  $name
-     * @return \Illuminate\Redis\Connections\Connection
+     * @return Connection
      */
     public function connection($name = null);
 }

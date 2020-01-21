@@ -2,6 +2,7 @@
 
 namespace Illuminate\Foundation\Console;
 
+use Exception;
 use Illuminate\Console\Command;
 use Symfony\Component\Process\ProcessUtils;
 use Symfony\Component\Console\Input\InputOption;
@@ -28,7 +29,7 @@ class ServeCommand extends Command
      *
      * @return void
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function fire()
     {

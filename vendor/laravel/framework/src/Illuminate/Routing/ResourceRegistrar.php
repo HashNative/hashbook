@@ -9,7 +9,7 @@ class ResourceRegistrar
     /**
      * The router instance.
      *
-     * @var \Illuminate\Routing\Router
+     * @var Router
      */
     protected $router;
 
@@ -54,7 +54,7 @@ class ResourceRegistrar
     /**
      * Create a new resource registrar instance.
      *
-     * @param  \Illuminate\Routing\Router  $router
+     * @param Router $router
      * @return void
      */
     public function __construct(Router $router)
@@ -162,7 +162,7 @@ class ResourceRegistrar
      * @param  string  $base
      * @param  string  $controller
      * @param  array   $options
-     * @return \Illuminate\Routing\Route
+     * @return Route
      */
     protected function addResourceIndex($name, $base, $controller, $options)
     {
@@ -180,7 +180,7 @@ class ResourceRegistrar
      * @param  string  $base
      * @param  string  $controller
      * @param  array   $options
-     * @return \Illuminate\Routing\Route
+     * @return Route
      */
     protected function addResourceCreate($name, $base, $controller, $options)
     {
@@ -198,7 +198,7 @@ class ResourceRegistrar
      * @param  string  $base
      * @param  string  $controller
      * @param  array   $options
-     * @return \Illuminate\Routing\Route
+     * @return Route
      */
     protected function addResourceStore($name, $base, $controller, $options)
     {
@@ -216,7 +216,7 @@ class ResourceRegistrar
      * @param  string  $base
      * @param  string  $controller
      * @param  array   $options
-     * @return \Illuminate\Routing\Route
+     * @return Route
      */
     protected function addResourceShow($name, $base, $controller, $options)
     {
@@ -234,7 +234,7 @@ class ResourceRegistrar
      * @param  string  $base
      * @param  string  $controller
      * @param  array   $options
-     * @return \Illuminate\Routing\Route
+     * @return Route
      */
     protected function addResourceEdit($name, $base, $controller, $options)
     {
@@ -252,7 +252,7 @@ class ResourceRegistrar
      * @param  string  $base
      * @param  string  $controller
      * @param  array   $options
-     * @return \Illuminate\Routing\Route
+     * @return Route
      */
     protected function addResourceUpdate($name, $base, $controller, $options)
     {
@@ -270,7 +270,7 @@ class ResourceRegistrar
      * @param  string  $base
      * @param  string  $controller
      * @param  array   $options
-     * @return \Illuminate\Routing\Route
+     * @return Route
      */
     protected function addResourceDestroy($name, $base, $controller, $options)
     {

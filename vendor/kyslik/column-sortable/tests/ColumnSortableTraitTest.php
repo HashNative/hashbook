@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Input;
+use Kyslik\ColumnSortable\Sortable;
 
 /**
  * Class ColumnSortableTraitTest
@@ -129,7 +132,7 @@ class ColumnSortableTraitTest extends \Orchestra\Testbench\TestCase
             $this->comment->newQuery()->from('comments as parent_comments')->select('parent_comments.*')->join('comments', 'parent_comments.parent_id', '=', 'comments.id');
         $this->assertEquals($expectedQuery->toSql(), $resultQuery->toSql());
     }
-    
+
     /**
      * Call protected/private method of a class.
      *
@@ -138,11 +141,11 @@ class ColumnSortableTraitTest extends \Orchestra\Testbench\TestCase
      * @param array  $parameters Array of parameters to pass into method.
      *
      * @return mixed Method return.
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     protected function invokeMethod(&$object, $methodName, array $parameters = [])
     {
-        $reflection = new \ReflectionClass(get_class($object));
+        $reflection = new ReflectionClass(get_class($object));
         $method     = $reflection->getMethod($methodName);
         $method->setAccessible(true);
 
@@ -188,7 +191,7 @@ class ColumnSortableTraitTest extends \Orchestra\Testbench\TestCase
 
 
     /**
-     * @expectedException  \Exception
+     * @expectedException  Exception
      * @expectedExceptionCode 0
      */
     public function testSortableQueryJoinBuilderThrowsException()
@@ -303,7 +306,7 @@ class ColumnSortableTraitTest extends \Orchestra\Testbench\TestCase
 class User extends Model
 {
 
-    use \Kyslik\ColumnSortable\Sortable;
+    use Sortable;
 
     /**
      * @var array
@@ -320,7 +323,7 @@ class User extends Model
 
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
     public function profile()
     {
@@ -352,7 +355,7 @@ class Profile extends Model
 
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function user()
     {
@@ -371,7 +374,7 @@ class Profile extends Model
  */
 class Comment extends Model
 {
-    use \Kyslik\ColumnSortable\Sortable;
+    use Sortable;
 
     /**
      * @var array
@@ -384,7 +387,7 @@ class Comment extends Model
 
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function parent()
     {

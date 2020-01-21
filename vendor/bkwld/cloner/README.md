@@ -17,8 +17,8 @@ A trait for Laravel Eloquent models that lets you clone a model and it's relatio
 Your model should now look like this:
 
 ```php
-class Article extends Eloquent {
-	use \Bkwld\Cloner\Cloneable;
+use Bkwld\Cloner\Cloneable;class Article extends Eloquent {
+	use Cloneable;
 }
 ```
 
@@ -42,8 +42,8 @@ Where `production` is the [connection name](https://laravel.com/docs/5.2/databas
 Lets say your `Article` has many `Photos` (a one to many relationship) and can have more than one `Authors` (a many to many relationship).  Now, your `Article` model should look like this:
 
 ```php
-class Article extends Eloquent {
-	use \Bkwld\Cloner\Cloneable;
+use Bkwld\Cloner\Cloneable;class Article extends Eloquent {
+	use Cloneable;
 
 	protected $cloneable_relations = ['photos', 'authors'];
 
@@ -67,8 +67,8 @@ The `$cloneable_relations` informs the `Cloneable` as to which relations it shou
 By default, `Cloner` does not copy the `id` (or whatever you've defined as the `key` for the model) field; it assumes a new value will be auto-incremented.  It also does not copy the `created_at` or `updated_at`.  You can add additional attributes to ignore as follows:
 
 ```php
-class Photo extends Eloquent {
-	use \Bkwld\Cloner\Cloneable;
+use Bkwld\Cloner\Cloneable;class Photo extends Eloquent {
+	use Cloneable;
 
 	protected $clone_exempt_attributes = ['uid', 'source'];
 
@@ -101,8 +101,8 @@ In addition, Cloner fires the following Laravel events during cloning:
 If your model references files saved disk, you'll probably want to duplicate those files and update the references.  Otherwise, if the clone is deleted and it cascades delets, you will delete files referenced by your original model.  `Cloner` allows you to specify a file attachment adapter and ships with support for [Bkwld\Upchuck](https://github.com/BKWLD/upchuck).  Here's some example usage:
 
 ```php
-class Photo extends Eloquent {
-	use \Bkwld\Cloner\Cloneable;
+use Bkwld\Cloner\Cloneable;class Photo extends Eloquent {
+	use Cloneable;
 
 	protected $cloneable_file_attributes = ['image'];
 

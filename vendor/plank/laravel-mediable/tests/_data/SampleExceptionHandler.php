@@ -13,8 +13,8 @@ class SampleExceptionHandler
      * inside the render() method, but instead of returning its result,
      * we would pass it to the parent::render().
      *
-     * @param  \Exception $e
-     * @return \Symfony\Component\HttpKernel\Exception\HttpException|\Exception
+     * @param Exception $e
+     * @return \Symfony\Component\HttpKernel\Exception\HttpException|Exception
      */
     public function render(Exception $e)
     {

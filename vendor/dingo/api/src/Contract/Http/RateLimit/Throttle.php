@@ -9,7 +9,7 @@ interface Throttle
     /**
      * Attempt to match the throttle against a given condition.
      *
-     * @param \Illuminate\Container\Container $container
+     * @param Container $container
      *
      * @return bool
      */

@@ -12,6 +12,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Validation\ValidatesWhenResolvedTrait;
 use Illuminate\Contracts\Validation\ValidatesWhenResolved;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
+use Symfony\Component\HttpFoundation\Response;
 
 class FormRequest extends Request implements ValidatesWhenResolved
 {
@@ -20,14 +21,14 @@ class FormRequest extends Request implements ValidatesWhenResolved
     /**
      * The container instance.
      *
-     * @var \Illuminate\Contracts\Container\Container
+     * @var Container
      */
     protected $container;
 
     /**
      * The redirector instance.
      *
-     * @var \Illuminate\Routing\Redirector
+     * @var Redirector
      */
     protected $redirector;
 
@@ -69,7 +70,7 @@ class FormRequest extends Request implements ValidatesWhenResolved
     /**
      * Get the validator instance for the request.
      *
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @return Validator
      */
     protected function getValidatorInstance()
     {
@@ -91,8 +92,8 @@ class FormRequest extends Request implements ValidatesWhenResolved
     /**
      * Create the default validator instance.
      *
-     * @param  \Illuminate\Contracts\Validation\Factory  $factory
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @param ValidationFactory $factory
+     * @return Validator
      */
     protected function createDefaultValidator(ValidationFactory $factory)
     {
@@ -115,10 +116,10 @@ class FormRequest extends Request implements ValidatesWhenResolved
     /**
      * Handle a failed validation attempt.
      *
-     * @param  \Illuminate\Contracts\Validation\Validator  $validator
+     * @param Validator $validator
      * @return void
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     protected function failedValidation(Validator $validator)
     {
@@ -131,7 +132,7 @@ class FormRequest extends Request implements ValidatesWhenResolved
      * Get the proper failed validation response for the request.
      *
      * @param  array  $errors
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function response(array $errors)
     {
@@ -147,7 +148,7 @@ class FormRequest extends Request implements ValidatesWhenResolved
     /**
      * Format the errors from the given Validator instance.
      *
-     * @param  \Illuminate\Contracts\Validation\Validator  $validator
+     * @param Validator $validator
      * @return array
      */
     protected function formatErrors(Validator $validator)
@@ -194,7 +195,7 @@ class FormRequest extends Request implements ValidatesWhenResolved
      *
      * @return void
      *
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @throws AuthorizationException
      */
     protected function failedAuthorization()
     {
@@ -224,7 +225,7 @@ class FormRequest extends Request implements ValidatesWhenResolved
     /**
      * Set the Redirector instance.
      *
-     * @param  \Illuminate\Routing\Redirector  $redirector
+     * @param Redirector $redirector
      * @return $this
      */
     public function setRedirector(Redirector $redirector)
@@ -237,7 +238,7 @@ class FormRequest extends Request implements ValidatesWhenResolved
     /**
      * Set the container implementation.
      *
-     * @param  \Illuminate\Contracts\Container\Container  $container
+     * @param Container $container
      * @return $this
      */
     public function setContainer(Container $container)

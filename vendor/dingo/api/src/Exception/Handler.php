@@ -2,11 +2,13 @@
 
 namespace Dingo\Api\Exception;
 
+use Dingo\Api\Http\Request;
 use Exception;
 use ReflectionFunction;
 use Illuminate\Http\Response;
 use Dingo\Api\Contract\Debug\ExceptionHandler;
 use Dingo\Api\Contract\Debug\MessageBagErrors;
+use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpFoundation\Response as BaseResponse;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Illuminate\Contracts\Debug\ExceptionHandler as IlluminateExceptionHandler;
@@ -44,14 +46,14 @@ class Handler implements ExceptionHandler, IlluminateExceptionHandler
     /**
      * The parent Illuminate exception handler instance.
      *
-     * @var \Illuminate\Contracts\Debug\ExceptionHandler
+     * @var IlluminateExceptionHandler
      */
     protected $parentHandler;
 
     /**
      * Create a new exception handler instance.
      *
-     * @param \Illuminate\Contracts\Debug\ExceptionHandler $parentHandler
+     * @param IlluminateExceptionHandler $parentHandler
      * @param array                                        $format
      * @param bool                                         $debug
      *
@@ -67,7 +69,7 @@ class Handler implements ExceptionHandler, IlluminateExceptionHandler
     /**
      * Report or log an exception.
      *
-     * @param \Exception $exception
+     * @param Exception $exception
      *
      * @return void
      */
@@ -79,12 +81,12 @@ class Handler implements ExceptionHandler, IlluminateExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param \Dingo\Api\Http\Request $request
-     * @param \Exception              $exception
-     *
-     * @throws \Exception
+     * @param Request $request
+     * @param Exception $exception
      *
      * @return mixed
+     *@throws Exception
+     *
      */
     public function render($request, Exception $exception)
     {
@@ -94,8 +96,8 @@ class Handler implements ExceptionHandler, IlluminateExceptionHandler
     /**
      * Render an exception to the console.
      *
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
-     * @param \Exception                                        $exception
+     * @param OutputInterface $output
+     * @param Exception $exception
      *
      * @return mixed
      */
@@ -121,9 +123,9 @@ class Handler implements ExceptionHandler, IlluminateExceptionHandler
     /**
      * Handle an exception if it has an existing handler.
      *
-     * @param \Exception $exception
+     * @param Exception $exception
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function handle(Exception $exception)
     {
@@ -147,11 +149,11 @@ class Handler implements ExceptionHandler, IlluminateExceptionHandler
     /**
      * Handle a generic error response if there is no handler available.
      *
-     * @param \Exception $exception
+     * @param Exception $exception
      *
-     * @throws \Exception
+     * @return Response
+     *@throws Exception
      *
-     * @return \Illuminate\Http\Response
      */
     protected function genericResponse(Exception $exception)
     {
@@ -173,7 +175,7 @@ class Handler implements ExceptionHandler, IlluminateExceptionHandler
     /**
      * Get the status code from the exception.
      *
-     * @param \Exception $exception
+     * @param Exception $exception
      *
      * @return int
      */
@@ -185,7 +187,7 @@ class Handler implements ExceptionHandler, IlluminateExceptionHandler
     /**
      * Get the headers from the exception.
      *
-     * @param \Exception $exception
+     * @param Exception $exception
      *
      * @return array
      */
@@ -197,7 +199,7 @@ class Handler implements ExceptionHandler, IlluminateExceptionHandler
     /**
      * Prepare the replacements array by gathering the keys and values.
      *
-     * @param \Exception $exception
+     * @param Exception $exception
      *
      * @return array
      */
@@ -283,7 +285,7 @@ class Handler implements ExceptionHandler, IlluminateExceptionHandler
     /**
      * Get the exception status code.
      *
-     * @param \Exception $exception
+     * @param Exception $exception
      * @param int        $defaultStatusCode
      *
      * @return int

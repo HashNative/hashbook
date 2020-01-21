@@ -13,6 +13,7 @@ namespace Prophecy\Call;
 
 use Exception;
 use Prophecy\Argument\ArgumentsWildcard;
+use SplObjectStorage;
 
 /**
  * Call object.
@@ -46,7 +47,7 @@ class Call
         $this->arguments   = $arguments;
         $this->returnValue = $returnValue;
         $this->exception   = $exception;
-        $this->scores      = new \SplObjectStorage();
+        $this->scores      = new SplObjectStorage();
 
         if ($file) {
             $this->file = $file;

@@ -2,13 +2,15 @@
 
 namespace PhpParser\Builder;
 
+use LogicException;
 use PhpParser\Comment;
 use PhpParser\Node;
 use PhpParser\Node\Expr\Print_;
 use PhpParser\Node\Scalar\String_;
 use PhpParser\Node\Stmt;
+use PHPUnit_Framework_TestCase;
 
-class MethodTest extends \PHPUnit_Framework_TestCase
+class MethodTest extends PHPUnit_Framework_TestCase
 {
     public function createMethodBuilder($name) {
         return new Method($name);
@@ -130,7 +132,7 @@ class MethodTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \LogicException
+     * @expectedException LogicException
      * @expectedExceptionMessage Cannot add statements to an abstract method
      */
     public function testAddStmtToAbstractMethodError() {
@@ -141,7 +143,7 @@ class MethodTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \LogicException
+     * @expectedException LogicException
      * @expectedExceptionMessage Cannot make method with statements abstract
      */
     public function testMakeMethodWithStmtsAbstractError() {
@@ -152,7 +154,7 @@ class MethodTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \LogicException
+     * @expectedException LogicException
      * @expectedExceptionMessage Expected parameter node, got "Name"
      */
     public function testInvalidParamError() {

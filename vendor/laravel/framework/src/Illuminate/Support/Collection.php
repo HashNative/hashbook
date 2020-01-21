@@ -2,9 +2,11 @@
 
 namespace Illuminate\Support;
 
+use Closure;
 use Countable;
 use Exception;
 use ArrayAccess;
+use InvalidArgumentException;
 use Traversable;
 use ArrayIterator;
 use CachingIterator;
@@ -421,7 +423,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      * @param  string  $key
      * @param  string  $operator
      * @param  mixed  $value
-     * @return \Closure
+     * @return Closure
      */
     protected function operatorForWhere($key, $operator, $value)
     {
@@ -1028,7 +1030,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
     /**
      * Push all of the given items onto the collection.
      *
-     * @param  \Traversable  $source
+     * @param Traversable $source
      * @return self
      */
     public function concat($source)
@@ -1074,7 +1076,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      * @param  int|null  $number
      * @return mixed
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function random($number = null)
     {
@@ -1503,7 +1505,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
     /**
      * Get an iterator for the items.
      *
-     * @return \ArrayIterator
+     * @return ArrayIterator
      */
     public function getIterator()
     {
@@ -1514,7 +1516,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      * Get a CachingIterator instance.
      *
      * @param  int  $flags
-     * @return \CachingIterator
+     * @return CachingIterator
      */
     public function getCachingIterator($flags = CachingIterator::CALL_TOSTRING)
     {
@@ -1534,7 +1536,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
     /**
      * Get a base Support collection instance from this collection.
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function toBase()
     {
@@ -1642,7 +1644,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      * @param  string  $key
      * @return mixed
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function __get($key)
     {

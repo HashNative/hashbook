@@ -19,21 +19,21 @@ class Lumen implements Adapter
     /**
      * Lumen application instance.
      *
-     * @var \Laravel\Lumen\Application
+     * @var Application
      */
     protected $app;
 
     /**
      * FastRoute parser instance.
      *
-     * @var \FastRoute\RouteParser
+     * @var RouteParser
      */
     protected $parser;
 
     /**
      * FastRoute data generator instance.
      *
-     * @var \FastRoute\DataGenerator
+     * @var DataGenerator
      */
     protected $generator;
 
@@ -61,9 +61,9 @@ class Lumen implements Adapter
     /**
      * Create a new lumen adapter instance.
      *
-     * @param \Laravel\Lumen\Application $app
-     * @param \FastRoute\RouteParser     $parser
-     * @param \FastRoute\DataGenerator   $generator
+     * @param Application $app
+     * @param RouteParser $parser
+     * @param DataGenerator $generator
      * @param string                     $dispatcher
      *
      * @return void
@@ -79,7 +79,7 @@ class Lumen implements Adapter
     /**
      * Dispatch a request.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param string                   $version
      *
      * @return mixed
@@ -106,7 +106,7 @@ class Lumen implements Adapter
     /**
      * Normalize the request URI so that Lumen can properly dispatch it.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
      * @return void
      */
@@ -123,7 +123,7 @@ class Lumen implements Adapter
      * Get the URI, methods, and action from the route.
      *
      * @param mixed                    $route
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
      * @return array
      */
@@ -253,7 +253,7 @@ class Lumen implements Adapter
      *
      * @param string $version
      *
-     * @return \ArrayIterator
+     * @return ArrayIterator
      */
     public function getIterableRoutes($version = null)
     {

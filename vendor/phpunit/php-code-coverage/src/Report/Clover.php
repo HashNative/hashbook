@@ -10,6 +10,7 @@
 
 namespace SebastianBergmann\CodeCoverage\Report;
 
+use DOMDocument;
 use SebastianBergmann\CodeCoverage\CodeCoverage;
 use SebastianBergmann\CodeCoverage\Node\File;
 
@@ -27,7 +28,7 @@ class Clover
      */
     public function process(CodeCoverage $coverage, $target = null, $name = null)
     {
-        $xmlDocument               = new \DOMDocument('1.0', 'UTF-8');
+        $xmlDocument               = new DOMDocument('1.0', 'UTF-8');
         $xmlDocument->formatOutput = true;
 
         $xmlCoverage = $xmlDocument->createElement('coverage');

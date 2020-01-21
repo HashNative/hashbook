@@ -2,6 +2,7 @@
 
 namespace Illuminate\Broadcasting\Broadcasters;
 
+use Illuminate\Http\Request;
 use ReflectionFunction;
 use ReflectionParameter;
 use Illuminate\Support\Str;
@@ -44,7 +45,7 @@ abstract class Broadcaster implements BroadcasterContract
     /**
      * Authenticate the incoming request for a given channel.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @param  string  $channel
      * @return mixed
      */

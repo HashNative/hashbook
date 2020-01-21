@@ -5,6 +5,7 @@ namespace App\Models\Common;
 use App\Models\Model;
 use App\Traits\Currencies;
 use Bkwld\Cloner\Cloneable;
+use Illuminate\Database\Eloquent\Builder;
 use Sofa\Eloquence\Eloquence;
 use App\Traits\Media;
 
@@ -101,9 +102,9 @@ class Item extends Model
     /**
      * Scope autocomplete.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param Builder $query
      * @param array $filter
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public function scopeAutocomplete($query, $filter)
     {
@@ -117,8 +118,8 @@ class Item extends Model
     /**
      * Scope quantity.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @param Builder $query
+     * @return Builder
      */
     public function scopeQuantity($query)
     {
@@ -128,10 +129,10 @@ class Item extends Model
     /**
      * Sort by category name
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param Builder $query
      * @param $direction
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public function categorySortable($query, $direction)
     {

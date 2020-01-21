@@ -2,7 +2,9 @@
 
 namespace Illuminate\Session;
 
+use Illuminate\Database\Connection;
 use Illuminate\Support\Manager;
+use SessionHandlerInterface;
 use Symfony\Component\HttpFoundation\Session\Storage\Handler\NullSessionHandler;
 
 class SessionManager extends Manager
@@ -21,7 +23,7 @@ class SessionManager extends Manager
     /**
      * Create an instance of the "array" session driver.
      *
-     * @return \Illuminate\Session\Store
+     * @return Store
      */
     protected function createArrayDriver()
     {
@@ -31,7 +33,7 @@ class SessionManager extends Manager
     /**
      * Create an instance of the "cookie" session driver.
      *
-     * @return \Illuminate\Session\Store
+     * @return Store
      */
     protected function createCookieDriver()
     {
@@ -43,7 +45,7 @@ class SessionManager extends Manager
     /**
      * Create an instance of the file session driver.
      *
-     * @return \Illuminate\Session\Store
+     * @return Store
      */
     protected function createFileDriver()
     {
@@ -53,7 +55,7 @@ class SessionManager extends Manager
     /**
      * Create an instance of the file session driver.
      *
-     * @return \Illuminate\Session\Store
+     * @return Store
      */
     protected function createNativeDriver()
     {
@@ -67,7 +69,7 @@ class SessionManager extends Manager
     /**
      * Create an instance of the database session driver.
      *
-     * @return \Illuminate\Session\Store
+     * @return Store
      */
     protected function createDatabaseDriver()
     {
@@ -83,7 +85,7 @@ class SessionManager extends Manager
     /**
      * Get the database connection for the database driver.
      *
-     * @return \Illuminate\Database\Connection
+     * @return Connection
      */
     protected function getDatabaseConnection()
     {
@@ -95,7 +97,7 @@ class SessionManager extends Manager
     /**
      * Create an instance of the APC session driver.
      *
-     * @return \Illuminate\Session\Store
+     * @return Store
      */
     protected function createApcDriver()
     {
@@ -105,7 +107,7 @@ class SessionManager extends Manager
     /**
      * Create an instance of the Memcached session driver.
      *
-     * @return \Illuminate\Session\Store
+     * @return Store
      */
     protected function createMemcachedDriver()
     {
@@ -115,7 +117,7 @@ class SessionManager extends Manager
     /**
      * Create an instance of the Redis session driver.
      *
-     * @return \Illuminate\Session\Store
+     * @return Store
      */
     protected function createRedisDriver()
     {
@@ -132,7 +134,7 @@ class SessionManager extends Manager
      * Create an instance of a cache driven driver.
      *
      * @param  string  $driver
-     * @return \Illuminate\Session\Store
+     * @return Store
      */
     protected function createCacheBased($driver)
     {
@@ -143,7 +145,7 @@ class SessionManager extends Manager
      * Create the cache based session handler instance.
      *
      * @param  string  $driver
-     * @return \Illuminate\Session\CacheBasedSessionHandler
+     * @return CacheBasedSessionHandler
      */
     protected function createCacheHandler($driver)
     {
@@ -158,8 +160,8 @@ class SessionManager extends Manager
     /**
      * Build the session instance.
      *
-     * @param  \SessionHandlerInterface  $handler
-     * @return \Illuminate\Session\Store
+     * @param  SessionHandlerInterface  $handler
+     * @return Store
      */
     protected function buildSession($handler)
     {
@@ -173,8 +175,8 @@ class SessionManager extends Manager
     /**
      * Build the encrypted session instance.
      *
-     * @param  \SessionHandlerInterface  $handler
-     * @return \Illuminate\Session\EncryptedStore
+     * @param  SessionHandlerInterface  $handler
+     * @return EncryptedStore
      */
     protected function buildEncryptedSession($handler)
     {

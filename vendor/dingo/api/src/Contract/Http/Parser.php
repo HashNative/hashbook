@@ -9,7 +9,7 @@ interface Parser
     /**
      * Parse an incoming request.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param IlluminateRequest $request
      *
      * @return mixed
      */

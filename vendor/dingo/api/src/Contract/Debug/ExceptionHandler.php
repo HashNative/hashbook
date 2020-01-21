@@ -3,15 +3,16 @@
 namespace Dingo\Api\Contract\Debug;
 
 use Exception;
+use Illuminate\Http\Response;
 
 interface ExceptionHandler
 {
     /**
      * Handle an exception.
      *
-     * @param \Exception $exception
+     * @param Exception $exception
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function handle(Exception $exception);
 }

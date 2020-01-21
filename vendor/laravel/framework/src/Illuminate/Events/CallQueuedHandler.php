@@ -2,6 +2,7 @@
 
 namespace Illuminate\Events;
 
+use Exception;
 use Illuminate\Contracts\Queue\Job;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Container\Container;
@@ -11,14 +12,14 @@ class CallQueuedHandler
     /**
      * The container instance.
      *
-     * @var \Illuminate\Contracts\Container\Container
+     * @var Container
      */
     protected $container;
 
     /**
      * Create a new job instance.
      *
-     * @param  \Illuminate\Contracts\Container\Container  $container
+     * @param Container $container
      * @return void
      */
     public function __construct(Container $container)
@@ -29,7 +30,7 @@ class CallQueuedHandler
     /**
      * Handle the queued job.
      *
-     * @param  \Illuminate\Contracts\Queue\Job  $job
+     * @param Job $job
      * @param  array  $data
      * @return void
      */
@@ -51,7 +52,7 @@ class CallQueuedHandler
     /**
      * Set the job instance of the given class if necessary.
      *
-     * @param  \Illuminate\Contracts\Queue\Job  $job
+     * @param Job $job
      * @param  mixed  $instance
      * @return mixed
      */
@@ -70,7 +71,7 @@ class CallQueuedHandler
      * The event instance and the exception will be passed.
      *
      * @param  array  $data
-     * @param  \Exception  $e
+     * @param  Exception  $e
      * @return void
      */
     public function failed(array $data, $e)

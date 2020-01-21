@@ -9,6 +9,8 @@ use App\Transformers\Income\InvoicePayments;
 use App\Transformers\Income\InvoiceStatus;
 use App\Transformers\Setting\Currency;
 use App\Models\Income\Invoice as Model;
+use League\Fractal\Resource\Collection;
+use League\Fractal\Resource\Item;
 use League\Fractal\TransformerAbstract;
 
 class Invoice extends TransformerAbstract
@@ -50,7 +52,7 @@ class Invoice extends TransformerAbstract
 
     /**
      * @param  Model $model
-     * @return \League\Fractal\Resource\Item
+     * @return Item
      */
     public function includeCurrency(Model $model)
     {
@@ -59,7 +61,7 @@ class Invoice extends TransformerAbstract
 
     /**
      * @param Model $model
-     * @return \League\Fractal\Resource\Item
+     * @return Item
      */
     public function includeCustomer(Model $model)
     {
@@ -68,7 +70,7 @@ class Invoice extends TransformerAbstract
 
     /**
      * @param Model $model
-     * @return \League\Fractal\Resource\Collection
+     * @return Collection
      */
     public function includeHistories(Model $model)
     {
@@ -77,7 +79,7 @@ class Invoice extends TransformerAbstract
 
     /**
      * @param Model $model
-     * @return \League\Fractal\Resource\Collection
+     * @return Collection
      */
     public function includeItems(Model $model)
     {
@@ -86,7 +88,7 @@ class Invoice extends TransformerAbstract
 
     /**
      * @param Model $model
-     * @return \League\Fractal\Resource\Collection
+     * @return Collection
      */
     public function includePayments(Model $model)
     {
@@ -95,7 +97,7 @@ class Invoice extends TransformerAbstract
 
     /**
      * @param Model $model
-     * @return \League\Fractal\Resource\Item
+     * @return Item
      */
     public function includeStatus(Model $model)
     {

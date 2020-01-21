@@ -2,7 +2,9 @@
 
 namespace Sofa\Eloquence\Metable;
 
-class InvalidTypeException extends \InvalidArgumentException
+use InvalidArgumentException;
+
+class InvalidTypeException extends InvalidArgumentException
 {
 
 }

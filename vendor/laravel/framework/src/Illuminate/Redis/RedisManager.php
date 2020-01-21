@@ -2,12 +2,15 @@
 
 namespace Illuminate\Redis;
 
+use Illuminate\Redis\Connections\Connection;
+use Illuminate\Redis\Connectors\PhpRedisConnector;
+use Illuminate\Redis\Connectors\PredisConnector;
 use Illuminate\Support\Arr;
 use InvalidArgumentException;
 use Illuminate\Contracts\Redis\Factory;
 
 /**
- * @mixin \Illuminate\Redis\Connections\Connection
+ * @mixin Connection
  */
 class RedisManager implements Factory
 {
@@ -48,7 +51,7 @@ class RedisManager implements Factory
      * Get a Redis connection by name.
      *
      * @param  string|null  $name
-     * @return \Illuminate\Redis\Connections\Connection
+     * @return Connection
      */
     public function connection($name = null)
     {
@@ -65,9 +68,9 @@ class RedisManager implements Factory
      * Resolve the given connection by name.
      *
      * @param  string|null  $name
-     * @return \Illuminate\Redis\Connections\Connection
+     * @return Connection
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function resolve($name = null)
     {
@@ -92,7 +95,7 @@ class RedisManager implements Factory
      * Resolve the given cluster connection by name.
      *
      * @param  string  $name
-     * @return \Illuminate\Redis\Connections\Connection
+     * @return Connection
      */
     protected function resolveCluster($name)
     {
@@ -106,7 +109,7 @@ class RedisManager implements Factory
     /**
      * Get the connector instance for the current driver.
      *
-     * @return \Illuminate\Redis\Connectors\PhpRedisConnector|\Illuminate\Redis\Connectors\PredisConnector
+     * @return PhpRedisConnector|PredisConnector
      */
     protected function connector()
     {

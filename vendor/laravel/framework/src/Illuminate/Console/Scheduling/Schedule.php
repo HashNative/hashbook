@@ -11,14 +11,14 @@ class Schedule
     /**
      * All of the events on the schedule.
      *
-     * @var \Illuminate\Console\Scheduling\Event[]
+     * @var Event[]
      */
     protected $events = [];
 
     /**
      * The mutex implementation.
      *
-     * @var \Illuminate\Console\Scheduling\Mutex
+     * @var Mutex
      */
     protected $mutex;
 
@@ -41,7 +41,7 @@ class Schedule
      *
      * @param  string|callable  $callback
      * @param  array   $parameters
-     * @return \Illuminate\Console\Scheduling\CallbackEvent
+     * @return CallbackEvent
      */
     public function call($callback, array $parameters = [])
     {
@@ -57,7 +57,7 @@ class Schedule
      *
      * @param  string  $command
      * @param  array  $parameters
-     * @return \Illuminate\Console\Scheduling\Event
+     * @return Event
      */
     public function command($command, array $parameters = [])
     {
@@ -74,7 +74,7 @@ class Schedule
      * Add a new job callback event to the schedule.
      *
      * @param  object|string  $job
-     * @return \Illuminate\Console\Scheduling\CallbackEvent
+     * @return CallbackEvent
      */
     public function job($job)
     {
@@ -88,7 +88,7 @@ class Schedule
      *
      * @param  string  $command
      * @param  array  $parameters
-     * @return \Illuminate\Console\Scheduling\Event
+     * @return Event
      */
     public function exec($command, array $parameters = [])
     {
@@ -136,7 +136,7 @@ class Schedule
     /**
      * Get all of the events on the schedule.
      *
-     * @return \Illuminate\Console\Scheduling\Event[]
+     * @return Event[]
      */
     public function events()
     {

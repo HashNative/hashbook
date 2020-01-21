@@ -3,6 +3,7 @@
 namespace Illuminate\Contracts\Foundation;
 
 use Illuminate\Contracts\Container\Container;
+use Illuminate\Support\ServiceProvider;
 
 interface Application extends Container
 {
@@ -44,10 +45,10 @@ interface Application extends Container
     /**
      * Register a service provider with the application.
      *
-     * @param  \Illuminate\Support\ServiceProvider|string  $provider
+     * @param  ServiceProvider|string  $provider
      * @param  array  $options
      * @param  bool   $force
-     * @return \Illuminate\Support\ServiceProvider
+     * @return ServiceProvider
      */
     public function register($provider, $options = [], $force = false);
 

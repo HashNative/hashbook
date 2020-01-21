@@ -15,7 +15,7 @@ class Parser
      * @param  string  $expression
      * @return array
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public static function parse($expression)
     {
@@ -76,7 +76,7 @@ class Parser
      * Parse an argument expression.
      *
      * @param  string  $token
-     * @return \Symfony\Component\Console\Input\InputArgument
+     * @return InputArgument
      */
     protected static function parseArgument($token)
     {
@@ -100,7 +100,7 @@ class Parser
      * Parse an option expression.
      *
      * @param  string  $token
-     * @return \Symfony\Component\Console\Input\InputOption
+     * @return InputOption
      */
     protected static function parseOption($token)
     {

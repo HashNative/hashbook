@@ -2,9 +2,12 @@
 
 namespace Dingo\Api\Auth;
 
+use Dingo\Api\Contract\Auth\Provider;
 use Exception;
 use Dingo\Api\Routing\Router;
+use Illuminate\Auth\GenericUser;
 use Illuminate\Container\Container;
+use Illuminate\Database\Eloquent\Model;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
@@ -13,14 +16,14 @@ class Auth
     /**
      * Router instance.
      *
-     * @var \Dingo\Api\Routing\Router
+     * @var Router
      */
     protected $router;
 
     /**
      * Illuminate container instance.
      *
-     * @var \Illuminate\Container\Container
+     * @var Container
      */
     protected $container;
 
@@ -34,22 +37,22 @@ class Auth
     /**
      * The provider used for authentication.
      *
-     * @var \Dingo\Api\Contract\Auth\Provider
+     * @var Provider
      */
     protected $providerUsed;
 
     /**
      * Authenticated user instance.
      *
-     * @var \Illuminate\Auth\GenericUser|\Illuminate\Database\Eloquent\Model
+     * @var GenericUser|Model
      */
     protected $user;
 
     /**
      * Create a new auth instance.
      *
-     * @param \Dingo\Api\Routing\Router       $router
-     * @param \Illuminate\Container\Container $container
+     * @param Router $router
+     * @param Container $container
      * @param array                           $providers
      *
      * @return void
@@ -66,9 +69,9 @@ class Auth
      *
      * @param array $providers
      *
-     * @throws \Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException
-     *
      * @return mixed
+     * @throws UnauthorizedHttpException
+     *
      */
     public function authenticate(array $providers = [])
     {
@@ -101,9 +104,9 @@ class Auth
      *
      * @param array $exceptionStack
      *
-     * @throws \Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException
-     *
      * @return void
+     * @throws UnauthorizedHttpException
+     *
      */
     protected function throwUnauthorizedException(array $exceptionStack)
     {
@@ -137,7 +140,7 @@ class Auth
      *
      * @param bool $authenticate
      *
-     * @return \Illuminate\Auth\GenericUser|\Illuminate\Database\Eloquent\Model|null
+     * @return GenericUser|Model|null
      */
     public function getUser($authenticate = true)
     {
@@ -159,7 +162,7 @@ class Auth
      *
      * @param bool $authenticate
      *
-     * @return \Illuminate\Auth\GenericUser|\Illuminate\Database\Eloquent\Model
+     * @return GenericUser|Model
      */
     public function user($authenticate = true)
     {
@@ -169,9 +172,9 @@ class Auth
     /**
      * Set the authenticated user.
      *
-     * @param \Illuminate\Auth\GenericUser|\Illuminate\Database\Eloquent\Model $user
+     * @param GenericUser|Model $user
      *
-     * @return \Dingo\Api\Auth\Auth
+     * @return Auth
      */
     public function setUser($user)
     {
@@ -195,7 +198,7 @@ class Auth
     /**
      * Get the provider used for authentication.
      *
-     * @return \Dingo\Api\Contract\Auth\Provider
+     * @return Provider
      */
     public function getProviderUsed()
     {

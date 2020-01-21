@@ -9,6 +9,8 @@ use App\Transformers\Expense\BillStatus;
 use App\Transformers\Expense\Vendor;
 use App\Transformers\Setting\Currency;
 use App\Models\Expense\Bill as Model;
+use League\Fractal\Resource\Collection;
+use League\Fractal\Resource\Item;
 use League\Fractal\TransformerAbstract;
 
 class Bill extends TransformerAbstract
@@ -50,7 +52,7 @@ class Bill extends TransformerAbstract
 
     /**
      * @param  Model $model
-     * @return \League\Fractal\Resource\Item
+     * @return Item
      */
     public function includeCurrency(Model $model)
     {
@@ -59,7 +61,7 @@ class Bill extends TransformerAbstract
 
     /**
      * @param Model $model
-     * @return \League\Fractal\Resource\Collection
+     * @return Collection
      */
     public function includeHistories(Model $model)
     {
@@ -68,7 +70,7 @@ class Bill extends TransformerAbstract
 
     /**
      * @param Model $model
-     * @return \League\Fractal\Resource\Collection
+     * @return Collection
      */
     public function includeItems(Model $model)
     {
@@ -77,7 +79,7 @@ class Bill extends TransformerAbstract
 
     /**
      * @param Model $model
-     * @return \League\Fractal\Resource\Collection
+     * @return Collection
      */
     public function includePayments(Model $model)
     {
@@ -86,7 +88,7 @@ class Bill extends TransformerAbstract
 
     /**
      * @param Model $model
-     * @return \League\Fractal\Resource\Item
+     * @return Item
      */
     public function includeStatus(Model $model)
     {
@@ -95,7 +97,7 @@ class Bill extends TransformerAbstract
 
     /**
      * @param Model $model
-     * @return \League\Fractal\Resource\Item
+     * @return Item
      */
     public function includeVendor(Model $model)
     {

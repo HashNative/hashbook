@@ -21,6 +21,7 @@ use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\StaticCall;
 use PhpParser\Node\Stmt\Unset_;
 use Psy\Exception\FatalErrorException;
+use function version_compare;
 
 /**
  * Validate that the functions are used correctly.
@@ -36,7 +37,7 @@ class FunctionReturnInWriteContextPass extends CodeCleanerPass
 
     public function __construct()
     {
-        $this->atLeastPhp55 = \version_compare(PHP_VERSION, '5.5', '>=');
+        $this->atLeastPhp55 = version_compare(PHP_VERSION, '5.5', '>=');
     }
 
     /**

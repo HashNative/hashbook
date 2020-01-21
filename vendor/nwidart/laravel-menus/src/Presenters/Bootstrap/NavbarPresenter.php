@@ -2,6 +2,7 @@
 
 namespace Nwidart\Menus\Presenters\Bootstrap;
 
+use Nwidart\Menus\MenuItem;
 use Nwidart\Menus\Presenters\Presenter;
 
 class NavbarPresenter extends Presenter
@@ -87,7 +88,7 @@ class NavbarPresenter extends Presenter
     /**
      * Get multilevel menu wrapper.
      *
-     * @param \Nwidart\Menus\MenuItem $item
+     * @param MenuItem $item
      *
      * @return string`
      */

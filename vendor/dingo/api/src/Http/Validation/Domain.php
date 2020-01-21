@@ -32,7 +32,7 @@ class Domain implements Validator
     /**
      * Validate that the request domain matches the configured domain.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
      * @return bool
      */

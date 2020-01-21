@@ -11,12 +11,12 @@ class DataProviderDebugTest extends PHPUnit_Framework_TestCase
 
     public static function provider()
     {
-        $obj2      = new \stdClass();
+        $obj2      = new stdClass();
         $obj2->foo = 'bar';
 
         $obj3 = (object) [1,2,"Test\r\n",4,5,6,7,8];
 
-        $obj = new \stdClass();
+        $obj = new stdClass();
         //@codingStandardsIgnoreStart
         $obj->null = null;
         //@codingStandardsIgnoreEnd
@@ -30,7 +30,7 @@ class DataProviderDebugTest extends PHPUnit_Framework_TestCase
         $obj->array       = ['foo' => 'bar'];
         $obj->self        = $obj;
 
-        $storage = new \SplObjectStorage();
+        $storage = new SplObjectStorage();
         $storage->attach($obj2);
         $storage->foo = $obj2;
 
@@ -40,7 +40,7 @@ class DataProviderDebugTest extends PHPUnit_Framework_TestCase
             [[[1,2,3], [3,4,5]]],
             // \n\r and \r is converted to \n
             ["this\nis\na\nvery\nvery\nvery\nvery\nvery\nvery\rlong\n\rtext"],
-            [new \stdClass(), $obj, [], $storage, $obj3],
+            [new stdClass(), $obj, [], $storage, $obj3],
             [chr(0) . chr(1) . chr(2) . chr(3) . chr(4) . chr(5), implode('', array_map('chr', range(0x0e, 0x1f)))],
             [chr(0x00) . chr(0x09)]
         ];
