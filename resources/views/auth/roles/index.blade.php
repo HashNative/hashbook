@@ -4,7 +4,7 @@
 
 @permission('create-auth-roles')
 @section('new_button')
-<span class="new-button"><a href="{{ url('auth/roles/create') }}" class="btn btn-success btn-sm"><span class="fa fa-plus"></span> &nbsp;{{ trans('general.add_new') }}</a></span>
+<span class="new-button"><a href="{{ url('auth/roles/create') }}" class="btn btn-danger btn-sm"><span class="fa fa-plus"></span> &nbsp;{{ trans('general.add_new') }}</a></span>
 @endsection
 @endpermission
 

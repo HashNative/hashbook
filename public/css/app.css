@@ -218,7 +218,7 @@ div.required .control-label:not(span):after, td.required:after {
 }
 
 .form-control:focus {
-    border-color: #00a65a !important;
+    border-color: #ff3401 !important;
 }
 
 .box.box-success .invoice, .box.box-success .bill {

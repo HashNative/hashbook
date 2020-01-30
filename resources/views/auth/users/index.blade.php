@@ -4,7 +4,7 @@
 
 @permission('create-auth-users')
 @section('new_button')
-<span class="new-button"><a href="{{ url('auth/users/create') }}" class="btn btn-success btn-sm"><span class="fa fa-plus"></span> &nbsp;{{ trans('general.add_new') }}</a></span>
+<span class="new-button"><a href="{{ url('auth/users/create') }}" class="btn btn-danger btn-sm"><span class="fa fa-plus"></span> &nbsp;{{ trans('general.add_new') }}</a></span>
 @endsection
 @endpermission
 

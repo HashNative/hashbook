@@ -144,7 +144,11 @@ $(document).ready(function () {
             }
 
             if (input_value == 1 && input_checked == true) {
+<<<<<<< HEAD
                 enable_class = 'btn-success active';
+=======
+                enable_class = 'btn-danger active';
+>>>>>>> DinuBeats
             } else {
                 disable_class = 'btn-danger active';
             }

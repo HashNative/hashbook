@@ -3,7 +3,11 @@
 }
 
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
+<<<<<<< HEAD
     background-color: #6da252 !important;
+=======
+    background-color: #ff3401 !important;
+>>>>>>> DinuBeats
 }
 
 .form-control:focus {

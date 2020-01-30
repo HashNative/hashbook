@@ -9,19 +9,19 @@
         <div class="stepwizard">
             <div class="stepwizard-row setup-panel">
                 <div class="stepwizard-step col-xs-3">
-                    <a href="#step-1" type="button" class="btn btn-success btn-circle">1</a>
+                    <a href="#step-1" type="button" class="btn btn-danger btn-circle">1</a>
                     <p><small>{{ trans_choice('general.companies', 1) }}</small></p>
                 </div>
                 <div class="stepwizard-step col-xs-3">
-                    <button type="button" class="btn btn-default btn-circle" disabled="disabled">2</button>
+                    <button type="button" class="btn btn-danger btn-circle" disabled="disabled">2</button>
                     <p><small>{{ trans_choice('general.currencies', 2) }}</small></p>
                 </div>
                 <div class="stepwizard-step col-xs-3">
-                    <button type="button" class="btn btn-default btn-circle" disabled="disabled">3</button>
+                    <button type="button" class="btn btn-danger btn-circle" disabled="disabled">3</button>
                     <p><small>{{ trans_choice('general.taxes', 2) }}</small></p>
                 </div>
                 <div class="stepwizard-step col-xs-3">
-                    <button type="button" class="btn btn-default btn-circle" disabled="disabled">4</button>
+                    <button type="button" class="btn btn-danger btn-circle" disabled="disabled">4</button>
                     <p><small>{{ trans_choice('general.finish', 1) }}</small></p>
                 </div>
             </div>
@@ -67,7 +67,7 @@
     <div class="box-footer">
         <div class="col-md-12">
             <div class="form-group no-margin">
-                {!! Form::button('<span class="fa fa-save"></span> &nbsp;' . trans('general.save'), ['type' => 'submit', 'class' => 'btn btn-success  button-submit', 'data-loading-text' => trans('general.loading')]) !!}
+                {!! Form::button('<span class="fa fa-save"></span> &nbsp;' . trans('general.save'), ['type' => 'submit', 'class' => 'btn btn-success  button-danger', 'data-loading-text' => trans('general.loading')]) !!}
                 <a href="{{ url('wizard/currencies') }}" id="wizard-skip" class="btn btn-default"><span class="fa fa-share"></span> &nbsp;{{ trans('general.skip') }}</a>
             </div>
         </div>

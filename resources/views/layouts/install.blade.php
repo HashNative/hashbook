@@ -37,9 +37,9 @@
                         <div class="form-group">
                             <div class="col-md-4 col-md-offset-8 text-right">
                                 @if (Request::is('install/requirements'))
-                                    <a href="{{ url('install/requirements') }}" class="btn btn-success"> {{ trans('install.refresh') }} &nbsp;<i class="fa fa-refresh"></i></a>
+                                    <a href="{{ url('install/requirements') }}" class="btn btn-danger"> {{ trans('install.refresh') }} &nbsp;<i class="fa fa-refresh"></i></a>
                                 @else
-                                    {!! Form::button(trans('install.next') . ' &nbsp;<i class="fa fa-arrow-right"></i>', ['type' => 'submit', 'id' => 'next-button', 'class' => 'btn btn-success']) !!}
+                                    {!! Form::button(trans('install.next') . ' &nbsp;<i class="fa fa-arrow-right"></i>', ['type' => 'submit', 'id' => 'next-button', 'class' => 'btn btn-danger']) !!}
                                 @endif
                             </div>
                         </div>
