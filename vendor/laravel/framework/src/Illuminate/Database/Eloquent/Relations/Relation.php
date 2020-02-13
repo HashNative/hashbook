@@ -11,7 +11,7 @@ use Illuminate\Database\Query\Expression;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
- * @mixin \Illuminate\Database\Eloquent\Builder
+ * @mixin Builder
  */
 abstract class Relation
 {
@@ -22,21 +22,21 @@ abstract class Relation
     /**
      * The Eloquent query builder instance.
      *
-     * @var \Illuminate\Database\Eloquent\Builder
+     * @var Builder
      */
     protected $query;
 
     /**
      * The parent model instance.
      *
-     * @var \Illuminate\Database\Eloquent\Model
+     * @var Model
      */
     protected $parent;
 
     /**
      * The related model instance.
      *
-     * @var \Illuminate\Database\Eloquent\Model
+     * @var Model
      */
     protected $related;
 
@@ -57,8 +57,8 @@ abstract class Relation
     /**
      * Create a new relation instance.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  \Illuminate\Database\Eloquent\Model  $parent
+     * @param Builder $query
+     * @param Model $parent
      * @return void
      */
     public function __construct(Builder $query, Model $parent)
@@ -73,7 +73,7 @@ abstract class Relation
     /**
      * Run a callback with constraints disabled on the relation.
      *
-     * @param  \Closure  $callback
+     * @param Closure $callback
      * @return mixed
      */
     public static function noConstraints(Closure $callback)
@@ -120,7 +120,7 @@ abstract class Relation
      * Match the eagerly loaded results to their parents.
      *
      * @param  array   $models
-     * @param  \Illuminate\Database\Eloquent\Collection  $results
+     * @param Collection $results
      * @param  string  $relation
      * @return array
      */
@@ -136,7 +136,7 @@ abstract class Relation
     /**
      * Get the relationship for eager loading.
      *
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return Collection
      */
     public function getEager()
     {
@@ -169,9 +169,9 @@ abstract class Relation
     /**
      * Add the constraints for a relationship count query.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  \Illuminate\Database\Eloquent\Builder  $parentQuery
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @param Builder $query
+     * @param Builder $parentQuery
+     * @return Builder
      */
     public function getRelationExistenceCountQuery(Builder $query, Builder $parentQuery)
     {
@@ -185,10 +185,10 @@ abstract class Relation
      *
      * Essentially, these queries compare on column names like whereColumn.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  \Illuminate\Database\Eloquent\Builder  $parentQuery
+     * @param Builder $query
+     * @param Builder $parentQuery
      * @param  array|mixed $columns
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public function getRelationExistenceQuery(Builder $query, Builder $parentQuery, $columns = ['*'])
     {
@@ -214,7 +214,7 @@ abstract class Relation
     /**
      * Get the underlying query for the relation.
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public function getQuery()
     {
@@ -234,7 +234,7 @@ abstract class Relation
     /**
      * Get the parent model of the relation.
      *
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return Model
      */
     public function getParent()
     {
@@ -254,7 +254,7 @@ abstract class Relation
     /**
      * Get the related model of the relation.
      *
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return Model
      */
     public function getRelated()
     {

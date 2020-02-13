@@ -2,6 +2,7 @@
 
 namespace PhpParser\Serializer;
 
+use InvalidArgumentException;
 use PhpParser\Comment;
 use PhpParser\Node;
 use PhpParser\Serializer;
@@ -83,7 +84,7 @@ class XML implements Serializer
         } elseif (null === $node) {
             $this->writer->writeElement('scalar:null');
         } else {
-            throw new \InvalidArgumentException('Unexpected node type');
+            throw new InvalidArgumentException('Unexpected node type');
         }
     }
 }

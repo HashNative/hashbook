@@ -30,7 +30,7 @@ class Prefix implements Validator
      * Validate the request has a prefix and if it matches the configured
      * API prefix.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
      * @return bool
      */

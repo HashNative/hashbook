@@ -11,15 +11,17 @@
 
 namespace Psy\Formatter;
 
+use Reflector;
+
 /**
  * Formatter interface.
  */
 interface Formatter
 {
     /**
-     * @param \Reflector $reflector
+     * @param Reflector $reflector
      *
      * @return string
      */
-    public static function format(\Reflector $reflector);
+    public static function format(Reflector $reflector);
 }

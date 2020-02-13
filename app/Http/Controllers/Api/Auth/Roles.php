@@ -6,6 +6,7 @@ use App\Http\Controllers\ApiController;
 use App\Http\Requests\Auth\Role as Request;
 use App\Models\Auth\Role;
 use App\Transformers\Auth\Role as Transformer;
+use Dingo\Api\Http\Response;
 use Dingo\Api\Routing\Helpers;
 
 class Roles extends ApiController
@@ -15,7 +16,7 @@ class Roles extends ApiController
     /**
      * Display a listing of the resource.
      *
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -28,7 +29,7 @@ class Roles extends ApiController
      * Display the specified resource.
      *
      * @param  Role  $role
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function show(Role $role)
     {
@@ -39,7 +40,7 @@ class Roles extends ApiController
      * Store a newly created resource in storage.
      *
      * @param  $request
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -57,7 +58,7 @@ class Roles extends ApiController
      *
      * @param  $role
      * @param  $request
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function update(Role $role, Request $request)
     {
@@ -74,7 +75,7 @@ class Roles extends ApiController
      * Remove the specified resource from storage.
      *
      * @param  Role  $role
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function destroy(Role $role)
     {

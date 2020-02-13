@@ -10,41 +10,43 @@
 
 namespace SebastianBergmann\CodeCoverage\Report\Xml;
 
+use DOMElement;
+use DOMNode;
 use SebastianBergmann\CodeCoverage\Util;
 
 class Totals
 {
     /**
-     * @var \DOMNode
+     * @var DOMNode
      */
     private $container;
 
     /**
-     * @var \DOMElement
+     * @var DOMElement
      */
     private $linesNode;
 
     /**
-     * @var \DOMElement
+     * @var DOMElement
      */
     private $methodsNode;
 
     /**
-     * @var \DOMElement
+     * @var DOMElement
      */
     private $functionsNode;
 
     /**
-     * @var \DOMElement
+     * @var DOMElement
      */
     private $classesNode;
 
     /**
-     * @var \DOMElement
+     * @var DOMElement
      */
     private $traitsNode;
 
-    public function __construct(\DOMElement $container)
+    public function __construct(DOMElement $container)
     {
         $this->container = $container;
         $dom             = $container->ownerDocument;

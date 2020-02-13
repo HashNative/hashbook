@@ -16,7 +16,7 @@ class Factory
     /**
      * Illuminate container instance.
      *
-     * @var \Illuminate\Container\Container
+     * @var Container
      */
     protected $container;
 
@@ -30,15 +30,15 @@ class Factory
     /**
      * Transformation layer adapter being used to transform responses.
      *
-     * @var \Dingo\Api\Contract\Transformer\Adapter
+     * @var Adapter
      */
     protected $adapter;
 
     /**
      * Create a new transformer factory instance.
      *
-     * @param \Illuminate\Container\Container         $container
-     * @param \Dingo\Api\Contract\Transformer\Adapter $adapter
+     * @param Container $container
+     * @param Adapter $adapter
      *
      * @return void
      */
@@ -53,10 +53,10 @@ class Factory
      *
      * @param string                 $class
      * @param string|callable|object $resolver
-     * @param array|\Closure         $third
-     * @param \Closure               $fourth
+     * @param array|Closure $third
+     * @param Closure $fourth
      *
-     * @return \Dingo\Api\Transformer\Binding
+     * @return Binding
      */
     public function register($class, $resolver, $third = null, $fourth = null)
     {
@@ -116,9 +116,9 @@ class Factory
      *
      * @param string|object $class
      *
-     * @throws \RuntimeException
+     * @return Binding
+     *@throws RuntimeException
      *
-     * @return \Dingo\Api\Transformer\Binding
      */
     protected function getBinding($class)
     {
@@ -140,9 +140,9 @@ class Factory
      *
      * @param string|callable|object $resolver
      * @param array                  $parameters
-     * @param \Closure               $callback
+     * @param Closure $callback
      *
-     * @return \Dingo\Api\Transformer\Binding
+     * @return Binding
      */
     protected function createBinding($resolver, array $parameters = [], Closure $callback = null)
     {
@@ -152,7 +152,7 @@ class Factory
     /**
      * Get a registered transformer binding from a collection of items.
      *
-     * @param \Illuminate\Support\Collection $collection
+     * @param Collection $collection
      *
      * @return null|string|callable
      */
@@ -204,7 +204,7 @@ class Factory
     /**
      * Set the transformation layer at runtime.
      *
-     * @param \Closure|\Dingo\Api\Contract\Transformer\Adapter $adapter
+     * @param Closure|Adapter $adapter
      *
      * @return void
      */
@@ -220,7 +220,7 @@ class Factory
     /**
      * Get the transformation layer adapter.
      *
-     * @return \Dingo\Api\Contract\Transformer\Adapter
+     * @return Adapter
      */
     public function getAdapter()
     {
@@ -230,7 +230,7 @@ class Factory
     /**
      * Get the request from the container.
      *
-     * @return \Dingo\Api\Http\Request
+     * @return Request
      */
     public function getRequest()
     {

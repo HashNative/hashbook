@@ -11,9 +11,11 @@
 
 namespace Prophecy\PhpDocumentor;
 
+use InvalidArgumentException;
 use phpDocumentor\Reflection\DocBlock\Tags\Method;
 use phpDocumentor\Reflection\DocBlockFactory;
 use phpDocumentor\Reflection\Types\ContextFactory;
+use ReflectionClass;
 
 /**
  * @author Théo FIDRY <theo.fidry@gmail.com>
@@ -32,11 +34,11 @@ final class ClassTagRetriever implements MethodTagRetrieverInterface
     }
 
     /**
-     * @param \ReflectionClass $reflectionClass
+     * @param ReflectionClass $reflectionClass
      *
      * @return Method[]
      */
-    public function getTagList(\ReflectionClass $reflectionClass)
+    public function getTagList(ReflectionClass $reflectionClass)
     {
         try {
             $phpdoc = $this->docBlockFactory->create(
@@ -45,7 +47,7 @@ final class ClassTagRetriever implements MethodTagRetrieverInterface
             );
 
             return $phpdoc->getTagsByName('method');
-        } catch (\InvalidArgumentException $e) {
+        } catch (InvalidArgumentException $e) {
             return array();
         }
     }

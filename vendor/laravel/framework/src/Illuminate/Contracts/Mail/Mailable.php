@@ -2,6 +2,7 @@
 
 namespace Illuminate\Contracts\Mail;
 
+use DateTime;
 use Illuminate\Contracts\Queue\Factory as Queue;
 
 interface Mailable
@@ -25,7 +26,7 @@ interface Mailable
     /**
      * Deliver the queued message after the given delay.
      *
-     * @param  \DateTime|int  $delay
+     * @param  DateTime|int  $delay
      * @param  Queue  $queue
      * @return mixed
      */

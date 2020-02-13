@@ -16,7 +16,7 @@ class ResourceRegistrar extends IlluminateResourceRegistrar
     /**
      * Create a new resource registrar instance.
      *
-     * @param \Dingo\Api\Routing\Router $router
+     * @param Router $router
      *
      * @return void
      */

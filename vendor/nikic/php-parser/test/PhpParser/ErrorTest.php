@@ -2,7 +2,10 @@
 
 namespace PhpParser;
 
-class ErrorTest extends \PHPUnit_Framework_TestCase
+use PHPUnit_Framework_TestCase;
+use RuntimeException;
+
+class ErrorTest extends PHPUnit_Framework_TestCase
 {
     public function testConstruct() {
         $attributes = array(
@@ -81,19 +84,19 @@ class ErrorTest extends \PHPUnit_Framework_TestCase
         try {
             $error->getStartColumn('');
             $this->fail('Expected RuntimeException');
-        } catch (\RuntimeException $e) {
+        } catch (RuntimeException $e) {
             $this->assertSame('Error does not have column information', $e->getMessage());
         }
         try {
             $error->getEndColumn('');
             $this->fail('Expected RuntimeException');
-        } catch (\RuntimeException $e) {
+        } catch (RuntimeException $e) {
             $this->assertSame('Error does not have column information', $e->getMessage());
         }
     }
 
     /**
-     * @expectedException \RuntimeException
+     * @expectedException RuntimeException
      * @expectedExceptionMessage Invalid position information
      */
     public function testInvalidPosInfo() {

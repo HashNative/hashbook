@@ -12,6 +12,7 @@ namespace SebastianBergmann\CodeCoverage\Report\Html;
 
 use SebastianBergmann\CodeCoverage\Node\AbstractNode;
 use SebastianBergmann\CodeCoverage\Node\Directory as DirectoryNode;
+use Text_Template;
 
 /**
  * Renders the dashboard for a directory node.
@@ -25,7 +26,7 @@ class Dashboard extends Renderer
     public function render(DirectoryNode $node, $file)
     {
         $classes  = $node->getClassesAndTraits();
-        $template = new \Text_Template(
+        $template = new Text_Template(
             $this->templatePath . 'dashboard.html',
             '{{',
             '}}'

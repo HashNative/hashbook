@@ -23,7 +23,7 @@ class PagerfantaPaginatorAdapter implements PaginatorInterface
     /**
      * The paginator instance.
      *
-     * @var \Pagerfanta\Pagerfanta
+     * @var Pagerfanta
      */
     protected $paginator;
 
@@ -37,7 +37,7 @@ class PagerfantaPaginatorAdapter implements PaginatorInterface
     /**
      * Create a new pagerfanta pagination adapter.
      *
-     * @param \Pagerfanta\Pagerfanta $paginator
+     * @param Pagerfanta $paginator
      * @param callable               $routeGenerator
      *
      * @return void
@@ -113,7 +113,7 @@ class PagerfantaPaginatorAdapter implements PaginatorInterface
     /**
      * Get the paginator instance.
      *
-     * @return \Pagerfanta\Pagerfanta
+     * @return Pagerfanta
      */
     public function getPaginator()
     {

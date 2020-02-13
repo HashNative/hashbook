@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Setting\Currency as Request;
 use App\Models\Banking\Account;
 use App\Models\Setting\Currency;
+use stdClass;
 
 class Currencies extends Controller
 {
@@ -266,7 +267,7 @@ class Currencies extends Controller
 
     public function currency()
     {
-        $json = new \stdClass();
+        $json = new stdClass();
 
         $code = request('code');
 
@@ -281,7 +282,7 @@ class Currencies extends Controller
 
     public function config()
     {
-        $json = new \stdClass();
+        $json = new stdClass();
 
         $code = request('code');
 

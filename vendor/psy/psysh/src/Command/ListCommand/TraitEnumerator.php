@@ -12,7 +12,11 @@
 namespace Psy\Command\ListCommand;
 
 use Psy\VarDumper\Presenter;
+use Reflector;
 use Symfony\Component\Console\Input\InputInterface;
+use function get_declared_traits;
+use function natcasesort;
+use function trigger_error;
 
 /**
  * Trait Enumerator class.
@@ -23,14 +27,14 @@ class TraitEnumerator extends Enumerator
 {
     public function __construct(Presenter $presenter)
     {
-        @\trigger_error('TraitEnumerator is no longer used', E_USER_DEPRECATED);
+        @trigger_error('TraitEnumerator is no longer used', E_USER_DEPRECATED);
         parent::__construct($presenter);
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function listItems(InputInterface $input, \Reflector $reflector = null, $target = null)
+    protected function listItems(InputInterface $input, Reflector $reflector = null, $target = null)
     {
         // only list traits when no Reflector is present.
         //
@@ -49,7 +53,7 @@ class TraitEnumerator extends Enumerator
             return;
         }
 
-        $traits = $this->prepareTraits(\get_declared_traits());
+        $traits = $this->prepareTraits(get_declared_traits());
 
         if (empty($traits)) {
             return;
@@ -69,7 +73,7 @@ class TraitEnumerator extends Enumerator
      */
     protected function prepareTraits(array $traits)
     {
-        \natcasesort($traits);
+        natcasesort($traits);
 
         // My kingdom for a generator.
         $ret = [];

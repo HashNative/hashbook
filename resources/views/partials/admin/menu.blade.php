@@ -25,7 +25,7 @@
             </div>
         </div>
         <!-- search form -->
-        <form action="#" method="get" id="form-search" class="sidebar-form">
+        <form action="#" method="get" id="form-search" class="">
             <div id="live-search" class="input-group">
                 <input type="text" name="live-search" value="<?php //echo $search; ?>" id="input-search" class="form-control" placeholder="{{ trans('general.search_placeholder') }}">
                 <span class="input-group-btn">

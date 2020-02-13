@@ -2,9 +2,11 @@
 
 namespace Sofa\Eloquence\Tests;
 
+use LogicException;
+use PHPUnit_Framework_TestCase;
 use Sofa\Eloquence\Mutator\Mutator;
 
-class MutatorTest extends \PHPUnit_Framework_TestCase {
+class MutatorTest extends PHPUnit_Framework_TestCase {
 
     public function setUp()
     {
@@ -90,7 +92,7 @@ class MutatorTest extends \PHPUnit_Framework_TestCase {
      * @test
      *
      * @dataProvider wrongCallables
-     * @expectedException \LogicException
+     * @expectedException LogicException
      */
     public function wrong_callable($callable)
     {

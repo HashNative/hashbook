@@ -3,6 +3,7 @@
 namespace Illuminate\Database\Connectors;
 
 use InvalidArgumentException;
+use PDO;
 
 class SQLiteConnector extends Connector implements ConnectorInterface
 {
@@ -10,9 +11,9 @@ class SQLiteConnector extends Connector implements ConnectorInterface
      * Establish a database connection.
      *
      * @param  array  $config
-     * @return \PDO
+     * @return PDO
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function connect(array $config)
     {

@@ -2,19 +2,21 @@
 
 namespace Illuminate\Mail\Events;
 
+use Swift_Message;
+
 class MessageSending
 {
     /**
      * The Swift message instance.
      *
-     * @var \Swift_Message
+     * @var Swift_Message
      */
     public $message;
 
     /**
      * Create a new event instance.
      *
-     * @param  \Swift_Message  $message
+     * @param  Swift_Message  $message
      * @return void
      */
     public function __construct($message)

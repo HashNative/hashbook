@@ -12,6 +12,7 @@ namespace SebastianBergmann\CodeCoverage\Report\Html;
 
 use SebastianBergmann\CodeCoverage\Node\File as FileNode;
 use SebastianBergmann\CodeCoverage\Util;
+use Text_Template;
 
 /**
  * Renders a file node.
@@ -53,7 +54,7 @@ class File extends Renderer
      */
     public function render(FileNode $node, $file)
     {
-        $template = new \Text_Template($this->templatePath . 'file.html', '{{', '}}');
+        $template = new Text_Template($this->templatePath . 'file.html', '{{', '}}');
 
         $template->setVar(
             [
@@ -74,9 +75,9 @@ class File extends Renderer
      */
     protected function renderItems(FileNode $node)
     {
-        $template = new \Text_Template($this->templatePath . 'file_item.html', '{{', '}}');
+        $template = new Text_Template($this->templatePath . 'file_item.html', '{{', '}}');
 
-        $methodItemTemplate = new \Text_Template(
+        $methodItemTemplate = new Text_Template(
             $this->templatePath . 'method_item.html',
             '{{',
             '}}'
@@ -124,12 +125,12 @@ class File extends Renderer
 
     /**
      * @param array          $items
-     * @param \Text_Template $template
-     * @param \Text_Template $methodItemTemplate
+     * @param Text_Template $template
+     * @param Text_Template $methodItemTemplate
      *
      * @return string
      */
-    protected function renderTraitOrClassItems(array $items, \Text_Template $template, \Text_Template $methodItemTemplate)
+    protected function renderTraitOrClassItems(array $items, Text_Template $template, Text_Template $methodItemTemplate)
     {
         if (empty($items)) {
             return '';
@@ -215,11 +216,11 @@ class File extends Renderer
 
     /**
      * @param array          $functions
-     * @param \Text_Template $template
+     * @param Text_Template $template
      *
      * @return string
      */
-    protected function renderFunctionItems(array $functions, \Text_Template $template)
+    protected function renderFunctionItems(array $functions, Text_Template $template)
     {
         if (empty($functions)) {
             return '';
@@ -238,11 +239,11 @@ class File extends Renderer
     }
 
     /**
-     * @param \Text_Template $template
+     * @param Text_Template $template
      *
      * @return string
      */
-    protected function renderFunctionOrMethodItem(\Text_Template $template, array $item, $indent = '')
+    protected function renderFunctionOrMethodItem(Text_Template $template, array $item, $indent = '')
     {
         $numTestedItems = $item['executedLines'] == $item['executableLines'] ? 1 : 0;
 

@@ -11,10 +11,28 @@
 
 namespace Psy\Test\Formatter;
 
+use PHPUnit\Framework\TestCase;
+use Psy\Exception\RuntimeException;
 use Psy\Formatter\CodeFormatter;
 use Psy\Test\Formatter\Fixtures\SomeClass;
+use ReflectionClass;
+use ReflectionClassConstant;
+use ReflectionExtension;
+use ReflectionFunction;
+use ReflectionMethod;
+use ReflectionObject;
+use ReflectionParameter;
+use ReflectionProperty;
+use function array_map;
+use function chr;
+use function defined;
+use function explode;
+use function implode;
+use function preg_replace;
+use function rtrim;
+use function version_compare;
 
-class CodeFormatterTest extends \PHPUnit\Framework\TestCase
+class CodeFormatterTest extends TestCase
 {
     /**
      * @dataProvider reflectors
@@ -22,7 +40,7 @@ class CodeFormatterTest extends \PHPUnit\Framework\TestCase
     public function testFormat($reflector, $expected)
     {
         $formatted = CodeFormatter::format($reflector);
-        $formattedWithoutColors = \preg_replace('#' . \chr(27) . '\[\d\d?m#', '', $formatted);
+        $formattedWithoutColors = preg_replace('#' . chr(27) . '\[\d\d?m#', '', $formatted);
 
         $this->assertEquals($expected, self::trimLines($formattedWithoutColors));
         $this->assertNotEquals($expected, self::trimLines($formatted));
@@ -64,16 +82,16 @@ EOS;
 EOS;
 
         return [
-            [new \ReflectionClass('Psy\Test\Formatter\Fixtures\SomeClass'), $expectClass],
-            [new \ReflectionObject(new SomeClass()), $expectClass],
-            [new \ReflectionMethod('Psy\Test\Formatter\Fixtures\SomeClass', 'someMethod'), $expectMethod],
-            [new \ReflectionFunction(SomeClass::someClosure()), $expectClosure],
+            [new ReflectionClass('Psy\Test\Formatter\Fixtures\SomeClass'), $expectClass],
+            [new ReflectionObject(new SomeClass()), $expectClass],
+            [new ReflectionMethod('Psy\Test\Formatter\Fixtures\SomeClass', 'someMethod'), $expectMethod],
+            [new ReflectionFunction(SomeClass::someClosure()), $expectClosure],
         ];
     }
 
     /**
      * @dataProvider invalidReflectors
-     * @expectedException \Psy\Exception\RuntimeException
+     * @expectedException RuntimeException
      */
     public function testCodeFormatterThrowsExceptionForReflectorsItDoesntUnderstand($reflector)
     {
@@ -83,13 +101,13 @@ EOS;
     public function invalidReflectors()
     {
         $reflectors = [
-            [new \ReflectionExtension('json')],
-            [new \ReflectionParameter(['Psy\Test\Formatter\Fixtures\SomeClass', 'someMethod'], 'someParam')],
-            [new \ReflectionProperty('Psy\Test\Formatter\Fixtures\SomeClass', 'someProp')],
+            [new ReflectionExtension('json')],
+            [new ReflectionParameter(['Psy\Test\Formatter\Fixtures\SomeClass', 'someMethod'], 'someParam')],
+            [new ReflectionProperty('Psy\Test\Formatter\Fixtures\SomeClass', 'someProp')],
         ];
 
-        if (\version_compare(PHP_VERSION, '7.1.0', '>=')) {
-            $reflectors[] = [new \ReflectionClassConstant('Psy\Test\Formatter\Fixtures\SomeClass', 'SOME_CONST')];
+        if (version_compare(PHP_VERSION, '7.1.0', '>=')) {
+            $reflectors[] = [new ReflectionClassConstant('Psy\Test\Formatter\Fixtures\SomeClass', 'SOME_CONST')];
         }
 
         return $reflectors;
@@ -97,7 +115,7 @@ EOS;
 
     /**
      * @dataProvider filenames
-     * @expectedException \Psy\Exception\RuntimeException
+     * @expectedException RuntimeException
      */
     public function testCodeFormatterThrowsExceptionForMissingFile($filename)
     {
@@ -115,7 +133,7 @@ EOS;
 
     public function filenames()
     {
-        if (\defined('HHVM_VERSION')) {
+        if (defined('HHVM_VERSION')) {
             $this->markTestSkipped('We have issues with PHPUnit mocks on HHVM.');
         }
 
@@ -124,6 +142,6 @@ EOS;
 
     private static function trimLines($code)
     {
-        return \rtrim(\implode("\n", \array_map('rtrim', \explode("\n", $code))));
+        return rtrim(implode("\n", array_map('rtrim', explode("\n", $code))));
     }
 }

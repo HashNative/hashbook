@@ -2,6 +2,8 @@
 
 namespace Sofa\Eloquence;
 
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Support\MessageBag;
 use Sofa\Eloquence\Validable\Observer;
 use Illuminate\Contracts\Validation\Factory;
 
@@ -21,14 +23,14 @@ trait Validable
     /**
      * Validator instance.
      *
-     * @var \Illuminate\Contracts\Validation\Validator
+     * @var Validator
      */
     protected $validator;
 
     /**
      * Validator factory instance.
      *
-     * @var \Illuminate\Contracts\Validation\Factory
+     * @var Factory
      */
     protected static $validatorFactory;
 
@@ -126,7 +128,7 @@ trait Validable
     /**
      * Retrieve validation error messages.
      *
-     * @return \Illuminate\Support\MessageBag
+     * @return MessageBag
      */
     public function getValidationErrors()
     {
@@ -136,7 +138,7 @@ trait Validable
     /**
      * Retrieve validation error messages.
      *
-     * @return \Illuminate\Support\MessageBag
+     * @return MessageBag
      */
     public function getMessageBag()
     {
@@ -156,7 +158,7 @@ trait Validable
     /**
      * Get the validator instance.
      *
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @return Validator
      */
     public function getValidator()
     {
@@ -320,7 +322,7 @@ trait Validable
     /**
      * Set validation factory instance for this model.
      *
-     * @param  \Illuminate\Contracts\Validation\Factory
+     * @param Factory
      * @return void
      */
     public static function setValidatorFactory(Factory $factory)

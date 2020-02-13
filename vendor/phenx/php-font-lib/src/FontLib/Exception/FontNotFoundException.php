@@ -2,7 +2,9 @@
 
 namespace FontLib\Exception;
 
-class FontNotFoundException extends \Exception
+use Exception;
+
+class FontNotFoundException extends Exception
 {
     public function __construct($fontPath)
     {

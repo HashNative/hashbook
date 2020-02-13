@@ -2,12 +2,14 @@
 
 namespace PhpParser\Builder;
 
+use LogicException;
 use PhpParser\Comment;
 use PhpParser\Node;
 use PhpParser\Node\Name;
 use PhpParser\Node\Stmt;
+use PHPUnit_Framework_TestCase;
 
-class ClassTest extends \PHPUnit_Framework_TestCase
+class ClassTest extends PHPUnit_Framework_TestCase
 {
     protected function createClassBuilder($class) {
         return new Class_($class);
@@ -123,7 +125,7 @@ DOC;
     }
 
     /**
-     * @expectedException \LogicException
+     * @expectedException LogicException
      * @expectedExceptionMessage Unexpected node of type "Stmt_Echo"
      */
     public function testInvalidStmtError() {
@@ -133,7 +135,7 @@ DOC;
     }
 
     /**
-     * @expectedException \LogicException
+     * @expectedException LogicException
      * @expectedExceptionMessage Doc comment must be a string or an instance of PhpParser\Comment\Doc
      */
     public function testInvalidDocComment() {
@@ -142,7 +144,7 @@ DOC;
     }
 
     /**
-     * @expectedException \LogicException
+     * @expectedException LogicException
      * @expectedExceptionMessage Name cannot be empty
      */
     public function testEmptyName() {
@@ -151,7 +153,7 @@ DOC;
     }
 
     /**
-     * @expectedException \LogicException
+     * @expectedException LogicException
      * @expectedExceptionMessage Name must be a string or an instance of PhpParser\Node\Name
      */
     public function testInvalidName() {

@@ -2,6 +2,7 @@
 
 namespace Illuminate\Queue\Jobs;
 
+use Illuminate\Contracts\Redis\Factory;
 use Illuminate\Support\Arr;
 use Illuminate\Queue\RedisQueue;
 use Illuminate\Container\Container;
@@ -12,7 +13,7 @@ class RedisJob extends Job implements JobContract
     /**
      * The Redis queue instance.
      *
-     * @var \Illuminate\Queue\RedisQueue
+     * @var RedisQueue
      */
     protected $redis;
 
@@ -40,8 +41,8 @@ class RedisJob extends Job implements JobContract
     /**
      * Create a new job instance.
      *
-     * @param  \Illuminate\Container\Container  $container
-     * @param  \Illuminate\Queue\RedisQueue  $redis
+     * @param Container $container
+     * @param RedisQueue $redis
      * @param  string  $job
      * @param  string  $reserved
      * @param  string  $connectionName
@@ -121,7 +122,7 @@ class RedisJob extends Job implements JobContract
     /**
      * Get the underlying Redis factory implementation.
      *
-     * @return \Illuminate\Contracts\Redis\Factory
+     * @return Factory
      */
     public function getRedisQueue()
     {

@@ -2,6 +2,7 @@
 
 namespace Plank\Mediable\SourceAdapters;
 
+use finfo;
 use Plank\Mediable\Helpers\File;
 use Psr\Http\Message\StreamInterface;
 
@@ -14,7 +15,7 @@ class StreamAdapter implements SourceAdapterInterface
 {
     /**
      * The source object.
-     * @var \Psr\Http\Message\StreamInterface
+     * @var StreamInterface
      */
     protected $source;
 
@@ -26,7 +27,7 @@ class StreamAdapter implements SourceAdapterInterface
 
     /**
      * Constructor.
-     * @param \Psr\Http\Message\StreamInterface $source
+     * @param StreamInterface $source
      */
     public function __construct(StreamInterface $source)
     {
@@ -76,7 +77,7 @@ class StreamAdapter implements SourceAdapterInterface
      */
     public function mimeType()
     {
-        $finfo = new \finfo(FILEINFO_MIME_TYPE);
+        $finfo = new finfo(FILEINFO_MIME_TYPE);
 
         return $finfo->buffer($this->contents());
     }

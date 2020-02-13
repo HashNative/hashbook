@@ -19,7 +19,7 @@
 
                     <div class="form-group col-md-2">
                         <div class="input-group" style="margin-top: 25px;">
-                            {!! Form::button('<span class="fa fa-list"></span> &nbsp;' . trans('reconciliations.list_transactions'), ['type' => 'submit', 'class' => 'btn btn-success']) !!}
+                            {!! Form::button('<span class="fa fa-list"></span> &nbsp;' . trans('reconciliations.list_transactions'), ['type' => 'submit', 'class' => 'btn btn-danger']) !!}
                         </div>
                     </div>
                 </div>

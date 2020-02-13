@@ -10,6 +10,8 @@
 
 namespace SebastianBergmann\CodeCoverage\Node;
 
+use PHP_Token_Stream;
+use PHP_Token_Stream_CachingFactory;
 use SebastianBergmann\CodeCoverage\InvalidArgumentException;
 
 /**
@@ -395,9 +397,9 @@ class File extends AbstractNode
         $classStack = $functionStack = [];
 
         if ($this->cacheTokens) {
-            $tokens = \PHP_Token_Stream_CachingFactory::get($this->getPath());
+            $tokens = PHP_Token_Stream_CachingFactory::get($this->getPath());
         } else {
-            $tokens = new \PHP_Token_Stream($this->getPath());
+            $tokens = new PHP_Token_Stream($this->getPath());
         }
 
         $this->processClasses($tokens);
@@ -572,9 +574,9 @@ class File extends AbstractNode
     }
 
     /**
-     * @param \PHP_Token_Stream $tokens
+     * @param PHP_Token_Stream $tokens
      */
-    protected function processClasses(\PHP_Token_Stream $tokens)
+    protected function processClasses(PHP_Token_Stream $tokens)
     {
         $classes = $tokens->getClasses();
         unset($tokens);
@@ -608,9 +610,9 @@ class File extends AbstractNode
     }
 
     /**
-     * @param \PHP_Token_Stream $tokens
+     * @param PHP_Token_Stream $tokens
      */
-    protected function processTraits(\PHP_Token_Stream $tokens)
+    protected function processTraits(PHP_Token_Stream $tokens)
     {
         $traits = $tokens->getTraits();
         unset($tokens);
@@ -644,9 +646,9 @@ class File extends AbstractNode
     }
 
     /**
-     * @param \PHP_Token_Stream $tokens
+     * @param PHP_Token_Stream $tokens
      */
-    protected function processFunctions(\PHP_Token_Stream $tokens)
+    protected function processFunctions(PHP_Token_Stream $tokens)
     {
         $functions = $tokens->getFunctions();
         unset($tokens);

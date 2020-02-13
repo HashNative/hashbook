@@ -10,19 +10,22 @@
 
 namespace SebastianBergmann\CodeCoverage\Report\Xml;
 
+use DOMDocument;
+use DOMElement;
+
 class File
 {
     /**
-     * @var \DOMDocument
+     * @var DOMDocument
      */
     protected $dom;
 
     /**
-     * @var \DOMElement
+     * @var DOMElement
      */
     protected $contextNode;
 
-    public function __construct(\DOMElement $context)
+    public function __construct(DOMElement $context)
     {
         $this->dom         = $context->ownerDocument;
         $this->contextNode = $context;

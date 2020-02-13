@@ -22,7 +22,7 @@ class LogServiceProvider extends ServiceProvider
     /**
      * Create the logger.
      *
-     * @return \Illuminate\Log\Writer
+     * @return Writer
      */
     public function createLogger()
     {
@@ -52,7 +52,7 @@ class LogServiceProvider extends ServiceProvider
     /**
      * Configure the Monolog handlers for the application.
      *
-     * @param  \Illuminate\Log\Writer  $log
+     * @param Writer $log
      * @return void
      */
     protected function configureHandler(Writer $log)
@@ -63,7 +63,7 @@ class LogServiceProvider extends ServiceProvider
     /**
      * Configure the Monolog handlers for the application.
      *
-     * @param  \Illuminate\Log\Writer  $log
+     * @param Writer $log
      * @return void
      */
     protected function configureSingleHandler(Writer $log)
@@ -77,7 +77,7 @@ class LogServiceProvider extends ServiceProvider
     /**
      * Configure the Monolog handlers for the application.
      *
-     * @param  \Illuminate\Log\Writer  $log
+     * @param Writer $log
      * @return void
      */
     protected function configureDailyHandler(Writer $log)
@@ -91,7 +91,7 @@ class LogServiceProvider extends ServiceProvider
     /**
      * Configure the Monolog handlers for the application.
      *
-     * @param  \Illuminate\Log\Writer  $log
+     * @param Writer $log
      * @return void
      */
     protected function configureSyslogHandler(Writer $log)
@@ -102,7 +102,7 @@ class LogServiceProvider extends ServiceProvider
     /**
      * Configure the Monolog handlers for the application.
      *
-     * @param  \Illuminate\Log\Writer  $log
+     * @param Writer $log
      * @return void
      */
     protected function configureErrorlogHandler(Writer $log)

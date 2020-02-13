@@ -5,6 +5,7 @@ namespace Illuminate\Notifications;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Collection;
 
 class SendQueuedNotifications implements ShouldQueue
 {
@@ -13,14 +14,14 @@ class SendQueuedNotifications implements ShouldQueue
     /**
      * The notifiable entities that should receive the notification.
      *
-     * @var \Illuminate\Support\Collection
+     * @var Collection
      */
     public $notifiables;
 
     /**
      * The notification to be sent.
      *
-     * @var \Illuminate\Notifications\Notification
+     * @var Notification
      */
     public $notification;
 
@@ -34,8 +35,8 @@ class SendQueuedNotifications implements ShouldQueue
     /**
      * Create a new job instance.
      *
-     * @param  \Illuminate\Support\Collection  $notifiables
-     * @param  \Illuminate\Notifications\Notification  $notification
+     * @param  Collection  $notifiables
+     * @param Notification $notification
      * @param  array  $channels
      * @return void
      */
@@ -49,7 +50,7 @@ class SendQueuedNotifications implements ShouldQueue
     /**
      * Send the notifications.
      *
-     * @param  \Illuminate\Notifications\ChannelManager  $manager
+     * @param ChannelManager $manager
      * @return void
      */
     public function handle(ChannelManager $manager)

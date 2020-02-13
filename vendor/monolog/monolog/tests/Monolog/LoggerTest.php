@@ -11,10 +11,15 @@
 
 namespace Monolog;
 
+use DateTimeZone;
+use Exception;
 use Monolog\Processor\WebProcessor;
 use Monolog\Handler\TestHandler;
+use PHPUnit_Framework_TestCase;
+use ReflectionProperty;
+use stdClass;
 
-class LoggerTest extends \PHPUnit_Framework_TestCase
+class LoggerTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @covers Monolog\Logger::getName
@@ -203,7 +208,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
     {
         $logger = new Logger(__METHOD__);
 
-        $logger->pushProcessor(new \stdClass());
+        $logger->pushProcessor(new stdClass());
     }
 
     /**
@@ -516,8 +521,8 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
     public function setTimezoneProvider()
     {
         return array_map(
-            function ($tz) { return array(new \DateTimeZone($tz)); },
-            \DateTimeZone::listIdentifiers()
+            function ($tz) { return array(new DateTimeZone($tz)); },
+            DateTimeZone::listIdentifiers()
         );
     }
 
@@ -583,7 +588,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         ;
         $handler->expects($this->any())
             ->method('handle')
-            ->will($this->throwException(new \Exception('Some handler exception')))
+            ->will($this->throwException(new Exception('Some handler exception')))
         ;
         $logger->pushHandler($handler);
         $logger->info('test');
@@ -609,7 +614,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         ;
         $handler->expects($this->any())
             ->method('handle')
-            ->will($this->throwException(new \Exception('Some handler exception')))
+            ->will($this->throwException(new Exception('Some handler exception')))
         ;
         $logger->pushHandler($handler);
         $logger->info('test');
@@ -635,7 +640,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $logger->pushProcessor($processorUid2);
 
         $getProperty = function ($object, $property) {
-            $reflectionProperty = new \ReflectionProperty(get_class($object), $property);
+            $reflectionProperty = new ReflectionProperty(get_class($object), $property);
             $reflectionProperty->setAccessible(true);
 
             return $reflectionProperty->getValue($object);

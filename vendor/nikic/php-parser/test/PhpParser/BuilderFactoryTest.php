@@ -3,8 +3,9 @@
 namespace PhpParser;
 
 use PhpParser\Node\Expr;
+use PHPUnit_Framework_TestCase;
 
-class BuilderFactoryTest extends \PHPUnit_Framework_TestCase
+class BuilderFactoryTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider provideTestFactory

@@ -12,6 +12,7 @@
 namespace Psy\Test\CodeCleaner;
 
 use Psy\CodeCleaner\ValidFunctionNamePass;
+use Psy\Exception\FatalErrorException;
 
 class ValidFunctionNamePassTest extends CodeCleanerTestCase
 {
@@ -22,7 +23,7 @@ class ValidFunctionNamePassTest extends CodeCleanerTestCase
 
     /**
      * @dataProvider getInvalidFunctions
-     * @expectedException \Psy\Exception\FatalErrorException
+     * @expectedException FatalErrorException
      */
     public function testProcessInvalidFunctionCallsAndDeclarations($code)
     {

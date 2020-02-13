@@ -2,7 +2,12 @@
 
 namespace PhpParser\Node;
 
-class NameTest extends \PHPUnit_Framework_TestCase
+use InvalidArgumentException;
+use OutOfBoundsException;
+use PHPUnit_Framework_TestCase;
+use stdClass;
+
+class NameTest extends PHPUnit_Framework_TestCase
 {
     public function testConstruct() {
         $name = new Name(array('foo', 'bar'));
@@ -49,7 +54,7 @@ class NameTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \OutOfBoundsException
+     * @expectedException OutOfBoundsException
      * @expectedExceptionMessage Offset 4 is out of bounds
      */
     public function testSliceOffsetTooLarge() {
@@ -57,7 +62,7 @@ class NameTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \OutOfBoundsException
+     * @expectedException OutOfBoundsException
      * @expectedExceptionMessage Offset -4 is out of bounds
      */
     public function testSliceOffsetTooSmall() {
@@ -65,7 +70,7 @@ class NameTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \OutOfBoundsException
+     * @expectedException OutOfBoundsException
      * @expectedExceptionMessage Length 4 is out of bounds
      */
     public function testSliceLengthTooLarge() {
@@ -73,7 +78,7 @@ class NameTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \OutOfBoundsException
+     * @expectedException OutOfBoundsException
      * @expectedExceptionMessage Length -4 is out of bounds
      */
     public function testSliceLengthTooSmall() {
@@ -125,10 +130,10 @@ class NameTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException        \InvalidArgumentException
+     * @expectedException        InvalidArgumentException
      * @expectedExceptionMessage Expected string, array of parts or Name instance
      */
     public function testInvalidArg() {
-        Name::concat('foo', new \stdClass);
+        Name::concat('foo', new stdClass);
     }
 }

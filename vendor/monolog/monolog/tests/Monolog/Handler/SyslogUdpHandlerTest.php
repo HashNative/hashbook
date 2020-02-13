@@ -11,6 +11,8 @@
 
 namespace Monolog\Handler;
 
+use Monolog\Formatter\ChromePHPFormatter;
+use Monolog\Logger;
 use Monolog\TestCase;
 
 /**
@@ -40,7 +42,7 @@ class SyslogUdpHandlerTest extends TestCase
         $handler->method('getDateTime')
             ->willReturn($time);
 
-        $handler->setFormatter(new \Monolog\Formatter\ChromePHPFormatter());
+        $handler->setFormatter(new ChromePHPFormatter());
 
         $socket = $this->getMock('\Monolog\Handler\SyslogUdp\UdpSocket', array('write'), array('lol', 'lol'));
         $socket->expects($this->at(0))
@@ -71,6 +73,6 @@ class SyslogUdpHandlerTest extends TestCase
 
     protected function getRecordWithMessage($msg)
     {
-        return array('message' => $msg, 'level' => \Monolog\Logger::WARNING, 'context' => null, 'extra' => array(), 'channel' => 'lol');
+        return array('message' => $msg, 'level' => Logger::WARNING, 'context' => null, 'extra' => array(), 'channel' => 'lol');
     }
 }

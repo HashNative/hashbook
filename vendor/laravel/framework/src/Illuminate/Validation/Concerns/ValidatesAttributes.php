@@ -206,7 +206,7 @@ trait ValidatesAttributes
      *
      * @param  string  $format
      * @param  string  $value
-     * @return \DateTime|null
+     * @return DateTime|null
      */
     protected function getDateTimeWithOptionalFormat($format, $value)
     {
@@ -1446,7 +1446,7 @@ trait ValidatesAttributes
      * @param  string  $rule
      * @return void
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     protected function requireParameterCount($count, $parameters, $rule)
     {

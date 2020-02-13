@@ -11,8 +11,10 @@
 
 namespace Monolog\Handler;
 
+use InvalidArgumentException;
 use Monolog\TestCase;
 use Monolog\Logger;
+use RuntimeException;
 
 /**
  * @author Pablo de Leon Belloc <pablolb@gmail.com>
@@ -39,7 +41,7 @@ class SocketHandlerTest extends TestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException InvalidArgumentException
      */
     public function testBadConnectionTimeout()
     {
@@ -55,7 +57,7 @@ class SocketHandlerTest extends TestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException InvalidArgumentException
      */
     public function testBadTimeout()
     {
@@ -263,7 +265,7 @@ class SocketHandlerTest extends TestCase
     }
 
     /**
-     * @expectedException \RuntimeException
+     * @expectedException RuntimeException
      */
     public function testAvoidInfiniteLoopWhenNoDataIsWrittenForAWritingTimeoutSeconds()
     {

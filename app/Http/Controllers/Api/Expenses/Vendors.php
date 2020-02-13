@@ -6,6 +6,7 @@ use App\Http\Controllers\ApiController;
 use App\Http\Requests\Expense\Vendor as Request;
 use App\Models\Expense\Vendor;
 use App\Transformers\Expense\Vendor as Transformer;
+use Dingo\Api\Http\Response;
 use Dingo\Api\Routing\Helpers;
 
 class Vendors extends ApiController
@@ -15,7 +16,7 @@ class Vendors extends ApiController
     /**
      * Display a listing of the resource.
      *
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -28,7 +29,7 @@ class Vendors extends ApiController
      * Display the specified resource.
      *
      * @param  int|string  $id
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function show($id)
     {
@@ -46,7 +47,7 @@ class Vendors extends ApiController
      * Store a newly created resource in storage.
      *
      * @param  $request
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -60,7 +61,7 @@ class Vendors extends ApiController
      *
      * @param  $vendor
      * @param  $request
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function update(Vendor $vendor, Request $request)
     {
@@ -73,7 +74,7 @@ class Vendors extends ApiController
      * Remove the specified resource from storage.
      *
      * @param  Vendor  $vendor
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function destroy(Vendor $vendor)
     {

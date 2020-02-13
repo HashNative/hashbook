@@ -8,6 +8,7 @@
 
 namespace Svg\Surface;
 
+use ReflectionClass;
 use Svg\Document;
 use Svg\Style;
 
@@ -34,7 +35,7 @@ class SurfaceCpdf implements SurfaceInterface
 
         if (!$canvas) {
             $canvas = new \CPdf\CPdf(array(0, 0, $w, $h));
-            $refl = new \ReflectionClass($canvas);
+            $refl = new ReflectionClass($canvas);
             $canvas->fontcache = realpath(dirname($refl->getFileName()) . "/../../fonts/")."/";
         }
 

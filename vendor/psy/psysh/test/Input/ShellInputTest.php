@@ -11,16 +11,19 @@
 
 namespace Psy\Test\Input;
 
+use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 use Psy\Input\CodeArgument;
 use Psy\Input\ShellInput;
+use ReflectionClass;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputOption;
 
-class ShellInputTest extends \PHPUnit\Framework\TestCase
+class ShellInputTest extends TestCase
 {
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException InvalidArgumentException
      * @expectedExceptionMessage Unexpected CodeArgument before the final position: a
      */
     public function testThrowsWhenCodeArgumentNotInFinalPosition()
@@ -95,7 +98,7 @@ class ShellInputTest extends \PHPUnit\Framework\TestCase
     public function testTokenize($input, $tokens, $message)
     {
         $input = new ShellInput($input);
-        $r = new \ReflectionClass('Psy\Input\ShellInput');
+        $r = new ReflectionClass('Psy\Input\ShellInput');
         $p = $r->getProperty('tokenPairs');
         $p->setAccessible(true);
         $this->assertSame($tokens, $p->getValue($input), $message);

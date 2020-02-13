@@ -10,7 +10,7 @@ class Pivot extends Model
     /**
      * The parent model of the relationship.
      *
-     * @var \Illuminate\Database\Eloquent\Model
+     * @var Model
      */
     public $parent;
 
@@ -38,7 +38,7 @@ class Pivot extends Model
     /**
      * Create a new pivot model instance.
      *
-     * @param  \Illuminate\Database\Eloquent\Model  $parent
+     * @param Model $parent
      * @param  array   $attributes
      * @param  string  $table
      * @param  bool    $exists
@@ -69,7 +69,7 @@ class Pivot extends Model
     /**
      * Create a new pivot model from raw values returned from a query.
      *
-     * @param  \Illuminate\Database\Eloquent\Model  $parent
+     * @param Model $parent
      * @param  array   $attributes
      * @param  string  $table
      * @param  bool    $exists
@@ -87,8 +87,8 @@ class Pivot extends Model
     /**
      * Set the keys for a save update query.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @param Builder $query
+     * @return Builder
      */
     protected function setKeysForSaveQuery(Builder $query)
     {
@@ -110,7 +110,7 @@ class Pivot extends Model
     /**
      * Get the query builder for a delete operation on the pivot.
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     protected function getDeleteQuery()
     {

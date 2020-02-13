@@ -12,6 +12,7 @@
 namespace Psy\Test\CodeCleaner;
 
 use Psy\CodeCleaner\LoopContextPass;
+use Psy\Exception\FatalErrorException;
 
 class LoopContextPassTest extends CodeCleanerTestCase
 {
@@ -22,7 +23,7 @@ class LoopContextPassTest extends CodeCleanerTestCase
 
     /**
      * @dataProvider invalidStatements
-     * @expectedException \Psy\Exception\FatalErrorException
+     * @expectedException FatalErrorException
      */
     public function testProcessStatementFails($code)
     {

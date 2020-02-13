@@ -2,6 +2,7 @@
 
 namespace PhpParser\Builder;
 
+use LogicException;
 use PhpParser;
 use PhpParser\Node\Name;
 use PhpParser\Node\Stmt;
@@ -60,7 +61,7 @@ class Interface_ extends Declaration
                 break;
 
             default:
-                throw new \LogicException(sprintf('Unexpected node of type "%s"', $type));
+                throw new LogicException(sprintf('Unexpected node of type "%s"', $type));
         }
 
         return $this;

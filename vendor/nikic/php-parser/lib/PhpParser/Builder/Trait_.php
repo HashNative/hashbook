@@ -2,6 +2,7 @@
 
 namespace PhpParser\Builder;
 
+use LogicException;
 use PhpParser;
 use PhpParser\Node\Stmt;
 
@@ -38,7 +39,7 @@ class Trait_ extends Declaration
         } else if ($stmt instanceof Stmt\TraitUse) {
             $this->uses[] = $stmt;
         } else {
-            throw new \LogicException(sprintf('Unexpected node of type "%s"', $stmt->getType()));
+            throw new LogicException(sprintf('Unexpected node of type "%s"', $stmt->getType()));
         }
 
         return $this;

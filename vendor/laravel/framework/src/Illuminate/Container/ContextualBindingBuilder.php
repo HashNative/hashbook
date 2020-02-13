@@ -2,6 +2,7 @@
 
 namespace Illuminate\Container;
 
+use Closure;
 use Illuminate\Contracts\Container\ContextualBindingBuilder as ContextualBindingBuilderContract;
 
 class ContextualBindingBuilder implements ContextualBindingBuilderContract
@@ -9,7 +10,7 @@ class ContextualBindingBuilder implements ContextualBindingBuilderContract
     /**
      * The underlying container instance.
      *
-     * @var \Illuminate\Container\Container
+     * @var Container
      */
     protected $container;
 
@@ -30,7 +31,7 @@ class ContextualBindingBuilder implements ContextualBindingBuilderContract
     /**
      * Create a new contextual binding builder.
      *
-     * @param  \Illuminate\Container\Container  $container
+     * @param Container $container
      * @param  string  $concrete
      * @return void
      */
@@ -56,7 +57,7 @@ class ContextualBindingBuilder implements ContextualBindingBuilderContract
     /**
      * Define the implementation for the contextual binding.
      *
-     * @param  \Closure|string  $implementation
+     * @param  Closure|string  $implementation
      * @return void
      */
     public function give($implementation)

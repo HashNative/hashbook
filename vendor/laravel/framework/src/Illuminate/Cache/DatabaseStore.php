@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Contracts\Cache\Store;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Contracts\Encryption\Encrypter as EncrypterContract;
+use Illuminate\Database\Query\Builder;
 
 class DatabaseStore implements Store
 {
@@ -16,14 +17,14 @@ class DatabaseStore implements Store
     /**
      * The database connection instance.
      *
-     * @var \Illuminate\Database\ConnectionInterface
+     * @var ConnectionInterface
      */
     protected $connection;
 
     /**
      * The encrypter instance.
      *
-     * @var \Illuminate\Contracts\Encryption\Encrypter
+     * @var EncrypterContract
      */
     protected $encrypter;
 
@@ -44,8 +45,8 @@ class DatabaseStore implements Store
     /**
      * Create a new database store.
      *
-     * @param  \Illuminate\Database\ConnectionInterface  $connection
-     * @param  \Illuminate\Contracts\Encryption\Encrypter  $encrypter
+     * @param ConnectionInterface $connection
+     * @param EncrypterContract $encrypter
      * @param  string  $table
      * @param  string  $prefix
      * @return void
@@ -151,7 +152,7 @@ class DatabaseStore implements Store
      *
      * @param  string  $key
      * @param  mixed  $value
-     * @param  \Closure  $callback
+     * @param Closure $callback
      * @return int|bool
      */
     protected function incrementOrDecrement($key, $value, Closure $callback)
@@ -241,7 +242,7 @@ class DatabaseStore implements Store
     /**
      * Get a query builder for the cache table.
      *
-     * @return \Illuminate\Database\Query\Builder
+     * @return Builder
      */
     protected function table()
     {
@@ -251,7 +252,7 @@ class DatabaseStore implements Store
     /**
      * Get the underlying database connection.
      *
-     * @return \Illuminate\Database\ConnectionInterface
+     * @return ConnectionInterface
      */
     public function getConnection()
     {
@@ -261,7 +262,7 @@ class DatabaseStore implements Store
     /**
      * Get the encrypter instance.
      *
-     * @return \Illuminate\Contracts\Encryption\Encrypter
+     * @return EncrypterContract
      */
     public function getEncrypter()
     {

@@ -32,7 +32,7 @@ class ReturnArgumentPromise implements PromiseInterface
      *
      * @param int $index The zero-indexed number of the argument to return
      *
-     * @throws \Prophecy\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function __construct($index = 0)
     {

@@ -11,13 +11,15 @@
 
 namespace Symfony\Component\Console\Tests\Command;
 
+use PHPUnit\Framework\TestCase;
 use Psy\Command\ExitCommand;
+use Psy\Exception\BreakException;
 use Symfony\Component\Console\Tester\CommandTester;
 
-class ExitCommandTest extends \PHPUnit\Framework\TestCase
+class ExitCommandTest extends TestCase
 {
     /**
-     * @expectedException \Psy\Exception\BreakException
+     * @expectedException BreakException
      * @expectedExceptionMessage Goodbye
      */
     public function testExecute()

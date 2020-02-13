@@ -3,16 +3,17 @@
 namespace Illuminate\Redis\Connections;
 
 use Closure;
+use Redis;
 
 /**
- * @mixin \Redis
+ * @mixin Redis
  */
 class PhpRedisConnection extends Connection
 {
     /**
      * Create a new PhpRedis connection.
      *
-     * @param  \Redis  $client
+     * @param  Redis  $client
      * @return void
      */
     public function __construct($client)
@@ -117,7 +118,7 @@ class PhpRedisConnection extends Connection
      * Execute commands in a pipeline.
      *
      * @param  callable  $callback
-     * @return array|\Redis
+     * @return array|Redis
      */
     public function pipeline(callable $callback = null)
     {
@@ -132,7 +133,7 @@ class PhpRedisConnection extends Connection
      * Execute commands in a transaction.
      *
      * @param  callable  $callback
-     * @return array|\Redis
+     * @return array|Redis
      */
     public function transaction(callable $callback = null)
     {
@@ -177,7 +178,7 @@ class PhpRedisConnection extends Connection
      * Subscribe to a set of given channels for messages.
      *
      * @param  array|string  $channels
-     * @param  \Closure  $callback
+     * @param Closure $callback
      * @return void
      */
     public function subscribe($channels, Closure $callback)
@@ -191,7 +192,7 @@ class PhpRedisConnection extends Connection
      * Subscribe to a set of given channels with wildcards.
      *
      * @param  array|string  $channels
-     * @param  \Closure  $callback
+     * @param Closure $callback
      * @return void
      */
     public function psubscribe($channels, Closure $callback)
@@ -205,7 +206,7 @@ class PhpRedisConnection extends Connection
      * Subscribe to a set of given channels for messages.
      *
      * @param  array|string  $channels
-     * @param  \Closure  $callback
+     * @param Closure $callback
      * @param  string  $method
      * @return void
      */

@@ -3,7 +3,7 @@
 return [
 
     'title'                 => 'אסימון API',
-    'api_token'             => 'אסימון',
+    'api_'             => 'אסימון',
     'my_apps'               => 'My Apps',
     'top_paid'              => 'תשלומים מובילים',
     'new'                   => 'חדש',
@@ -12,7 +12,7 @@ return [
     'search'                => 'חיפוש',
     'install'               => 'התקנה',
     'buy_now'               => 'קנה עכשיו',
-    'token_link'            => '<a href="https://akaunting.com/tokens" target="_blank">לחץ כאן</a> כדי לקבל את ה-API אסימון.',
+    '_link'            => '<a href="https://akaunting.com/s" target="_blank">לחץ כאן</a> כדי לקבל את ה-API אסימון.',
     'no_apps'               => 'אין  עדיין יישומים בקטגוריה זאת.',
     'developer'             => 'האם אתה מפתח? <a href="https://akaunting.com/blog/akaunting-app-store" target="_blank">כאן</a> תלמד כיצד ליצור app ולהתחיל למכור היום!',
 

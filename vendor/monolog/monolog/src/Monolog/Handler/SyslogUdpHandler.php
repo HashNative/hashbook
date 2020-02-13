@@ -11,6 +11,7 @@
 
 namespace Monolog\Handler;
 
+use DateTime;
 use Monolog\Logger;
 use Monolog\Handler\SyslogUdp\UdpSocket;
 
@@ -90,7 +91,7 @@ class SyslogUdpHandler extends AbstractSyslogHandler
 
     protected function getDateTime()
     {
-        return date(\DateTime::RFC3339);
+        return date(DateTime::RFC3339);
     }
 
     /**

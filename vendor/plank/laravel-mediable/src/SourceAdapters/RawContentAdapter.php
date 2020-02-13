@@ -2,6 +2,7 @@
 
 namespace Plank\Mediable\SourceAdapters;
 
+use finfo;
 use Plank\Mediable\Helpers\File;
 
 /**
@@ -63,7 +64,7 @@ class RawContentAdapter implements SourceAdapterInterface
      */
     public function mimeType()
     {
-        $finfo = new \finfo(FILEINFO_MIME_TYPE);
+        $finfo = new finfo(FILEINFO_MIME_TYPE);
 
         return $finfo->buffer($this->source) ?: null;
     }

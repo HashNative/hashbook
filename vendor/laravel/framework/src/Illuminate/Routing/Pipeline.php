@@ -20,8 +20,8 @@ class Pipeline extends BasePipeline
     /**
      * Get the final piece of the Closure onion.
      *
-     * @param  \Closure  $destination
-     * @return \Closure
+     * @param Closure $destination
+     * @return Closure
      */
     protected function prepareDestination(Closure $destination)
     {
@@ -39,7 +39,7 @@ class Pipeline extends BasePipeline
     /**
      * Get a Closure that represents a slice of the application onion.
      *
-     * @return \Closure
+     * @return Closure
      */
     protected function carry()
     {
@@ -64,10 +64,10 @@ class Pipeline extends BasePipeline
      * Handle the given exception.
      *
      * @param  mixed  $passable
-     * @param  \Exception  $e
+     * @param Exception $e
      * @return mixed
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function handleException($passable, Exception $e)
     {

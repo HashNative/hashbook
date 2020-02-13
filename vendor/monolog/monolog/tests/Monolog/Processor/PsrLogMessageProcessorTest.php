@@ -11,7 +11,10 @@
 
 namespace Monolog\Processor;
 
-class PsrLogMessageProcessorTest extends \PHPUnit_Framework_TestCase
+use PHPUnit_Framework_TestCase;
+use stdClass;
+
+class PsrLogMessageProcessorTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider getPairs
@@ -36,7 +39,7 @@ class PsrLogMessageProcessorTest extends \PHPUnit_Framework_TestCase
             array(null,     ''),
             array(true,     '1'),
             array(false,    ''),
-            array(new \stdClass, '[object stdClass]'),
+            array(new stdClass, '[object stdClass]'),
             array(array(), '[array]'),
         );
     }

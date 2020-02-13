@@ -9,6 +9,7 @@
 namespace Dompdf;
 
 use DOMDocument;
+use DOMElement;
 use DOMNode;
 use Dompdf\Adapter\CPDF;
 use DOMXPath;
@@ -589,7 +590,7 @@ class Dompdf
         $xpath = new DOMXPath($this->dom);
         $stylesheets = $xpath->query("//*[name() = 'link' or name() = 'style']");
 
-        /** @var \DOMElement $tag */
+        /** @var DOMElement $tag */
         foreach ($stylesheets as $tag) {
             switch (strtolower($tag->nodeName)) {
                 // load <link rel="STYLESHEET" ... /> tags
@@ -791,7 +792,7 @@ class Dompdf
 
                     // the hex-decoded text of the content property, duplicated from AbstrctFrameReflower::_parse_string
                     $decoded_string = preg_replace_callback("/\\\\([0-9a-fA-F]{0,6})/",
-                        function ($matches) { return \Dompdf\Helpers::unichr(hexdec($matches[1])); },
+                        function ($matches) { return Helpers::unichr(hexdec($matches[1])); },
                         $style->content);
                     $chars = mb_strtoupper($style->content) . mb_strtolower($style->content) . mb_strtoupper($decoded_string) . mb_strtolower($decoded_string);
                     $canvas->register_string_subset($style->font_family, $chars);
@@ -825,7 +826,7 @@ class Dompdf
             "keywords" => "Keywords",
             "description" => "Subject",
         );
-        /** @var \DOMElement $meta */
+        /** @var DOMElement $meta */
         foreach ($metas as $meta) {
             $name = mb_strtolower($meta->getAttribute("name"));
             $value = trim($meta->getAttribute("content"));

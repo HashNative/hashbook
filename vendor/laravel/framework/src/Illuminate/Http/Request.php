@@ -4,6 +4,9 @@ namespace Illuminate\Http;
 
 use Closure;
 use ArrayAccess;
+use Illuminate\Contracts\Session\Session;
+use Illuminate\Routing\Route;
+use Illuminate\Session\Store;
 use RuntimeException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -36,14 +39,14 @@ class Request extends SymfonyRequest implements Arrayable, ArrayAccess
     /**
      * The user resolver callback.
      *
-     * @var \Closure
+     * @var Closure
      */
     protected $userResolver;
 
     /**
      * The route resolver callback.
      *
-     * @var \Closure
+     * @var Closure
      */
     protected $routeResolver;
 
@@ -326,7 +329,7 @@ class Request extends SymfonyRequest implements Arrayable, ArrayAccess
     /**
      * Get the input source for the request.
      *
-     * @return \Symfony\Component\HttpFoundation\ParameterBag
+     * @return ParameterBag
      */
     protected function getInputSource()
     {
@@ -340,8 +343,8 @@ class Request extends SymfonyRequest implements Arrayable, ArrayAccess
     /**
      * Create an Illuminate request from a Symfony instance.
      *
-     * @param  \Symfony\Component\HttpFoundation\Request  $request
-     * @return \Illuminate\Http\Request
+     * @param SymfonyRequest $request
+     * @return Request
      */
     public static function createFromBase(SymfonyRequest $request)
     {
@@ -399,9 +402,9 @@ class Request extends SymfonyRequest implements Arrayable, ArrayAccess
     /**
      * Get the session associated with the request.
      *
-     * @return \Illuminate\Session\Store
+     * @return Store
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     public function session()
     {
@@ -415,7 +418,7 @@ class Request extends SymfonyRequest implements Arrayable, ArrayAccess
     /**
      * Set the session instance on the request.
      *
-     * @param  \Illuminate\Contracts\Session\Session  $session
+     * @param  Session  $session
      * @return void
      */
     public function setLaravelSession($session)
@@ -439,7 +442,7 @@ class Request extends SymfonyRequest implements Arrayable, ArrayAccess
      *
      * @param  string|null  $param
      *
-     * @return \Illuminate\Routing\Route|object|string
+     * @return Route|object|string
      */
     public function route($param = null)
     {
@@ -457,7 +460,7 @@ class Request extends SymfonyRequest implements Arrayable, ArrayAccess
      *
      * @return string
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     public function fingerprint()
     {
@@ -486,7 +489,7 @@ class Request extends SymfonyRequest implements Arrayable, ArrayAccess
     /**
      * Get the user resolver callback.
      *
-     * @return \Closure
+     * @return Closure
      */
     public function getUserResolver()
     {
@@ -498,7 +501,7 @@ class Request extends SymfonyRequest implements Arrayable, ArrayAccess
     /**
      * Set the user resolver callback.
      *
-     * @param  \Closure  $callback
+     * @param Closure $callback
      * @return $this
      */
     public function setUserResolver(Closure $callback)
@@ -511,7 +514,7 @@ class Request extends SymfonyRequest implements Arrayable, ArrayAccess
     /**
      * Get the route resolver callback.
      *
-     * @return \Closure
+     * @return Closure
      */
     public function getRouteResolver()
     {
@@ -523,7 +526,7 @@ class Request extends SymfonyRequest implements Arrayable, ArrayAccess
     /**
      * Set the route resolver callback.
      *
-     * @param  \Closure  $callback
+     * @param Closure $callback
      * @return $this
      */
     public function setRouteResolver(Closure $callback)

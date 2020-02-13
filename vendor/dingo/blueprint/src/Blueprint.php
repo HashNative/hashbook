@@ -2,6 +2,8 @@
 
 namespace Dingo\Blueprint;
 
+use Dingo\Blueprint\Annotation\Request;
+use Dingo\Blueprint\Annotation\Response;
 use ReflectionClass;
 use RuntimeException;
 use Illuminate\Support\Str;
@@ -15,14 +17,14 @@ class Blueprint
     /**
      * Simple annotation reader instance.
      *
-     * @var \Doctrine\Common\Annotations\SimpleAnnotationReader
+     * @var SimpleAnnotationReader
      */
     protected $reader;
 
     /**
      * Filesytsem instance.
      *
-     * @var \Illuminate\Filesystem\Filesystem
+     * @var Filesystem
      */
     protected $files;
 
@@ -36,8 +38,8 @@ class Blueprint
     /**
      * Create a new generator instance.
      *
-     * @param \Doctrine\Common\Annotations\SimpleAnnotationReader $reader
-     * @param \Illuminate\Filesystem\Filesystem                   $files
+     * @param SimpleAnnotationReader $reader
+     * @param Filesystem $files
      *
      * @return void
      */
@@ -73,7 +75,7 @@ class Blueprint
     /**
      * Generate documentation with the name, version and optional overview content.
      *
-     * @param \Illuminate\Support\Collection $controllers
+     * @param Collection $controllers
      * @param string                         $name
      * @param string                         $version
      * @param string                         $includePath
@@ -122,7 +124,7 @@ class Blueprint
     /**
      * Generate the documentation contents from the resources collection.
      *
-     * @param \Illuminate\Support\Collection $resources
+     * @param Collection $resources
      * @param string                         $name
      * @param string                         $overviewFile
      *
@@ -202,7 +204,7 @@ class Blueprint
      * Append the attributes subsection to a resource or action.
      *
      * @param string                         $contents
-     * @param \Illuminate\Support\Collection $attributes
+     * @param Collection $attributes
      * @param int                            $indent
      *
      * @return void
@@ -233,7 +235,7 @@ class Blueprint
      * Append the parameters subsection to a resource or action.
      *
      * @param string                         $contents
-     * @param \Illuminate\Support\Collection $parameters
+     * @param Collection $parameters
      *
      * @return void
      */
@@ -270,8 +272,8 @@ class Blueprint
      * Append a response subsection to an action.
      *
      * @param string                               $contents
-     * @param \Dingo\Blueprint\Annotation\Response $response
-     * @param \Dingo\Blueprint\RestResource            $resource
+     * @param Response $response
+     * @param RestResource $resource
      *
      * @return void
      */
@@ -300,8 +302,8 @@ class Blueprint
      * Append a request subsection to an action.
      *
      * @param string                              $contents
-     * @param \Dingo\Blueprint\Annotation\Request $request
-     * @param \Dingo\Blueprint\RestResource           $resource
+     * @param Request $request
+     * @param RestResource $resource
      *
      * @return void
      */

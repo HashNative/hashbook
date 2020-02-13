@@ -13,6 +13,7 @@ namespace Psy\Command;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use function sprintf;
 
 /**
  * Clear the Psy Shell.
@@ -44,6 +45,6 @@ HELP
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->write(\sprintf('%c[2J%c[0;0f', 27, 27));
+        $output->write(sprintf('%c[2J%c[0;0f', 27, 27));
     }
 }

@@ -2,7 +2,9 @@
 
 namespace Illuminate\Support\Facades;
 
+use Illuminate\Contracts\Foundation\Application;
 use Mockery;
+use Mockery\Expectation;
 use RuntimeException;
 use Mockery\MockInterface;
 
@@ -11,7 +13,7 @@ abstract class Facade
     /**
      * The application instance being facaded.
      *
-     * @var \Illuminate\Contracts\Foundation\Application
+     * @var Application
      */
     protected static $app;
 
@@ -39,7 +41,7 @@ abstract class Facade
     /**
      * Initiate a mock expectation on the facade.
      *
-     * @return \Mockery\Expectation
+     * @return Expectation
      */
     public static function shouldReceive()
     {
@@ -55,7 +57,7 @@ abstract class Facade
     /**
      * Create a fresh mock instance for the given class.
      *
-     * @return \Mockery\Expectation
+     * @return Expectation
      */
     protected static function createFreshMockInstance()
     {
@@ -69,7 +71,7 @@ abstract class Facade
     /**
      * Create a fresh mock instance for the given class.
      *
-     * @return \Mockery\MockInterface
+     * @return MockInterface
      */
     protected static function createMock()
     {
@@ -133,7 +135,7 @@ abstract class Facade
      *
      * @return string
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     protected static function getFacadeAccessor()
     {
@@ -183,7 +185,7 @@ abstract class Facade
     /**
      * Get the application instance behind the facade.
      *
-     * @return \Illuminate\Contracts\Foundation\Application
+     * @return Application
      */
     public static function getFacadeApplication()
     {
@@ -193,7 +195,7 @@ abstract class Facade
     /**
      * Set the application instance.
      *
-     * @param  \Illuminate\Contracts\Foundation\Application  $app
+     * @param  Application  $app
      * @return void
      */
     public static function setFacadeApplication($app)
@@ -208,7 +210,7 @@ abstract class Facade
      * @param  array   $args
      * @return mixed
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     public static function __callStatic($method, $args)
     {

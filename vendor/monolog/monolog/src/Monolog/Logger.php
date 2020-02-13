@@ -11,6 +11,9 @@
 
 namespace Monolog;
 
+use DateTime;
+use DateTimeZone;
+use LogicException;
 use Monolog\Handler\HandlerInterface;
 use Monolog\Handler\StreamHandler;
 use Psr\Log\LoggerInterface;
@@ -104,7 +107,7 @@ class Logger implements LoggerInterface, ResettableInterface
     );
 
     /**
-     * @var \DateTimeZone
+     * @var DateTimeZone
      */
     protected static $timezone;
 
@@ -193,7 +196,7 @@ class Logger implements LoggerInterface, ResettableInterface
     public function popHandler()
     {
         if (!$this->handlers) {
-            throw new \LogicException('You tried to pop from an empty handler stack.');
+            throw new LogicException('You tried to pop from an empty handler stack.');
         }
 
         return array_shift($this->handlers);
@@ -249,7 +252,7 @@ class Logger implements LoggerInterface, ResettableInterface
     public function popProcessor()
     {
         if (!$this->processors) {
-            throw new \LogicException('You tried to pop from an empty processor stack.');
+            throw new LogicException('You tried to pop from an empty processor stack.');
         }
 
         return array_shift($this->processors);
@@ -314,14 +317,14 @@ class Logger implements LoggerInterface, ResettableInterface
         }
 
         if (!static::$timezone) {
-            static::$timezone = new \DateTimeZone(date_default_timezone_get() ?: 'UTC');
+            static::$timezone = new DateTimeZone(date_default_timezone_get() ?: 'UTC');
         }
 
         // php7.1+ always has microseconds enabled, so we do not need this hack
         if ($this->microsecondTimestamps && PHP_VERSION_ID < 70100) {
-            $ts = \DateTime::createFromFormat('U.u', sprintf('%.6F', microtime(true)), static::$timezone);
+            $ts = DateTime::createFromFormat('U.u', sprintf('%.6F', microtime(true)), static::$timezone);
         } else {
-            $ts = new \DateTime(null, static::$timezone);
+            $ts = new DateTime(null, static::$timezone);
         }
         $ts->setTimezone(static::$timezone);
 
@@ -782,9 +785,9 @@ class Logger implements LoggerInterface, ResettableInterface
      *
      * This is stored globally for all Logger instances
      *
-     * @param \DateTimeZone $tz Timezone object
+     * @param DateTimeZone $tz Timezone object
      */
-    public static function setTimezone(\DateTimeZone $tz)
+    public static function setTimezone(DateTimeZone $tz)
     {
         self::$timezone = $tz;
     }

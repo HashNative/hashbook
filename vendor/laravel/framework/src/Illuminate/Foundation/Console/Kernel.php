@@ -4,6 +4,17 @@ namespace Illuminate\Foundation\Console;
 
 use Closure;
 use Exception;
+use Illuminate\Foundation\Bootstrap\BootProviders;
+use Illuminate\Foundation\Bootstrap\HandleExceptions;
+use Illuminate\Foundation\Bootstrap\LoadConfiguration;
+use Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables;
+use Illuminate\Foundation\Bootstrap\RegisterFacades;
+use Illuminate\Foundation\Bootstrap\RegisterProviders;
+use Illuminate\Foundation\Bootstrap\SetRequestForConsole;
+use Illuminate\Foundation\Bus\PendingDispatch;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 use Throwable;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Contracts\Events\Dispatcher;
@@ -19,21 +30,21 @@ class Kernel implements KernelContract
     /**
      * The application implementation.
      *
-     * @var \Illuminate\Contracts\Foundation\Application
+     * @var Application
      */
     protected $app;
 
     /**
      * The event dispatcher implementation.
      *
-     * @var \Illuminate\Contracts\Events\Dispatcher
+     * @var Dispatcher
      */
     protected $events;
 
     /**
      * The Artisan application instance.
      *
-     * @var \Illuminate\Console\Application
+     * @var Artisan
      */
     protected $artisan;
 
@@ -57,20 +68,20 @@ class Kernel implements KernelContract
      * @var array
      */
     protected $bootstrappers = [
-        \Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables::class,
-        \Illuminate\Foundation\Bootstrap\LoadConfiguration::class,
-        \Illuminate\Foundation\Bootstrap\HandleExceptions::class,
-        \Illuminate\Foundation\Bootstrap\RegisterFacades::class,
-        \Illuminate\Foundation\Bootstrap\SetRequestForConsole::class,
-        \Illuminate\Foundation\Bootstrap\RegisterProviders::class,
-        \Illuminate\Foundation\Bootstrap\BootProviders::class,
+        LoadEnvironmentVariables::class,
+        LoadConfiguration::class,
+        HandleExceptions::class,
+        RegisterFacades::class,
+        SetRequestForConsole::class,
+        RegisterProviders::class,
+        BootProviders::class,
     ];
 
     /**
      * Create a new console kernel instance.
      *
-     * @param  \Illuminate\Contracts\Foundation\Application  $app
-     * @param  \Illuminate\Contracts\Events\Dispatcher  $events
+     * @param Application $app
+     * @param Dispatcher $events
      * @return void
      */
     public function __construct(Application $app, Dispatcher $events)
@@ -104,8 +115,8 @@ class Kernel implements KernelContract
     /**
      * Run the console application.
      *
-     * @param  \Symfony\Component\Console\Input\InputInterface  $input
-     * @param  \Symfony\Component\Console\Output\OutputInterface  $output
+     * @param  InputInterface  $input
+     * @param  OutputInterface  $output
      * @return int
      */
     public function handle($input, $output = null)
@@ -140,7 +151,7 @@ class Kernel implements KernelContract
     /**
      * Terminate the application.
      *
-     * @param  \Symfony\Component\Console\Input\InputInterface  $input
+     * @param  InputInterface  $input
      * @param  int  $status
      * @return void
      */
@@ -152,7 +163,7 @@ class Kernel implements KernelContract
     /**
      * Define the application's command schedule.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     * @param Schedule $schedule
      * @return void
      */
     protected function schedule(Schedule $schedule)
@@ -175,7 +186,7 @@ class Kernel implements KernelContract
      *
      * @param  string  $signature
      * @param  Closure  $callback
-     * @return \Illuminate\Foundation\Console\ClosureCommand
+     * @return ClosureCommand
      */
     public function command($signature, Closure $callback)
     {
@@ -191,7 +202,7 @@ class Kernel implements KernelContract
     /**
      * Register the given command with the console application.
      *
-     * @param  \Symfony\Component\Console\Command\Command  $command
+     * @param  Command  $command
      * @return void
      */
     public function registerCommand($command)
@@ -204,7 +215,7 @@ class Kernel implements KernelContract
      *
      * @param  string  $command
      * @param  array  $parameters
-     * @param  \Symfony\Component\Console\Output\OutputInterface  $outputBuffer
+     * @param  OutputInterface  $outputBuffer
      * @return int
      */
     public function call($command, array $parameters = [], $outputBuffer = null)
@@ -225,7 +236,7 @@ class Kernel implements KernelContract
      *
      * @param  string  $command
      * @param  array   $parameters
-     * @return \Illuminate\Foundation\Bus\PendingDispatch
+     * @return PendingDispatch
      */
     public function queue($command, array $parameters = [])
     {
@@ -276,7 +287,7 @@ class Kernel implements KernelContract
     /**
      * Get the Artisan application instance.
      *
-     * @return \Illuminate\Console\Application
+     * @return Artisan
      */
     protected function getArtisan()
     {
@@ -291,7 +302,7 @@ class Kernel implements KernelContract
     /**
      * Set the Artisan application instance.
      *
-     * @param  \Illuminate\Console\Application  $artisan
+     * @param Artisan $artisan
      * @return void
      */
     public function setArtisan($artisan)
@@ -312,7 +323,7 @@ class Kernel implements KernelContract
     /**
      * Report the exception to the exception handler.
      *
-     * @param  \Exception  $e
+     * @param Exception $e
      * @return void
      */
     protected function reportException(Exception $e)
@@ -323,8 +334,8 @@ class Kernel implements KernelContract
     /**
      * Report the exception to the exception handler.
      *
-     * @param  \Symfony\Component\Console\Output\OutputInterface  $output
-     * @param  \Exception  $e
+     * @param  OutputInterface  $output
+     * @param Exception $e
      * @return void
      */
     protected function renderException($output, Exception $e)

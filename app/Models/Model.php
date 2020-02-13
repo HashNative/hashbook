@@ -4,7 +4,9 @@ namespace App\Models;
 
 use App\Scopes\Company;
 use EloquentFilter\Filterable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model as Eloquent;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Kyslik\ColumnSortable\Sortable;
 use Request;
@@ -31,7 +33,7 @@ class Model extends Eloquent
     /**
      * Global company relation.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function company()
     {
@@ -66,10 +68,10 @@ class Model extends Eloquent
     /**
      * Scope to only include company data.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param Builder $query
      * @param $company_id
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public function scopeCompanyId($query, $company_id)
     {
@@ -79,10 +81,10 @@ class Model extends Eloquent
     /**
      * Scope to get all rows filtered, sorted and paginated.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param Builder $query
      * @param $sort
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public function scopeCollect($query, $sort = 'name')
     {
@@ -97,8 +99,8 @@ class Model extends Eloquent
     /**
      * Scope to only include active models.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @param Builder $query
+     * @return Builder
      */
     public function scopeEnabled($query)
     {
@@ -108,8 +110,8 @@ class Model extends Eloquent
     /**
      * Scope to only include passive models.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @param Builder $query
+     * @return Builder
      */
     public function scopeDisabled($query)
     {
@@ -119,9 +121,9 @@ class Model extends Eloquent
     /**
      * Scope to only include reconciled models.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param Builder $query
      * @param $value
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public function scopeReconciled($query, $value = 1)
     {

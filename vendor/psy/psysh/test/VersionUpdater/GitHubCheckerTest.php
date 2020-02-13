@@ -11,13 +11,16 @@
 
 namespace Psy\Test\VersionUpdater;
 
+use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 use Psy\Shell;
+use function json_decode;
 
-class GitHubCheckerTest extends \PHPUnit\Framework\TestCase
+class GitHubCheckerTest extends TestCase
 {
     /**
      * @dataProvider malformedResults
-     * @expectedException \InvalidArgumentException
+     * @expectedException InvalidArgumentException
      * @expectedExceptionMessage Unable to check for updates
      *
      * @param mixed $input
@@ -52,13 +55,13 @@ class GitHubCheckerTest extends \PHPUnit\Framework\TestCase
     public function jsonResults()
     {
         return [
-            [false, \json_decode('{"tag_name":"v9.0.0"}')],
-            [true, \json_decode('{"tag_name":"v' . Shell::VERSION . '"}')],
-            [true, \json_decode('{"tag_name":"v0.0.1"}')],
-            [true, \json_decode('{"tag_name":"v0.4.1-alpha"}')],
-            [true, \json_decode('{"tag_name":"v0.4.2-beta3"}')],
-            [true, \json_decode('{"tag_name":"v0.0.1"}')],
-            [true, \json_decode('{"tag_name":""}')],
+            [false, json_decode('{"tag_name":"v9.0.0"}')],
+            [true, json_decode('{"tag_name":"v' . Shell::VERSION . '"}')],
+            [true, json_decode('{"tag_name":"v0.0.1"}')],
+            [true, json_decode('{"tag_name":"v0.4.1-alpha"}')],
+            [true, json_decode('{"tag_name":"v0.4.2-beta3"}')],
+            [true, json_decode('{"tag_name":"v0.0.1"}')],
+            [true, json_decode('{"tag_name":""}')],
         ];
     }
 
@@ -71,12 +74,12 @@ class GitHubCheckerTest extends \PHPUnit\Framework\TestCase
             [null],
             [false],
             [true],
-            [\json_decode('{"foo":"bar"}')],
-            [\json_decode('{}')],
-            [\json_decode('[]')],
+            [json_decode('{"foo":"bar"}')],
+            [json_decode('{}')],
+            [json_decode('[]')],
             [[]],
-            [\json_decode('{"tag_name":false"}')],
-            [\json_decode('{"tag_name":true"}')],
+            [json_decode('{"tag_name":false"}')],
+            [json_decode('{"tag_name":true"}')],
         ];
     }
 }

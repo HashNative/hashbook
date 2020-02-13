@@ -2,6 +2,7 @@
 
 namespace Illuminate\Foundation\Testing\Concerns;
 
+use Illuminate\Database\Connection;
 use PHPUnit_Framework_Constraint_Not as ReverseConstraint;
 use Illuminate\Foundation\Testing\Constraints\HasInDatabase;
 use Illuminate\Foundation\Testing\Constraints\SoftDeletedInDatabase;
@@ -65,7 +66,7 @@ trait InteractsWithDatabase
      * Get the database connection.
      *
      * @param  string|null  $connection
-     * @return \Illuminate\Database\Connection
+     * @return Connection
      */
     protected function getConnection($connection = null)
     {

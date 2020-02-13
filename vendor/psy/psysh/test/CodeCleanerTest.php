@@ -11,9 +11,12 @@
 
 namespace Psy\Test;
 
+use PHPUnit\Framework\TestCase;
 use Psy\CodeCleaner;
+use Psy\Exception\ParseErrorException;
+use function defined;
 
-class CodeCleanerTest extends \PHPUnit\Framework\TestCase
+class CodeCleanerTest extends TestCase
 {
     /**
      * @dataProvider semicolonCodeProvider
@@ -79,7 +82,7 @@ class CodeCleanerTest extends \PHPUnit\Framework\TestCase
      */
     public function testMoreUnclosedStatements(array $lines)
     {
-        if (\defined('HHVM_VERSION')) {
+        if (defined('HHVM_VERSION')) {
             $this->markTestSkipped('HHVM not supported.');
         }
 
@@ -102,7 +105,7 @@ class CodeCleanerTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider invalidStatementsProvider
-     * @expectedException \Psy\Exception\ParseErrorException
+     * @expectedException ParseErrorException
      */
     public function testInvalidStatementsThrowParseErrors($code)
     {

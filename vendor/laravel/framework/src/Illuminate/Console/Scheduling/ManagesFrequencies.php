@@ -3,6 +3,8 @@
 namespace Illuminate\Console\Scheduling;
 
 use Carbon\Carbon;
+use Closure;
+use DateTimeZone;
 
 trait ManagesFrequencies
 {
@@ -48,7 +50,7 @@ trait ManagesFrequencies
      *
      * @param  string  $startTime
      * @param  string  $endTime
-     * @return \Closure
+     * @return Closure
      */
     private function inTimeInterval($startTime, $endTime)
     {
@@ -373,7 +375,7 @@ trait ManagesFrequencies
     /**
      * Set the timezone the date should be evaluated on.
      *
-     * @param  \DateTimeZone|string  $timezone
+     * @param  DateTimeZone|string  $timezone
      * @return $this
      */
     public function timezone($timezone)

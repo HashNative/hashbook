@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
- * @mixin \Illuminate\Database\Eloquent\Builder
+ * @mixin Builder
  */
 class MorphTo extends BelongsTo
 {
@@ -22,7 +22,7 @@ class MorphTo extends BelongsTo
     /**
      * The models whose relations are being eager loaded.
      *
-     * @var \Illuminate\Database\Eloquent\Collection
+     * @var Collection
      */
     protected $models;
 
@@ -43,8 +43,8 @@ class MorphTo extends BelongsTo
     /**
      * Create a new morph to relationship instance.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  \Illuminate\Database\Eloquent\Model  $parent
+     * @param Builder $query
+     * @param Model $parent
      * @param  string  $foreignKey
      * @param  string  $ownerKey
      * @param  string  $type
@@ -72,7 +72,7 @@ class MorphTo extends BelongsTo
     /**
      * Build a dictionary with the models.
      *
-     * @param  \Illuminate\Database\Eloquent\Collection  $models
+     * @param Collection $models
      * @return void
      */
     protected function buildDictionary(Collection $models)
@@ -114,7 +114,7 @@ class MorphTo extends BelongsTo
      * Get all of the relation results for a type.
      *
      * @param  string  $type
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return Collection
      */
     protected function getResultsByType($type)
     {
@@ -146,7 +146,7 @@ class MorphTo extends BelongsTo
      * Create a new model instance by type.
      *
      * @param  string  $type
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return Model
      */
     public function createModelByType($type)
     {
@@ -159,7 +159,7 @@ class MorphTo extends BelongsTo
      * Match the eagerly loaded results to their parents.
      *
      * @param  array   $models
-     * @param  \Illuminate\Database\Eloquent\Collection  $results
+     * @param Collection $results
      * @param  string  $relation
      * @return array
      */
@@ -172,7 +172,7 @@ class MorphTo extends BelongsTo
      * Match the results for a given type to their parents.
      *
      * @param  string  $type
-     * @param  \Illuminate\Database\Eloquent\Collection  $results
+     * @param Collection $results
      * @return void
      */
     protected function matchToMorphParents($type, Collection $results)
@@ -189,8 +189,8 @@ class MorphTo extends BelongsTo
     /**
      * Associate the model instance to the given parent.
      *
-     * @param  \Illuminate\Database\Eloquent\Model  $model
-     * @return \Illuminate\Database\Eloquent\Model
+     * @param Model $model
+     * @return Model
      */
     public function associate($model)
     {
@@ -204,7 +204,7 @@ class MorphTo extends BelongsTo
     /**
      * Dissociate previously associated model from the given parent.
      *
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return Model
      */
     public function dissociate()
     {
@@ -238,8 +238,8 @@ class MorphTo extends BelongsTo
     /**
      * Replay stored macro calls on the actual related instance.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @param Builder $query
+     * @return Builder
      */
     protected function replayMacros(Builder $query)
     {

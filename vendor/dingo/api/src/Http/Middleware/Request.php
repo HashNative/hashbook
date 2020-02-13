@@ -3,6 +3,8 @@
 namespace Dingo\Api\Http\Middleware;
 
 use Closure;
+use Dingo\Api\Http\Response;
+use Dingo\Api\Http\Validator;
 use Exception;
 use Dingo\Api\Routing\Router;
 use Laravel\Lumen\Application;
@@ -28,28 +30,28 @@ class Request
     /**
      * Exception handler instance.
      *
-     * @var \Dingo\Api\Contract\Debug\ExceptionHandler
+     * @var ExceptionHandler
      */
     protected $exception;
 
     /**
      * Router instance.
      *
-     * @var \Dingo\Api\Routing\Router
+     * @var Router
      */
     protected $router;
 
     /**
      * HTTP validator instance.
      *
-     * @var \Dingo\Api\Http\Validator
+     * @var Validator
      */
     protected $validator;
 
     /**
      * Event dispatcher instance.
      *
-     * @var \Illuminate\Events\Dispatcher
+     * @var EventDispatcher
      */
     protected $events;
 
@@ -64,10 +66,10 @@ class Request
      * Create a new request middleware instance.
      *
      * @param \Illuminate\Contracts\Foundation\Application $app
-     * @param \Dingo\Api\Contract\Debug\ExceptionHandler   $exception
-     * @param \Dingo\Api\Routing\Router                    $router
-     * @param \Dingo\Api\Http\RequestValidator             $validator
-     * @param \Illuminate\Events\Dispatcher                $events
+     * @param ExceptionHandler $exception
+     * @param Router $router
+     * @param RequestValidator $validator
+     * @param EventDispatcher $events
      *
      * @return void
      */
@@ -84,7 +86,7 @@ class Request
      * Handle an incoming request.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Closure                 $next
+     * @param Closure $next
      *
      * @return mixed
      */
@@ -114,9 +116,9 @@ class Request
     /**
      * Send the request through the Dingo router.
      *
-     * @param \Dingo\Api\Http\Request $request
+     * @param HttpRequest $request
      *
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     protected function sendRequestThroughRouter(HttpRequest $request)
     {
@@ -190,7 +192,7 @@ class Request
     /**
      * Gather the middlewares for the route.
      *
-     * @param \Dingo\Api\Http\Request $request
+     * @param HttpRequest $request
      *
      * @return array
      */

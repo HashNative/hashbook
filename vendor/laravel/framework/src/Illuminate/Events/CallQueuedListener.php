@@ -2,6 +2,7 @@
 
 namespace Illuminate\Events;
 
+use Exception;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Queue\Job;
 use Illuminate\Queue\InteractsWithQueue;
@@ -64,7 +65,7 @@ class CallQueuedListener implements ShouldQueue
     /**
      * Handle the queued job.
      *
-     * @param  \Illuminate\Container\Container  $container
+     * @param Container $container
      * @return void
      */
     public function handle(Container $container)
@@ -83,7 +84,7 @@ class CallQueuedListener implements ShouldQueue
     /**
      * Set the job instance of the given class if necessary.
      *
-     * @param  \Illuminate\Contracts\Queue\Job  $job
+     * @param Job $job
      * @param  mixed  $instance
      * @return mixed
      */
@@ -101,7 +102,7 @@ class CallQueuedListener implements ShouldQueue
      *
      * The event instance and the exception will be passed.
      *
-     * @param  \Exception  $e
+     * @param  Exception  $e
      * @return void
      */
     public function failed($e)

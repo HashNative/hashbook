@@ -1,5 +1,16 @@
 <?php
 
+use Illuminate\Broadcasting\PendingBroadcast;
+use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Contracts\Auth\StatefulGuard;
+use Illuminate\Contracts\Logging\Log;
+use Illuminate\Contracts\Translation\Translator;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Database\Eloquent\FactoryBuilder;
+use Illuminate\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\HtmlString;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Bus\Dispatcher;
@@ -12,6 +23,10 @@ use Illuminate\Contracts\Cookie\Factory as CookieFactory;
 use Illuminate\Database\Eloquent\Factory as EloquentFactory;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 use Illuminate\Contracts\Broadcasting\Factory as BroadcastFactory;
+use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 if (! function_exists('abort')) {
     /**
@@ -23,7 +38,7 @@ if (! function_exists('abort')) {
      * @return void
      *
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @throws NotFoundHttpException
      */
     function abort($code, $message = '', array $headers = [])
     {
@@ -42,7 +57,7 @@ if (! function_exists('abort_if')) {
      * @return void
      *
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @throws NotFoundHttpException
      */
     function abort_if($boolean, $code, $message = '', array $headers = [])
     {
@@ -63,7 +78,7 @@ if (! function_exists('abort_unless')) {
      * @return void
      *
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @throws NotFoundHttpException
      */
     function abort_unless($boolean, $code, $message = '', array $headers = [])
     {
@@ -94,7 +109,7 @@ if (! function_exists('app')) {
      *
      * @param  string  $abstract
      * @param  array   $parameters
-     * @return mixed|\Illuminate\Foundation\Application
+     * @return mixed|Application
      */
     function app($abstract = null, array $parameters = [])
     {
@@ -140,7 +155,7 @@ if (! function_exists('auth')) {
      * Get the available auth instance.
      *
      * @param  string|null  $guard
-     * @return \Illuminate\Contracts\Auth\Factory|\Illuminate\Contracts\Auth\Guard|\Illuminate\Contracts\Auth\StatefulGuard
+     * @return AuthFactory|Guard|StatefulGuard
      */
     function auth($guard = null)
     {
@@ -159,7 +174,7 @@ if (! function_exists('back')) {
      * @param  int    $status
      * @param  array  $headers
      * @param  mixed  $fallback
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     function back($status = 302, $headers = [], $fallback = false)
     {
@@ -199,7 +214,7 @@ if (! function_exists('broadcast')) {
      * Begin broadcasting an event.
      *
      * @param  mixed|null  $event
-     * @return \Illuminate\Broadcasting\PendingBroadcast|void
+     * @return PendingBroadcast|void
      */
     function broadcast($event = null)
     {
@@ -216,7 +231,7 @@ if (! function_exists('cache')) {
      * @param  dynamic  key|key,default|data,expiration|null
      * @return mixed
      *
-     * @throws \Exception
+     * @throws Exception
      */
     function cache()
     {
@@ -294,7 +309,7 @@ if (! function_exists('cookie')) {
      * @param  string  $domain
      * @param  bool    $secure
      * @param  bool    $httpOnly
-     * @return \Symfony\Component\HttpFoundation\Cookie
+     * @return Cookie
      */
     function cookie($name = null, $value = null, $minutes = 0, $path = null, $domain = null, $secure = false, $httpOnly = true)
     {
@@ -312,7 +327,7 @@ if (! function_exists('csrf_field')) {
     /**
      * Generate a CSRF token form field.
      *
-     * @return \Illuminate\Support\HtmlString
+     * @return HtmlString
      */
     function csrf_field()
     {
@@ -326,7 +341,7 @@ if (! function_exists('csrf_token')) {
      *
      * @return string
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     function csrf_token()
     {
@@ -387,7 +402,7 @@ if (! function_exists('elixir')) {
      * @param  string  $buildDirectory
      * @return string
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     function elixir($file, $buildDirectory = 'build')
     {
@@ -452,7 +467,7 @@ if (! function_exists('factory')) {
      * Create a model factory builder for a given class, name, and amount.
      *
      * @param  dynamic  class|class,name|class,amount|class,name,amount
-     * @return \Illuminate\Database\Eloquent\FactoryBuilder
+     * @return FactoryBuilder
      */
     function factory()
     {
@@ -490,7 +505,7 @@ if (! function_exists('logger')) {
      *
      * @param  string  $message
      * @param  array  $context
-     * @return \Illuminate\Contracts\Logging\Log|null
+     * @return Log|null
      */
     function logger($message = null, array $context = [])
     {
@@ -507,7 +522,7 @@ if (! function_exists('method_field')) {
      * Generate a form field to spoof the HTTP verb used by forms.
      *
      * @param  string  $method
-     * @return \Illuminate\Support\HtmlString
+     * @return HtmlString
      */
     function method_field($method)
     {
@@ -521,9 +536,9 @@ if (! function_exists('mix')) {
      *
      * @param  string  $path
      * @param  string  $manifestDirectory
-     * @return \Illuminate\Support\HtmlString
+     * @return HtmlString
      *
-     * @throws \Exception
+     * @throws Exception
      */
     function mix($path, $manifestDirectory = '')
     {
@@ -585,7 +600,7 @@ if (! function_exists('policy')) {
      * @param  object|string  $class
      * @return mixed
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     function policy($class)
     {
@@ -614,7 +629,7 @@ if (! function_exists('redirect')) {
      * @param  int     $status
      * @param  array   $headers
      * @param  bool    $secure
-     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
+     * @return Redirector|RedirectResponse
      */
     function redirect($to = null, $status = 302, $headers = [], $secure = null)
     {
@@ -632,7 +647,7 @@ if (! function_exists('request')) {
      *
      * @param  array|string  $key
      * @param  mixed   $default
-     * @return \Illuminate\Http\Request|string|array
+     * @return Request|string|array
      */
     function request($key = null, $default = null)
     {
@@ -681,7 +696,7 @@ if (! function_exists('response')) {
      * @param  string  $content
      * @param  int     $status
      * @param  array   $headers
-     * @return \Symfony\Component\HttpFoundation\Response|\Illuminate\Contracts\Routing\ResponseFactory
+     * @return Response|ResponseFactory
      */
     function response($content = '', $status = 200, array $headers = [])
     {
@@ -781,7 +796,7 @@ if (! function_exists('trans')) {
      * @param  string  $key
      * @param  array   $replace
      * @param  string  $locale
-     * @return \Illuminate\Contracts\Translation\Translator|string|array|null
+     * @return Translator|string|array|null
      */
     function trans($key = null, $replace = [], $locale = null)
     {
@@ -798,7 +813,7 @@ if (! function_exists('trans_choice')) {
      * Translates the given message based on a count.
      *
      * @param  string  $key
-     * @param  int|array|\Countable  $number
+     * @param  int|array|Countable $number
      * @param  array   $replace
      * @param  string  $locale
      * @return string
@@ -816,7 +831,7 @@ if (! function_exists('__')) {
      * @param  string  $key
      * @param  array  $replace
      * @param  string  $locale
-     * @return \Illuminate\Contracts\Translation\Translator|string
+     * @return Translator|string
      */
     function __($key = null, $replace = [], $locale = null)
     {
@@ -831,7 +846,7 @@ if (! function_exists('url')) {
      * @param  string  $path
      * @param  mixed   $parameters
      * @param  bool    $secure
-     * @return \Illuminate\Contracts\Routing\UrlGenerator|string
+     * @return UrlGenerator|string
      */
     function url($path = null, $parameters = [], $secure = null)
     {
@@ -851,7 +866,7 @@ if (! function_exists('validator')) {
      * @param  array  $rules
      * @param  array  $messages
      * @param  array  $customAttributes
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @return Validator
      */
     function validator(array $data = [], array $rules = [], array $messages = [], array $customAttributes = [])
     {
@@ -872,7 +887,7 @@ if (! function_exists('view')) {
      * @param  string  $view
      * @param  array   $data
      * @param  array   $mergeData
-     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     * @return View|ViewFactory
      */
     function view($view = null, $data = [], $mergeData = [])
     {

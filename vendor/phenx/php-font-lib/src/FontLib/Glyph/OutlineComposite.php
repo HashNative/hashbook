@@ -9,6 +9,8 @@
 
 namespace FontLib\Glyph;
 
+use FontLib\Table\Type\glyf;
+
 /**
  * Composite glyph outline
  *
@@ -220,7 +222,7 @@ class OutlineComposite extends Outline {
   public function getSVGContours() {
     $contours = array();
 
-    /** @var \FontLib\Table\Type\glyf $glyph_data */
+    /** @var glyf $glyph_data */
     $glyph_data = $this->getFont()->getTableObject("glyf");
 
     /** @var Outline[] $glyphs */

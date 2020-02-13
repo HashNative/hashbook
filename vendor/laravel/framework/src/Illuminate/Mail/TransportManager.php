@@ -22,7 +22,7 @@ class TransportManager extends Manager
     /**
      * Create an instance of the SMTP Swift Transport driver.
      *
-     * @return \Swift_SmtpTransport
+     * @return SmtpTransport
      */
     protected function createSmtpDriver()
     {
@@ -61,7 +61,7 @@ class TransportManager extends Manager
     /**
      * Create an instance of the Sendmail Swift Transport driver.
      *
-     * @return \Swift_SendmailTransport
+     * @return SendmailTransport
      */
     protected function createSendmailDriver()
     {
@@ -73,7 +73,7 @@ class TransportManager extends Manager
     /**
      * Create an instance of the Amazon SES Swift Transport driver.
      *
-     * @return \Swift_SendmailTransport
+     * @return SendmailTransport
      */
     protected function createSesDriver()
     {
@@ -104,7 +104,7 @@ class TransportManager extends Manager
     /**
      * Create an instance of the Mail Swift Transport driver.
      *
-     * @return \Swift_MailTransport
+     * @return MailTransport
      */
     protected function createMailDriver()
     {
@@ -114,7 +114,7 @@ class TransportManager extends Manager
     /**
      * Create an instance of the Mailgun Swift Transport driver.
      *
-     * @return \Illuminate\Mail\Transport\MailgunTransport
+     * @return MailgunTransport
      */
     protected function createMailgunDriver()
     {
@@ -129,7 +129,7 @@ class TransportManager extends Manager
     /**
      * Create an instance of the Mandrill Swift Transport driver.
      *
-     * @return \Illuminate\Mail\Transport\MandrillTransport
+     * @return MandrillTransport
      */
     protected function createMandrillDriver()
     {
@@ -143,7 +143,7 @@ class TransportManager extends Manager
     /**
      * Create an instance of the SparkPost Swift Transport driver.
      *
-     * @return \Illuminate\Mail\Transport\SparkPostTransport
+     * @return SparkPostTransport
      */
     protected function createSparkPostDriver()
     {
@@ -157,7 +157,7 @@ class TransportManager extends Manager
     /**
      * Create an instance of the Log Swift Transport driver.
      *
-     * @return \Illuminate\Mail\Transport\LogTransport
+     * @return LogTransport
      */
     protected function createLogDriver()
     {
@@ -167,7 +167,7 @@ class TransportManager extends Manager
     /**
      * Create an instance of the Array Swift Transport Driver.
      *
-     * @return \Illuminate\Mail\Transport\ArrayTransport
+     * @return ArrayTransport
      */
     protected function createArrayDriver()
     {
@@ -178,7 +178,7 @@ class TransportManager extends Manager
      * Get a fresh Guzzle HTTP client instance.
      *
      * @param  array  $config
-     * @return \GuzzleHttp\Client
+     * @return HttpClient
      */
     protected function guzzle($config)
     {

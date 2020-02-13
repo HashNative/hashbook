@@ -2,6 +2,7 @@
 
 namespace Illuminate\Mail;
 
+use DateTime;
 use ReflectionClass;
 use ReflectionProperty;
 use BadMethodCallException;
@@ -108,7 +109,7 @@ class Mailable implements MailableContract
     /**
      * Send the message using the given mailer.
      *
-     * @param  \Illuminate\Contracts\Mail\Mailer  $mailer
+     * @param MailerContract $mailer
      * @return void
      */
     public function send(MailerContract $mailer)
@@ -127,7 +128,7 @@ class Mailable implements MailableContract
     /**
      * Queue the message for sending.
      *
-     * @param  \Illuminate\Contracts\Queue\Factory  $queue
+     * @param Queue $queue
      * @return mixed
      */
     public function queue(Queue $queue)
@@ -148,7 +149,7 @@ class Mailable implements MailableContract
     /**
      * Deliver the queued message after the given delay.
      *
-     * @param  \DateTime|int  $delay
+     * @param  DateTime|int  $delay
      * @param  Queue  $queue
      * @return mixed
      */
@@ -221,7 +222,7 @@ class Mailable implements MailableContract
     /**
      * Build the text view for a Markdown message.
      *
-     * @param  \Illuminate\Mail\Markdown  $markdown
+     * @param Markdown $markdown
      * @param  array  $data
      * @return string
      */
@@ -235,7 +236,7 @@ class Mailable implements MailableContract
     /**
      * Add the sender to the message.
      *
-     * @param  \Illuminate\Mail\Message  $message
+     * @param Message $message
      * @return $this
      */
     protected function buildFrom($message)
@@ -250,7 +251,7 @@ class Mailable implements MailableContract
     /**
      * Add all of the recipients to the message.
      *
-     * @param  \Illuminate\Mail\Message  $message
+     * @param Message $message
      * @return $this
      */
     protected function buildRecipients($message)
@@ -267,7 +268,7 @@ class Mailable implements MailableContract
     /**
      * Set the subject for the message.
      *
-     * @param  \Illuminate\Mail\Message  $message
+     * @param Message $message
      * @return $this
      */
     protected function buildSubject($message)
@@ -284,7 +285,7 @@ class Mailable implements MailableContract
     /**
      * Add all of the attachments to the message.
      *
-     * @param  \Illuminate\Mail\Message  $message
+     * @param Message $message
      * @return $this
      */
     protected function buildAttachments($message)
@@ -305,7 +306,7 @@ class Mailable implements MailableContract
     /**
      * Run the callbacks for the message.
      *
-     * @param  \Illuminate\Mail\Message  $message
+     * @param Message $message
      * @return $this
      */
     protected function runCallbacks($message)
@@ -652,7 +653,7 @@ class Mailable implements MailableContract
      * @param  array   $parameters
      * @return $this
      *
-     * @throws \BadMethodCallException
+     * @throws BadMethodCallException
      */
     public function __call($method, $parameters)
     {

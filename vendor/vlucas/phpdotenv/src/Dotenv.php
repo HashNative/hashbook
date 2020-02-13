@@ -2,6 +2,7 @@
 
 namespace Dotenv;
 
+use Dotenv\Exception\InvalidFileException;
 use Dotenv\Exception\InvalidPathException;
 
 /**
@@ -22,7 +23,7 @@ class Dotenv
     /**
      * The loader instance.
      *
-     * @var \Dotenv\Loader|null
+     * @var Loader|null
      */
     protected $loader;
 
@@ -43,9 +44,9 @@ class Dotenv
     /**
      * Load environment file in given directory.
      *
-     * @throws \Dotenv\Exception\InvalidPathException|\Dotenv\Exception\InvalidFileException
-     *
      * @return array
+     *@throws InvalidPathException|InvalidFileException
+     *
      */
     public function load()
     {
@@ -55,7 +56,7 @@ class Dotenv
     /**
      * Load environment file in given directory, suppress InvalidPathException.
      *
-     * @throws \Dotenv\Exception\InvalidFileException
+     * @throws InvalidFileException
      *
      * @return array
      */
@@ -72,9 +73,9 @@ class Dotenv
     /**
      * Load environment file in given directory.
      *
-     * @throws \Dotenv\Exception\InvalidPathException|\Dotenv\Exception\InvalidFileException
-     *
      * @return array
+     *@throws InvalidPathException|InvalidFileException
+     *
      */
     public function overload()
     {
@@ -105,9 +106,9 @@ class Dotenv
      *
      * @param bool $overload
      *
-     * @throws \Dotenv\Exception\InvalidPathException|\Dotenv\Exception\InvalidFileException
-     *
      * @return array
+     *@throws InvalidPathException|InvalidFileException
+     *
      */
     protected function loadData($overload = false)
     {
@@ -119,7 +120,7 @@ class Dotenv
      *
      * @param string|string[] $variable
      *
-     * @return \Dotenv\Validator
+     * @return Validator
      */
     public function required($variable)
     {

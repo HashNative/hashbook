@@ -11,10 +11,11 @@
 
 namespace Psy\Test\Reflection;
 
+use PHPUnit\Framework\TestCase;
 use Psy\Reflection\ReflectionLanguageConstruct;
 use Psy\Reflection\ReflectionLanguageConstructParameter;
 
-class ReflectionLanguageConstructParameterTest extends \PHPUnit\Framework\TestCase
+class ReflectionLanguageConstructParameterTest extends TestCase
 {
     public function testOptions()
     {

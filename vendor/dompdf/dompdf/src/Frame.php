@@ -2,8 +2,12 @@
 
 namespace Dompdf;
 
+use DOMElement;
+use DOMNode;
 use Dompdf\Css\Style;
 use Dompdf\Frame\FrameList;
+use Dompdf\FrameDecorator\AbstractFrameDecorator;
+use DOMText;
 
 /**
  * @package dompdf
@@ -31,7 +35,7 @@ class Frame
     /**
      * The DOMElement or DOMText object this frame represents
      *
-     * @var \DOMElement|\DOMText
+     * @var DOMElement|DOMText
      */
     protected $_node;
 
@@ -131,7 +135,7 @@ class Frame
     /**
      * This frame's decorator
      *
-     * @var \Dompdf\FrameDecorator\AbstractFrameDecorator
+     * @var AbstractFrameDecorator
      */
     protected $_decorator;
 
@@ -174,9 +178,9 @@ class Frame
     /**
      * Class constructor
      *
-     * @param \DOMNode $node the DOMNode this frame represents
+     * @param DOMNode $node the DOMNode this frame represents
      */
-    public function __construct(\DOMNode $node)
+    public function __construct(DOMNode $node)
     {
         $this->_node = $node;
 
@@ -336,7 +340,7 @@ class Frame
     }
 
     /**
-     * @return \DOMElement|\DOMText
+     * @return DOMElement|DOMText
      */
     public function get_node()
     {
@@ -376,7 +380,7 @@ class Frame
     }
 
     /**
-     * @return \Dompdf\FrameDecorator\AbstractFrameDecorator
+     * @return AbstractFrameDecorator
      */
     public function get_decorator()
     {
@@ -681,7 +685,7 @@ class Frame
     }
 
     /**
-     * @param \Dompdf\FrameDecorator\AbstractFrameDecorator $decorator
+     * @param AbstractFrameDecorator $decorator
      */
     public function set_decorator(FrameDecorator\AbstractFrameDecorator $decorator)
     {

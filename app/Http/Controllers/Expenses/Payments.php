@@ -13,6 +13,7 @@ use App\Traits\Uploads;
 use App\Utilities\Import;
 use App\Utilities\ImportFile;
 use App\Utilities\Modules;
+use Excel;
 
 class Payments extends Controller
 {
@@ -222,7 +223,7 @@ class Payments extends Controller
      */
     public function export()
     {
-        \Excel::create('payments', function($excel) {
+        Excel::create('payments', function($excel) {
             $excel->sheet('payments', function($sheet) {
                 $sheet->fromModel(Payment::filter(request()->input())->get()->makeHidden([
                     'id', 'company_id', 'parent_id', 'created_at', 'updated_at', 'deleted_at'

@@ -2,6 +2,7 @@
 
 namespace Illuminate\Mail;
 
+use DateTime;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 class PendingMail
@@ -130,7 +131,7 @@ class PendingMail
     /**
      * Deliver the queued message after the given delay.
      *
-     * @param  \DateTime|int  $delay
+     * @param  DateTime|int  $delay
      * @param  Mailable  $mailable
      * @return mixed
      */

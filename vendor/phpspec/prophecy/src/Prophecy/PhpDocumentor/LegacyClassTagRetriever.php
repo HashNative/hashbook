@@ -13,6 +13,7 @@ namespace Prophecy\PhpDocumentor;
 
 use phpDocumentor\Reflection\DocBlock;
 use phpDocumentor\Reflection\DocBlock\Tag\MethodTag as LegacyMethodTag;
+use ReflectionClass;
 
 /**
  * @author Théo FIDRY <theo.fidry@gmail.com>
@@ -22,11 +23,11 @@ use phpDocumentor\Reflection\DocBlock\Tag\MethodTag as LegacyMethodTag;
 final class LegacyClassTagRetriever implements MethodTagRetrieverInterface
 {
     /**
-     * @param \ReflectionClass $reflectionClass
+     * @param ReflectionClass $reflectionClass
      *
      * @return LegacyMethodTag[]
      */
-    public function getTagList(\ReflectionClass $reflectionClass)
+    public function getTagList(ReflectionClass $reflectionClass)
     {
         $phpdoc = new DocBlock($reflectionClass->getDocComment());
 

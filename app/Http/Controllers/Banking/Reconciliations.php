@@ -9,6 +9,7 @@ use App\Models\Banking\Account;
 use App\Models\Banking\Reconciliation;
 use App\Models\Setting\Currency;
 use Date;
+use stdClass;
 
 class Reconciliations extends Controller
 {
@@ -70,7 +71,7 @@ class Reconciliations extends Controller
     public function store(Request $request)
     {
         $reconcile = $request->get('reconcile');
-        $transactions = $request->get('transactions');
+        $transactions = $request->get('');
 
         Reconciliation::create([
             'company_id' => session('company_id'),
@@ -284,7 +285,7 @@ class Reconciliations extends Controller
         $currency_code = $request['currency_code'];
         $closing_balance = $request['closing_balance'];
 
-        $json = new \stdClass();
+        $json = new stdClass();
 
         $cleared_amount = $difference = $income_total = $expense_total = 0;
 

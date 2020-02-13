@@ -14,6 +14,7 @@ use App\Models\Expense\BillStatus;
 use App\Models\Common\Item;
 use App\Models\Setting\Tax;
 use App\Transformers\Expense\Bill as Transformer;
+use Dingo\Api\Http\Response;
 use Dingo\Api\Routing\Helpers;
 
 class Bills extends ApiController
@@ -23,7 +24,7 @@ class Bills extends ApiController
     /**
      * Display a listing of the resource.
      *
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -36,7 +37,7 @@ class Bills extends ApiController
      * Display the specified resource.
      *
      * @param  Bill  $bill
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function show(Bill $bill)
     {
@@ -47,7 +48,7 @@ class Bills extends ApiController
      * Store a newly created resource in storage.
      *
      * @param  $request
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -124,7 +125,7 @@ class Bills extends ApiController
      *
      * @param  $bill
      * @param  $request
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function update(Bill $bill, Request $request)
     {
@@ -189,7 +190,7 @@ class Bills extends ApiController
      * Remove the specified resource from storage.
      *
      * @param  Bill  $bill
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function destroy(Bill $bill)
     {

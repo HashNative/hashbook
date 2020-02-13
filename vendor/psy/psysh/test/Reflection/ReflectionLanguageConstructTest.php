@@ -11,9 +11,12 @@
 
 namespace Psy\Test\Reflection;
 
+use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 use Psy\Reflection\ReflectionLanguageConstruct;
+use RuntimeException;
 
-class ReflectionLanguageConstructTest extends \PHPUnit\Framework\TestCase
+class ReflectionLanguageConstructTest extends TestCase
 {
     /**
      * @dataProvider languageConstructs
@@ -62,7 +65,7 @@ class ReflectionLanguageConstructTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider languageConstructs
-     * @expectedException \RuntimeException
+     * @expectedException RuntimeException
      */
     public function testExportThrows($keyword)
     {
@@ -84,7 +87,7 @@ class ReflectionLanguageConstructTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider unknownLanguageConstructs
-     * @expectedException \InvalidArgumentException
+     * @expectedException InvalidArgumentException
      */
     public function testUnknownLanguageConstructsThrowExceptions($keyword)
     {

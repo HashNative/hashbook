@@ -11,6 +11,8 @@
 
 namespace Prophecy\Argument\Token;
 
+use Traversable;
+
 /**
  * Array every entry token.
  *
@@ -40,7 +42,7 @@ class ArrayEveryEntryToken implements TokenInterface
      */
     public function scoreArgument($argument)
     {
-        if (!$argument instanceof \Traversable && !is_array($argument)) {
+        if (!$argument instanceof Traversable && !is_array($argument)) {
             return false;
         }
 

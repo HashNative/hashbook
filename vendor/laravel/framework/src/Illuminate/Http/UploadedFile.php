@@ -2,6 +2,7 @@
 
 namespace Illuminate\Http;
 
+use Illuminate\Http\Testing\FileFactory;
 use Illuminate\Support\Arr;
 use Illuminate\Container\Container;
 use Illuminate\Support\Traits\Macroable;
@@ -15,7 +16,7 @@ class UploadedFile extends SymfonyUploadedFile
     /**
      * Begin creating a new file fake.
      *
-     * @return \Illuminate\Http\Testing\FileFactory
+     * @return FileFactory
      */
     public static function fake()
     {
@@ -89,7 +90,7 @@ class UploadedFile extends SymfonyUploadedFile
     /**
      * Create a new file instance from a base instance.
      *
-     * @param  \Symfony\Component\HttpFoundation\File\UploadedFile  $file
+     * @param SymfonyUploadedFile $file
      * @param  bool $test
      * @return static
      */

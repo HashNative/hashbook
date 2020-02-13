@@ -53,7 +53,7 @@ interface PasswordBroker
      * Reset the password for the given token.
      *
      * @param  array     $credentials
-     * @param  \Closure  $callback
+     * @param Closure $callback
      * @return mixed
      */
     public function reset(array $credentials, Closure $callback);
@@ -61,7 +61,7 @@ interface PasswordBroker
     /**
      * Set a custom password validator.
      *
-     * @param  \Closure  $callback
+     * @param Closure $callback
      * @return void
      */
     public function validator(Closure $callback);

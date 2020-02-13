@@ -130,7 +130,7 @@ class Attribute extends Model implements AttributeContract
      * Create new AttributeBag.
      *
      * @param  array  $models
-     * @return \Sofa\Eloquence\Metable\AttributeBag
+     * @return AttributeBag
      */
     public function newBag(array $models = [])
     {
@@ -184,7 +184,7 @@ class Attribute extends Model implements AttributeContract
      *
      * @param string $key
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     protected function setMetaKey($key)
     {
@@ -212,7 +212,7 @@ class Attribute extends Model implements AttributeContract
      *
      * @param mixed $value
      *
-     * @throws \Sofa\Eloquence\Metable\InvalidTypeException
+     * @throws InvalidTypeException
      */
     public function setValue($value)
     {

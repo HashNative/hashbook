@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Common;
 
 use App\Http\Controllers\Controller;
+use Exception;
 use Illuminate\Http\Request;
 use App\Models\Common\Media;
 use File;
@@ -20,7 +21,7 @@ class Uploads extends Controller
     {
         try {
             $media = Media::find($id);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return false;
         }
 
@@ -57,7 +58,7 @@ class Uploads extends Controller
 
         try {
             $media = Media::find($id);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json([
                 'success' => false,
                 'error'   => true,
@@ -101,7 +102,7 @@ class Uploads extends Controller
     {
         try {
             $media = Media::find($id);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return false;
         }
 
@@ -123,7 +124,7 @@ class Uploads extends Controller
     {
         try {
             $media = Media::find($id);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return back();
         }
 

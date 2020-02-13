@@ -4,9 +4,11 @@ namespace Dingo\Api;
 
 use Dingo\Api\Auth\Auth;
 use Dingo\Api\Routing\Router;
+use Exception;
 use Illuminate\Container\Container;
 use Dingo\Api\Http\InternalRequest;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Cookie;
 use Dingo\Api\Exception\InternalHttpException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -18,28 +20,28 @@ class Dispatcher
     /**
      * Illuminate container instance.
      *
-     * @var \Illuminate\Container\Container
+     * @var Container
      */
     protected $container;
 
     /**
      * Illuminate filesystem instance.
      *
-     * @var \Illuminate\Filesystem\Filesystem
+     * @var Filesystem
      */
     protected $files;
 
     /**
      * Router instance.
      *
-     * @var \Dingo\Api\Routing\Router
+     * @var Router
      */
     protected $router;
 
     /**
      * Auth instance.
      *
-     * @var \Dingo\Api\Auth\Auth
+     * @var Auth
      */
     protected $auth;
 
@@ -165,10 +167,10 @@ class Dispatcher
     /**
      * Create a new dispatcher instance.
      *
-     * @param \Illuminate\Container\Container   $container
-     * @param \Illuminate\Filesystem\Filesystem $files
-     * @param \Dingo\Api\Routing\Router         $router
-     * @param \Dingo\Api\Auth\Auth              $auth
+     * @param Container $container
+     * @param Filesystem $files
+     * @param Router $router
+     * @param Auth $auth
      *
      * @return void
      */
@@ -197,7 +199,7 @@ class Dispatcher
      *
      * @param array $files
      *
-     * @return \Dingo\Api\Dispatcher
+     * @return Dispatcher
      */
     public function attach(array $files)
     {
@@ -223,7 +225,7 @@ class Dispatcher
      *
      * @param mixed $user
      *
-     * @return \Dingo\Api\Dispatcher
+     * @return Dispatcher
      */
     public function be($user)
     {
@@ -237,7 +239,7 @@ class Dispatcher
      *
      * @param string|array $content
      *
-     * @return \Dingo\Api\Dispatcher
+     * @return Dispatcher
      */
     public function json($content)
     {
@@ -255,7 +257,7 @@ class Dispatcher
      *
      * @param string $domain
      *
-     * @return \Dingo\Api\Dispatcher
+     * @return Dispatcher
      */
     public function on($domain)
     {
@@ -267,7 +269,7 @@ class Dispatcher
     /**
      * Return the raw response object once request is dispatched.
      *
-     * @return \Dingo\Api\Dispatcher
+     * @return Dispatcher
      */
     public function raw()
     {
@@ -279,7 +281,7 @@ class Dispatcher
     /**
      * Only authenticate with the given user for a single request.
      *
-     * @return \Dingo\Api\Dispatcher
+     * @return Dispatcher
      */
     public function once()
     {
@@ -293,7 +295,7 @@ class Dispatcher
      *
      * @param string $version
      *
-     * @return \Dingo\Api\Dispatcher
+     * @return Dispatcher
      */
     public function version($version)
     {
@@ -307,7 +309,7 @@ class Dispatcher
      *
      * @param string|array $parameters
      *
-     * @return \Dingo\Api\Dispatcher
+     * @return Dispatcher
      */
     public function with($parameters)
     {
@@ -322,7 +324,7 @@ class Dispatcher
      * @param string $key
      * @param string $value
      *
-     * @return \Dingo\Api\Dispatcher
+     * @return Dispatcher
      */
     public function header($key, $value)
     {
@@ -334,9 +336,9 @@ class Dispatcher
     /**
      * Set a cookie to be sent on the next API request.
      *
-     * @param \Symfony\Component\HttpFoundation\Cookie $cookie
+     * @param Cookie $cookie
      *
-     * @return \Dingo\Api\Dispatcher
+     * @return Dispatcher
      */
     public function cookie(Cookie $cookie)
     {
@@ -452,7 +454,7 @@ class Dispatcher
      * @param string       $uri
      * @param string|array $parameters
      *
-     * @return \Dingo\Api\Http\InternalRequest
+     * @return InternalRequest
      */
     protected function createRequest($verb, $uri, $parameters)
     {
@@ -523,11 +525,11 @@ class Dispatcher
     /**
      * Attempt to dispatch an internal request.
      *
-     * @param \Dingo\Api\Http\InternalRequest $request
-     *
-     * @throws \Exception|\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface
+     * @param InternalRequest $request
      *
      * @return mixed
+     *@throws Exception|HttpExceptionInterface
+     *
      */
     protected function dispatch(InternalRequest $request)
     {
@@ -616,7 +618,7 @@ class Dispatcher
     /**
      * Get the root request instance.
      *
-     * @return \Illuminate\Http\Request
+     * @return Request
      */
     protected function getRootRequest()
     {

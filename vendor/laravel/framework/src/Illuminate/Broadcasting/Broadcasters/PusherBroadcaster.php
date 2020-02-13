@@ -2,6 +2,7 @@
 
 namespace Illuminate\Broadcasting\Broadcasters;
 
+use Illuminate\Http\Request;
 use Pusher;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -13,14 +14,14 @@ class PusherBroadcaster extends Broadcaster
     /**
      * The Pusher SDK instance.
      *
-     * @var \Pusher
+     * @var Pusher
      */
     protected $pusher;
 
     /**
      * Create a new broadcaster instance.
      *
-     * @param  \Pusher  $pusher
+     * @param Pusher $pusher
      * @return void
      */
     public function __construct(Pusher $pusher)
@@ -31,7 +32,7 @@ class PusherBroadcaster extends Broadcaster
     /**
      * Authenticate the incoming request for a given channel.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @return mixed
      */
     public function auth($request)
@@ -53,7 +54,7 @@ class PusherBroadcaster extends Broadcaster
     /**
      * Return the valid authentication response.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @param  mixed  $result
      * @return mixed
      */
@@ -111,7 +112,7 @@ class PusherBroadcaster extends Broadcaster
     /**
      * Get the Pusher SDK instance.
      *
-     * @return \Pusher
+     * @return Pusher
      */
     public function getPusher()
     {

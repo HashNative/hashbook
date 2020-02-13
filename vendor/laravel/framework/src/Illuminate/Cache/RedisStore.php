@@ -4,13 +4,14 @@ namespace Illuminate\Cache;
 
 use Illuminate\Contracts\Cache\Store;
 use Illuminate\Contracts\Redis\Factory as Redis;
+use Predis\ClientInterface;
 
 class RedisStore extends TaggableStore implements Store
 {
     /**
      * The Redis factory implementation.
      *
-     * @var \Illuminate\Contracts\Redis\Factory
+     * @var Redis
      */
     protected $redis;
 
@@ -31,7 +32,7 @@ class RedisStore extends TaggableStore implements Store
     /**
      * Create a new Redis store.
      *
-     * @param  \Illuminate\Contracts\Redis\Factory  $redis
+     * @param Redis $redis
      * @param  string  $prefix
      * @param  string  $connection
      * @return void
@@ -192,7 +193,7 @@ class RedisStore extends TaggableStore implements Store
      * Begin executing a new tags operation.
      *
      * @param  array|mixed  $names
-     * @return \Illuminate\Cache\RedisTaggedCache
+     * @return RedisTaggedCache
      */
     public function tags($names)
     {
@@ -204,7 +205,7 @@ class RedisStore extends TaggableStore implements Store
     /**
      * Get the Redis connection instance.
      *
-     * @return \Predis\ClientInterface
+     * @return ClientInterface
      */
     public function connection()
     {
@@ -225,7 +226,7 @@ class RedisStore extends TaggableStore implements Store
     /**
      * Get the Redis database instance.
      *
-     * @return \Illuminate\Contracts\Redis\Factory
+     * @return Redis
      */
     public function getRedis()
     {

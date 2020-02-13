@@ -10,10 +10,13 @@
 
 namespace SebastianBergmann\CodeCoverage\Node;
 
+use PHPUnit_Framework_Test;
+use RecursiveIterator;
+
 /**
  * Recursive iterator for node object graphs.
  */
-class Iterator implements \RecursiveIterator
+class Iterator implements RecursiveIterator
 {
     /**
      * @var int
@@ -64,7 +67,7 @@ class Iterator implements \RecursiveIterator
     /**
      * Returns the current element.
      *
-     * @return \PHPUnit_Framework_Test
+     * @return PHPUnit_Framework_Test
      */
     public function current()
     {

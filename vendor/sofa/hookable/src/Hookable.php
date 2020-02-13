@@ -13,7 +13,7 @@ use Closure;
 trait Hookable
 {
     /**
-     * @var \Closure[]
+     * @var Closure[]
      */
     protected static $hooks = [];
 
@@ -21,7 +21,7 @@ trait Hookable
      * Register hook on Eloquent method.
      *
      * @param  string   $method
-     * @param  \Closure $hook
+     * @param Closure $hook
      * @return void
      */
     public static function hook($method, Closure $hook)
@@ -43,7 +43,7 @@ trait Hookable
      * Create new Hookable query builder for the instance.
      *
      * @param  \Illuminate\Database\Query\Builder
-     * @return \Sofa\Hookable\Builder
+     * @return Builder
      */
     public function newEloquentBuilder($query)
     {
@@ -59,10 +59,10 @@ trait Hookable
     /**
      * Allow custom where method calls on the builder.
      *
-     * @param  \Sofa\Hookable\Builder  $query
+     * @param Builder $query
      * @param  string  $method
-     * @param  \Sofa\Hookable\ArgumentBag  $args
-     * @return \Sofa\Hookable\Builder
+     * @param ArgumentBag $args
+     * @return Builder
      */
     public function queryHook(Builder $query, $method, ArgumentBag $args)
     {
@@ -231,10 +231,10 @@ trait Hookable
     /**
      * Send payload through the pipeline.
      *
-     * @param  \Closure[] $pipes
+     * @param Closure[] $pipes
      * @param  mixed      $payload
      * @param  array      $params
-     * @param  \Closure   $destination
+     * @param Closure $destination
      * @return mixed
      */
     protected function pipe($pipes, $payload, $params, $destination)
@@ -249,7 +249,7 @@ trait Hookable
      * Get all hooks for given method bound to $this instance.
      *
      * @param  string $method
-     * @return \Closure[]
+     * @return Closure[]
      */
     protected function boundHooks($method)
     {

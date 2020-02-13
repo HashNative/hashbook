@@ -65,7 +65,7 @@ class MailServiceProvider extends ServiceProvider
     /**
      * Set a global address on the mailer by type.
      *
-     * @param  \Illuminate\Mail\Mailer  $mailer
+     * @param Mailer $mailer
      * @param  array  $config
      * @param  string  $type
      * @return void

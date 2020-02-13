@@ -15,6 +15,11 @@ use JakubOnderka\PhpConsoleHighlighter\Highlighter;
 use Psy\Configuration;
 use Psy\ConsoleColorFactory;
 use Psy\Exception\RuntimeException;
+use ReflectionClass;
+use ReflectionFunctionAbstract;
+use Reflector;
+use function file_get_contents;
+use function is_file;
 
 /**
  * A pretty-printer for code.
@@ -24,12 +29,12 @@ class CodeFormatter implements Formatter
     /**
      * Format the code represented by $reflector.
      *
-     * @param \Reflector  $reflector
+     * @param Reflector  $reflector
      * @param null|string $colorMode (default: null)
      *
      * @return string formatted code
      */
-    public static function format(\Reflector $reflector, $colorMode = null)
+    public static function format(Reflector $reflector, $colorMode = null)
     {
         if (!self::isReflectable($reflector)) {
             throw new RuntimeException('Source code unavailable');
@@ -38,11 +43,11 @@ class CodeFormatter implements Formatter
         $colorMode = $colorMode ?: Configuration::COLOR_MODE_AUTO;
 
         if ($fileName = $reflector->getFileName()) {
-            if (!\is_file($fileName)) {
+            if (!is_file($fileName)) {
                 throw new RuntimeException('Source code unavailable');
             }
 
-            $file  = \file_get_contents($fileName);
+            $file  = file_get_contents($fileName);
             $start = $reflector->getStartLine();
             $end   = $reflector->getEndLine() - $start;
 
@@ -59,13 +64,13 @@ class CodeFormatter implements Formatter
     /**
      * Check whether a Reflector instance is reflectable by this formatter.
      *
-     * @param \Reflector $reflector
+     * @param Reflector $reflector
      *
      * @return bool
      */
-    private static function isReflectable(\Reflector $reflector)
+    private static function isReflectable(Reflector $reflector)
     {
-        return $reflector instanceof \ReflectionClass ||
-            $reflector instanceof \ReflectionFunctionAbstract;
+        return $reflector instanceof ReflectionClass ||
+            $reflector instanceof ReflectionFunctionAbstract;
     }
 }

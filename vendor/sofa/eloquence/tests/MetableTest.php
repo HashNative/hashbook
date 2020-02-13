@@ -3,6 +3,7 @@
 namespace Sofa\Eloquence\Tests;
 
 use Mockery as m;
+use PHPUnit_Framework_TestCase;
 use Sofa\Eloquence\Builder;
 use Sofa\Eloquence\Metable;
 use Sofa\Eloquence\Eloquence;
@@ -13,7 +14,7 @@ use Illuminate\Database\Query\Builder as Query;
 use Illuminate\Database\Query\Grammars\Grammar;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
-class MetableTest extends \PHPUnit_Framework_TestCase {
+class MetableTest extends PHPUnit_Framework_TestCase {
 
     public function setUp()
     {

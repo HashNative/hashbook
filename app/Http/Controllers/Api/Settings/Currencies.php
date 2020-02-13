@@ -6,6 +6,7 @@ use App\Http\Controllers\ApiController;
 use App\Http\Requests\Setting\Currency as Request;
 use App\Models\Setting\Currency;
 use App\Transformers\Setting\Currency as Transformer;
+use Dingo\Api\Http\Response;
 use Dingo\Api\Routing\Helpers;
 
 class Currencies extends ApiController
@@ -15,7 +16,7 @@ class Currencies extends ApiController
     /**
      * Display a listing of the resource.
      *
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -28,7 +29,7 @@ class Currencies extends ApiController
      * Display the specified resource.
      *
      * @param  Currency  $currency
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function show(Currency $currency)
     {
@@ -39,7 +40,7 @@ class Currencies extends ApiController
      * Store a newly created resource in storage.
      *
      * @param  $request
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -53,7 +54,7 @@ class Currencies extends ApiController
      *
      * @param  $currency
      * @param  $request
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function update(Currency $currency, Request $request)
     {
@@ -66,7 +67,7 @@ class Currencies extends ApiController
      * Remove the specified resource from storage.
      *
      * @param  Currency  $currency
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function destroy(Currency $currency)
     {

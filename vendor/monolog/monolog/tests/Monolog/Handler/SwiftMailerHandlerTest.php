@@ -13,10 +13,15 @@ namespace Monolog\Handler;
 
 use Monolog\Logger;
 use Monolog\TestCase;
+use PHPUnit_Framework_MockObject_MockObject;
+use ReflectionMethod;
+use RuntimeException;
+use Swift_Mailer;
+use Swift_Message;
 
 class SwiftMailerHandlerTest extends TestCase
 {
-    /** @var \Swift_Mailer|\PHPUnit_Framework_MockObject_MockObject */
+    /** @var Swift_Mailer|PHPUnit_Framework_MockObject_MockObject */
     private $mailer;
 
     public function setUp()
@@ -33,7 +38,7 @@ class SwiftMailerHandlerTest extends TestCase
             ->method('send');
 
         $callback = function () {
-            throw new \RuntimeException('Swift_Message creation callback should not have been called in this test');
+            throw new RuntimeException('Swift_Message creation callback should not have been called in this test');
         };
         $handler = new SwiftMailerHandler($this->mailer, $callback);
 
@@ -47,11 +52,11 @@ class SwiftMailerHandlerTest extends TestCase
     public function testMessageCanBeCustomizedGivenLoggedData()
     {
         // Wire Mailer to expect a specific Swift_Message with a customized Subject
-        $expectedMessage = new \Swift_Message();
+        $expectedMessage = new Swift_Message();
         $this->mailer->expects($this->once())
             ->method('send')
             ->with($this->callback(function ($value) use ($expectedMessage) {
-                return $value instanceof \Swift_Message
+                return $value instanceof Swift_Message
                     && $value->getSubject() === 'Emergency'
                     && $value === $expectedMessage;
             }));
@@ -75,7 +80,7 @@ class SwiftMailerHandlerTest extends TestCase
     public function testMessageSubjectFormatting()
     {
         // Wire Mailer to expect a specific Swift_Message with a customized Subject
-        $messageTemplate = new \Swift_Message();
+        $messageTemplate = new Swift_Message();
         $messageTemplate->setSubject('Alert: %level_name% %message%');
         $receivedMessage = null;
 
@@ -98,10 +103,10 @@ class SwiftMailerHandlerTest extends TestCase
 
     public function testMessageHaveUniqueId()
     {
-        $messageTemplate = new \Swift_Message();
+        $messageTemplate = new Swift_Message();
         $handler = new SwiftMailerHandler($this->mailer, $messageTemplate);
 
-        $method = new \ReflectionMethod('Monolog\Handler\SwiftMailerHandler', 'buildMessage');
+        $method = new ReflectionMethod('Monolog\Handler\SwiftMailerHandler', 'buildMessage');
         $method->setAccessible(true);
         $method->invokeArgs($handler, array($messageTemplate, array()));
 

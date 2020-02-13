@@ -146,7 +146,7 @@ if (! function_exists('array_get')) {
     /**
      * Get an item from an array using "dot" notation.
      *
-     * @param  \ArrayAccess|array  $array
+     * @param ArrayAccess|array  $array
      * @param  string  $key
      * @param  mixed   $default
      * @return mixed
@@ -161,7 +161,7 @@ if (! function_exists('array_has')) {
     /**
      * Check if an item or items exist in an array using "dot" notation.
      *
-     * @param  \ArrayAccess|array  $array
+     * @param ArrayAccess|array  $array
      * @param  string|array  $keys
      * @return bool
      */
@@ -386,7 +386,7 @@ if (! function_exists('collect')) {
      * Create a collection from the given value.
      *
      * @param  mixed  $value
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     function collect($value = null)
     {
@@ -535,7 +535,7 @@ if (! function_exists('e')) {
     /**
      * Escape HTML special characters in a string.
      *
-     * @param  \Illuminate\Contracts\Support\Htmlable|string  $value
+     * @param Htmlable|string  $value
      * @return string
      */
     function e($value)
@@ -695,7 +695,7 @@ if (! function_exists('retry')) {
      * @param  int  $sleep
      * @return mixed
      *
-     * @throws \Exception
+     * @throws Exception
      */
     function retry($times, callable $callback, $sleep = 0)
     {
@@ -840,7 +840,7 @@ if (! function_exists('str_random')) {
      * @param  int  $length
      * @return string
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     function str_random($length = 16)
     {

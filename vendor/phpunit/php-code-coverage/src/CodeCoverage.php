@@ -10,6 +10,15 @@
 
 namespace SebastianBergmann\CodeCoverage;
 
+use PHP_Token_CLASS;
+use PHP_Token_INTERFACE;
+use PHP_Token_Stream;
+use PHP_Token_Stream_CachingFactory;
+use PHP_Token_TRAIT;
+use PHPUnit_Extensions_PhptTestCase;
+use PHPUnit_Framework_TestCase;
+use PHPUnit_Util_Test;
+use ReflectionClass;
 use SebastianBergmann\CodeCoverage\Driver\Driver;
 use SebastianBergmann\CodeCoverage\Driver\Xdebug;
 use SebastianBergmann\CodeCoverage\Driver\HHVM;
@@ -340,20 +349,20 @@ class CodeCoverage
         $size   = 'unknown';
         $status = null;
 
-        if ($id instanceof \PHPUnit_Framework_TestCase) {
+        if ($id instanceof PHPUnit_Framework_TestCase) {
             $_size = $id->getSize();
 
-            if ($_size == \PHPUnit_Util_Test::SMALL) {
+            if ($_size == PHPUnit_Util_Test::SMALL) {
                 $size = 'small';
-            } elseif ($_size == \PHPUnit_Util_Test::MEDIUM) {
+            } elseif ($_size == PHPUnit_Util_Test::MEDIUM) {
                 $size = 'medium';
-            } elseif ($_size == \PHPUnit_Util_Test::LARGE) {
+            } elseif ($_size == PHPUnit_Util_Test::LARGE) {
                 $size = 'large';
             }
 
             $status = $id->getStatus();
             $id     = get_class($id) . '::' . $id->getName();
-        } elseif ($id instanceof \PHPUnit_Extensions_PhptTestCase) {
+        } elseif ($id instanceof PHPUnit_Extensions_PhptTestCase) {
             $size = 'large';
             $id   = $id->getName();
         }
@@ -619,7 +628,7 @@ class CodeCoverage
         }
 
         if ($this->checkForUnintentionallyCoveredCode &&
-            (!$this->currentId instanceof \PHPUnit_Framework_TestCase ||
+            (!$this->currentId instanceof PHPUnit_Framework_TestCase ||
             (!$this->currentId->isMedium() && !$this->currentId->isLarge()))) {
             $this->performUnintentionallyCoveredCodeCheck(
                 $data,
@@ -759,9 +768,9 @@ class CodeCoverage
             }
 
             if ($this->cacheTokens) {
-                $tokens = \PHP_Token_Stream_CachingFactory::get($filename);
+                $tokens = PHP_Token_Stream_CachingFactory::get($filename);
             } else {
-                $tokens = new \PHP_Token_Stream($filename);
+                $tokens = new PHP_Token_Stream($filename);
             }
 
             $classes = array_merge($tokens->getClasses(), $tokens->getTraits());
@@ -812,7 +821,7 @@ class CodeCoverage
                     case 'PHP_Token_TRAIT':
                     case 'PHP_Token_CLASS':
                     case 'PHP_Token_FUNCTION':
-                        /* @var \PHP_Token_Interface $token */
+                        /* @var PHP_Token_Interface $token */
 
                         $docblock = $token->getDocblock();
 
@@ -824,9 +833,9 @@ class CodeCoverage
                             for ($i = $token->getLine(); $i <= $endLine; $i++) {
                                 $this->ignoredLines[$filename][] = $i;
                             }
-                        } elseif ($token instanceof \PHP_Token_INTERFACE ||
-                            $token instanceof \PHP_Token_TRAIT ||
-                            $token instanceof \PHP_Token_CLASS) {
+                        } elseif ($token instanceof PHP_Token_INTERFACE ||
+                            $token instanceof PHP_Token_TRAIT ||
+                            $token instanceof PHP_Token_CLASS) {
                             if (empty($classes[$token->getName()]['methods'])) {
                                 for ($i = $token->getLine();
                                      $i <= $token->getEndLine();
@@ -1052,7 +1061,7 @@ class CodeCoverage
                 continue;
             }
 
-            $class = new \ReflectionClass($unit[0]);
+            $class = new ReflectionClass($unit[0]);
 
             foreach ($this->unintentionallyCoveredSubclassesWhitelist as $whitelisted) {
                 if ($class->isSubclassOf($whitelisted)) {

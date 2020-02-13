@@ -16,14 +16,14 @@ class Factory
     /**
      * Transformer factory instance.
      *
-     * @var \Dingo\Api\Transformer\Factory
+     * @var TransformerFactory
      */
     protected $transformer;
 
     /**
      * Create a new response factory instance.
      *
-     * @param \Dingo\Api\Transformer\Factory $transformer
+     * @param TransformerFactory $transformer
      *
      * @return void
      */
@@ -37,7 +37,7 @@ class Factory
      *
      * @param null|string $location
      *
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function created($location = null, $content = null)
     {
@@ -57,7 +57,7 @@ class Factory
      * @param null|string $location
      * @param mixed       $content
      *
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function accepted($location = null, $content = null)
     {
@@ -74,7 +74,7 @@ class Factory
     /**
      * Respond with a no content response.
      *
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function noContent()
     {
@@ -86,12 +86,12 @@ class Factory
     /**
      * Bind a collection to a transformer and start building a response.
      *
-     * @param \Illuminate\Support\Collection $collection
+     * @param Collection $collection
      * @param object                         $transformer
-     * @param array|\Closure                 $parameters
-     * @param \Closure|null                  $after
+     * @param array|Closure $parameters
+     * @param Closure|null                  $after
      *
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function collection(Collection $collection, $transformer, $parameters = [], Closure $after = null)
     {
@@ -101,7 +101,7 @@ class Factory
             $class = get_class($collection->first());
         }
 
-        if ($parameters instanceof \Closure) {
+        if ($parameters instanceof Closure) {
             $after = $parameters;
             $parameters = [];
         }
@@ -117,15 +117,15 @@ class Factory
      * @param object   $item
      * @param object   $transformer
      * @param array    $parameters
-     * @param \Closure $after
+     * @param Closure $after
      *
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function item($item, $transformer, $parameters = [], Closure $after = null)
     {
         $class = get_class($item);
 
-        if ($parameters instanceof \Closure) {
+        if ($parameters instanceof Closure) {
             $after = $parameters;
             $parameters = [];
         }
@@ -138,12 +138,12 @@ class Factory
     /**
      * Bind a paginator to a transformer and start building a response.
      *
-     * @param \Illuminate\Contracts\Pagination\Paginator $paginator
+     * @param Paginator $paginator
      * @param object                                     $transformer
      * @param array                                      $parameters
-     * @param \Closure                                   $after
+     * @param Closure $after
      *
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function paginator(Paginator $paginator, $transformer, array $parameters = [], Closure $after = null)
     {
@@ -164,9 +164,9 @@ class Factory
      * @param string $message
      * @param int    $statusCode
      *
-     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
-     *
      * @return void
+     * @throws HttpException
+     *
      */
     public function error($message, $statusCode)
     {
@@ -178,9 +178,9 @@ class Factory
      *
      * @param string $message
      *
-     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
-     *
      * @return void
+     * @throws HttpException
+     *
      */
     public function errorNotFound($message = 'Not Found')
     {
@@ -192,9 +192,9 @@ class Factory
      *
      * @param string $message
      *
-     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
-     *
      * @return void
+     * @throws HttpException
+     *
      */
     public function errorBadRequest($message = 'Bad Request')
     {
@@ -206,9 +206,9 @@ class Factory
      *
      * @param string $message
      *
-     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
-     *
      * @return void
+     * @throws HttpException
+     *
      */
     public function errorForbidden($message = 'Forbidden')
     {
@@ -220,9 +220,9 @@ class Factory
      *
      * @param string $message
      *
-     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
-     *
      * @return void
+     * @throws HttpException
+     *
      */
     public function errorInternal($message = 'Internal Error')
     {
@@ -234,9 +234,9 @@ class Factory
      *
      * @param string $message
      *
-     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
-     *
      * @return void
+     * @throws HttpException
+     *
      */
     public function errorUnauthorized($message = 'Unauthorized')
     {
@@ -248,9 +248,9 @@ class Factory
      *
      * @param string $message
      *
-     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
-     *
      * @return void
+     * @throws HttpException
+     *
      */
     public function errorMethodNotAllowed($message = 'Method Not Allowed')
     {
@@ -263,7 +263,7 @@ class Factory
      * @param string $method
      * @param array  $parameters
      *
-     * @throws \ErrorException
+     * @throws ErrorException
      *
      * @return mixed
      */

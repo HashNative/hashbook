@@ -2,6 +2,9 @@
 
 namespace Plank\Mediable;
 
+use Plank\Mediable\Commands\ImportMediaCommand;
+use Plank\Mediable\Commands\PruneMediaCommand;
+use Plank\Mediable\Commands\SyncMediaCommand;
 use Plank\Mediable\SourceAdapters\SourceAdapterFactory;
 use Plank\Mediable\UrlGenerators\UrlGeneratorFactory;
 use Illuminate\Support\ServiceProvider;
@@ -128,9 +131,9 @@ class MediableServiceProvider extends ServiceProvider
     public function registerConsoleCommands()
     {
         $this->commands([
-            \Plank\Mediable\Commands\ImportMediaCommand::class,
-            \Plank\Mediable\Commands\PruneMediaCommand::class,
-            \Plank\Mediable\Commands\SyncMediaCommand::class,
+            ImportMediaCommand::class,
+            PruneMediaCommand::class,
+            SyncMediaCommand::class,
         ]);
     }
 }

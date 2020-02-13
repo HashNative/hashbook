@@ -2,6 +2,7 @@
 
 namespace PhpParser;
 
+use LogicException;
 use PhpParser\Comment;
 use PhpParser\Node\Expr;
 use PhpParser\Node\Name;
@@ -24,7 +25,7 @@ abstract class BuilderAbstract implements Builder {
             return $node;
         }
 
-        throw new \LogicException('Expected node or builder object');
+        throw new LogicException('Expected node or builder object');
     }
 
     /**
@@ -39,7 +40,7 @@ abstract class BuilderAbstract implements Builder {
             return $name;
         } elseif (is_string($name)) {
             if (!$name) {
-                throw new \LogicException('Name cannot be empty');
+                throw new LogicException('Name cannot be empty');
             }
 
             if ($name[0] == '\\') {
@@ -51,7 +52,7 @@ abstract class BuilderAbstract implements Builder {
             }
         }
 
-        throw new \LogicException('Name must be a string or an instance of PhpParser\Node\Name');
+        throw new LogicException('Name must be a string or an instance of PhpParser\Node\Name');
     }
 
     /**
@@ -67,7 +68,7 @@ abstract class BuilderAbstract implements Builder {
     protected function normalizeType($type) {
         if (!is_string($type)) {
             if (!$type instanceof Name && !$type instanceof NullableType) {
-                throw new \LogicException(
+                throw new LogicException(
                     'Type must be a string, or an instance of Name or NullableType');
             }
             return $type;
@@ -91,7 +92,7 @@ abstract class BuilderAbstract implements Builder {
         }
 
         if ($nullable && $type === 'void') {
-            throw new \LogicException('void type cannot be nullable');
+            throw new LogicException('void type cannot be nullable');
         }
 
         return $nullable ? new Node\NullableType($type) : $type;
@@ -142,7 +143,7 @@ abstract class BuilderAbstract implements Builder {
 
             return new Expr\Array_($items);
         } else {
-            throw new \LogicException('Invalid value');
+            throw new LogicException('Invalid value');
         }
     }
 
@@ -159,7 +160,7 @@ abstract class BuilderAbstract implements Builder {
         } else if (is_string($docComment)) {
             return new Comment\Doc($docComment);
         } else {
-            throw new \LogicException('Doc comment must be a string or an instance of PhpParser\Comment\Doc');
+            throw new LogicException('Doc comment must be a string or an instance of PhpParser\Comment\Doc');
         }
     }
 

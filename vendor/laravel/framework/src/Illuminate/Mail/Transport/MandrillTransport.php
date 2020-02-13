@@ -10,7 +10,7 @@ class MandrillTransport extends Transport
     /**
      * Guzzle client instance.
      *
-     * @var \GuzzleHttp\ClientInterface
+     * @var ClientInterface
      */
     protected $client;
 
@@ -24,7 +24,7 @@ class MandrillTransport extends Transport
     /**
      * Create a new Mandrill transport instance.
      *
-     * @param  \GuzzleHttp\ClientInterface  $client
+     * @param ClientInterface $client
      * @param  string  $key
      * @return void
      */
@@ -60,7 +60,7 @@ class MandrillTransport extends Transport
      *
      * Note that Mandrill still respects CC, BCC headers in raw message itself.
      *
-     * @param  \Swift_Mime_Message $message
+     * @param Swift_Mime_Message $message
      * @return array
      */
     protected function getTo(Swift_Mime_Message $message)

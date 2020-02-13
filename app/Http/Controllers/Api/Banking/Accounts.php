@@ -6,6 +6,7 @@ use App\Http\Controllers\ApiController;
 use App\Http\Requests\Banking\Account as Request;
 use App\Models\Banking\Account;
 use App\Transformers\Banking\Account as Transformer;
+use Dingo\Api\Http\Response;
 use Dingo\Api\Routing\Helpers;
 
 class Accounts extends ApiController
@@ -15,7 +16,7 @@ class Accounts extends ApiController
     /**
      * Display a listing of the resource.
      *
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -28,7 +29,7 @@ class Accounts extends ApiController
      * Display the specified resource.
      *
      * @param  Account  $account
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function show(Account $account)
     {
@@ -39,7 +40,7 @@ class Accounts extends ApiController
      * Store a newly created resource in storage.
      *
      * @param  $request
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -53,7 +54,7 @@ class Accounts extends ApiController
      *
      * @param  $account
      * @param  $request
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function update(Account $account, Request $request)
     {
@@ -66,7 +67,7 @@ class Accounts extends ApiController
      * Remove the specified resource from storage.
      *
      * @param  Account  $account
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function destroy(Account $account)
     {

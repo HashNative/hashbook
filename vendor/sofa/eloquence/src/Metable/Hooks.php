@@ -3,6 +3,7 @@
 namespace Sofa\Eloquence\Metable;
 
 use BadMethodCallException;
+use Closure;
 
 /**
  * This class provides instance scope for the closures
@@ -13,7 +14,7 @@ class Hooks
     /**
      * Register hook on getAttribute method.
      *
-     * @return \Closure
+     * @return Closure
      */
     public function getAttribute()
     {
@@ -31,7 +32,7 @@ class Hooks
     /**
      * Register hook on setAttribute method.
      *
-     * @return \Closure
+     * @return Closure
      */
     public function setAttribute()
     {
@@ -49,7 +50,7 @@ class Hooks
     /**
      * Register hook on toArray method.
      *
-     * @return \Closure
+     * @return Closure
      */
     public function toArray()
     {
@@ -65,7 +66,7 @@ class Hooks
     /**
      * Register hook on replicate method.
      *
-     * @return \Closure
+     * @return Closure
      */
     public function replicate()
     {
@@ -83,7 +84,7 @@ class Hooks
     /**
      * Register hook on save method.
      *
-     * @return \Closure
+     * @return Closure
      */
     public function save()
     {
@@ -97,7 +98,7 @@ class Hooks
     /**
      * Register hook on isset call.
      *
-     * @return \Closure
+     * @return Closure
      */
     public function __issetHook()
     {
@@ -115,7 +116,7 @@ class Hooks
     /**
      * Register hook on unset call.
      *
-     * @return \Closure
+     * @return Closure
      */
     public function __unsetHook()
     {
@@ -133,7 +134,7 @@ class Hooks
     /**
      * Register hook on queryHook method.
      *
-     * @return \Closure
+     * @return Closure
      */
     public function queryHook()
     {

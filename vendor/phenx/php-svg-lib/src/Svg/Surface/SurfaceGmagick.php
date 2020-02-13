@@ -8,13 +8,15 @@
 
 namespace Svg\Surface;
 
+use Gmagick;
+use GmagickDraw;
 use Svg\Style;
 
 class SurfaceGmagick implements SurfaceInterface
 {
     const DEBUG = false;
 
-    /** @var \GmagickDraw */
+    /** @var GmagickDraw */
     private $canvas;
 
     private $width;
@@ -31,7 +33,7 @@ class SurfaceGmagick implements SurfaceInterface
         $this->width = $w;
         $this->height = $h;
 
-        $canvas = new \GmagickDraw();
+        $canvas = new GmagickDraw();
 
         $this->canvas = $canvas;
     }
@@ -42,7 +44,7 @@ class SurfaceGmagick implements SurfaceInterface
             echo __FUNCTION__ . "\n";
         }
 
-        $image = new \Gmagick();
+        $image = new Gmagick();
         $image->newimage($this->width, $this->height);
         $image->drawimage($this->canvas);
 

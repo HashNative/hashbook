@@ -24,14 +24,14 @@ class IlluminatePaginatorAdapter implements PaginatorInterface
     /**
      * The paginator instance.
      *
-     * @var \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     * @var LengthAwarePaginator
      */
     protected $paginator;
 
     /**
      * Create a new illuminate pagination adapter.
      *
-     * @param \Illuminate\Contracts\Pagination\LengthAwarePaginator $paginator
+     * @param LengthAwarePaginator $paginator
      *
      * @return void
      */
@@ -105,7 +105,7 @@ class IlluminatePaginatorAdapter implements PaginatorInterface
     /**
      * Get the paginator instance.
      *
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     * @return LengthAwarePaginator
      */
     public function getPaginator()
     {

@@ -11,9 +11,14 @@
 
 namespace Psy;
 
+use InvalidArgumentException;
 use PhpParser\Lexer;
 use PhpParser\Parser;
 use PhpParser\ParserFactory as OriginalParserFactory;
+use function class_exists;
+use function constant;
+use function in_array;
+use function version_compare;
 
 /**
  * Parser factory to abstract over PHP parser library versions.
@@ -44,7 +49,7 @@ class ParserFactory
      */
     public function hasKindsSupport()
     {
-        return \class_exists('PhpParser\ParserFactory');
+        return class_exists('PhpParser\ParserFactory');
     }
 
     /**
@@ -55,7 +60,7 @@ class ParserFactory
     public function getDefaultKind()
     {
         if ($this->hasKindsSupport()) {
-            return \version_compare(PHP_VERSION, '7.0', '>=') ? static::ONLY_PHP7 : static::ONLY_PHP5;
+            return version_compare(PHP_VERSION, '7.0', '>=') ? static::ONLY_PHP7 : static::ONLY_PHP5;
         }
     }
 
@@ -73,14 +78,14 @@ class ParserFactory
 
             $kind = $kind ?: $this->getDefaultKind();
 
-            if (!\in_array($kind, static::getPossibleKinds())) {
-                throw new \InvalidArgumentException('Unknown parser kind');
+            if (!in_array($kind, static::getPossibleKinds())) {
+                throw new InvalidArgumentException('Unknown parser kind');
             }
 
-            $parser = $originalFactory->create(\constant('PhpParser\ParserFactory::' . $kind));
+            $parser = $originalFactory->create(constant('PhpParser\ParserFactory::' . $kind));
         } else {
             if ($kind !== null) {
-                throw new \InvalidArgumentException('Install PHP Parser v2.x to specify parser kind');
+                throw new InvalidArgumentException('Install PHP Parser v2.x to specify parser kind');
             }
 
             $parser = new Parser(new Lexer());

@@ -2,6 +2,9 @@
 
 namespace Sofa\Eloquence\Tests;
 
+use Illuminate\Database\Query\Grammars\Grammar;
+use InvalidArgumentException;
+use PHPUnit_Framework_TestCase;
 use Sofa\Eloquence\Builder;
 use Sofa\Eloquence\Eloquence;
 use Sofa\Eloquence\Mappable;
@@ -10,8 +13,9 @@ use Illuminate\Database\Query\Builder as Query;
 use Illuminate\Database\Eloquent\Model;
 
 use Mockery as m;
+use Sofa\Eloquence\Searchable\ParserFactory;
 
-class BuilderTest extends \PHPUnit_Framework_TestCase {
+class BuilderTest extends PHPUnit_Framework_TestCase {
 
     public function tearDown()
     {
@@ -34,7 +38,7 @@ class BuilderTest extends \PHPUnit_Framework_TestCase {
     /**
      * @test
      *
-     * @expectedException \InvalidArgumentException
+     * @expectedException InvalidArgumentException
      */
     public function it_takes_exactly_two_values_for_whereBetween()
     {
@@ -57,7 +61,7 @@ class BuilderTest extends \PHPUnit_Framework_TestCase {
 
     protected function getBuilder()
     {
-        $grammar    = new \Illuminate\Database\Query\Grammars\Grammar;
+        $grammar    = new Grammar;
         $connection = m::mock('\Illuminate\Database\ConnectionInterface');
         $processor  = m::mock('\Illuminate\Database\Query\Processors\Processor');
         $query      = new Query($connection, $grammar, $processor);
@@ -70,7 +74,7 @@ class BuilderTest extends \PHPUnit_Framework_TestCase {
         $factory->shouldReceive('make')->andReturn($joiner);
         Builder::setJoinerFactory($factory);
 
-        Builder::setParserFactory(new \Sofa\Eloquence\Searchable\ParserFactory);
+        Builder::setParserFactory(new ParserFactory);
 
         $model = new BuilderModelStub;
         $builder->setModel($model);

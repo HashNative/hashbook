@@ -9,7 +9,7 @@ interface TokenRepositoryInterface
     /**
      * Create a new token.
      *
-     * @param  \Illuminate\Contracts\Auth\CanResetPassword  $user
+     * @param CanResetPasswordContract $user
      * @return string
      */
     public function create(CanResetPasswordContract $user);
@@ -17,7 +17,7 @@ interface TokenRepositoryInterface
     /**
      * Determine if a token record exists and is valid.
      *
-     * @param  \Illuminate\Contracts\Auth\CanResetPassword  $user
+     * @param CanResetPasswordContract $user
      * @param  string  $token
      * @return bool
      */
@@ -26,7 +26,7 @@ interface TokenRepositoryInterface
     /**
      * Delete a token record.
      *
-     * @param  \Illuminate\Contracts\Auth\CanResetPassword  $user
+     * @param CanResetPasswordContract $user
      * @return void
      */
     public function delete(CanResetPasswordContract $user);

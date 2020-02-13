@@ -11,14 +11,16 @@
 
 namespace Psy\Test\Input;
 
+use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 use Psy\Input\CodeArgument;
 use Symfony\Component\Console\Input\InputArgument;
 
-class CodeArgumentTest extends \PHPUnit\Framework\TestCase
+class CodeArgumentTest extends TestCase
 {
     /**
      * @dataProvider getInvalidModes
-     * @expectedException \InvalidArgumentException
+     * @expectedException InvalidArgumentException
      */
     public function testInvalidModes($mode)
     {

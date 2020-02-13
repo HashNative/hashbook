@@ -14,13 +14,14 @@ namespace Psy\Test\CodeCleaner;
 use PhpParser\Node\Stmt\Expression;
 use Psy\CodeCleaner\NoReturnValue;
 use Psy\Test\ParserTestCase;
+use function class_exists;
 
 class NoReturnValueTest extends ParserTestCase
 {
     public function testCreate()
     {
         $stmt = NoReturnValue::create();
-        if (\class_exists('PhpParser\Node\Stmt\Expression')) {
+        if (class_exists('PhpParser\Node\Stmt\Expression')) {
             $stmt = new Expression($stmt);
         }
 

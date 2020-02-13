@@ -355,7 +355,7 @@ Example how to catch:
 ...
 try {
     $users = $user->with('detail')->sortable(['detail.phone_number'])->paginate(5);    
-} catch (\Kyslik\ColumnSortable\Exceptions\ColumnSortableException $e) {
+} catch (ColumnSortableException $e) {
     dd($e);
 }
 ```

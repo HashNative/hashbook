@@ -39,7 +39,7 @@ class Scope
     protected $scopeIdentifier;
 
     /**
-     * @var \League\Fractal\Manager
+     * @var Manager
      */
     protected $manager;
 
@@ -77,7 +77,7 @@ class Scope
      * @param string            $scopeIdentifier
      * @param ResourceInterface $resource
      *
-     * @return \League\Fractal\Scope
+     * @return Scope
      */
     public function embedChildScope($scopeIdentifier, $resource)
     {
@@ -131,7 +131,7 @@ class Scope
     /**
      * Getter for manager.
      *
-     * @return \League\Fractal\Manager
+     * @return Manager
      */
     public function getManager()
     {
@@ -423,7 +423,7 @@ class Scope
      *
      * @internal
      *
-     * @param \League\Fractal\TransformerAbstract $transformer
+     * @param TransformerAbstract $transformer
      * @param mixed                               $data
      *
      * @return array
@@ -498,7 +498,7 @@ class Scope
      *
      * @internal
      *
-     * @return \League\Fractal\ParamBag|null
+     * @return ParamBag|null
      */
     protected function getFilterFieldset()
     {

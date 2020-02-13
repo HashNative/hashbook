@@ -11,9 +11,12 @@
 
 namespace Psy\Test\Exception;
 
+use PHPUnit\Framework\TestCase;
 use Psy\Exception\TypeErrorException;
+use TypeError;
+use function version_compare;
 
-class TypeErrorExceptionTest extends \PHPUnit\Framework\TestCase
+class TypeErrorExceptionTest extends TestCase
 {
     public function testException()
     {
@@ -37,11 +40,11 @@ class TypeErrorExceptionTest extends \PHPUnit\Framework\TestCase
 
     public function testFromTypeError()
     {
-        if (\version_compare(PHP_VERSION, '7.0.0', '<')) {
+        if (version_compare(PHP_VERSION, '7.0.0', '<')) {
             $this->markTestSkipped();
         }
 
-        $previous = new \TypeError('{{message}}', 13);
+        $previous = new TypeError('{{message}}', 13);
         $e = TypeErrorException::fromTypeError($previous);
 
         $this->assertInstanceOf('Psy\Exception\TypeErrorException', $e);

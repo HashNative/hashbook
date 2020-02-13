@@ -11,7 +11,7 @@ class Request extends IlluminateRequest implements RequestInterface
     /**
      * Accept parser instance.
      *
-     * @var \Dingo\Api\Http\Parser\Accept
+     * @var Accept
      */
     protected static $acceptParser;
 
@@ -25,9 +25,9 @@ class Request extends IlluminateRequest implements RequestInterface
     /**
      * Create a new Dingo request instance from an Illuminate request instance.
      *
-     * @param \Illuminate\Http\Request $old
+     * @param IlluminateRequest $old
      *
-     * @return \Dingo\Api\Http\Request
+     * @return Request
      */
     public function createFromIlluminate(IlluminateRequest $old)
     {
@@ -99,7 +99,7 @@ class Request extends IlluminateRequest implements RequestInterface
     /**
      * Set the accept parser instance.
      *
-     * @param \Dingo\Api\Http\Parser\Accept $acceptParser
+     * @param Accept $acceptParser
      *
      * @return void
      */
@@ -111,7 +111,7 @@ class Request extends IlluminateRequest implements RequestInterface
     /**
      * Get the accept parser instance.
      *
-     * @return \Dingo\Api\Http\Parser\Accept
+     * @return Accept
      */
     public static function getAcceptParser()
     {

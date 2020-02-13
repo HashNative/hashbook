@@ -8,6 +8,7 @@
 
 namespace Svg\Surface;
 
+use PDFlib;
 use Svg\Style;
 use Svg\Document;
 
@@ -32,7 +33,7 @@ class SurfacePDFLib implements SurfaceInterface
         $h = $dimensions["height"];
 
         if (!$canvas) {
-            $canvas = new \PDFlib();
+            $canvas = new PDFlib();
 
             /* all strings are expected as utf8 */
             $canvas->set_option("stringformat=utf8");

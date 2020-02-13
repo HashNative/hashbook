@@ -12,6 +12,8 @@ use App\Models\Setting\Currency;
 use App\Utilities\Import;
 use App\Utilities\ImportFile;
 use Date;
+use Excel;
+use Form;
 use Illuminate\Http\Request as FRequest;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -331,7 +333,7 @@ class Customers extends Controller
      */
     public function export()
     {
-        \Excel::create('customers', function($excel) {
+        Excel::create('customers', function($excel) {
             $excel->sheet('customers', function($sheet) {
                 $sheet->fromModel(Customer::filter(request()->input())->get()->makeHidden([
                     'id', 'company_id', 'created_at', 'updated_at', 'deleted_at'
@@ -395,10 +397,10 @@ class Customers extends Controller
             foreach ($request['fields'] as $field) {
                 switch ($field) {
                     case 'password':
-                        $html .= \Form::passwordGroup('password', trans('auth.password.current'), 'key', [], null, 'col-md-6 password');
+                        $html .= Form::passwordGroup('password', trans('auth.password.current'), 'key', [], null, 'col-md-6 password');
                         break;
                     case 'password_confirmation':
-                        $html .= \Form::passwordGroup('password_confirmation', trans('auth.password.current_confirm'), 'key', [], null, 'col-md-6 password');
+                        $html .= Form::passwordGroup('password_confirmation', trans('auth.password.current_confirm'), 'key', [], null, 'col-md-6 password');
                         break;
                 }
             }

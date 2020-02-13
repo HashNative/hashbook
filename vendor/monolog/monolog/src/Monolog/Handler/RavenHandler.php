@@ -11,10 +11,12 @@
 
 namespace Monolog\Handler;
 
+use Exception;
 use Monolog\Formatter\LineFormatter;
 use Monolog\Formatter\FormatterInterface;
 use Monolog\Logger;
 use Raven_Client;
+use Throwable;
 
 /**
  * Handler to send messages to a Sentry (https://github.com/getsentry/sentry) server
@@ -179,7 +181,7 @@ class RavenHandler extends AbstractProcessingHandler
             $options['release'] = $this->release;
         }
 
-        if (isset($record['context']['exception']) && ($record['context']['exception'] instanceof \Exception || (PHP_VERSION_ID >= 70000 && $record['context']['exception'] instanceof \Throwable))) {
+        if (isset($record['context']['exception']) && ($record['context']['exception'] instanceof Exception || (PHP_VERSION_ID >= 70000 && $record['context']['exception'] instanceof Throwable))) {
             $options['message'] = $record['formatted'];
             $this->ravenClient->captureException($record['context']['exception'], $options);
         } else {

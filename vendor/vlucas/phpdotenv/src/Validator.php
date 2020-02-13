@@ -22,7 +22,7 @@ class Validator
     /**
      * The loader instance.
      *
-     * @var \Dotenv\Loader
+     * @var Loader
      */
     protected $loader;
 
@@ -30,7 +30,7 @@ class Validator
      * Create a new validator instance.
      *
      * @param array          $variables
-     * @param \Dotenv\Loader $loader
+     * @param Loader $loader
      *
      * @return void
      */
@@ -50,7 +50,7 @@ class Validator
     /**
      * Assert that each variable is not empty.
      *
-     * @return \Dotenv\Validator
+     * @return Validator
      */
     public function notEmpty()
     {
@@ -65,7 +65,7 @@ class Validator
     /**
      * Assert that each specified variable is an integer.
      *
-     * @return \Dotenv\Validator
+     * @return Validator
      */
     public function isInteger()
     {
@@ -80,7 +80,7 @@ class Validator
     /**
      * Assert that each specified variable is a boolean.
      *
-     * @return \Dotenv\Validator
+     * @return Validator
      */
     public function isBoolean()
     {
@@ -101,7 +101,7 @@ class Validator
      *
      * @param string[] $choices
      *
-     * @return \Dotenv\Validator
+     * @return Validator
      */
     public function allowedValues(array $choices)
     {
@@ -119,9 +119,9 @@ class Validator
      * @param callable $callback
      * @param string   $message
      *
-     * @throws \Dotenv\Exception\InvalidCallbackException|\Dotenv\Exception\ValidationException
+     * @return Validator
+     *@throws InvalidCallbackException|ValidationException
      *
-     * @return \Dotenv\Validator
      */
     protected function assertCallback($callback, $message = 'failed callback assertion')
     {

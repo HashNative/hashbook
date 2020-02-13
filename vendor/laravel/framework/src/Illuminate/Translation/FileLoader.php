@@ -9,7 +9,7 @@ class FileLoader implements LoaderInterface
     /**
      * The filesystem instance.
      *
-     * @var \Illuminate\Filesystem\Filesystem
+     * @var Filesystem
      */
     protected $files;
 
@@ -30,7 +30,7 @@ class FileLoader implements LoaderInterface
     /**
      * Create a new file loader instance.
      *
-     * @param  \Illuminate\Filesystem\Filesystem  $files
+     * @param Filesystem $files
      * @param  string  $path
      * @return void
      */

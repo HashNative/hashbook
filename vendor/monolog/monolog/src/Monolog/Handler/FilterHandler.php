@@ -12,6 +12,7 @@
 namespace Monolog\Handler;
 
 use Monolog\Logger;
+use RuntimeException;
 
 /**
  * Simple handler wrapper that filters records based on a list of levels
@@ -26,7 +27,7 @@ class FilterHandler extends AbstractHandler
     /**
      * Handler or factory callable($record, $this)
      *
-     * @var callable|\Monolog\Handler\HandlerInterface
+     * @var callable|HandlerInterface
      */
     protected $handler;
 
@@ -57,7 +58,7 @@ class FilterHandler extends AbstractHandler
         $this->setAcceptedLevels($minLevelOrList, $maxLevel);
 
         if (!$this->handler instanceof HandlerInterface && !is_callable($this->handler)) {
-            throw new \RuntimeException("The given handler (".json_encode($this->handler).") is not a callable nor a Monolog\Handler\HandlerInterface object");
+            throw new RuntimeException("The given handler (".json_encode($this->handler).") is not a callable nor a Monolog\Handler\HandlerInterface object");
         }
     }
 
@@ -108,7 +109,7 @@ class FilterHandler extends AbstractHandler
         if (!$this->handler instanceof HandlerInterface) {
             $this->handler = call_user_func($this->handler, $record, $this);
             if (!$this->handler instanceof HandlerInterface) {
-                throw new \RuntimeException("The factory callable should return a HandlerInterface");
+                throw new RuntimeException("The factory callable should return a HandlerInterface");
             }
         }
 

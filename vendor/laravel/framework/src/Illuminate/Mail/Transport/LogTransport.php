@@ -11,14 +11,14 @@ class LogTransport extends Transport
     /**
      * The Logger instance.
      *
-     * @var \Psr\Log\LoggerInterface
+     * @var LoggerInterface
      */
     protected $logger;
 
     /**
      * Create a new log transport instance.
      *
-     * @param  \Psr\Log\LoggerInterface  $logger
+     * @param LoggerInterface $logger
      * @return void
      */
     public function __construct(LoggerInterface $logger)
@@ -43,7 +43,7 @@ class LogTransport extends Transport
     /**
      * Get a loggable string out of a Swiftmailer entity.
      *
-     * @param  \Swift_Mime_MimeEntity $entity
+     * @param Swift_Mime_MimeEntity $entity
      * @return string
      */
     protected function getMimeEntityString(Swift_Mime_MimeEntity $entity)

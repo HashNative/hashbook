@@ -3,14 +3,16 @@
 namespace Illuminate\Queue\Failed;
 
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Database\ConnectionResolverInterface;
+use Illuminate\Database\Query\Builder;
 
 class DatabaseFailedJobProvider implements FailedJobProviderInterface
 {
     /**
      * The connection resolver implementation.
      *
-     * @var \Illuminate\Database\ConnectionResolverInterface
+     * @var ConnectionResolverInterface
      */
     protected $resolver;
 
@@ -31,7 +33,7 @@ class DatabaseFailedJobProvider implements FailedJobProviderInterface
     /**
      * Create a new database failed job provider.
      *
-     * @param  \Illuminate\Database\ConnectionResolverInterface  $resolver
+     * @param ConnectionResolverInterface $resolver
      * @param  string  $database
      * @param  string  $table
      * @return void
@@ -49,7 +51,7 @@ class DatabaseFailedJobProvider implements FailedJobProviderInterface
      * @param  string  $connection
      * @param  string  $queue
      * @param  string  $payload
-     * @param  \Exception  $exception
+     * @param  Exception  $exception
      * @return int|null
      */
     public function log($connection, $queue, $payload, $exception)
@@ -108,7 +110,7 @@ class DatabaseFailedJobProvider implements FailedJobProviderInterface
     /**
      * Get a new query builder instance for the table.
      *
-     * @return \Illuminate\Database\Query\Builder
+     * @return Builder
      */
     protected function getTable()
     {

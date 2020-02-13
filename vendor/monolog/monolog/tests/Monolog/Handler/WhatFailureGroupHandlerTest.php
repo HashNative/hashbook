@@ -11,6 +11,7 @@
 
 namespace Monolog\Handler;
 
+use Exception;
 use Monolog\TestCase;
 use Monolog\Logger;
 
@@ -139,6 +140,6 @@ class ExceptionTestHandler extends TestHandler
     {
         parent::handle($record);
 
-        throw new \Exception("ExceptionTestHandler::handle");
+        throw new Exception("ExceptionTestHandler::handle");
     }
 }

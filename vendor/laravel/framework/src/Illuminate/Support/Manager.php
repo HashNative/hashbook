@@ -3,6 +3,7 @@
 namespace Illuminate\Support;
 
 use Closure;
+use Illuminate\Foundation\Application;
 use InvalidArgumentException;
 
 abstract class Manager
@@ -10,7 +11,7 @@ abstract class Manager
     /**
      * The application instance.
      *
-     * @var \Illuminate\Foundation\Application
+     * @var Application
      */
     protected $app;
 
@@ -31,7 +32,7 @@ abstract class Manager
     /**
      * Create a new manager instance.
      *
-     * @param  \Illuminate\Foundation\Application  $app
+     * @param  Application  $app
      * @return void
      */
     public function __construct($app)
@@ -72,7 +73,7 @@ abstract class Manager
      * @param  string  $driver
      * @return mixed
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     protected function createDriver($driver)
     {
@@ -106,7 +107,7 @@ abstract class Manager
      * Register a custom driver creator Closure.
      *
      * @param  string    $driver
-     * @param  \Closure  $callback
+     * @param Closure $callback
      * @return $this
      */
     public function extend($driver, Closure $callback)

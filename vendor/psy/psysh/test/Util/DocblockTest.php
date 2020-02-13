@@ -11,9 +11,11 @@
 
 namespace Psy\Test\Util;
 
+use PHPUnit\Framework\TestCase;
 use Psy\Util\Docblock;
+use function defined;
 
-class DocblockTest extends \PHPUnit\Framework\TestCase
+class DocblockTest extends TestCase
 {
     /**
      * @dataProvider comments
@@ -41,7 +43,7 @@ class DocblockTest extends \PHPUnit\Framework\TestCase
 
     public function comments()
     {
-        if (\defined('HHVM_VERSION')) {
+        if (defined('HHVM_VERSION')) {
             $this->markTestSkipped('We have issues with PHPUnit mocks on HHVM.');
         }
 

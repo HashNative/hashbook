@@ -2,6 +2,8 @@
 
 namespace Illuminate\Notifications\Events;
 
+use Illuminate\Notifications\Notification;
+
 class NotificationFailed
 {
     /**
@@ -14,7 +16,7 @@ class NotificationFailed
     /**
      * The notification instance.
      *
-     * @var \Illuminate\Notifications\Notification
+     * @var Notification
      */
     public $notification;
 
@@ -36,7 +38,7 @@ class NotificationFailed
      * Create a new event instance.
      *
      * @param  mixed  $notifiable
-     * @param  \Illuminate\Notifications\Notification  $notification
+     * @param  Notification  $notification
      * @param  string  $channel
      * @param  array  $data
      * @return void

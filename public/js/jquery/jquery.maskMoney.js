@@ -539,7 +539,7 @@
                         // selectAllOnFocus will be handled by
                         // the focus event. The focus event is
                         // also fired when the input is clicked.
-                        return;
+
                     } else if (input.setSelectionRange && settings.bringCaretAtEndOnFocus) {
                         length = $input.val().length;
 

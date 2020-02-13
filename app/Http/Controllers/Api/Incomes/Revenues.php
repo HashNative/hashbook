@@ -6,6 +6,7 @@ use App\Http\Controllers\ApiController;
 use App\Http\Requests\Income\Revenue as Request;
 use App\Models\Income\Revenue;
 use App\Transformers\Income\Revenue as Transformer;
+use Dingo\Api\Http\Response;
 use Dingo\Api\Routing\Helpers;
 
 class Revenues extends ApiController
@@ -15,7 +16,7 @@ class Revenues extends ApiController
     /**
      * Display a listing of the resource.
      *
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -28,7 +29,7 @@ class Revenues extends ApiController
      * Display the specified resource.
      *
      * @param  Revenue  $revenue
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function show(Revenue $revenue)
     {
@@ -39,7 +40,7 @@ class Revenues extends ApiController
      * Store a newly created resource in storage.
      *
      * @param  $request
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -53,7 +54,7 @@ class Revenues extends ApiController
      *
      * @param  $revenue
      * @param  $request
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function update(Revenue $revenue, Request $request)
     {
@@ -66,7 +67,7 @@ class Revenues extends ApiController
      * Remove the specified resource from storage.
      *
      * @param  Revenue  $revenue
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function destroy(Revenue $revenue)
     {

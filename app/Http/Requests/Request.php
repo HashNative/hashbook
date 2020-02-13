@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
 class Request extends FormRequest
@@ -10,7 +11,7 @@ class Request extends FormRequest
     /**
      * Set the company id to the request.
      *
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @return Validator
      */
     protected function getValidatorInstance()
     {

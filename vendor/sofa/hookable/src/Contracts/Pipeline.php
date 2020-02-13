@@ -25,7 +25,7 @@ interface Pipeline
     /**
      * Add the arguments to be passed along with the parcel.
      *
-     * @param  \Sofa\Hookable\Contracts\ArgumentBag $args
+     * @param ArgumentBag $args
      * @return $this
      */
     public function with(ArgumentBag $args);
@@ -33,7 +33,7 @@ interface Pipeline
     /**
      * Dispatch the parcel and call the final callback at the end.
      *
-     * @param  \Closure $destination
+     * @param Closure $destination
      * @return mixed
      */
     public function to(Closure $destination);

@@ -23,7 +23,7 @@ class AttributeBag extends Collection implements AttributeBagContract
     /**
      * Add or update attribute.
      *
-     * @param  \Sofa\Eloquence\Metable\Attribute|string $key
+     * @param Attribute|string $key
      * @param  mixed $value
      * @return $this
      */
@@ -45,7 +45,7 @@ class AttributeBag extends Collection implements AttributeBagContract
     /**
      * Set attribute.
      *
-     * @param \Sofa\Eloquence\Metable\Attribute $attribute
+     * @param Attribute $attribute
      */
     protected function setInstance(Attribute $attribute)
     {
@@ -61,7 +61,7 @@ class AttributeBag extends Collection implements AttributeBagContract
     /**
      * Set attribute.
      *
-     * @param \Sofa\Eloquence\Metable\Attribute $attribute
+     * @param Attribute $attribute
      */
     public function add($attribute)
     {
@@ -71,7 +71,7 @@ class AttributeBag extends Collection implements AttributeBagContract
     /**
      * Set attribute.
      *
-     * @param \Sofa\Eloquence\Metable\Attribute $attribute
+     * @param Attribute $attribute
      */
     protected function addInstance(Attribute $attribute)
     {
@@ -81,7 +81,7 @@ class AttributeBag extends Collection implements AttributeBagContract
     /**
      * Update existing attribute.
      *
-     * @param  \Sofa\Eloquence\Metable\Attribute|string $key
+     * @param Attribute|string $key
      * @param  mixed  $value
      * @return $this
      */
@@ -102,7 +102,7 @@ class AttributeBag extends Collection implements AttributeBagContract
      *
      * @param  string $key
      * @param  mixed  $value
-     * @return \Sofa\Eloquence\Metable\Attribute
+     * @return Attribute
      */
     protected function newAttribute($key, $value)
     {

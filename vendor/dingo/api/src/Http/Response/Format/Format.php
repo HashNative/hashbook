@@ -2,28 +2,34 @@
 
 namespace Dingo\Api\Http\Response\Format;
 
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+
 abstract class Format
 {
     /**
      * Illuminate request instance.
      *
-     * @var \Illuminate\Http\Request
+     * @var Request
      */
     protected $request;
 
     /**
      * Illuminate response instance.
      *
-     * @var \Illuminate\Http\Response
+     * @var Response
      */
     protected $response;
 
     /**
      * Set the request instance.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
-     * @return \Dingo\Api\Http\Response\Format\Format
+     * @return Format
      */
     public function setRequest($request)
     {
@@ -35,9 +41,9 @@ abstract class Format
     /**
      * Set the response instance.
      *
-     * @param \Illuminate\Http\Response $response
+     * @param Response $response
      *
-     * @return \Dingo\Api\Http\Response\Format\Format
+     * @return Format
      */
     public function setResponse($response)
     {
@@ -49,7 +55,7 @@ abstract class Format
     /**
      * Format an Eloquent model.
      *
-     * @param \Illuminate\Database\Eloquent\Model $model
+     * @param Model $model
      *
      * @return string
      */
@@ -58,7 +64,7 @@ abstract class Format
     /**
      * Format an Eloquent collection.
      *
-     * @param \Illuminate\Database\Eloquent\Collection $collection
+     * @param Collection $collection
      *
      * @return string
      */
@@ -67,7 +73,7 @@ abstract class Format
     /**
      * Format an array or instance implementing Arrayable.
      *
-     * @param array|\Illuminate\Contracts\Support\Arrayable $content
+     * @param array|Arrayable $content
      *
      * @return string
      */

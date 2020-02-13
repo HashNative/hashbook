@@ -3,10 +3,11 @@
 namespace Sofa\Eloquence\Tests;
 
 use Mockery as m;
+use PHPUnit_Framework_TestCase;
 use Sofa\Eloquence\Eloquence;
 use Illuminate\Database\Eloquent\Model;
 
-class EloquenceTest extends \PHPUnit_Framework_TestCase
+class EloquenceTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {

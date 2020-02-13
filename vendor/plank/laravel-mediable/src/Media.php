@@ -2,10 +2,14 @@
 
 namespace Plank\Mediable;
 
+use Illuminate\Contracts\Filesystem\Filesystem;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Plank\Mediable\Exceptions\MediaUrlException;
 use Plank\Mediable\Helpers\File;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Plank\Mediable\UrlGenerators\UrlGenerator;
 
 /**
  * Media Model.
@@ -44,7 +48,7 @@ class Media extends Model
     /**
      * Retrieve all associated models of given class.
      * @param  string $class FQCN
-     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     * @return MorphToMany
      */
     public function models($class)
     {
@@ -62,7 +66,7 @@ class Media extends Model
 
     /**
      * Query scope for to find media in a particular directory.
-     * @param  \Illuminate\Database\Eloquent\Builder  $q
+     * @param Builder $q
      * @param  string                                 $disk      Filesystem disk to search in
      * @param  string                                 $directory Path relative to disk
      * @param  bool                                   $recursive (_optional_) If true, will find media in or under the specified directory
@@ -81,7 +85,7 @@ class Media extends Model
 
     /**
      * Query scope for finding media in a particular directory or one of its subdirectories.
-     * @param  \Illuminate\Database\Eloquent\Builder  $q
+     * @param Builder $q
      * @param  string                                 $disk      Filesystem disk to search in
      * @param  string                                 $directory Path relative to disk
      * @return void
@@ -93,7 +97,7 @@ class Media extends Model
 
     /**
      * Query scope for finding media by basename.
-     * @param  \Illuminate\Database\Eloquent\Builder $q
+     * @param Builder $q
      * @param  string                                $basename filename and extension
      * @return void
      */
@@ -105,7 +109,7 @@ class Media extends Model
 
     /**
      * Query scope finding media at a path relative to a disk.
-     * @param  \Illuminate\Database\Eloquent\Builder $q
+     * @param Builder $q
      * @param  string                                $disk
      * @param  string                                $path directory, filename and extension
      * @return void
@@ -120,7 +124,7 @@ class Media extends Model
 
     /**
      * Query scope to remove the order by clause from the query.
-     * @param  \Illuminate\Database\Eloquent\Builder $q
+     * @param Builder $q
      * @return void
      */
     public function scopeUnordered(Builder $q)
@@ -170,7 +174,7 @@ class Media extends Model
 
     /**
      * Get the absolute URL to the media file.
-     * @throws \Plank\Mediable\Exceptions\MediaUrlException If media's disk is not publicly accessible
+     * @throws MediaUrlException If media's disk is not publicly accessible
      * @return string
      */
     public function getUrl()
@@ -238,7 +242,7 @@ class Media extends Model
 
     /**
      * Get the filesystem object for this media.
-     * @return \Illuminate\Contracts\Filesystem\Filesystem
+     * @return Filesystem
      */
     protected function storage()
     {
@@ -247,7 +251,7 @@ class Media extends Model
 
     /**
      * Get a UrlGenerator instance for the media.
-     * @return \Plank\Mediable\UrlGenerators\UrlGenerator
+     * @return UrlGenerator
      */
     protected function getUrlGenerator()
     {

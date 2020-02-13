@@ -39,7 +39,7 @@ trait Mediable
 
     /**
      * Relationship for all attached media.
-     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     * @return MorphToMany
      */
     public function media()
     {
@@ -50,7 +50,7 @@ trait Mediable
 
     /**
      * Query scope to detect the presence of one or more attached media for a given tag.
-     * @param  \Illuminate\Database\Eloquent\Builder $q
+     * @param Builder $q
      * @param  string|array                          $tags
      * @param  bool                                  $match_all
      * @return void
@@ -67,7 +67,7 @@ trait Mediable
 
     /**
      * Query scope to detect the presence of one or more attached media that is bound to all of the specified tags simultaneously.
-     * @param  \Illuminate\Database\Eloquent\Builder $q
+     * @param Builder $q
      * @param  array                                 $tags
      * @return void
      */
@@ -83,7 +83,7 @@ trait Mediable
     /**
      * Query scope to eager load attached media.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder $q
+     * @param Builder $q
      * @param  string|array                          $tags      If one or more tags are specified, only media attached to those tags will be loaded.
      * @param  bool                                  $match_all Only load media matching all provided tags
      * @return void
@@ -107,7 +107,7 @@ trait Mediable
 
     /**
      * Query scope to eager load attached media assigned to multiple tags.
-     * @param  \Illuminate\Database\Eloquent\Builder $q
+     * @param Builder $q
      * @param  string|array                          $tags
      * @return void
      */
@@ -332,7 +332,7 @@ trait Mediable
 
     /**
      * Get a list of all tags that the media is attached to.
-     * @param  \Plank\Mediable\Media  $media
+     * @param Media $media
      * @return array
      */
     public function getTagsForMedia(Media $media)
@@ -420,7 +420,7 @@ trait Mediable
 
     /**
      * Modify an eager load query to only load media assigned to all provided tags simultaneously.
-     * @param  \Illuminate\Database\Eloquent\Relations\MorphToMany $q
+     * @param MorphToMany $q
      * @param  array|string                                        $tags
      * @return void
      */
@@ -509,7 +509,7 @@ trait Mediable
 
     /**
      * {@inheritdoc}
-     * @return \Plank\Mediable\MediableCollection
+     * @return MediableCollection
      */
     public function newCollection(array $models = [])
     {

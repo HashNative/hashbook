@@ -153,7 +153,7 @@ fieldset[disabled] .btn-primary.active {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5cb85c', endColorstr='#ff419641', GradientType=0);
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   background-repeat: repeat-x;
-  border-color: #3e8f3e;
+  border-color: #ffa601;
 }
 .btn-success:hover,
 .btn-success:focus {

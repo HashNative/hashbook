@@ -11,6 +11,14 @@
 
 namespace Psy\VersionUpdater;
 
+use DateInterval;
+use DateTime;
+use function date;
+use function file_get_contents;
+use function file_put_contents;
+use function json_decode;
+use function json_encode;
+
 class IntervalChecker extends GitHubChecker
 {
     private $cacheFile;
@@ -25,10 +33,10 @@ class IntervalChecker extends GitHubChecker
     public function fetchLatestRelease()
     {
         // Read the cached file
-        $cached = \json_decode(@\file_get_contents($this->cacheFile, false));
+        $cached = json_decode(@file_get_contents($this->cacheFile, false));
         if ($cached && isset($cached->last_check) && isset($cached->release)) {
-            $now = new \DateTime();
-            $lastCheck = new \DateTime($cached->last_check);
+            $now = new DateTime();
+            $lastCheck = new DateTime($cached->last_check);
             if ($lastCheck >= $now->sub($this->getDateInterval())) {
                 return $cached->release;
             }
@@ -47,21 +55,21 @@ class IntervalChecker extends GitHubChecker
     {
         switch ($this->interval) {
             case Checker::DAILY:
-                return new \DateInterval('P1D');
+                return new DateInterval('P1D');
             case Checker::WEEKLY:
-                return new \DateInterval('P1W');
+                return new DateInterval('P1W');
             case Checker::MONTHLY:
-                return new \DateInterval('P1M');
+                return new DateInterval('P1M');
         }
     }
 
     private function updateCache($release)
     {
         $data = [
-            'last_check' => \date(DATE_ATOM),
+            'last_check' => date(DATE_ATOM),
             'release'    => $release,
         ];
 
-        \file_put_contents($this->cacheFile, \json_encode($data));
+        file_put_contents($this->cacheFile, json_encode($data));
     }
 }

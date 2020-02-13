@@ -10,7 +10,7 @@ class MailgunTransport extends Transport
     /**
      * Guzzle client instance.
      *
-     * @var \GuzzleHttp\ClientInterface
+     * @var ClientInterface
      */
     protected $client;
 
@@ -38,7 +38,7 @@ class MailgunTransport extends Transport
     /**
      * Create a new Mailgun transport instance.
      *
-     * @param  \GuzzleHttp\ClientInterface  $client
+     * @param ClientInterface $client
      * @param  string  $key
      * @param  string  $domain
      * @return void
@@ -71,7 +71,7 @@ class MailgunTransport extends Transport
     /**
      * Get the HTTP payload for sending the Mailgun message.
      *
-     * @param  \Swift_Mime_Message  $message
+     * @param Swift_Mime_Message $message
      * @param  string  $to
      * @return array
      */
@@ -99,7 +99,7 @@ class MailgunTransport extends Transport
     /**
      * Get the "to" payload field for the API request.
      *
-     * @param  \Swift_Mime_Message  $message
+     * @param Swift_Mime_Message $message
      * @return string
      */
     protected function getTo(Swift_Mime_Message $message)
@@ -112,7 +112,7 @@ class MailgunTransport extends Transport
     /**
      * Get all of the contacts for the message.
      *
-     * @param  \Swift_Mime_Message  $message
+     * @param Swift_Mime_Message $message
      * @return array
      */
     protected function allContacts(Swift_Mime_Message $message)

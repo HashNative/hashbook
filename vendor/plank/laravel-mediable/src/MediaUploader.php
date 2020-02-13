@@ -8,6 +8,7 @@ use Plank\Mediable\Exceptions\MediaUpload\FileNotFoundException;
 use Plank\Mediable\Exceptions\MediaUpload\ForbiddenException;
 use Plank\Mediable\Exceptions\MediaUpload\FileNotSupportedException;
 use Plank\Mediable\Exceptions\MediaUpload\ConfigurationException;
+use Plank\Mediable\Exceptions\MediaUploadFileNotFoundException;
 use Plank\Mediable\Helpers\File;
 use Plank\Mediable\SourceAdapters\RawContentAdapter;
 use Plank\Mediable\SourceAdapters\SourceAdapterFactory;
@@ -74,8 +75,8 @@ class MediaUploader
 
     /**
      * Constructor.
-     * @param \Illuminate\Filesystem\FilesystemManager            $filesystem
-     * @param \Plank\Mediable\SourceAdapters\SourceAdapterFactory $factory
+     * @param FilesystemManager $filesystem
+     * @param SourceAdapterFactory $factory
      * @param array|null                                          $config
      */
     public function __construct(FileSystemManager $filesystem, SourceAdapterFactory $factory, $config = null)
@@ -185,7 +186,7 @@ class MediaUploader
      * Change the class to use for generated Media.
      * @param string $class
      * @return static
-     * @throws \Plank\Mediable\Exceptions\MediaUpload\ConfigurationException if $class does not extend Plank\Mediable\Media
+     * @throws ConfigurationException if $class does not extend Plank\Mediable\Media
      */
     public function setModelClass($class)
     {
@@ -343,9 +344,9 @@ class MediaUploader
      * @param  string $mime_type
      * @param  string $extension
      * @return string
-     * @throws \Plank\Mediable\Exceptions\MediaUpload\FileNotSupportedException If the file type is not recognized
-     * @throws \Plank\Mediable\Exceptions\MediaUpload\FileNotSupportedException If the file type is restricted
-     * @throws \Plank\Mediable\Exceptions\MediaUpload\FileNotSupportedException If the aggregate type is restricted
+     * @throws FileNotSupportedException If the file type is not recognized
+     * @throws FileNotSupportedException If the file type is restricted
+     * @throws FileNotSupportedException If the aggregate type is restricted
      */
     public function inferAggregateType($mime_type, $extension)
     {
@@ -419,7 +420,7 @@ class MediaUploader
      * Process the file upload.
      *
      * Validates the source, then stores the file onto the disk and creates and stores a new Media instance.
-     * @return \Plank\Mediable\Media
+     * @return Media
      */
     public function upload()
     {
@@ -448,7 +449,7 @@ class MediaUploader
      * Create a `Media` record for a file already on a disk.
      * @param  string $disk
      * @param  string $path Path to file, relative to disk root
-     * @return \Plank\Mediable\Media
+     * @return Media
      */
     public function importPath($disk, $path)
     {
@@ -465,8 +466,8 @@ class MediaUploader
      * @param  string $directory
      * @param  string $filename
      * @param  string $extension
-     * @return \Plank\Mediable\Media
-     * @throws \Plank\Mediable\Exceptions\MediaUploadFileNotFoundException If the file does not exist
+     * @return Media
+     * @throws MediaUploadFileNotFoundException If the file does not exist
      */
     public function import($disk, $directory, $filename, $extension)
     {
@@ -494,7 +495,7 @@ class MediaUploader
 
     /**
      * Reanalyze a media record's file and adjust the aggregate type and size, if necessary.
-     * @param  \Plank\Mediable\Media  $media
+     * @param Media $media
      * @return bool Whether the model was modified
      */
     public function update(Media $media)
@@ -514,7 +515,7 @@ class MediaUploader
 
     /**
      * Generate an instance of the `Media` class.
-     * @return \Plank\Mediable\Media
+     * @return Media
      */
     private function makeModel()
     {
@@ -527,8 +528,8 @@ class MediaUploader
      * Ensure that the provided filesystem disk name exists and is allowed.
      * @param  string $disk
      * @return string
-     * @throws \Plank\Mediable\Exceptions\MediaUpload\ConfigurationException If the disk does not exist
-     * @throws \Plank\Mediable\Exceptions\MediaUpload\ForbiddenException If the disk is not included in the `allowed_disks` config.
+     * @throws ConfigurationException If the disk does not exist
+     * @throws ForbiddenException If the disk is not included in the `allowed_disks` config.
      */
     private function verifyDisk($disk)
     {
@@ -546,8 +547,8 @@ class MediaUploader
     /**
      * Ensure that a valid source has been provided.
      * @return void
-     * @throws \Plank\Mediable\Exceptions\MediaUpload\ConfigurationException If no source is provided
-     * @throws \Plank\Mediable\Exceptions\MediaUpload\FileNotFoundException If the source is invalid
+     * @throws ConfigurationException If no source is provided
+     * @throws FileNotFoundException If the source is invalid
      */
     private function verifySource()
     {
@@ -563,7 +564,7 @@ class MediaUploader
      * Ensure that the file's mime type is allowed.
      * @param  string $mime_type
      * @return string
-     * @throws \Plank\Mediable\Exceptions\MediaUpload\FileNotSupportedException If the mime type is not allowed
+     * @throws FileNotSupportedException If the mime type is not allowed
      */
     private function verifyMimeType($mime_type)
     {
@@ -579,7 +580,7 @@ class MediaUploader
      * Ensure that the file's extension is allowed.
      * @param  string $extension
      * @return string
-     * @throws \Plank\Mediable\Exceptions\MediaUpload\FileNotSupportedException If the file extension is not allowed
+     * @throws FileNotSupportedException If the file extension is not allowed
      */
     private function verifyExtension($extension)
     {
@@ -595,7 +596,7 @@ class MediaUploader
      * Verify that the file being uploaded is not larger than the maximum.
      * @param  int $size
      * @return int
-     * @throws \Plank\Mediable\Exceptions\MediaUpload\FileSizeException If the file is too large
+     * @throws FileSizeException If the file is too large
      */
     private function verifyFileSize($size)
     {
@@ -609,7 +610,7 @@ class MediaUploader
 
     /**
      * Verify that the intended destination is available and handle any duplications.
-     * @param  \Plank\Mediable\Media  $model
+     * @param Media $model
      * @return void
      */
     private function verifyDestination(Media $model)
@@ -623,9 +624,9 @@ class MediaUploader
 
     /**
      * Decide what to do about duplicated files.
-     * @param  \Plank\Mediable\Media  $model
+     * @param Media $model
      * @return void
-     * @throws \Plank\Mediable\Exceptions\MediaUpload\FileExistsException If directory is not writable or file already exists at the destination and on_duplicate is set to 'error'
+     * @throws FileExistsException If directory is not writable or file already exists at the destination and on_duplicate is set to 'error'
      */
     private function handleDuplicate(Media $model)
     {
@@ -644,7 +645,7 @@ class MediaUploader
 
     /**
      * Delete the media that previously existed at a destination.
-     * @param  \Plank\Mediable\Media  $model
+     * @param Media $model
      * @return void
      */
     private function deleteExistingMedia(Media $model)
@@ -660,7 +661,7 @@ class MediaUploader
 
     /**
      * Increment model's filename until one is found that doesn't already exist.
-     * @param  \Plank\Mediable\Media $model
+     * @param Media $model
      * @return void
      */
     private function generateUniqueFilename(Media $model)

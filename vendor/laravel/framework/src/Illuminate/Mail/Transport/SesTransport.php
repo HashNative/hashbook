@@ -10,14 +10,14 @@ class SesTransport extends Transport
     /**
      * The Amazon SES instance.
      *
-     * @var \Aws\Ses\SesClient
+     * @var SesClient
      */
     protected $ses;
 
     /**
      * Create a new SES transport instance.
      *
-     * @param  \Aws\Ses\SesClient  $ses
+     * @param SesClient $ses
      * @return void
      */
     public function __construct(SesClient $ses)

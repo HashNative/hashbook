@@ -30,7 +30,7 @@ class CallbackPromise implements PromiseInterface
      *
      * @param callable $callback Custom callback
      *
-     * @throws \Prophecy\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function __construct($callback)
     {

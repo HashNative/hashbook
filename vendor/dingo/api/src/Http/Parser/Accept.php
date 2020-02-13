@@ -58,10 +58,10 @@ class Accept implements Parser
      * Parse the accept header on the incoming request. If strict is enabled
      * then the accept header must be available and must be a valid match.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param bool                     $strict
      *
-     * @throws \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
+     * @throws BadRequestHttpException
      *
      * @return array
      */

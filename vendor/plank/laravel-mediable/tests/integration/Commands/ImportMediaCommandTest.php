@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Filesystem\FilesystemManager;
 use Plank\Mediable\Media;
 use Plank\Mediable\Commands\ImportMediaCommand;
 use Illuminate\Contracts\Console\Kernel as Artisan;
@@ -66,7 +67,7 @@ class ImportMediaCommandTest extends TestCase
     {
         $this->markTestIncomplete('working locally, failing in Travis. Need to investigate further.');
         $artisan = $this->getArtisan();
-        $filesystem = app(\Illuminate\Filesystem\FilesystemManager::class);
+        $filesystem = app(FilesystemManager::class);
         $uploader = app('mediable.uploader');
         $uploader->setAllowUnrecognizedTypes(false);
         $command = new ImportMediaCommand($filesystem, $uploader);

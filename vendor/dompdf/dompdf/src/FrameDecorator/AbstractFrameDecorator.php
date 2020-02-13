@@ -57,7 +57,7 @@ abstract class AbstractFrameDecorator extends Frame
     /**
      * Reflower object used to calculate frame dimensions (Strategy pattern)
      *
-     * @var \Dompdf\FrameReflower\AbstractFrameReflower
+     * @var AbstractFrameReflower
      */
     protected $_reflower;
 
@@ -567,7 +567,7 @@ abstract class AbstractFrameDecorator extends Frame
     }
 
     /**
-     * @return \Dompdf\FrameReflower\AbstractFrameReflower
+     * @return AbstractFrameReflower
      */
     function get_reflower()
     {

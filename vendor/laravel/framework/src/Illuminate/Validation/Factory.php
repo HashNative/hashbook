@@ -13,21 +13,21 @@ class Factory implements FactoryContract
     /**
      * The Translator implementation.
      *
-     * @var \Illuminate\Contracts\Translation\Translator
+     * @var Translator
      */
     protected $translator;
 
     /**
      * The Presence Verifier implementation.
      *
-     * @var \Illuminate\Validation\PresenceVerifierInterface
+     * @var PresenceVerifierInterface
      */
     protected $verifier;
 
     /**
      * The IoC container instance.
      *
-     * @var \Illuminate\Contracts\Container\Container
+     * @var Container
      */
     protected $container;
 
@@ -76,8 +76,8 @@ class Factory implements FactoryContract
     /**
      * Create a new Validator factory instance.
      *
-     * @param  \Illuminate\Contracts\Translation\Translator $translator
-     * @param  \Illuminate\Contracts\Container\Container  $container
+     * @param Translator $translator
+     * @param Container $container
      * @return void
      */
     public function __construct(Translator $translator, Container $container = null)
@@ -93,7 +93,7 @@ class Factory implements FactoryContract
      * @param  array  $rules
      * @param  array  $messages
      * @param  array  $customAttributes
-     * @return \Illuminate\Validation\Validator
+     * @return Validator
      */
     public function make(array $data, array $rules, array $messages = [], array $customAttributes = [])
     {
@@ -129,7 +129,7 @@ class Factory implements FactoryContract
      * @param  array  $customAttributes
      * @return void
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function validate(array $data, array $rules, array $messages = [], array $customAttributes = [])
     {
@@ -143,7 +143,7 @@ class Factory implements FactoryContract
      * @param  array  $rules
      * @param  array  $messages
      * @param  array  $customAttributes
-     * @return \Illuminate\Validation\Validator
+     * @return Validator
      */
     protected function resolve(array $data, array $rules, array $messages, array $customAttributes)
     {
@@ -157,7 +157,7 @@ class Factory implements FactoryContract
     /**
      * Add the extensions to a validator instance.
      *
-     * @param  \Illuminate\Validation\Validator  $validator
+     * @param Validator $validator
      * @return void
      */
     protected function addExtensions(Validator $validator)
@@ -180,7 +180,7 @@ class Factory implements FactoryContract
      * Register a custom validator extension.
      *
      * @param  string  $rule
-     * @param  \Closure|string  $extension
+     * @param Closure|string  $extension
      * @param  string  $message
      * @return void
      */
@@ -197,7 +197,7 @@ class Factory implements FactoryContract
      * Register a custom implicit validator extension.
      *
      * @param  string   $rule
-     * @param  \Closure|string  $extension
+     * @param Closure|string  $extension
      * @param  string  $message
      * @return void
      */
@@ -214,7 +214,7 @@ class Factory implements FactoryContract
      * Register a custom dependent validator extension.
      *
      * @param  string   $rule
-     * @param  \Closure|string  $extension
+     * @param Closure|string  $extension
      * @param  string  $message
      * @return void
      */
@@ -231,7 +231,7 @@ class Factory implements FactoryContract
      * Register a custom validator message replacer.
      *
      * @param  string   $rule
-     * @param  \Closure|string  $replacer
+     * @param Closure|string  $replacer
      * @return void
      */
     public function replacer($rule, $replacer)
@@ -242,7 +242,7 @@ class Factory implements FactoryContract
     /**
      * Set the Validator instance resolver.
      *
-     * @param  \Closure  $resolver
+     * @param Closure $resolver
      * @return void
      */
     public function resolver(Closure $resolver)
@@ -253,7 +253,7 @@ class Factory implements FactoryContract
     /**
      * Get the Translator implementation.
      *
-     * @return \Illuminate\Contracts\Translation\Translator
+     * @return Translator
      */
     public function getTranslator()
     {
@@ -263,7 +263,7 @@ class Factory implements FactoryContract
     /**
      * Get the Presence Verifier implementation.
      *
-     * @return \Illuminate\Validation\PresenceVerifierInterface
+     * @return PresenceVerifierInterface
      */
     public function getPresenceVerifier()
     {
@@ -273,7 +273,7 @@ class Factory implements FactoryContract
     /**
      * Set the Presence Verifier implementation.
      *
-     * @param  \Illuminate\Validation\PresenceVerifierInterface  $presenceVerifier
+     * @param PresenceVerifierInterface $presenceVerifier
      * @return void
      */
     public function setPresenceVerifier(PresenceVerifierInterface $presenceVerifier)

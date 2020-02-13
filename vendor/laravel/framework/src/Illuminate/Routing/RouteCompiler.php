@@ -2,6 +2,7 @@
 
 namespace Illuminate\Routing;
 
+use Symfony\Component\Routing\CompiledRoute;
 use Symfony\Component\Routing\Route as SymfonyRoute;
 
 class RouteCompiler
@@ -9,14 +10,14 @@ class RouteCompiler
     /**
      * The route instance.
      *
-     * @var \Illuminate\Routing\Route
+     * @var Route
      */
     protected $route;
 
     /**
      * Create a new Route compiler instance.
      *
-     * @param  \Illuminate\Routing\Route  $route
+     * @param Route $route
      * @return void
      */
     public function __construct($route)
@@ -27,7 +28,7 @@ class RouteCompiler
     /**
      * Compile the route.
      *
-     * @return \Symfony\Component\Routing\CompiledRoute
+     * @return CompiledRoute
      */
     public function compile()
     {

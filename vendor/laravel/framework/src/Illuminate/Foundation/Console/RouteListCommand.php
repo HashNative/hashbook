@@ -3,6 +3,7 @@
 namespace Illuminate\Foundation\Console;
 
 use Closure;
+use Illuminate\Routing\RouteCollection;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Routing\Route;
@@ -29,14 +30,14 @@ class RouteListCommand extends Command
     /**
      * The router instance.
      *
-     * @var \Illuminate\Routing\Router
+     * @var Router
      */
     protected $router;
 
     /**
      * An array of all the registered routes.
      *
-     * @var \Illuminate\Routing\RouteCollection
+     * @var RouteCollection
      */
     protected $routes;
 
@@ -50,7 +51,7 @@ class RouteListCommand extends Command
     /**
      * Create a new route command instance.
      *
-     * @param  \Illuminate\Routing\Router  $router
+     * @param Router $router
      * @return void
      */
     public function __construct(Router $router)
@@ -100,7 +101,7 @@ class RouteListCommand extends Command
     /**
      * Get the route information for a given route.
      *
-     * @param  \Illuminate\Routing\Route  $route
+     * @param Route $route
      * @return array
      */
     protected function getRouteInformation(Route $route)
@@ -143,7 +144,7 @@ class RouteListCommand extends Command
     /**
      * Get before filters.
      *
-     * @param  \Illuminate\Routing\Route  $route
+     * @param Route $route
      * @return string
      */
     protected function getMiddleware($route)

@@ -15,11 +15,11 @@ class SqlServerConnection extends Connection
     /**
      * Execute a Closure within a transaction.
      *
-     * @param  \Closure  $callback
+     * @param Closure $callback
      * @param  int  $attempts
      * @return mixed
      *
-     * @throws \Exception|\Throwable
+     * @throws Exception|Throwable
      */
     public function transaction(Closure $callback, $attempts = 1)
     {
@@ -59,7 +59,7 @@ class SqlServerConnection extends Connection
     /**
      * Get the default query grammar instance.
      *
-     * @return \Illuminate\Database\Query\Grammars\SqlServerGrammar
+     * @return QueryGrammar
      */
     protected function getDefaultQueryGrammar()
     {
@@ -69,7 +69,7 @@ class SqlServerConnection extends Connection
     /**
      * Get the default schema grammar instance.
      *
-     * @return \Illuminate\Database\Schema\Grammars\SqlServerGrammar
+     * @return SchemaGrammar
      */
     protected function getDefaultSchemaGrammar()
     {
@@ -79,7 +79,7 @@ class SqlServerConnection extends Connection
     /**
      * Get the default post processor instance.
      *
-     * @return \Illuminate\Database\Query\Processors\SqlServerProcessor
+     * @return SqlServerProcessor
      */
     protected function getDefaultPostProcessor()
     {
@@ -89,7 +89,7 @@ class SqlServerConnection extends Connection
     /**
      * Get the Doctrine DBAL driver.
      *
-     * @return \Doctrine\DBAL\Driver\PDOSqlsrv\Driver
+     * @return DoctrineDriver
      */
     protected function getDoctrineDriver()
     {

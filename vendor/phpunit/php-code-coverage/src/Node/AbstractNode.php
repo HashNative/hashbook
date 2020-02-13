@@ -10,12 +10,13 @@
 
 namespace SebastianBergmann\CodeCoverage\Node;
 
+use Countable;
 use SebastianBergmann\CodeCoverage\Util;
 
 /**
  * Base class for nodes in the code coverage information tree.
  */
-abstract class AbstractNode implements \Countable
+abstract class AbstractNode implements Countable
 {
     /**
      * @var string

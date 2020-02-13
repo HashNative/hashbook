@@ -19,8 +19,8 @@ trait QueriesRelationships
      * @param  string  $operator
      * @param  int     $count
      * @param  string  $boolean
-     * @param  \Closure|null  $callback
-     * @return \Illuminate\Database\Eloquent\Builder|static
+     * @param Closure|null  $callback
+     * @return Builder|static
      */
     public function has($relation, $operator = '>=', $count = 1, $boolean = 'and', Closure $callback = null)
     {
@@ -62,8 +62,8 @@ trait QueriesRelationships
      * @param  string  $operator
      * @param  int     $count
      * @param  string  $boolean
-     * @param  \Closure|null  $callback
-     * @return \Illuminate\Database\Eloquent\Builder|static
+     * @param Closure|null  $callback
+     * @return Builder|static
      */
     protected function hasNested($relations, $operator = '>=', $count = 1, $boolean = 'and', $callback = null)
     {
@@ -87,7 +87,7 @@ trait QueriesRelationships
      * @param  string  $relation
      * @param  string  $operator
      * @param  int     $count
-     * @return \Illuminate\Database\Eloquent\Builder|static
+     * @return Builder|static
      */
     public function orHas($relation, $operator = '>=', $count = 1)
     {
@@ -99,8 +99,8 @@ trait QueriesRelationships
      *
      * @param  string  $relation
      * @param  string  $boolean
-     * @param  \Closure|null  $callback
-     * @return \Illuminate\Database\Eloquent\Builder|static
+     * @param Closure|null  $callback
+     * @return Builder|static
      */
     public function doesntHave($relation, $boolean = 'and', Closure $callback = null)
     {
@@ -111,7 +111,7 @@ trait QueriesRelationships
      * Add a relationship count / exists condition to the query with an "or".
      *
      * @param  string  $relation
-     * @return \Illuminate\Database\Eloquent\Builder|static
+     * @return Builder|static
      */
     public function orDoesntHave($relation)
     {
@@ -122,10 +122,10 @@ trait QueriesRelationships
      * Add a relationship count / exists condition to the query with where clauses.
      *
      * @param  string  $relation
-     * @param  \Closure|null  $callback
+     * @param Closure|null  $callback
      * @param  string  $operator
      * @param  int     $count
-     * @return \Illuminate\Database\Eloquent\Builder|static
+     * @return Builder|static
      */
     public function whereHas($relation, Closure $callback = null, $operator = '>=', $count = 1)
     {
@@ -136,10 +136,10 @@ trait QueriesRelationships
      * Add a relationship count / exists condition to the query with where clauses and an "or".
      *
      * @param  string    $relation
-     * @param  \Closure  $callback
+     * @param Closure $callback
      * @param  string    $operator
      * @param  int       $count
-     * @return \Illuminate\Database\Eloquent\Builder|static
+     * @return Builder|static
      */
     public function orWhereHas($relation, Closure $callback = null, $operator = '>=', $count = 1)
     {
@@ -150,8 +150,8 @@ trait QueriesRelationships
      * Add a relationship count / exists condition to the query with where clauses.
      *
      * @param  string  $relation
-     * @param  \Closure|null  $callback
-     * @return \Illuminate\Database\Eloquent\Builder|static
+     * @param Closure|null  $callback
+     * @return Builder|static
      */
     public function whereDoesntHave($relation, Closure $callback = null)
     {
@@ -162,8 +162,8 @@ trait QueriesRelationships
      * Add a relationship count / exists condition to the query with where clauses and an "or".
      *
      * @param  string    $relation
-     * @param  \Closure  $callback
-     * @return \Illuminate\Database\Eloquent\Builder|static
+     * @param Closure $callback
+     * @return Builder|static
      */
     public function orWhereDoesntHave($relation, Closure $callback = null)
     {
@@ -227,12 +227,12 @@ trait QueriesRelationships
     /**
      * Add the "has" condition where clause to the query.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $hasQuery
-     * @param  \Illuminate\Database\Eloquent\Relations\Relation  $relation
+     * @param Builder $hasQuery
+     * @param Relation $relation
      * @param  string  $operator
      * @param  int  $count
      * @param  string  $boolean
-     * @return \Illuminate\Database\Eloquent\Builder|static
+     * @return Builder|static
      */
     protected function addHasWhere(Builder $hasQuery, Relation $relation, $operator, $count, $boolean)
     {
@@ -246,8 +246,8 @@ trait QueriesRelationships
     /**
      * Merge the where constraints from another query to the current query.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $from
-     * @return \Illuminate\Database\Eloquent\Builder|static
+     * @param Builder $from
+     * @return Builder|static
      */
     public function mergeConstraintsFrom(Builder $from)
     {
@@ -268,7 +268,7 @@ trait QueriesRelationships
     /**
      * Add a sub-query count clause to this query.
      *
-     * @param  \Illuminate\Database\Query\Builder $query
+     * @param QueryBuilder $query
      * @param  string  $operator
      * @param  int  $count
      * @param  string  $boolean
@@ -290,7 +290,7 @@ trait QueriesRelationships
      * Get the "has relation" base query instance.
      *
      * @param  string  $relation
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     * @return Relation
      */
     protected function getRelationWithoutConstraints($relation)
     {

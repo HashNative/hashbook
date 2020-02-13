@@ -13,6 +13,7 @@ namespace Monolog\Handler;
 
 use Monolog\TestCase;
 use Monolog\Logger;
+use ReflectionMethod;
 
 /**
  * @covers Monolog\Handler\BrowserConsoleHandlerTest
@@ -26,7 +27,7 @@ class BrowserConsoleHandlerTest extends TestCase
 
     protected function generateScript()
     {
-        $reflMethod = new \ReflectionMethod('Monolog\Handler\BrowserConsoleHandler', 'generateScript');
+        $reflMethod = new ReflectionMethod('Monolog\Handler\BrowserConsoleHandler', 'generateScript');
         $reflMethod->setAccessible(true);
 
         return $reflMethod->invoke(null);

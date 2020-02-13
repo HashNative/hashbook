@@ -2,11 +2,13 @@
 
 namespace Illuminate\Foundation\Testing;
 
+use Illuminate\Foundation\Application;
 use Mockery;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Console\Application as Artisan;
 use PHPUnit\Framework\TestCase as BaseTestCase;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -21,7 +23,7 @@ abstract class TestCase extends BaseTestCase
     /**
      * The Illuminate application instance.
      *
-     * @var \Illuminate\Foundation\Application
+     * @var Application
      */
     protected $app;
 
@@ -51,7 +53,7 @@ abstract class TestCase extends BaseTestCase
      *
      * Needs to be implemented by subclasses.
      *
-     * @return \Symfony\Component\HttpKernel\HttpKernelInterface
+     * @return HttpKernelInterface
      */
     abstract public function createApplication();
 

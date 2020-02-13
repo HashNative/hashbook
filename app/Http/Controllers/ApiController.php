@@ -4,15 +4,16 @@ namespace App\Http\Controllers;
 
 use Dingo\Api\Exception\ResourceException;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class ApiController extends Controller
 {
     /**
      * Create the response for when a request fails validation.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param Request $request
      * @param  array $errors
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     protected function buildFailedValidationResponse(Request $request, array $errors)
     {

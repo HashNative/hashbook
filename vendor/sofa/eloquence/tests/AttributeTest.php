@@ -3,10 +3,12 @@
 namespace Sofa\Eloquence\Tests;
 
 use Illuminate\Database\Eloquent\Model;
+use InvalidArgumentException;
+use PHPUnit_Framework_TestCase;
 use Sofa\Eloquence\Metable\Attribute;
 use Sofa\Eloquence\Metable\AttributeBag;
 
-class AttributeTest extends \PHPUnit_Framework_TestCase {
+class AttributeTest extends PHPUnit_Framework_TestCase {
 
     /**
      * @test
@@ -47,7 +49,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase {
     /**
      * @test
      *
-     * @expectedException \InvalidArgumentException
+     * @expectedException InvalidArgumentException
      */
     public function it_rejects_invalid_variable_name_as_key()
     {
@@ -57,7 +59,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase {
     /**
      * @test
      *
-     * @expectedException \InvalidArgumentException
+     * @expectedException InvalidArgumentException
      */
     public function it_rejects_user_types_without_mutator()
     {

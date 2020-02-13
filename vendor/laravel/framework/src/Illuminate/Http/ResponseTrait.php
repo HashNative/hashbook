@@ -4,6 +4,7 @@ namespace Illuminate\Http;
 
 use Exception;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Symfony\Component\HttpFoundation\Cookie;
 
 trait ResponseTrait
 {
@@ -17,7 +18,7 @@ trait ResponseTrait
     /**
      * The exception that triggered the error response (if applicable).
      *
-     * @var \Exception|null
+     * @var Exception|null
      */
     public $exception;
 
@@ -84,7 +85,7 @@ trait ResponseTrait
     /**
      * Add a cookie to the response.
      *
-     * @param  \Symfony\Component\HttpFoundation\Cookie|mixed  $cookie
+     * @param  Cookie|mixed  $cookie
      * @return $this
      */
     public function cookie($cookie)
@@ -95,7 +96,7 @@ trait ResponseTrait
     /**
      * Add a cookie to the response.
      *
-     * @param  \Symfony\Component\HttpFoundation\Cookie|mixed  $cookie
+     * @param  Cookie|mixed  $cookie
      * @return $this
      */
     public function withCookie($cookie)
@@ -112,7 +113,7 @@ trait ResponseTrait
     /**
      * Set the exception to attach to the response.
      *
-     * @param  \Exception  $e
+     * @param Exception $e
      * @return $this
      */
     public function withException(Exception $e)
@@ -125,7 +126,7 @@ trait ResponseTrait
     /**
      * Throws the response in a HttpResponseException instance.
      *
-     * @throws \Illuminate\Http\Exceptions\HttpResponseException
+     * @throws HttpResponseException
      */
     public function throwResponse()
     {

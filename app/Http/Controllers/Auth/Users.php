@@ -199,7 +199,7 @@ class Users extends Controller
     public function destroy(User $user)
     {
         // Can't delete yourself
-        if ($user->id == \Auth::user()->id) {
+        if ($user->id == Auth::user()->id) {
             $message = trans('auth.error.self_delete');
 
             flash($message)->error();

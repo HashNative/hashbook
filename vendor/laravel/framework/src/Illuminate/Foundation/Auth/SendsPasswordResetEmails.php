@@ -2,7 +2,10 @@
 
 namespace Illuminate\Foundation\Auth;
 
+use Illuminate\Contracts\Auth\PasswordBroker;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Password;
 
 trait SendsPasswordResetEmails
@@ -10,7 +13,7 @@ trait SendsPasswordResetEmails
     /**
      * Display the form to request a password reset link.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function showLinkRequestForm()
     {
@@ -20,8 +23,8 @@ trait SendsPasswordResetEmails
     /**
      * Send a reset link to the given user.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Request $request
+     * @return RedirectResponse
      */
     public function sendResetLinkEmail(Request $request)
     {
@@ -42,7 +45,7 @@ trait SendsPasswordResetEmails
     /**
      * Validate the email for the given request.
      *
-     * @param \Illuminate\Http\Request  $request
+     * @param Request $request
      * @return void
      */
     protected function validateEmail(Request $request)
@@ -54,7 +57,7 @@ trait SendsPasswordResetEmails
      * Get the response for a successful password reset link.
      *
      * @param  string  $response
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     protected function sendResetLinkResponse($response)
     {
@@ -64,9 +67,9 @@ trait SendsPasswordResetEmails
     /**
      * Get the response for a failed password reset link.
      *
-     * @param  \Illuminate\Http\Request
+     * @param Request
      * @param  string  $response
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     protected function sendResetLinkFailedResponse(Request $request, $response)
     {
@@ -78,7 +81,7 @@ trait SendsPasswordResetEmails
     /**
      * Get the broker to be used during password reset.
      *
-     * @return \Illuminate\Contracts\Auth\PasswordBroker
+     * @return PasswordBroker
      */
     public function broker()
     {

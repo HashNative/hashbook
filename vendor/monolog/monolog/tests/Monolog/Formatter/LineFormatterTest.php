@@ -11,10 +11,15 @@
 
 namespace Monolog\Formatter;
 
+use DateTime;
+use LogicException;
+use PHPUnit_Framework_TestCase;
+use RuntimeException;
+
 /**
  * @covers Monolog\Formatter\LineFormatter
  */
-class LineFormatterTest extends \PHPUnit_Framework_TestCase
+class LineFormatterTest extends PHPUnit_Framework_TestCase
 {
     public function testDefFormatWithString()
     {
@@ -24,7 +29,7 @@ class LineFormatterTest extends \PHPUnit_Framework_TestCase
             'channel' => 'log',
             'context' => array(),
             'message' => 'foo',
-            'datetime' => new \DateTime,
+            'datetime' => new DateTime,
             'extra' => array(),
         ));
         $this->assertEquals('['.date('Y-m-d').'] log.WARNING: foo [] []'."\n", $message);
@@ -37,7 +42,7 @@ class LineFormatterTest extends \PHPUnit_Framework_TestCase
             'level_name' => 'ERROR',
             'channel' => 'meh',
             'message' => 'foo',
-            'datetime' => new \DateTime,
+            'datetime' => new DateTime,
             'extra' => array(),
             'context' => array(
                 'foo' => 'bar',
@@ -56,7 +61,7 @@ class LineFormatterTest extends \PHPUnit_Framework_TestCase
             'level_name' => 'ERROR',
             'channel' => 'meh',
             'context' => array(),
-            'datetime' => new \DateTime,
+            'datetime' => new DateTime,
             'extra' => array('ip' => '127.0.0.1'),
             'message' => 'log',
         ));
@@ -70,7 +75,7 @@ class LineFormatterTest extends \PHPUnit_Framework_TestCase
             'level_name' => 'ERROR',
             'channel' => 'meh',
             'context' => array(),
-            'datetime' => new \DateTime,
+            'datetime' => new DateTime,
             'extra' => array('ip' => '127.0.0.1', 'file' => 'test'),
             'message' => 'log',
         ));
@@ -84,7 +89,7 @@ class LineFormatterTest extends \PHPUnit_Framework_TestCase
             'level_name' => 'ERROR',
             'channel' => 'meh',
             'context' => array(),
-            'datetime' => new \DateTime,
+            'datetime' => new DateTime,
             'extra' => array(),
             'message' => 'log',
         ));
@@ -98,7 +103,7 @@ class LineFormatterTest extends \PHPUnit_Framework_TestCase
             'level_name' => 'ERROR',
             'channel' => 'meh',
             'context' => array('foo' => 'bar'),
-            'datetime' => new \DateTime,
+            'datetime' => new DateTime,
             'extra' => array('foo' => 'xbar'),
             'message' => 'log',
         ));
@@ -112,7 +117,7 @@ class LineFormatterTest extends \PHPUnit_Framework_TestCase
             'level_name' => 'ERROR',
             'channel' => 'meh',
             'context' => array(),
-            'datetime' => new \DateTime,
+            'datetime' => new DateTime,
             'extra' => array('foo' => new TestFoo, 'bar' => new TestBar, 'baz' => array(), 'res' => fopen('php://memory', 'rb')),
             'message' => 'foobar',
         ));
@@ -126,8 +131,8 @@ class LineFormatterTest extends \PHPUnit_Framework_TestCase
         $message = $formatter->format(array(
             'level_name' => 'CRITICAL',
             'channel' => 'core',
-            'context' => array('exception' => new \RuntimeException('Foo')),
-            'datetime' => new \DateTime,
+            'context' => array('exception' => new RuntimeException('Foo')),
+            'datetime' => new DateTime,
             'extra' => array(),
             'message' => 'foobar',
         ));
@@ -140,12 +145,12 @@ class LineFormatterTest extends \PHPUnit_Framework_TestCase
     public function testDefFormatWithPreviousException()
     {
         $formatter = new LineFormatter(null, 'Y-m-d');
-        $previous = new \LogicException('Wut?');
+        $previous = new LogicException('Wut?');
         $message = $formatter->format(array(
             'level_name' => 'CRITICAL',
             'channel' => 'core',
-            'context' => array('exception' => new \RuntimeException('Foo', 0, $previous)),
-            'datetime' => new \DateTime,
+            'context' => array('exception' => new RuntimeException('Foo', 0, $previous)),
+            'datetime' => new DateTime,
             'extra' => array(),
             'message' => 'foobar',
         ));
@@ -164,7 +169,7 @@ class LineFormatterTest extends \PHPUnit_Framework_TestCase
                 'channel' => 'test',
                 'message' => 'bar',
                 'context' => array(),
-                'datetime' => new \DateTime,
+                'datetime' => new DateTime,
                 'extra' => array(),
             ),
             array(
@@ -172,7 +177,7 @@ class LineFormatterTest extends \PHPUnit_Framework_TestCase
                 'channel' => 'log',
                 'message' => 'foo',
                 'context' => array(),
-                'datetime' => new \DateTime,
+                'datetime' => new DateTime,
                 'extra' => array(),
             ),
         ));

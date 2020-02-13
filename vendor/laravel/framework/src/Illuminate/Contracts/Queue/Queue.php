@@ -2,6 +2,8 @@
 
 namespace Illuminate\Contracts\Queue;
 
+use DateTime;
+
 interface Queue
 {
     /**
@@ -45,7 +47,7 @@ interface Queue
     /**
      * Push a new job onto the queue after a delay.
      *
-     * @param  \DateTime|int  $delay
+     * @param  DateTime|int  $delay
      * @param  string  $job
      * @param  mixed   $data
      * @param  string  $queue
@@ -57,7 +59,7 @@ interface Queue
      * Push a new job onto the queue after a delay.
      *
      * @param  string  $queue
-     * @param  \DateTime|int  $delay
+     * @param  DateTime|int  $delay
      * @param  string  $job
      * @param  mixed   $data
      * @return mixed
@@ -78,7 +80,7 @@ interface Queue
      * Pop the next job off of the queue.
      *
      * @param  string  $queue
-     * @return \Illuminate\Contracts\Queue\Job|null
+     * @return Job|null
      */
     public function pop($queue = null);
 

@@ -5,6 +5,7 @@ namespace Nwidart\Modules\Commands;
 use Illuminate\Console\Command;
 use Nwidart\Modules\Exceptions\FileAlreadyExistException;
 use Nwidart\Modules\Generators\FileGenerator;
+use Nwidart\Modules\Module;
 
 abstract class GeneratorCommand extends Command
 {
@@ -74,7 +75,7 @@ abstract class GeneratorCommand extends Command
     /**
      * Get class namespace.
      *
-     * @param \Nwidart\Modules\Module $module
+     * @param Module $module
      *
      * @return string
      */

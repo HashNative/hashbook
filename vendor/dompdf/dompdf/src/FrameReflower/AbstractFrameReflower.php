@@ -311,7 +311,7 @@ abstract class AbstractFrameReflower
 
         // Convert escaped hex characters into ascii characters (e.g. \A => newline)
         $string = preg_replace_callback("/\\\\([0-9a-fA-F]{0,6})/",
-            function ($matches) { return \Dompdf\Helpers::unichr(hexdec($matches[1])); },
+            function ($matches) { return Helpers::unichr(hexdec($matches[1])); },
             $string);
         return $string;
     }

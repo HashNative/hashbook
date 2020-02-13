@@ -49,7 +49,7 @@ trait HasRelationships
      * @param  string  $related
      * @param  string  $foreignKey
      * @param  string  $localKey
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
     public function hasOne($related, $foreignKey = null, $localKey = null)
     {
@@ -70,7 +70,7 @@ trait HasRelationships
      * @param  string  $type
      * @param  string  $id
      * @param  string  $localKey
-     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
+     * @return MorphOne
      */
     public function morphOne($related, $name, $type = null, $id = null, $localKey = null)
     {
@@ -92,7 +92,7 @@ trait HasRelationships
      * @param  string  $foreignKey
      * @param  string  $ownerKey
      * @param  string  $relation
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function belongsTo($related, $foreignKey = null, $ownerKey = null, $relation = null)
     {
@@ -128,7 +128,7 @@ trait HasRelationships
      * @param  string  $name
      * @param  string  $type
      * @param  string  $id
-     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     * @return MorphTo
      */
     public function morphTo($name = null, $type = null, $id = null)
     {
@@ -155,7 +155,7 @@ trait HasRelationships
      * @param  string  $name
      * @param  string  $type
      * @param  string  $id
-     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     * @return MorphTo
      */
     protected function morphEagerTo($name, $type, $id)
     {
@@ -171,7 +171,7 @@ trait HasRelationships
      * @param  string  $name
      * @param  string  $type
      * @param  string  $id
-     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     * @return MorphTo
      */
     protected function morphInstanceTo($target, $name, $type, $id)
     {
@@ -213,7 +213,7 @@ trait HasRelationships
      * @param  string  $related
      * @param  string  $foreignKey
      * @param  string  $localKey
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function hasMany($related, $foreignKey = null, $localKey = null)
     {
@@ -236,7 +236,7 @@ trait HasRelationships
      * @param  string|null  $firstKey
      * @param  string|null  $secondKey
      * @param  string|null  $localKey
-     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     * @return HasManyThrough
      */
     public function hasManyThrough($related, $through, $firstKey = null, $secondKey = null, $localKey = null)
     {
@@ -261,7 +261,7 @@ trait HasRelationships
      * @param  string  $type
      * @param  string  $id
      * @param  string  $localKey
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     * @return MorphMany
      */
     public function morphMany($related, $name, $type = null, $id = null, $localKey = null)
     {
@@ -287,7 +287,7 @@ trait HasRelationships
      * @param  string  $foreignKey
      * @param  string  $relatedKey
      * @param  string  $relation
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return BelongsToMany
      */
     public function belongsToMany($related, $table = null, $foreignKey = null, $relatedKey = null, $relation = null)
     {
@@ -328,7 +328,7 @@ trait HasRelationships
      * @param  string  $foreignKey
      * @param  string  $relatedKey
      * @param  bool  $inverse
-     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     * @return MorphToMany
      */
     public function morphToMany($related, $name, $table = null, $foreignKey = null, $relatedKey = null, $inverse = false)
     {
@@ -362,7 +362,7 @@ trait HasRelationships
      * @param  string  $table
      * @param  string  $foreignKey
      * @param  string  $relatedKey
-     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     * @return MorphToMany
      */
     public function morphedByMany($related, $name, $table = null, $foreignKey = null, $relatedKey = null)
     {

@@ -5,7 +5,7 @@ return [
     'invoice_number'        => 'Invoice Number',
     'invoice_date'          => 'Invoice Date',
     'total_price'           => 'Total Price',
-    'due_date'              => 'Due Date',
+    'due_date'              => 'Due Days',
     'order_number'          => 'Order Number',
     'bill_to'               => 'Bill To',
 

@@ -52,11 +52,11 @@ class PhpEngine implements EngineInterface
     /**
      * Handle a view exception.
      *
-     * @param  \Exception  $e
+     * @param Exception $e
      * @param  int  $obLevel
      * @return void
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function handleViewException(Exception $e, $obLevel)
     {

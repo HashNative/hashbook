@@ -11,6 +11,7 @@
 
 namespace Monolog\Handler;
 
+use InvalidArgumentException;
 use Monolog\Logger;
 use Monolog\Formatter\JsonFormatter;
 use PhpAmqpLib\Message\AMQPMessage;
@@ -42,7 +43,7 @@ class AmqpHandler extends AbstractProcessingHandler
         } elseif ($exchange instanceof AMQPChannel) {
             $this->exchangeName = $exchangeName;
         } else {
-            throw new \InvalidArgumentException('PhpAmqpLib\Channel\AMQPChannel or AMQPExchange instance required');
+            throw new InvalidArgumentException('PhpAmqpLib\Channel\AMQPChannel or AMQPExchange instance required');
         }
         $this->exchange = $exchange;
 

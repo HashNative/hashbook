@@ -70,7 +70,7 @@ class NotificationFake implements NotificationFactory
      * @param  mixed  $notifiable
      * @param  string  $notification
      * @param  callable|null  $callback
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function sent($notifiable, $notification, $callback = null)
     {
@@ -120,7 +120,7 @@ class NotificationFake implements NotificationFactory
     /**
      * Send the given notification to the given notifiable entities.
      *
-     * @param  \Illuminate\Support\Collection|array|mixed  $notifiables
+     * @param Collection|array|mixed  $notifiables
      * @param  mixed  $notification
      * @return void
      */
@@ -132,7 +132,7 @@ class NotificationFake implements NotificationFactory
     /**
      * Send the given notification immediately.
      *
-     * @param  \Illuminate\Support\Collection|array|mixed  $notifiables
+     * @param Collection|array|mixed  $notifiables
      * @param  mixed  $notification
      * @return void
      */

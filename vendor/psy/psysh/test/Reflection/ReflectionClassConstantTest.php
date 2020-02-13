@@ -11,9 +11,13 @@
 
 namespace Psy\Test\Reflection;
 
+use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 use Psy\Reflection\ReflectionClassConstant;
+use ReflectionMethod;
+use RuntimeException;
 
-class ReflectionClassConstantTest extends \PHPUnit\Framework\TestCase
+class ReflectionClassConstantTest extends TestCase
 {
     const CONSTANT_ONE = 'one';
 
@@ -32,7 +36,7 @@ class ReflectionClassConstantTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException InvalidArgumentException
      */
     public function testUnknownConstantThrowsException()
     {
@@ -55,14 +59,14 @@ class ReflectionClassConstantTest extends \PHPUnit\Framework\TestCase
     {
         $refl = new ReflectionClassConstant($this, 'CONSTANT_ONE');
 
-        $this->assertEquals(\ReflectionMethod::IS_PUBLIC, $refl->getModifiers());
+        $this->assertEquals(ReflectionMethod::IS_PUBLIC, $refl->getModifiers());
         $this->assertFalse($refl->isPrivate());
         $this->assertFalse($refl->isProtected());
         $this->assertTrue($refl->isPublic());
     }
 
     /**
-     * @expectedException \RuntimeException
+     * @expectedException RuntimeException
      * @dataProvider notYetImplemented
      */
     public function testNotYetImplemented($method)

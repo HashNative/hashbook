@@ -1,98 +1,99 @@
 .nav-tabs-custom>.nav-tabs>li.active {
-    border-top-color: #6da252;
+    border-top-color: #6e7094;
 }
 
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
-    background-color: #6da252 !important;
+    background-color: #d62a2a !important;
+
 }
 
 .form-control:focus {
-    border-color: #6da252 !important;
+    border-color: #24292e !important;
 }
 
 #result-search {
-    border-color: #6da252;
+    border-color: #24292e;
 }
 
 #profit {
-    background: #6da252;
+    background: #24292e;
 }
 
 .info-box .progress .progress-bar.progress-bar-green, .progress-bar-success {
-    background-color: #6da252;
+    background-color: #24292e;
 }
 
 /* Bootstrap */
 .btn-success {
-    background-color: #6da252;
-    border-color: #629149;
+    background-color: #24292e;
+    border-color: #24292e;
 }
 
 .btn-success.hover, .btn-success:hover {
-    background-color: #629149;
+    background-color: #ff712c;
 }
 
 .btn-success.focus, .btn-success:focus {
-    background-color: #629149;
-    border-color: #2b4020;
+    background-color: #ff712c;
+    border-color: #142961;
 }
 
 .btn-success.active, .btn-success:active {
-    background-color: #6da252;
-    border-color: #629149;
+    background-color: #ff3401;
+    border-color: #ff3401;
 }
 
 .btn-success.active.focus, .btn-success.active:focus {
-    background-color: #4c7139;
-    border-color: #416131;
+    background-color: #24292e;
+    border-color: #242923;
 }
 
 .bg-green {
-    background-color: #6da252 !important;
+    background-color: #bd4913 !important;
 }
 
 .alert-success {
-    background-color: #6da252 !important;
-    border-color: #629149;
+    background-color: #bd4913 !important;
+    border-color: #ff3401;
 }
 
 .label-success {
-    background-color: #6da252 !important;
+    background-color: #bd4913 !important;
 }
 
 .box.box-success {
-    border-top-color: #6da252;
+    border-top-color: #bd4913;
 }
 
 .box.box-solid.box-success>.box-header {
-    background-color: #6da252;
+    background-color: #bd4913;
 }
 
 .box.box-solid.box-success {
-    border-color: #629149;
+    border-color: #ff3401;
 }
 
 .text-green {
-    color: #6da252;
+    color: #bd4913;
 }
 
 /* AdminLTE green skin */
 .skin-green-light .main-header .navbar {
-    background-color: #6da252;
+    background-color: #221f1e;
 }
 
 .skin-green-light .main-header .navbar .sidebar-toggle:hover {
-    background-color: #629149;
+    background-color: #221f1e;
 }
 
 .skin-green-light .main-header .logo {
-    background-color: #6da252;
+    background-color: #221f1e;
 }
 
 .skin-green-light .main-header li.user-header {
-    background-color: #6da252;
+    background-color: #221f1e;
 }
 
 .skin-green-light .main-header .logo:hover {
-    background-color: #629149;
+    background-color: #221f1e;
 }

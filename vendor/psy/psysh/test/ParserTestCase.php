@@ -11,11 +11,15 @@
 
 namespace Psy\Test;
 
+use PhpParser\Error;
 use PhpParser\PrettyPrinter\Standard as Printer;
+use PHPUnit\Framework\TestCase;
 use Psy\Exception\ParseErrorException;
 use Psy\ParserFactory;
+use RuntimeException;
+use function strpos;
 
-class ParserTestCase extends \PHPUnit\Framework\TestCase
+class ParserTestCase extends TestCase
 {
     protected $traverser;
     private $parser;
@@ -33,7 +37,7 @@ class ParserTestCase extends \PHPUnit\Framework\TestCase
         $code = $prefix . $code;
         try {
             return $this->getParser()->parse($code);
-        } catch (\PhpParser\Error $e) {
+        } catch (Error $e) {
             if (!$this->parseErrorIsEOF($e)) {
                 throw ParseErrorException::fromParseError($e);
             }
@@ -41,7 +45,7 @@ class ParserTestCase extends \PHPUnit\Framework\TestCase
             try {
                 // Unexpected EOF, try again with an implicit semicolon
                 return $this->getParser()->parse($code . ';');
-            } catch (\PhpParser\Error $e) {
+            } catch (Error $e) {
                 return false;
             }
         }
@@ -50,7 +54,7 @@ class ParserTestCase extends \PHPUnit\Framework\TestCase
     protected function traverse(array $stmts)
     {
         if (!isset($this->traverser)) {
-            throw new \RuntimeException('Test cases must provide a traverser');
+            throw new RuntimeException('Test cases must provide a traverser');
         }
 
         return $this->traverser->traverse($stmts);
@@ -88,10 +92,10 @@ class ParserTestCase extends \PHPUnit\Framework\TestCase
         return $this->printer;
     }
 
-    private function parseErrorIsEOF(\PhpParser\Error $e)
+    private function parseErrorIsEOF(Error $e)
     {
         $msg = $e->getRawMessage();
 
-        return ($msg === 'Unexpected token EOF') || (\strpos($msg, 'Syntax error, unexpected EOF') !== false);
+        return ($msg === 'Unexpected token EOF') || (strpos($msg, 'Syntax error, unexpected EOF') !== false);
     }
 }

@@ -2,9 +2,11 @@
 
 namespace Dingo\Api\Auth\Provider;
 
+use Dingo\Api\Contract\Auth\Provider;
 use Exception;
 use Illuminate\Http\Request;
 use Dingo\Api\Routing\Route;
+use League\OAuth2\Server\Resource;
 use League\OAuth2\Server\ResourceServer;
 use League\OAuth2\Server\Entity\AccessTokenEntity;
 use League\OAuth2\Server\Exception\OAuthException;
@@ -16,7 +18,7 @@ class OAuth2 extends Authorization
     /**
      * OAuth 2.0 resource server instance.
      *
-     * @var \League\OAuth2\Server\Resource
+     * @var Resource
      */
     protected $resource;
 
@@ -44,7 +46,7 @@ class OAuth2 extends Authorization
     /**
      * Create a new OAuth 2.0 provider instance.
      *
-     * @param \League\OAuth2\Server\ResourceServer $resource
+     * @param ResourceServer $resource
      * @param bool                                 $httpHeadersOnly
      *
      * @return void
@@ -58,13 +60,13 @@ class OAuth2 extends Authorization
     /**
      * Authenticate request with the OAuth 2.0 resource server.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Dingo\Api\Routing\Route $route
-     *
-     * @throws \Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException
-     * @throws \Exception
+     * @param Request $request
+     * @param Route $route
      *
      * @return mixed
+     *@throws Exception
+     *
+     * @throws UnauthorizedHttpException
      */
     public function authenticate(Request $request, Route $route)
     {
@@ -96,7 +98,7 @@ class OAuth2 extends Authorization
     /**
      * Resolve the resource owner.
      *
-     * @param \League\OAuth2\Server\Entity\AccessTokenEntity $token
+     * @param AccessTokenEntity $token
      *
      * @return mixed
      */
@@ -114,12 +116,12 @@ class OAuth2 extends Authorization
     /**
      * Validate a route has any scopes.
      *
-     * @param \League\OAuth2\Server\Entity\AccessTokenEntity $token
-     * @param \Dingo\Api\Routing\Route                       $route
-     *
-     * @throws \League\OAuth2\Server\Exception\InvalidScopeException
+     * @param AccessTokenEntity $token
+     * @param Route $route
      *
      * @return bool
+     * @throws InvalidScopeException
+     *
      */
     protected function validateAnyRouteScopes(AccessTokenEntity $token, Route $route)
     {
@@ -141,12 +143,12 @@ class OAuth2 extends Authorization
     /**
      * Validate a route has all scopes.
      *
-     * @param \League\OAuth2\Server\Entity\AccessTokenEntity $token
-     * @param \Dingo\Api\Routing\Route                       $route
-     *
-     * @throws \League\OAuth2\Server\Exception\InvalidScopeException
+     * @param AccessTokenEntity $token
+     * @param Route $route
      *
      * @return bool
+     * @throws InvalidScopeException
+     *
      */
     protected function validateAllRouteScopes(AccessTokenEntity $token, Route $route)
     {
@@ -166,7 +168,7 @@ class OAuth2 extends Authorization
      *
      * @param callable $resolver
      *
-     * @return \Dingo\Api\Contract\Auth\Provider
+     * @return Provider
      */
     public function setUserResolver(callable $resolver)
     {
@@ -180,7 +182,7 @@ class OAuth2 extends Authorization
      *
      * @param callable $resolver
      *
-     * @return \Dingo\Api\Contract\Auth\Provider
+     * @return Provider
      */
     public function setClientResolver(callable $resolver)
     {

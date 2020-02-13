@@ -26,9 +26,11 @@ function tester($handler, $record)
 
 namespace Monolog\Processor;
 
+use Acme\Tester;
 use Monolog\Logger;
 use Monolog\TestCase;
 use Monolog\Handler\TestHandler;
+use function Acme\tester;
 
 class IntrospectionProcessorTest extends TestCase
 {
@@ -44,7 +46,7 @@ class IntrospectionProcessorTest extends TestCase
     public function testProcessorFromClass()
     {
         $handler = $this->getHandler();
-        $tester = new \Acme\Tester;
+        $tester = new Tester;
         $tester->test($handler, $this->getRecord());
         list($record) = $handler->getRecords();
         $this->assertEquals(__FILE__, $record['extra']['file']);
@@ -56,7 +58,7 @@ class IntrospectionProcessorTest extends TestCase
     public function testProcessorFromFunc()
     {
         $handler = $this->getHandler();
-        \Acme\tester($handler, $this->getRecord());
+        tester($handler, $this->getRecord());
         list($record) = $handler->getRecords();
         $this->assertEquals(__FILE__, $record['extra']['file']);
         $this->assertEquals(24, $record['extra']['line']);

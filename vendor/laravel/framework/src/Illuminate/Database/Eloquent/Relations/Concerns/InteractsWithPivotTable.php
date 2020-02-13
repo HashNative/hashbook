@@ -4,6 +4,8 @@ namespace Illuminate\Database\Eloquent\Relations\Concerns;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection as BaseCollection;
 
 trait InteractsWithPivotTable
@@ -64,7 +66,7 @@ trait InteractsWithPivotTable
     /**
      * Sync the intermediate tables with a list of IDs without detaching.
      *
-     * @param  \Illuminate\Database\Eloquent\Collection|array  $ids
+     * @param Collection|array  $ids
      * @return array
      */
     public function syncWithoutDetaching($ids)
@@ -75,7 +77,7 @@ trait InteractsWithPivotTable
     /**
      * Sync the intermediate tables with a list of IDs or collection of models.
      *
-     * @param  \Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection|array  $ids
+     * @param Collection|BaseCollection|array  $ids
      * @param  bool   $detaching
      * @return array
      */
@@ -375,7 +377,7 @@ trait InteractsWithPivotTable
      *
      * @param  array  $attributes
      * @param  bool   $exists
-     * @return \Illuminate\Database\Eloquent\Relations\Pivot
+     * @return Pivot
      */
     public function newPivot(array $attributes = [], $exists = false)
     {
@@ -390,7 +392,7 @@ trait InteractsWithPivotTable
      * Create a new existing pivot model instance.
      *
      * @param  array  $attributes
-     * @return \Illuminate\Database\Eloquent\Relations\Pivot
+     * @return Pivot
      */
     public function newExistingPivot(array $attributes = [])
     {
@@ -400,7 +402,7 @@ trait InteractsWithPivotTable
     /**
      * Get a new plain query builder for the pivot table.
      *
-     * @return \Illuminate\Database\Query\Builder
+     * @return Builder
      */
     public function newPivotStatement()
     {
@@ -411,7 +413,7 @@ trait InteractsWithPivotTable
      * Get a new pivot statement for a given "other" ID.
      *
      * @param  mixed  $id
-     * @return \Illuminate\Database\Query\Builder
+     * @return Builder
      */
     public function newPivotStatementForId($id)
     {
@@ -421,7 +423,7 @@ trait InteractsWithPivotTable
     /**
      * Create a new query builder for the pivot table.
      *
-     * @return \Illuminate\Database\Query\Builder
+     * @return Builder
      */
     protected function newPivotQuery()
     {

@@ -11,6 +11,17 @@
 
 namespace Psy;
 
+use Exception;
+use InvalidArgumentException;
+use function array_diff;
+use function array_key_exists;
+use function array_keys;
+use function array_merge;
+use function in_array;
+use function is_object;
+use function is_scalar;
+use function is_string;
+
 /**
  * The Shell execution context.
  *
@@ -75,19 +86,19 @@ class Context
             case '__file':
             case '__line':
             case '__dir':
-                if (\array_key_exists($name, $this->commandScopeVariables)) {
+                if (array_key_exists($name, $this->commandScopeVariables)) {
                     return $this->commandScopeVariables[$name];
                 }
                 break;
 
             default:
-                if (\array_key_exists($name, $this->scopeVariables)) {
+                if (array_key_exists($name, $this->scopeVariables)) {
                     return $this->scopeVariables[$name];
                 }
                 break;
         }
 
-        throw new \InvalidArgumentException('Unknown variable: $' . $name);
+        throw new InvalidArgumentException('Unknown variable: $' . $name);
     }
 
     /**
@@ -97,7 +108,7 @@ class Context
      */
     public function getAll()
     {
-        return \array_merge($this->scopeVariables, $this->getSpecialVariables());
+        return array_merge($this->scopeVariables, $this->getSpecialVariables());
     }
 
     /**
@@ -123,7 +134,7 @@ class Context
             $vars['this'] = $this->boundObject;
         }
 
-        return \array_merge($vars, $this->commandScopeVariables);
+        return array_merge($vars, $this->commandScopeVariables);
     }
 
     /**
@@ -170,9 +181,9 @@ class Context
     /**
      * Set the most recent Exception.
      *
-     * @param \Exception $e
+     * @param Exception $e
      */
-    public function setLastException(\Exception $e)
+    public function setLastException(Exception $e)
     {
         $this->lastException = $e;
     }
@@ -180,14 +191,14 @@ class Context
     /**
      * Get the most recent Exception.
      *
-     * @throws \InvalidArgumentException If no Exception has been caught
+     * @return null|Exception
+     *@throws InvalidArgumentException If no Exception has been caught
      *
-     * @return null|\Exception
      */
     public function getLastException()
     {
         if (!isset($this->lastException)) {
-            throw new \InvalidArgumentException('No most-recent exception');
+            throw new InvalidArgumentException('No most-recent exception');
         }
 
         return $this->lastException;
@@ -206,14 +217,14 @@ class Context
     /**
      * Get the most recent output from evaluated code.
      *
-     * @throws \InvalidArgumentException If no output has happened yet
+     * @throws InvalidArgumentException If no output has happened yet
      *
      * @return null|string
      */
     public function getLastStdout()
     {
         if (!isset($this->lastStdout)) {
-            throw new \InvalidArgumentException('No most-recent output');
+            throw new InvalidArgumentException('No most-recent output');
         }
 
         return $this->lastStdout;
@@ -228,7 +239,7 @@ class Context
      */
     public function setBoundObject($boundObject)
     {
-        $this->boundObject = \is_object($boundObject) ? $boundObject : null;
+        $this->boundObject = is_object($boundObject) ? $boundObject : null;
         $this->boundClass = null;
     }
 
@@ -251,7 +262,7 @@ class Context
      */
     public function setBoundClass($boundClass)
     {
-        $this->boundClass = (\is_string($boundClass) && $boundClass !== '') ? $boundClass : null;
+        $this->boundClass = (is_string($boundClass) && $boundClass !== '') ? $boundClass : null;
         $this->boundObject = null;
     }
 
@@ -275,7 +286,7 @@ class Context
         $vars = [];
         foreach ($commandScopeVariables as $key => $value) {
             // kind of type check
-            if (\is_scalar($value) && \in_array($key, self::$commandScopeNames)) {
+            if (is_scalar($value) && in_array($key, self::$commandScopeNames)) {
                 $vars[$key] = $value;
             }
         }
@@ -303,7 +314,7 @@ class Context
      */
     public function getUnusedCommandScopeVariableNames()
     {
-        return \array_diff(self::$commandScopeNames, \array_keys($this->commandScopeVariables));
+        return array_diff(self::$commandScopeNames, array_keys($this->commandScopeVariables));
     }
 
     /**
@@ -315,6 +326,6 @@ class Context
      */
     public static function isSpecialVariableName($name)
     {
-        return \in_array($name, self::$specialNames) || \in_array($name, self::$commandScopeNames);
+        return in_array($name, self::$specialNames) || in_array($name, self::$commandScopeNames);
     }
 }

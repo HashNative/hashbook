@@ -2,6 +2,7 @@
 
 namespace Sofa\Eloquence\Mutator;
 
+use LogicException;
 use ReflectionException;
 use ReflectionClass;
 use ReflectionMethod;
@@ -19,7 +20,7 @@ class Mutator implements MutatorContract
      * @param  string|array $callables
      * @return mixed
      *
-     * @throws \LogicException
+     * @throws LogicException
      */
     public function mutate($value, $callables)
     {
@@ -42,7 +43,7 @@ class Mutator implements MutatorContract
      * @param  string $callable
      * @return array
      *
-     * @throws \Sofa\Eloquence\Mutator\InvalidCallableException
+     * @throws InvalidCallableException
      */
     protected function parse($callable)
     {
@@ -106,7 +107,7 @@ class Mutator implements MutatorContract
      * @param  string   $userCallable
      * @return callable
      *
-     * @throws \Sofa\Eloquence\Mutator\InvalidCallableException
+     * @throws InvalidCallableException
      */
     protected function parseClassMethod($userCallable)
     {
@@ -128,10 +129,10 @@ class Mutator implements MutatorContract
     /**
      * Get instance callable.
      *
-     * @param  \ReflectionMethod  $method
+     * @param ReflectionMethod $method
      * @return callable
      *
-     * @throws \Sofa\Eloquence\Mutator\InvalidCallableException
+     * @throws InvalidCallableException
      */
     protected function getInstanceMethod(ReflectionClass $class, ReflectionMethod $method)
     {
@@ -149,7 +150,7 @@ class Mutator implements MutatorContract
     /**
      * Determine whether instance can be instantiated.
      *
-     * @param  \ReflectionClass  $class
+     * @param ReflectionClass $class
      * @return boolean
      */
     protected function canInstantiate(ReflectionClass $class)

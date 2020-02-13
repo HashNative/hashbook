@@ -4,7 +4,7 @@
 
 @section('new_button')
 @permission('create-common-items')
-<span class="new-button"><a href="{{ route('items.create') }}" class="btn btn-success btn-sm"><span class="fa fa-plus"></span> &nbsp;{{ trans('general.add_new') }}</a></span>
+<span class="new-button"><a href="{{ route('items.create') }}" class="btn btn-danger btn-sm"><span class="fa fa-plus"></span> &nbsp;{{ trans('general.add_new') }}</a></span>
 <span><a href="{{ route('import.create', ['common', 'items']) }}" class="btn btn-default btn-sm"><span class="fa fa-download"></span> &nbsp;{{ trans('import.import') }}</a></span>
 @endpermission
 <span><a href="{{ route('items.export', request()->input()) }}" class="btn btn-default btn-sm"><span class="fa fa-upload"></span> &nbsp;{{ trans('general.export') }}</a></span>
@@ -47,7 +47,7 @@
                 <tbody>
                 @foreach($items as $item)
                     <tr>
-                        <td class="hidden-xs"><img src="{{ $item->picture ? Storage::url($item->picture->id) : asset('public/img/akaunting-logo-green.png') }}" class="img-thumbnail" width="50" alt="{{ $item->name }}"></td>
+                        <td class="hidden-xs"><img src="{{ $item->picture ? Storage::url($item->picture->id) : asset('public/img/Logo Final PNG.png') }}" class="img-thumbnail" width="50" alt="{{ $item->name }}"></td>
                         <td><a href="{{ route('items.edit', $item->id) }}">{{ $item->name }}</a></td>
                         <td class="hidden-xs">{{ $item->category ? $item->category->name : trans('general.na') }}</td>
                         <td class="hidden-xs">{{ $item->quantity }}</td>

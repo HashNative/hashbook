@@ -11,6 +11,7 @@
 
 namespace Monolog\Handler;
 
+use Aws\Sdk;
 use Monolog\TestCase;
 
 class DynamoDbHandlerTest extends TestCase
@@ -52,7 +53,7 @@ class DynamoDbHandlerTest extends TestCase
         $handler = new DynamoDbHandler($this->client, 'foo');
         $handler->setFormatter($formatter);
 
-        $isV3 = defined('Aws\Sdk::VERSION') && version_compare(\Aws\Sdk::VERSION, '3.0', '>=');
+        $isV3 = defined('Aws\Sdk::VERSION') && version_compare(Sdk::VERSION, '3.0', '>=');
         if ($isV3) {
             $expFormatted = array('foo' => array('N' => 1), 'bar' => array('N' => 2));
         } else {

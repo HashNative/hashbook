@@ -1,6 +1,8 @@
 <?php
 namespace Dompdf;
 
+use Svg\Document;
+
 class Helpers
 {
     /**
@@ -617,7 +619,7 @@ class Helpers
             }
             else {
                 if (strpos($data, "<svg") !== false) {
-                    $doc = new \Svg\Document();
+                    $doc = new Document();
                     $doc->loadFile($filename);
 
                     list($width, $height) = $doc->getDimensions();

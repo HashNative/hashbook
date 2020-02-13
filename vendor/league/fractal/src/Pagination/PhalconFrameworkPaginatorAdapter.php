@@ -11,6 +11,8 @@
 
 namespace League\Fractal\Pagination;
 
+use Phalcon\Paginator\AdapterInterface;
+
 /**
  * A paginator adapter for PhalconPHP/pagination.
  *
@@ -22,7 +24,7 @@ class PhalconFrameworkPaginatorAdapter implements PaginatorInterface
     /**
      * A slice of the result set to show in the pagination
      *
-     * @var \Phalcon\Paginator\AdapterInterface
+     * @var AdapterInterface
      */
     private $paginator;
 

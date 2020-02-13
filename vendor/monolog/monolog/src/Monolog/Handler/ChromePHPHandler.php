@@ -11,8 +11,11 @@
 
 namespace Monolog\Handler;
 
+use DateTime;
+use InvalidArgumentException;
 use Monolog\Formatter\ChromePHPFormatter;
 use Monolog\Logger;
+use RuntimeException;
 
 /**
  * Handler sending logs to the ChromePHP extension (http://www.chromephp.com/)
@@ -65,7 +68,7 @@ class ChromePHPHandler extends AbstractProcessingHandler
     {
         parent::__construct($level, $bubble);
         if (!function_exists('json_encode')) {
-            throw new \RuntimeException('PHP\'s json extension is required to use Monolog\'s ChromePHPHandler');
+            throw new RuntimeException('PHP\'s json extension is required to use Monolog\'s ChromePHPHandler');
         }
     }
 
@@ -145,7 +148,7 @@ class ChromePHPHandler extends AbstractProcessingHandler
                 'level' => Logger::WARNING,
                 'level_name' => Logger::getLevelName(Logger::WARNING),
                 'channel' => 'monolog',
-                'datetime' => new \DateTime(),
+                'datetime' => new DateTime(),
                 'extra' => array(),
             );
             self::$json['rows'][count(self::$json['rows']) - 1] = $this->getFormatter()->format($record);
@@ -191,7 +194,7 @@ class ChromePHPHandler extends AbstractProcessingHandler
     public function __get($property)
     {
         if ('sendHeaders' !== $property) {
-            throw new \InvalidArgumentException('Undefined property '.$property);
+            throw new InvalidArgumentException('Undefined property '.$property);
         }
 
         return static::$sendHeaders;
@@ -203,7 +206,7 @@ class ChromePHPHandler extends AbstractProcessingHandler
     public function __set($property, $value)
     {
         if ('sendHeaders' !== $property) {
-            throw new \InvalidArgumentException('Undefined property '.$property);
+            throw new InvalidArgumentException('Undefined property '.$property);
         }
 
         static::$sendHeaders = $value;

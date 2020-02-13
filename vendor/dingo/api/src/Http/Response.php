@@ -3,6 +3,10 @@
 namespace Dingo\Api\Http;
 
 use ArrayObject;
+use Dingo\Api\Http\Response\Format\Format;
+use Exception;
+use RuntimeException;
+use Symfony\Component\HttpFoundation\Cookie;
 use UnexpectedValueException;
 use Illuminate\Http\JsonResponse;
 use Dingo\Api\Transformer\Binding;
@@ -21,14 +25,14 @@ class Response extends IlluminateResponse
     /**
      * The exception that triggered the error response.
      *
-     * @var \Exception
+     * @var Exception
      */
     public $exception;
 
     /**
      * Transformer binding instance.
      *
-     * @var \Dingo\Api\Transformer\Binding
+     * @var Binding
      */
     protected $binding;
 
@@ -49,7 +53,7 @@ class Response extends IlluminateResponse
     /**
      * Event dispatcher instance.
      *
-     * @var \Illuminate\Events\Dispatcher
+     * @var EventDispatcher
      */
     protected static $events;
 
@@ -59,7 +63,7 @@ class Response extends IlluminateResponse
      * @param mixed                          $content
      * @param int                            $status
      * @param array                          $headers
-     * @param \Dingo\Api\Transformer\Binding $binding
+     * @param Binding $binding
      *
      * @return void
      */
@@ -73,9 +77,9 @@ class Response extends IlluminateResponse
     /**
      * Make an API response from an existing Illuminate response.
      *
-     * @param \Illuminate\Http\Response $old
+     * @param IlluminateResponse $old
      *
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public static function makeFromExisting(IlluminateResponse $old)
     {
@@ -89,9 +93,9 @@ class Response extends IlluminateResponse
     /**
      * Make an API response from an existing JSON response.
      *
-     * @param \Illuminate\Http\JsonResponse $json
+     * @param JsonResponse $json
      *
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public static function makeFromJson(JsonResponse $json)
     {
@@ -107,7 +111,7 @@ class Response extends IlluminateResponse
      *
      * @param string $format
      *
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function morph($format = 'json')
     {
@@ -189,7 +193,7 @@ class Response extends IlluminateResponse
     /**
      * Set the event dispatcher instance.
      *
-     * @param \Illuminate\Events\Dispatcher $events
+     * @param EventDispatcher $events
      *
      * @return void
      */
@@ -203,9 +207,9 @@ class Response extends IlluminateResponse
      *
      * @param string $format
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      *
-     * @return \Dingo\Api\Http\Response\Format\Format
+     * @return Format
      */
     public static function getFormatter($format)
     {
@@ -244,7 +248,7 @@ class Response extends IlluminateResponse
      * Add a response formatter.
      *
      * @param string                                 $key
-     * @param \Dingo\Api\Http\Response\Format\Format $formatter
+     * @param Format $formatter
      *
      * @return void
      */
@@ -256,7 +260,7 @@ class Response extends IlluminateResponse
     /**
      * Set the transformer factory instance.
      *
-     * @param \Dingo\Api\Transformer\Factory $transformer
+     * @param TransformerFactory $transformer
      *
      * @return void
      */
@@ -268,7 +272,7 @@ class Response extends IlluminateResponse
     /**
      * Get the transformer instance.
      *
-     * @return \Dingo\Api\Transformer\Factory
+     * @return TransformerFactory
      */
     public static function getTransformer()
     {
@@ -281,7 +285,7 @@ class Response extends IlluminateResponse
      * @param string $key
      * @param mixed  $value
      *
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function addMeta($key, $value)
     {
@@ -296,7 +300,7 @@ class Response extends IlluminateResponse
      * @param string $key
      * @param mixed  $value
      *
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function meta($key, $value)
     {
@@ -308,7 +312,7 @@ class Response extends IlluminateResponse
      *
      * @param array $meta
      *
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function setMeta(array $meta)
     {
@@ -330,9 +334,9 @@ class Response extends IlluminateResponse
     /**
      * Add a cookie to the response.
      *
-     * @param \Symfony\Component\HttpFoundation\Cookie|mixed $cookie
+     * @param Cookie|mixed $cookie
      *
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function cookie($cookie)
     {
@@ -346,7 +350,7 @@ class Response extends IlluminateResponse
      * @param string $value
      * @param bool   $replace
      *
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function withHeader($key, $value, $replace = true)
     {
@@ -358,7 +362,7 @@ class Response extends IlluminateResponse
      *
      * @param int $statusCode
      *
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     public function statusCode($statusCode)
     {

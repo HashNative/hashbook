@@ -2,7 +2,7 @@
 
 namespace Sofa\Hookable;
 
-class ArgumentBag implements \Sofa\Hookable\Contracts\ArgumentBag
+class ArgumentBag implements Contracts\ArgumentBag
 {
     /**
      * Arguments being passed.

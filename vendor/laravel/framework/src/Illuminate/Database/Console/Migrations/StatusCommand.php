@@ -25,15 +25,15 @@ class StatusCommand extends BaseCommand
     /**
      * The migrator instance.
      *
-     * @var \Illuminate\Database\Migrations\Migrator
+     * @var Migrator
      */
     protected $migrator;
 
     /**
      * Create a new migration rollback command instance.
      *
-     * @param  \Illuminate\Database\Migrations\Migrator $migrator
-     * @return \Illuminate\Database\Console\Migrations\StatusCommand
+     * @param Migrator $migrator
+     * @return StatusCommand
      */
     public function __construct(Migrator $migrator)
     {
@@ -68,7 +68,7 @@ class StatusCommand extends BaseCommand
      * Get the status for the given ran migrations.
      *
      * @param  array  $ran
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     protected function getStatusFor(array $ran)
     {

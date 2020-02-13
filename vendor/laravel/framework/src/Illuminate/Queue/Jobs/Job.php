@@ -2,6 +2,8 @@
 
 namespace Illuminate\Queue\Jobs;
 
+use Exception;
+use Illuminate\Container\Container;
 use Illuminate\Queue\InteractsWithTime;
 
 abstract class Job
@@ -18,7 +20,7 @@ abstract class Job
     /**
      * The IoC container instance.
      *
-     * @var \Illuminate\Container\Container
+     * @var Container
      */
     protected $container;
 
@@ -143,7 +145,7 @@ abstract class Job
     /**
      * Process an exception that caused the job to fail.
      *
-     * @param  \Exception  $e
+     * @param  Exception  $e
      * @return void
      */
     public function failed($e)
@@ -245,7 +247,7 @@ abstract class Job
     /**
      * Get the service container instance.
      *
-     * @return \Illuminate\Container\Container
+     * @return Container
      */
     public function getContainer()
     {

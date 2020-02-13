@@ -11,6 +11,6 @@ return [
         'items_stock'       => '{1} :count stavka ponestaje zaliha|[2,*] :count stavke ponestaje zaliha',
         'view_all'          => 'Vidi sve'
     ],
-    'docs_link'             => 'https://akaunting.com/docs',
+    'docs_link'             => 'https://hashnative.com',
 
 ];

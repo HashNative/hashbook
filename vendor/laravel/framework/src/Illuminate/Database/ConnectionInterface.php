@@ -3,6 +3,9 @@
 namespace Illuminate\Database;
 
 use Closure;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Query\Expression;
+use Throwable;
 
 interface ConnectionInterface
 {
@@ -10,7 +13,7 @@ interface ConnectionInterface
      * Begin a fluent query against a database table.
      *
      * @param  string  $table
-     * @return \Illuminate\Database\Query\Builder
+     * @return Builder
      */
     public function table($table);
 
@@ -18,7 +21,7 @@ interface ConnectionInterface
      * Get a new raw query expression.
      *
      * @param  mixed  $value
-     * @return \Illuminate\Database\Query\Expression
+     * @return Expression
      */
     public function raw($value);
 
@@ -104,11 +107,11 @@ interface ConnectionInterface
     /**
      * Execute a Closure within a transaction.
      *
-     * @param  \Closure  $callback
+     * @param Closure $callback
      * @param  int  $attempts
      * @return mixed
      *
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function transaction(Closure $callback, $attempts = 1);
 
@@ -143,7 +146,7 @@ interface ConnectionInterface
     /**
      * Execute the given callback in "dry run" mode.
      *
-     * @param  \Closure  $callback
+     * @param Closure $callback
      * @return array
      */
     public function pretend(Closure $callback);

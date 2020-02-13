@@ -6,6 +6,8 @@ namespace PhpParser;
  * This parser is based on a skeleton written by Moriyoshi Koizumi, which in
  * turn is based on work by Masato Bito.
  */
+
+use LogicException;
 use PhpParser\Node\Name;
 use PhpParser\Node\Param;
 use PhpParser\Node\Scalar\LNumber;
@@ -18,6 +20,8 @@ use PhpParser\Node\Stmt\Namespace_;
 use PhpParser\Node\Stmt\Property;
 use PhpParser\Node\Stmt\TryCatch;
 use PhpParser\Node\Stmt\UseUse;
+use RangeException;
+use RuntimeException;
 
 abstract class ParserAbstract implements Parser
 {
@@ -122,7 +126,7 @@ abstract class ParserAbstract implements Parser
         $this->errors = array();
 
         if (isset($options['throwOnError'])) {
-            throw new \LogicException(
+            throw new LogicException(
                 '"throwOnError" is no longer supported, use "errorHandler" instead');
         }
     }
@@ -191,7 +195,7 @@ abstract class ParserAbstract implements Parser
                         : $this->invalidSymbol;
 
                     if ($symbol === $this->invalidSymbol) {
-                        throw new \RangeException(sprintf(
+                        throw new RangeException(sprintf(
                             'The lexer returned an invalid token (id=%d, value=%s)',
                             $tokenId, $tokenValue
                         ));
@@ -343,7 +347,7 @@ abstract class ParserAbstract implements Parser
             }
         }
 
-        throw new \RuntimeException('Reached end of parser loop');
+        throw new RuntimeException('Reached end of parser loop');
     }
 
     protected function emitError(Error $error) {

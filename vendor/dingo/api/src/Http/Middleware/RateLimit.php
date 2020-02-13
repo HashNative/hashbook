@@ -8,28 +8,29 @@ use Dingo\Api\Routing\Router;
 use Dingo\Api\Http\InternalRequest;
 use Dingo\Api\Http\RateLimit\Handler;
 use Dingo\Api\Exception\RateLimitExceededException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class RateLimit
 {
     /**
      * Router instance.
      *
-     * @var \Dingo\Api\Routing\Router
+     * @var Router
      */
     protected $router;
 
     /**
      * Rate limit handler instance.
      *
-     * @var \Dingo\Api\Http\RateLimit\Handler
+     * @var Handler
      */
     protected $handler;
 
     /**
      * Create a new rate limit middleware instance.
      *
-     * @param \Dingo\Api\Routing\Router         $router
-     * @param \Dingo\Api\Http\RateLimit\Handler $handler
+     * @param Router $router
+     * @param Handler $handler
      *
      * @return void
      */
@@ -43,9 +44,9 @@ class RateLimit
      * Perform rate limiting before a request is executed.
      *
      * @param \Dingo\Api\Http\Request $request
-     * @param \Closure                $next
+     * @param Closure $next
      *
-     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+     * @throws HttpException
      *
      * @return mixed
      */
@@ -79,9 +80,9 @@ class RateLimit
     /**
      * Send the response with the rate limit headers.
      *
-     * @param \Dingo\Api\Http\Response $response
+     * @param Response $response
      *
-     * @return \Dingo\Api\Http\Response
+     * @return Response
      */
     protected function responseWithHeaders($response)
     {

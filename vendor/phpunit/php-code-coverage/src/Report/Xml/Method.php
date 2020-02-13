@@ -10,14 +10,16 @@
 
 namespace SebastianBergmann\CodeCoverage\Report\Xml;
 
+use DOMElement;
+
 class Method
 {
     /**
-     * @var \DOMElement
+     * @var DOMElement
      */
     private $contextNode;
 
-    public function __construct(\DOMElement $context, $name)
+    public function __construct(DOMElement $context, $name)
     {
         $this->contextNode = $context;
 

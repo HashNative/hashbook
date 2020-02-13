@@ -9,7 +9,7 @@ trait InteractsWithAuthentication
     /**
      * Set the currently logged in user for the application.
      *
-     * @param  \Illuminate\Contracts\Auth\Authenticatable  $user
+     * @param UserContract $user
      * @param  string|null  $driver
      * @return $this
      */
@@ -23,7 +23,7 @@ trait InteractsWithAuthentication
     /**
      * Set the currently logged in user for the application.
      *
-     * @param  \Illuminate\Contracts\Auth\Authenticatable  $user
+     * @param UserContract $user
      * @param  string|null  $driver
      * @return void
      */

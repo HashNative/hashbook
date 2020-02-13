@@ -14,29 +14,29 @@ class PasswordBroker implements PasswordBrokerContract
     /**
      * The password token repository.
      *
-     * @var \Illuminate\Auth\Passwords\TokenRepositoryInterface
+     * @var TokenRepositoryInterface
      */
     protected $tokens;
 
     /**
      * The user provider implementation.
      *
-     * @var \Illuminate\Contracts\Auth\UserProvider
+     * @var UserProvider
      */
     protected $users;
 
     /**
      * The custom password validator callback.
      *
-     * @var \Closure
+     * @var Closure
      */
     protected $passwordValidator;
 
     /**
      * Create a new password broker instance.
      *
-     * @param  \Illuminate\Auth\Passwords\TokenRepositoryInterface  $tokens
-     * @param  \Illuminate\Contracts\Auth\UserProvider  $users
+     * @param TokenRepositoryInterface $tokens
+     * @param UserProvider $users
      * @return void
      */
     public function __construct(TokenRepositoryInterface $tokens,
@@ -77,7 +77,7 @@ class PasswordBroker implements PasswordBrokerContract
      * Reset the password for the given token.
      *
      * @param  array  $credentials
-     * @param  \Closure  $callback
+     * @param Closure $callback
      * @return mixed
      */
     public function reset(array $credentials, Closure $callback)
@@ -107,7 +107,7 @@ class PasswordBroker implements PasswordBrokerContract
      * Validate a password reset for the given credentials.
      *
      * @param  array  $credentials
-     * @return \Illuminate\Contracts\Auth\CanResetPassword
+     * @return CanResetPasswordContract
      */
     protected function validateReset(array $credentials)
     {
@@ -129,7 +129,7 @@ class PasswordBroker implements PasswordBrokerContract
     /**
      * Set a custom password validator.
      *
-     * @param  \Closure  $callback
+     * @param Closure $callback
      * @return void
      */
     public function validator(Closure $callback)
@@ -179,9 +179,9 @@ class PasswordBroker implements PasswordBrokerContract
      * Get the user for the given credentials.
      *
      * @param  array  $credentials
-     * @return \Illuminate\Contracts\Auth\CanResetPassword
+     * @return CanResetPasswordContract
      *
-     * @throws \UnexpectedValueException
+     * @throws UnexpectedValueException
      */
     public function getUser(array $credentials)
     {
@@ -210,7 +210,7 @@ class PasswordBroker implements PasswordBrokerContract
     /**
      * Delete password reset tokens of the given user.
      *
-     * @param  \Illuminate\Contracts\Auth\CanResetPassword $user
+     * @param CanResetPasswordContract $user
      * @return void
      */
     public function deleteToken(CanResetPasswordContract $user)
@@ -233,7 +233,7 @@ class PasswordBroker implements PasswordBrokerContract
     /**
      * Get the password reset token repository implementation.
      *
-     * @return \Illuminate\Auth\Passwords\TokenRepositoryInterface
+     * @return TokenRepositoryInterface
      */
     public function getRepository()
     {

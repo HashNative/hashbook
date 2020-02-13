@@ -47,7 +47,7 @@ class Listener
     /**
      * The output handler callback.
      *
-     * @var \Closure|null
+     * @var Closure|null
      */
     protected $outputHandler;
 
@@ -104,7 +104,7 @@ class Listener
      *
      * @param  string  $connection
      * @param  string  $queue
-     * @param  \Illuminate\Queue\ListenerOptions  $options
+     * @param ListenerOptions $options
      * @return void
      */
     public function listen($connection, $queue, ListenerOptions $options)
@@ -121,8 +121,8 @@ class Listener
      *
      * @param  string  $connection
      * @param  string  $queue
-     * @param  \Illuminate\Queue\ListenerOptions  $options
-     * @return \Symfony\Component\Process\Process
+     * @param ListenerOptions $options
+     * @return Process
      */
     public function makeProcess($connection, $queue, ListenerOptions $options)
     {
@@ -151,7 +151,7 @@ class Listener
      * Add the environment option to the given command.
      *
      * @param  string  $command
-     * @param  \Illuminate\Queue\ListenerOptions  $options
+     * @param ListenerOptions $options
      * @return string
      */
     protected function addEnvironment($command, ListenerOptions $options)
@@ -165,7 +165,7 @@ class Listener
      * @param  string  $command
      * @param  string  $connection
      * @param  string  $queue
-     * @param  \Illuminate\Queue\ListenerOptions  $options
+     * @param ListenerOptions $options
      * @return string
      */
     protected function formatCommand($command, $connection, $queue, ListenerOptions $options)
@@ -182,7 +182,7 @@ class Listener
     /**
      * Run the given process.
      *
-     * @param  \Symfony\Component\Process\Process  $process
+     * @param Process $process
      * @param  int  $memory
      * @return void
      */
@@ -238,7 +238,7 @@ class Listener
     /**
      * Set the output handler callback.
      *
-     * @param  \Closure  $outputHandler
+     * @param Closure $outputHandler
      * @return void
      */
     public function setOutputHandler(Closure $outputHandler)

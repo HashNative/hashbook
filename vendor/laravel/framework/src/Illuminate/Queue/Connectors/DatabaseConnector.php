@@ -2,6 +2,7 @@
 
 namespace Illuminate\Queue\Connectors;
 
+use Illuminate\Contracts\Queue\Queue;
 use Illuminate\Support\Arr;
 use Illuminate\Queue\DatabaseQueue;
 use Illuminate\Database\ConnectionResolverInterface;
@@ -11,14 +12,14 @@ class DatabaseConnector implements ConnectorInterface
     /**
      * Database connections.
      *
-     * @var \Illuminate\Database\ConnectionResolverInterface
+     * @var ConnectionResolverInterface
      */
     protected $connections;
 
     /**
      * Create a new connector instance.
      *
-     * @param  \Illuminate\Database\ConnectionResolverInterface  $connections
+     * @param ConnectionResolverInterface $connections
      * @return void
      */
     public function __construct(ConnectionResolverInterface $connections)
@@ -30,7 +31,7 @@ class DatabaseConnector implements ConnectorInterface
      * Establish a queue connection.
      *
      * @param  array  $config
-     * @return \Illuminate\Contracts\Queue\Queue
+     * @return Queue
      */
     public function connect(array $config)
     {

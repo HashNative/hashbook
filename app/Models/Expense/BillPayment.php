@@ -7,6 +7,7 @@ use App\Traits\Currencies;
 use App\Traits\DateTime;
 use App\Traits\Media;
 use Date;
+use Illuminate\Database\Eloquent\Builder;
 
 class BillPayment extends Model
 {
@@ -78,8 +79,8 @@ class BillPayment extends Model
     /**
      * Scope paid invoice.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @param Builder $query
+     * @return Builder
      */
     public function scopePaid($query)
     {

@@ -4,10 +4,12 @@ namespace App\Models\Common;
 
 use Auth;
 use EloquentFilter\Filterable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Kyslik\ColumnSortable\Sortable;
 use App\Traits\Media;
+use Route;
 
 class Company extends Eloquent
 {
@@ -175,7 +177,7 @@ class Company extends Eloquent
      */
     public function modelFilter()
     {
-        list($folder, $file) = explode('/', \Route::current()->uri());
+        list($folder, $file) = explode('/', Route::current()->uri());
 
         if (empty($folder) || empty($file)) {
             return $this->provideFilter();
@@ -189,10 +191,10 @@ class Company extends Eloquent
     /**
      * Scope to get all rows filtered, sorted and paginated.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param Builder $query
      * @param $sort
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public function scopeCollect($query, $sort = 'name')
     {
@@ -207,9 +209,9 @@ class Company extends Eloquent
     /**
      * Scope to only include companies of a given enabled value.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param Builder $query
      * @param mixed $value
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public function scopeEnabled($query, $value = 1)
     {
@@ -219,10 +221,10 @@ class Company extends Eloquent
     /**
      * Sort by company name
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param Builder $query
      * @param $direction
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public function nameSortable($query, $direction)
     {
@@ -235,10 +237,10 @@ class Company extends Eloquent
     /**
      * Sort by company email
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param Builder $query
      * @param $direction
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public function emailSortable($query, $direction)
     {

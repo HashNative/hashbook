@@ -2,10 +2,12 @@
 
 namespace PhpParser\Unserializer;
 
+use DomainException;
 use PhpParser\Comment;
 use PhpParser\Node\Scalar;
+use PHPUnit_Framework_TestCase;
 
-class XMLTest extends \PHPUnit_Framework_TestCase
+class XMLTest extends PHPUnit_Framework_TestCase
 {
     public function testNode() {
         $xml = <<<XML
@@ -90,7 +92,7 @@ XML;
     }
 
     /**
-     * @expectedException        \DomainException
+     * @expectedException        DomainException
      * @expectedExceptionMessage AST root element not found
      */
     public function testWrongRootElementError() {

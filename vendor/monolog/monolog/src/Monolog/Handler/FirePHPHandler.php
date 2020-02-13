@@ -11,6 +11,7 @@
 
 namespace Monolog\Handler;
 
+use InvalidArgumentException;
 use Monolog\Formatter\WildfireFormatter;
 
 /**
@@ -175,7 +176,7 @@ class FirePHPHandler extends AbstractProcessingHandler
     public function __get($property)
     {
         if ('sendHeaders' !== $property) {
-            throw new \InvalidArgumentException('Undefined property '.$property);
+            throw new InvalidArgumentException('Undefined property '.$property);
         }
 
         return static::$sendHeaders;
@@ -187,7 +188,7 @@ class FirePHPHandler extends AbstractProcessingHandler
     public function __set($property, $value)
     {
         if ('sendHeaders' !== $property) {
-            throw new \InvalidArgumentException('Undefined property '.$property);
+            throw new InvalidArgumentException('Undefined property '.$property);
         }
 
         static::$sendHeaders = $value;

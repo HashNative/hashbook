@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Common;
 use App\Http\Controllers\ApiController;
 use Date;
 use Dingo\Api\Routing\Helpers;
+use Illuminate\Http\JsonResponse;
 
 class Ping extends ApiController
 {
@@ -13,7 +14,7 @@ class Ping extends ApiController
     /**
      * Responds with a status for heath check.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function index()
     {

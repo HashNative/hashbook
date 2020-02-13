@@ -30,7 +30,7 @@ class PhpRedisConnector
      * @param  array  $config
      * @param  array  $clusterOptions
      * @param  array  $options
-     * @return \Illuminate\Redis\Connections\PhpRedisClusterConnection
+     * @return PhpRedisClusterConnection
      */
     public function connectToCluster(array $config, array $clusterOptions, array $options)
     {
@@ -58,7 +58,7 @@ class PhpRedisConnector
      * Create the Redis client instance.
      *
      * @param  array  $config
-     * @return \Redis
+     * @return Redis
      */
     protected function createClient(array $config)
     {
@@ -86,7 +86,7 @@ class PhpRedisConnector
     /**
      * Establish a connection with the Redis host.
      *
-     * @param  \Redis  $client
+     * @param Redis $client
      * @param  array  $config
      * @return void
      */
@@ -102,7 +102,7 @@ class PhpRedisConnector
      *
      * @param  array  $servers
      * @param  array  $options
-     * @return \RedisCluster
+     * @return RedisCluster
      */
     protected function createRedisClusterInstance(array $servers, array $options)
     {

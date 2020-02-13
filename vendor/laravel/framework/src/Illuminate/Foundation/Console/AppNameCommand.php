@@ -27,14 +27,14 @@ class AppNameCommand extends Command
     /**
      * The Composer class instance.
      *
-     * @var \Illuminate\Support\Composer
+     * @var Composer
      */
     protected $composer;
 
     /**
      * The filesystem instance.
      *
-     * @var \Illuminate\Filesystem\Filesystem
+     * @var Filesystem
      */
     protected $files;
 
@@ -48,8 +48,8 @@ class AppNameCommand extends Command
     /**
      * Create a new key generator command.
      *
-     * @param  \Illuminate\Support\Composer  $composer
-     * @param  \Illuminate\Filesystem\Filesystem  $files
+     * @param Composer $composer
+     * @param Filesystem $files
      * @return void
      */
     public function __construct(Composer $composer, Filesystem $files)

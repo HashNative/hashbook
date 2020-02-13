@@ -2,11 +2,14 @@
 
 namespace PhpParser\Builder;
 
+use LogicException;
 use PhpParser\Node;
 use PhpParser\Node\Expr;
 use PhpParser\Node\Scalar;
+use PHPUnit_Framework_TestCase;
+use stdClass;
 
-class ParamTest extends \PHPUnit_Framework_TestCase
+class ParamTest extends PHPUnit_Framework_TestCase
 {
     public function createParamBuilder($name) {
         return new Param($name);
@@ -130,7 +133,7 @@ class ParamTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \LogicException
+     * @expectedException LogicException
      * @expectedExceptionMessage Parameter type cannot be void
      */
     public function testVoidTypeError() {
@@ -138,11 +141,11 @@ class ParamTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \LogicException
+     * @expectedException LogicException
      * @expectedExceptionMessage Type must be a string, or an instance of Name or NullableType
      */
     public function testInvalidTypeError() {
-        $this->createParamBuilder('test')->setTypeHint(new \stdClass);
+        $this->createParamBuilder('test')->setTypeHint(new stdClass);
     }
 
     public function testByRef() {

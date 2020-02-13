@@ -2,13 +2,18 @@
 
 namespace PhpParser;
 
-abstract class CodeTestAbstract extends \PHPUnit_Framework_TestCase
+use PHPUnit_Framework_TestCase;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+use RegexIterator;
+
+abstract class CodeTestAbstract extends PHPUnit_Framework_TestCase
 {
     protected function getTests($directory, $fileExtension) {
         $directory = realpath($directory);
-        $it = new \RecursiveDirectoryIterator($directory);
-        $it = new \RecursiveIteratorIterator($it, \RecursiveIteratorIterator::LEAVES_ONLY);
-        $it = new \RegexIterator($it, '(\.' . preg_quote($fileExtension) . '$)');
+        $it = new RecursiveDirectoryIterator($directory);
+        $it = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::LEAVES_ONLY);
+        $it = new RegexIterator($it, '(\.' . preg_quote($fileExtension) . '$)');
 
         $tests = array();
         foreach ($it as $file) {

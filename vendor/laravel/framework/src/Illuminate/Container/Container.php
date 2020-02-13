@@ -4,6 +4,7 @@ namespace Illuminate\Container;
 
 use Closure;
 use ArrayAccess;
+use InvalidArgumentException;
 use LogicException;
 use ReflectionClass;
 use ReflectionParameter;
@@ -199,7 +200,7 @@ class Container implements ArrayAccess, ContainerContract
      * Register a binding with the container.
      *
      * @param  string|array  $abstract
-     * @param  \Closure|string|null  $concrete
+     * @param Closure|string|null  $concrete
      * @param  bool  $shared
      * @return void
      */
@@ -236,7 +237,7 @@ class Container implements ArrayAccess, ContainerContract
      *
      * @param  string  $abstract
      * @param  string  $concrete
-     * @return \Closure
+     * @return Closure
      */
     protected function getClosure($abstract, $concrete)
     {
@@ -264,7 +265,7 @@ class Container implements ArrayAccess, ContainerContract
      * Bind a callback to resolve with Container::call.
      *
      * @param  string  $method
-     * @param  \Closure  $callback
+     * @param Closure $callback
      * @return void
      */
     public function bindMethod($method, $callback)
@@ -289,7 +290,7 @@ class Container implements ArrayAccess, ContainerContract
      *
      * @param  string  $concrete
      * @param  string  $abstract
-     * @param  \Closure|string  $implementation
+     * @param Closure|string  $implementation
      * @return void
      */
     public function addContextualBinding($concrete, $abstract, $implementation)
@@ -301,7 +302,7 @@ class Container implements ArrayAccess, ContainerContract
      * Register a binding if it hasn't already been registered.
      *
      * @param  string  $abstract
-     * @param  \Closure|string|null  $concrete
+     * @param Closure|string|null  $concrete
      * @param  bool  $shared
      * @return void
      */
@@ -316,7 +317,7 @@ class Container implements ArrayAccess, ContainerContract
      * Register a shared binding in the container.
      *
      * @param  string|array  $abstract
-     * @param  \Closure|string|null  $concrete
+     * @param Closure|string|null  $concrete
      * @return void
      */
     public function singleton($abstract, $concrete = null)
@@ -328,10 +329,10 @@ class Container implements ArrayAccess, ContainerContract
      * "Extend" an abstract type in the container.
      *
      * @param  string    $abstract
-     * @param  \Closure  $closure
+     * @param Closure $closure
      * @return void
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function extend($abstract, Closure $closure)
     {
@@ -455,7 +456,7 @@ class Container implements ArrayAccess, ContainerContract
      * Bind a new callback to an abstract's rebind event.
      *
      * @param  string    $abstract
-     * @param  \Closure  $callback
+     * @param Closure $callback
      * @return mixed
      */
     public function rebinding($abstract, Closure $callback)
@@ -515,9 +516,9 @@ class Container implements ArrayAccess, ContainerContract
     /**
      * Wrap the given closure such that its dependencies will be injected when executed.
      *
-     * @param  \Closure  $callback
+     * @param Closure $callback
      * @param  array  $parameters
-     * @return \Closure
+     * @return Closure
      */
     public function wrap(Closure $callback, array $parameters = [])
     {
@@ -543,7 +544,7 @@ class Container implements ArrayAccess, ContainerContract
      * Get a closure to resolve the given type from the container.
      *
      * @param  string  $abstract
-     * @return \Closure
+     * @return Closure
      */
     public function factory($abstract)
     {
@@ -715,7 +716,7 @@ class Container implements ArrayAccess, ContainerContract
      * @param  string  $concrete
      * @return mixed
      *
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws BindingResolutionException
      */
     public function build($concrete)
     {
@@ -796,7 +797,7 @@ class Container implements ArrayAccess, ContainerContract
     /**
      * Determine if the given dependency has a parameter override from makeWith.
      *
-     * @param  \ReflectionParameter  $dependency
+     * @param ReflectionParameter $dependency
      * @return bool
      */
     protected function hasParameterOverride($dependency)
@@ -809,7 +810,7 @@ class Container implements ArrayAccess, ContainerContract
     /**
      * Get a parameter override for a dependency.
      *
-     * @param  \ReflectionParameter  $dependency
+     * @param ReflectionParameter $dependency
      * @return mixed
      */
     protected function getParameterOverride($dependency)
@@ -830,10 +831,10 @@ class Container implements ArrayAccess, ContainerContract
     /**
      * Resolve a non-class hinted primitive dependency.
      *
-     * @param  \ReflectionParameter  $parameter
+     * @param ReflectionParameter $parameter
      * @return mixed
      *
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws BindingResolutionException
      */
     protected function resolvePrimitive(ReflectionParameter $parameter)
     {
@@ -851,10 +852,10 @@ class Container implements ArrayAccess, ContainerContract
     /**
      * Resolve a class based dependency from the container.
      *
-     * @param  \ReflectionParameter  $parameter
+     * @param ReflectionParameter $parameter
      * @return mixed
      *
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws BindingResolutionException
      */
     protected function resolveClass(ReflectionParameter $parameter)
     {
@@ -880,7 +881,7 @@ class Container implements ArrayAccess, ContainerContract
      * @param  string  $concrete
      * @return void
      *
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws BindingResolutionException
      */
     protected function notInstantiable($concrete)
     {
@@ -898,10 +899,10 @@ class Container implements ArrayAccess, ContainerContract
     /**
      * Throw an exception for an unresolvable primitive.
      *
-     * @param  \ReflectionParameter  $parameter
+     * @param ReflectionParameter $parameter
      * @return void
      *
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws BindingResolutionException
      */
     protected function unresolvablePrimitive(ReflectionParameter $parameter)
     {
@@ -914,7 +915,7 @@ class Container implements ArrayAccess, ContainerContract
      * Register a new resolving callback.
      *
      * @param  string    $abstract
-     * @param  \Closure|null  $callback
+     * @param Closure|null  $callback
      * @return void
      */
     public function resolving($abstract, Closure $callback = null)
@@ -934,7 +935,7 @@ class Container implements ArrayAccess, ContainerContract
      * Register a new after resolving callback for all types.
      *
      * @param  string   $abstract
-     * @param  \Closure|null $callback
+     * @param Closure|null $callback
      * @return void
      */
     public function afterResolving($abstract, Closure $callback = null)
@@ -1036,7 +1037,7 @@ class Container implements ArrayAccess, ContainerContract
      * @param  string  $abstract
      * @return string
      *
-     * @throws \LogicException
+     * @throws LogicException
      */
     public function getAlias($abstract)
     {
@@ -1142,7 +1143,7 @@ class Container implements ArrayAccess, ContainerContract
     /**
      * Set the shared instance of the container.
      *
-     * @param  \Illuminate\Contracts\Container\Container|null  $container
+     * @param ContainerContract|null  $container
      * @return static
      */
     public static function setInstance(ContainerContract $container = null)

@@ -11,9 +11,11 @@
 
 namespace Monolog\Formatter;
 
+use DateTime;
 use Monolog\Logger;
+use PHPUnit_Framework_TestCase;
 
-class ChromePHPFormatterTest extends \PHPUnit_Framework_TestCase
+class ChromePHPFormatterTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @covers Monolog\Formatter\ChromePHPFormatter::format
@@ -26,7 +28,7 @@ class ChromePHPFormatterTest extends \PHPUnit_Framework_TestCase
             'level_name' => 'ERROR',
             'channel' => 'meh',
             'context' => array('from' => 'logger'),
-            'datetime' => new \DateTime("@0"),
+            'datetime' => new DateTime("@0"),
             'extra' => array('ip' => '127.0.0.1'),
             'message' => 'log',
         );
@@ -59,7 +61,7 @@ class ChromePHPFormatterTest extends \PHPUnit_Framework_TestCase
             'level_name' => 'CRITICAL',
             'channel' => 'meh',
             'context' => array('from' => 'logger'),
-            'datetime' => new \DateTime("@0"),
+            'datetime' => new DateTime("@0"),
             'extra' => array('ip' => '127.0.0.1', 'file' => 'test', 'line' => 14),
             'message' => 'log',
         );
@@ -92,7 +94,7 @@ class ChromePHPFormatterTest extends \PHPUnit_Framework_TestCase
             'level_name' => 'DEBUG',
             'channel' => 'meh',
             'context' => array(),
-            'datetime' => new \DateTime("@0"),
+            'datetime' => new DateTime("@0"),
             'extra' => array(),
             'message' => 'log',
         );
@@ -122,7 +124,7 @@ class ChromePHPFormatterTest extends \PHPUnit_Framework_TestCase
                 'level_name' => 'INFO',
                 'channel' => 'meh',
                 'context' => array(),
-                'datetime' => new \DateTime("@0"),
+                'datetime' => new DateTime("@0"),
                 'extra' => array(),
                 'message' => 'log',
             ),
@@ -131,7 +133,7 @@ class ChromePHPFormatterTest extends \PHPUnit_Framework_TestCase
                 'level_name' => 'WARNING',
                 'channel' => 'foo',
                 'context' => array(),
-                'datetime' => new \DateTime("@0"),
+                'datetime' => new DateTime("@0"),
                 'extra' => array(),
                 'message' => 'log2',
             ),

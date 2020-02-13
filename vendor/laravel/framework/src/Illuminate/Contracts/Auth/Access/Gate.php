@@ -2,6 +2,11 @@
 
 namespace Illuminate\Contracts\Auth\Access;
 
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\Access\Response;
+use Illuminate\Contracts\Auth\Authenticatable;
+use InvalidArgumentException;
+
 interface Gate
 {
     /**
@@ -78,9 +83,9 @@ interface Gate
      *
      * @param  string  $ability
      * @param  array|mixed  $arguments
-     * @return \Illuminate\Auth\Access\Response
+     * @return Response
      *
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @throws AuthorizationException
      */
     public function authorize($ability, $arguments = []);
 
@@ -90,14 +95,14 @@ interface Gate
      * @param  object|string  $class
      * @return mixed
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function getPolicyFor($class);
 
     /**
      * Get a guard instance for the given user.
      *
-     * @param  \Illuminate\Contracts\Auth\Authenticatable|mixed  $user
+     * @param  Authenticatable|mixed  $user
      * @return static
      */
     public function forUser($user);

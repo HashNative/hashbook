@@ -11,10 +11,15 @@
 
 namespace League\Fractal;
 
+use ArrayAccess;
+use ArrayIterator;
+use IteratorAggregate;
+use LogicException;
+
 /**
  * A handy interface for getting at include parameters.
  */
-class ParamBag implements \ArrayAccess, \IteratorAggregate
+class ParamBag implements ArrayAccess, IteratorAggregate
 {
     /**
      * @var array
@@ -75,13 +80,13 @@ class ParamBag implements \ArrayAccess, \IteratorAggregate
      * @param string $key
      * @param mixed  $value
      *
-     * @throws \LogicException
+     * @throws LogicException
      *
      * @return void
      */
     public function __set($key, $value)
     {
-        throw new \LogicException('Modifying parameters is not permitted');
+        throw new LogicException('Modifying parameters is not permitted');
     }
 
     /**
@@ -89,13 +94,13 @@ class ParamBag implements \ArrayAccess, \IteratorAggregate
      *
      * @param string $key
      *
-     * @throws \LogicException
+     * @throws LogicException
      *
      * @return void
      */
     public function __unset($key)
     {
-        throw new \LogicException('Modifying parameters is not permitted');
+        throw new LogicException('Modifying parameters is not permitted');
     }
 
     /**
@@ -128,13 +133,13 @@ class ParamBag implements \ArrayAccess, \IteratorAggregate
      * @param string $key
      * @param mixed  $value
      *
-     * @throws \LogicException
+     * @throws LogicException
      *
      * @return void
      */
     public function offsetSet($key, $value)
     {
-        throw new \LogicException('Modifying parameters is not permitted');
+        throw new LogicException('Modifying parameters is not permitted');
     }
 
     /**
@@ -142,22 +147,22 @@ class ParamBag implements \ArrayAccess, \IteratorAggregate
      *
      * @param string $key
      *
-     * @throws \LogicException
+     * @throws LogicException
      *
      * @return void
      */
     public function offsetUnset($key)
     {
-        throw new \LogicException('Modifying parameters is not permitted');
+        throw new LogicException('Modifying parameters is not permitted');
     }
 
     /**
      * IteratorAggregate for iterating over the object like an array.
      *
-     * @return \ArrayIterator
+     * @return ArrayIterator
      */
     public function getIterator()
     {
-        return new \ArrayIterator($this->params);
+        return new ArrayIterator($this->params);
     }
 }

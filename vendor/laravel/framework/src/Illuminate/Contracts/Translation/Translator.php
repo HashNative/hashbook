@@ -2,6 +2,8 @@
 
 namespace Illuminate\Contracts\Translation;
 
+use Countable;
+
 interface Translator
 {
     /**
@@ -18,7 +20,7 @@ interface Translator
      * Get a translation according to an integer value.
      *
      * @param  string  $key
-     * @param  int|array|\Countable  $number
+     * @param  int|array|Countable  $number
      * @param  array   $replace
      * @param  string  $locale
      * @return string

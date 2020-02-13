@@ -3,6 +3,7 @@
 namespace Illuminate\Routing;
 
 use Closure;
+use Illuminate\Container\Container;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -11,9 +12,9 @@ class RouteBinding
     /**
      * Create a Route model binding for a given callback.
      *
-     * @param  \Illuminate\Container\Container  $container
-     * @param  \Closure|string  $binder
-     * @return \Closure
+     * @param  Container  $container
+     * @param Closure|string  $binder
+     * @return Closure
      */
     public static function forCallback($container, $binder)
     {
@@ -27,9 +28,9 @@ class RouteBinding
     /**
      * Create a class based binding using the IoC container.
      *
-     * @param  \Illuminate\Container\Container  $container
+     * @param  Container  $container
      * @param  string  $binding
-     * @return \Closure
+     * @return Closure
      */
     protected static function createClassBinding($container, $binding)
     {
@@ -48,10 +49,10 @@ class RouteBinding
     /**
      * Create a Route model binding for a model.
      *
-     * @param  \Illuminate\Container\Container  $container
+     * @param  Container  $container
      * @param  string  $class
-     * @param  \Closure|null  $callback
-     * @return \Closure
+     * @param Closure|null  $callback
+     * @return Closure
      */
     public static function forModel($container, $class, $callback = null)
     {

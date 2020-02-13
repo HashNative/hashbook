@@ -65,8 +65,8 @@ This will produce the following output with the standard pretty printer:
 
 namespace Name\Space;
 
-use Some\Other\Thingy as SomeClass;
-abstract class SomeClass extends SomeOtherClass implements A\Few, \Interfaces
+use Interfaces;use Some\Other\Thingy as SomeClass;
+abstract class SomeClass extends SomeOtherClass implements A\Few, Interfaces
 {
     protected $someProperty;
     private $anotherProperty = array(1, 2, 3);

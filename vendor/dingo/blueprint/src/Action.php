@@ -2,6 +2,11 @@
 
 namespace Dingo\Blueprint;
 
+use Dingo\Blueprint\Annotation\Request;
+use Dingo\Blueprint\Annotation\Response;
+use Dingo\Blueprint\Annotation\Transaction;
+use Dingo\Blueprint\Annotation\Versions;
+use phpDocumentor\Reflection\DocBlockFactory;
 use RuntimeException;
 use ReflectionMethod;
 use Illuminate\Support\Collection;
@@ -11,29 +16,29 @@ class Action extends Section
     /**
      * Action reflector instance.
      *
-     * @var \ReflectionMethod
+     * @var ReflectionMethod
      */
     protected $reflector;
 
     /**
      * Annotations belonging to the action.
      *
-     * @var \Illuminate\Support\Collection
+     * @var Collection
      */
     protected $annotations;
 
     /**
      * Parent resource of the action.
      *
-     * @var \Dingo\Blueprint\RestResource
+     * @var RestResource
      */
     protected $resource;
 
     /**
      * Create a new action instance.
      *
-     * @param \ReflectionMethod              $reflector
-     * @param \Illuminate\Support\Collection $annotations
+     * @param ReflectionMethod $reflector
+     * @param Collection $annotations
      *
      * @return void
      */
@@ -66,7 +71,7 @@ class Action extends Section
     /**
      * Get the actions version annotation.
      *
-     * @return \Dingo\Blueprint\Annotation\Versions|null
+     * @return Versions|null
      */
     public function getVersions()
     {
@@ -78,7 +83,7 @@ class Action extends Section
     /**
      * Get the actions response annotation.
      *
-     * @return \Dingo\Blueprint\Annotation\Response|null
+     * @return Response|null
      */
     public function getResponse()
     {
@@ -90,7 +95,7 @@ class Action extends Section
     /**
      * Get the actions request annotation.
      *
-     * @return \Dingo\Blueprint\Annotation\Request|null
+     * @return Request|null
      */
     public function getRequest()
     {
@@ -102,7 +107,7 @@ class Action extends Section
     /**
      * Get the actions transaction annotation.
      *
-     * @return \Dingo\Blueprint\Annotation\Transaction|null
+     * @return Transaction|null
      */
     public function getTransaction()
     {
@@ -118,7 +123,7 @@ class Action extends Section
      */
     public function getIdentifier()
     {
-        $factory = \phpDocumentor\Reflection\DocBlockFactory::createInstance();
+        $factory = DocBlockFactory::createInstance();
         $docblock = $factory->create($this->reflector);
 
         return $docblock->getSummary();
@@ -131,7 +136,7 @@ class Action extends Section
      */
     public function getDescription()
     {
-        $factory = \phpDocumentor\Reflection\DocBlockFactory::createInstance();
+        $factory = DocBlockFactory::createInstance();
         $docblock = $factory->create($this->reflector);
 
         return $docblock->getDescription();
@@ -162,7 +167,7 @@ class Action extends Section
     /**
      * Get the actions method.
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      *
      * @return string
      */
@@ -178,7 +183,7 @@ class Action extends Section
     /**
      * Set the parent resource on the action.
      *
-     * @param \Dingo\Blueprint\RestResource $resource
+     * @param RestResource $resource
      *
      * @return void
      */

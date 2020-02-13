@@ -27,22 +27,22 @@ class MigrateMakeCommand extends BaseCommand
     /**
      * The migration creator instance.
      *
-     * @var \Illuminate\Database\Migrations\MigrationCreator
+     * @var MigrationCreator
      */
     protected $creator;
 
     /**
      * The Composer instance.
      *
-     * @var \Illuminate\Support\Composer
+     * @var Composer
      */
     protected $composer;
 
     /**
      * Create a new migration install command instance.
      *
-     * @param  \Illuminate\Database\Migrations\MigrationCreator  $creator
-     * @param  \Illuminate\Support\Composer  $composer
+     * @param MigrationCreator $creator
+     * @param Composer $composer
      * @return void
      */
     public function __construct(MigrationCreator $creator, Composer $composer)

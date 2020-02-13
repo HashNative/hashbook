@@ -7,6 +7,7 @@ use App\Transformers\Expense\Vendor;
 use App\Transformers\Setting\Category;
 use App\Transformers\Setting\Currency;
 use App\Models\Expense\Payment as Model;
+use League\Fractal\Resource\Item;
 use League\Fractal\TransformerAbstract;
 
 class Payment extends TransformerAbstract
@@ -43,7 +44,7 @@ class Payment extends TransformerAbstract
 
     /**
      * @param  Model $model
-     * @return \League\Fractal\Resource\Item
+     * @return Item
      */
     public function includeAccount(Model $model)
     {
@@ -52,7 +53,7 @@ class Payment extends TransformerAbstract
 
     /**
      * @param  Model $model
-     * @return \League\Fractal\Resource\Item
+     * @return Item
      */
     public function includeCategory(Model $model)
     {
@@ -61,7 +62,7 @@ class Payment extends TransformerAbstract
 
     /**
      * @param  Model $model
-     * @return \League\Fractal\Resource\Item
+     * @return Item
      */
     public function includeCurrency(Model $model)
     {

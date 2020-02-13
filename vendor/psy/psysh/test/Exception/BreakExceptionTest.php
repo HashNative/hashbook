@@ -11,9 +11,10 @@
 
 namespace Psy\Test\Exception;
 
+use PHPUnit\Framework\TestCase;
 use Psy\Exception\BreakException;
 
-class BreakExceptionTest extends \PHPUnit\Framework\TestCase
+class BreakExceptionTest extends TestCase
 {
     public function testInstance()
     {
@@ -32,7 +33,7 @@ class BreakExceptionTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @expectedException \Psy\Exception\BreakException
+     * @expectedException BreakException
      * @expectedExceptionMessage Goodbye
      */
     public function testExitShell()

@@ -12,7 +12,7 @@ class Accept implements Validator
     /**
      * Accept parser instance.
      *
-     * @var \Dingo\Api\Http\Parser\Accept
+     * @var AcceptParser
      */
     protected $accept;
 
@@ -26,7 +26,7 @@ class Accept implements Validator
     /**
      * Create a new accept validator instance.
      *
-     * @param \Dingo\Api\Http\Parser\Accept $accept
+     * @param AcceptParser $accept
      * @param bool                          $strict
      *
      * @return void
@@ -43,9 +43,9 @@ class Accept implements Validator
      * validator should always be run last and must not return
      * a success boolean.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
-     * @throws \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
+     * @throws BadRequestHttpException
      *
      * @return bool
      */

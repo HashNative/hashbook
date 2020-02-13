@@ -36,7 +36,7 @@ class MorphMany extends MorphOneOrMany
      * Match the eagerly loaded results to their parents.
      *
      * @param  array   $models
-     * @param  \Illuminate\Database\Eloquent\Collection  $results
+     * @param Collection $results
      * @param  string  $relation
      * @return array
      */

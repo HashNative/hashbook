@@ -12,7 +12,7 @@ class Basic extends Authorization
     /**
      * Illuminate authentication manager.
      *
-     * @var \Illuminate\Auth\AuthManager
+     * @var AuthManager
      */
     protected $auth;
 
@@ -26,7 +26,7 @@ class Basic extends Authorization
     /**
      * Create a new basic provider instance.
      *
-     * @param \Illuminate\Auth\AuthManager $auth
+     * @param AuthManager $auth
      * @param string                       $identifier
      *
      * @return void
@@ -40,8 +40,8 @@ class Basic extends Authorization
     /**
      * Authenticate request with Basic.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Dingo\Api\Routing\Route $route
+     * @param Request $request
+     * @param Route $route
      *
      * @return mixed
      */

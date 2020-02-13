@@ -3,9 +3,11 @@
 namespace PhpParser\Lexer;
 
 use PhpParser\ErrorHandler;
+use PhpParser\Lexer;
 use PhpParser\Parser\Tokens;
+use function is_array;
 
-class Emulative extends \PhpParser\Lexer
+class Emulative extends Lexer
 {
     protected $newKeywords;
     protected $inObjectAccess;
@@ -148,7 +150,7 @@ class Emulative extends \PhpParser\Lexer
                 }
             }
 
-            if (\is_array($this->tokens[$i])) {
+            if (is_array($this->tokens[$i])) {
                 $line += substr_count($this->tokens[$i][1], "\n");
             }
         }

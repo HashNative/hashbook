@@ -2,13 +2,15 @@
 
 namespace Sofa\Eloquence\Tests;
 
+use LogicException;
 use Mockery as m;
+use PHPUnit_Framework_TestCase;
 use Sofa\Eloquence\Mappable;
 use Sofa\Eloquence\Eloquence;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
-class MappableTest extends \PHPUnit_Framework_TestCase {
+class MappableTest extends PHPUnit_Framework_TestCase {
 
     public function setUp()
     {
@@ -63,7 +65,7 @@ class MappableTest extends \PHPUnit_Framework_TestCase {
     /**
      * @test
      *
-     * @expectedException \LogicException
+     * @expectedException LogicException
      */
     public function mapped_join_rejects_morphTo_relation_for_joins()
     {

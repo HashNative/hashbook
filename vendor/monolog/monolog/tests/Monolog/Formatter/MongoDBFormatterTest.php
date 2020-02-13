@@ -11,12 +11,17 @@
 
 namespace Monolog\Formatter;
 
+use DateTime;
+use Exception;
 use Monolog\Logger;
+use PHPUnit_Framework_TestCase;
+use ReflectionProperty;
+use stdClass;
 
 /**
  * @author Florian Plattner <me@florianplattner.de>
  */
-class MongoDBFormatterTest extends \PHPUnit_Framework_TestCase
+class MongoDBFormatterTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
@@ -45,11 +50,11 @@ class MongoDBFormatterTest extends \PHPUnit_Framework_TestCase
     {
         $formatter = new MongoDBFormatter($traceDepth, $traceAsString);
 
-        $reflTrace = new \ReflectionProperty($formatter, 'exceptionTraceAsString');
+        $reflTrace = new ReflectionProperty($formatter, 'exceptionTraceAsString');
         $reflTrace->setAccessible(true);
         $this->assertEquals($expectedTraceAsString, $reflTrace->getValue($formatter));
 
-        $reflDepth = new\ReflectionProperty($formatter, 'maxNestingLevel');
+        $reflDepth = newReflectionProperty($formatter, 'maxNestingLevel');
         $reflDepth->setAccessible(true);
         $this->assertEquals($expectedTraceDepth, $reflDepth->getValue($formatter));
     }
@@ -62,7 +67,7 @@ class MongoDBFormatterTest extends \PHPUnit_Framework_TestCase
             'level' => Logger::WARNING,
             'level_name' => Logger::getLevelName(Logger::WARNING),
             'channel' => 'test',
-            'datetime' => new \DateTime('2014-02-01 00:00:00'),
+            'datetime' => new DateTime('2014-02-01 00:00:00'),
             'extra' => array(),
         );
 
@@ -82,23 +87,23 @@ class MongoDBFormatterTest extends \PHPUnit_Framework_TestCase
 
     public function testRecursiveFormat()
     {
-        $someObject = new \stdClass();
+        $someObject = new stdClass();
         $someObject->foo = 'something';
         $someObject->bar = 'stuff';
 
         $record = array(
             'message' => 'some log message',
             'context' => array(
-                'stuff' => new \DateTime('2014-02-01 02:31:33'),
+                'stuff' => new DateTime('2014-02-01 02:31:33'),
                 'some_object' => $someObject,
                 'context_string' => 'some string',
                 'context_int' => 123456,
-                'except' => new \Exception('exception message', 987),
+                'except' => new Exception('exception message', 987),
             ),
             'level' => Logger::WARNING,
             'level_name' => Logger::getLevelName(Logger::WARNING),
             'channel' => 'test',
-            'datetime' => new \DateTime('2014-02-01 00:00:00'),
+            'datetime' => new DateTime('2014-02-01 00:00:00'),
             'extra' => array(),
         );
 
@@ -144,7 +149,7 @@ class MongoDBFormatterTest extends \PHPUnit_Framework_TestCase
             'level' => Logger::WARNING,
             'level_name' => Logger::getLevelName(Logger::WARNING),
             'channel' => 'test',
-            'datetime' => new \DateTime('2014-02-01 00:00:00'),
+            'datetime' => new DateTime('2014-02-01 00:00:00'),
             'extra' => array(),
         );
 
@@ -180,7 +185,7 @@ class MongoDBFormatterTest extends \PHPUnit_Framework_TestCase
             'level' => Logger::WARNING,
             'level_name' => Logger::getLevelName(Logger::WARNING),
             'channel' => 'test',
-            'datetime' => new \DateTime('2014-02-01 00:00:00'),
+            'datetime' => new DateTime('2014-02-01 00:00:00'),
             'extra' => array(),
         );
 
@@ -205,9 +210,9 @@ class MongoDBFormatterTest extends \PHPUnit_Framework_TestCase
 
     public function testFormatDepthObjects()
     {
-        $someObject = new \stdClass();
+        $someObject = new stdClass();
         $someObject->property = 'anything';
-        $someObject->nest3 = new \stdClass();
+        $someObject->nest3 = new stdClass();
         $someObject->nest3->property = 'nothing';
         $someObject->nest3->nest4 = 'invisible';
 
@@ -219,7 +224,7 @@ class MongoDBFormatterTest extends \PHPUnit_Framework_TestCase
             'level' => Logger::WARNING,
             'level_name' => Logger::getLevelName(Logger::WARNING),
             'channel' => 'test',
-            'datetime' => new \DateTime('2014-02-01 00:00:00'),
+            'datetime' => new DateTime('2014-02-01 00:00:00'),
             'extra' => array(),
         );
 
@@ -243,12 +248,12 @@ class MongoDBFormatterTest extends \PHPUnit_Framework_TestCase
         $record = array(
             'message' => 'some log message',
             'context' => array(
-                'nest2' => new \Exception('exception message', 987),
+                'nest2' => new Exception('exception message', 987),
             ),
             'level' => Logger::WARNING,
             'level_name' => Logger::getLevelName(Logger::WARNING),
             'channel' => 'test',
-            'datetime' => new \DateTime('2014-02-01 00:00:00'),
+            'datetime' => new DateTime('2014-02-01 00:00:00'),
             'extra' => array(),
         );
 
