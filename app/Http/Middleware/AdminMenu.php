@@ -160,9 +160,9 @@ class AdminMenu
                         $sub->url('settings/categories', trans_choice('general.categories', 2), 2, $attr);
                     }
 
-                    if ($user->can('read-settings-currencies')) {
-                        $sub->url('settings/currencies', trans_choice('general.currencies', 2), 3, $attr);
-                    }
+                    // if ($user->can('read-settings-currencies')) {
+                    //     $sub->url('settings/currencies', trans_choice('general.currencies', 2), 3, $attr);
+                    // }
 
                     if ($user->can('read-settings-taxes')) {
                         $sub->url('settings/taxes', trans_choice('general.tax_rates', 2), 4, $attr);

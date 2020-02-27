@@ -12,7 +12,7 @@
 
             {{ Form::textGroup('number', trans('accounts.number'), 'pencil') }}
 
-            {{ Form::selectGroup('currency_code', trans_choice('general.currencies', 1), 'exchange', $currencies, setting('general.default_currency')) }}
+            <!-- {{ Form::selectGroup('currency_code', trans_choice('general.currencies', 1), 'exchange', $currencies, setting('general.default_currency')) }} -->
 
             {{ Form::textGroup('opening_balance', trans('accounts.opening_balance'), 'money', ['required' => 'required'], 0) }}
 

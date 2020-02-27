@@ -22,7 +22,7 @@
         </div>
         @stack('vendor_id_input_end')
 
-        {{ Form::selectGroup('currency_code', trans_choice('general.currencies', 1), 'exchange', $currencies, setting('general.default_currency')) }}
+        <!-- {{ Form::selectGroup('currency_code', trans_choice('general.currencies', 1), 'exchange', $currencies, setting('general.default_currency')) }} -->
 
         {{ Form::textGroup('billed_at', trans('bills.bill_date'), 'calendar',['id' => 'billed_at', 'class' => 'form-control', 'required' => 'required', 'data-inputmask' => '\'alias\': \'yyyy/mm/dd\'', 'data-mask' => '', 'autocomplete' => 'off'],Date::now()->toDateString()) }}
 

@@ -14,7 +14,7 @@
 
             {{ Form::textGroup('tax_number', trans('general.tax_number'), 'percent', []) }}
 
-            {{ Form::selectGroup('currency_code', trans_choice('general.currencies', 1), 'exchange', $currencies, setting('general.default_currency')) }}
+            <!-- {{ Form::selectGroup('currency_code', trans_choice('general.currencies', 1), 'exchange', $currencies, setting('general.default_currency')) }} -->
 
             {{ Form::textGroup('phone', trans('general.phone'), 'phone', []) }}
 
